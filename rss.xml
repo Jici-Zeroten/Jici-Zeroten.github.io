@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>Hexo</title>
+        <subtitle></subtitle>
+        <icon>http://example.com/images/favicon.ico</icon>
+        <link>http://example.com</link>
+        <author>
+          <name>John Doe</name>
+        </author>
+        <description></description>
+        <language>en</language>
+        <pubDate>Sat, 12 Aug 2023 17:07:13 +0800</pubDate>
+        <lastBuildDate>Sat, 12 Aug 2023 17:07:13 +0800</lastBuildDate>
+        <item>
+            <guid isPermalink="true">http://example.com/2023/08/12/second/</guid>
+            <title>second</title>
+            <link>http://example.com/2023/08/12/second/</link>
+            <pubDate>Sat, 12 Aug 2023 17:07:13 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;br /&gt;
+&amp;lt;html&amp;gt;&lt;br /&gt;
+&amp;lt;head&amp;gt;&lt;br /&gt;
+&amp;lt;meta charset=&amp;quot;utf-8&amp;quot;&amp;gt;&lt;br /&gt;
+&amp;lt;title&amp;gt;second&amp;lt;/title&amp;gt;&lt;br /&gt;
+&amp;lt;/head&amp;gt;&lt;br /&gt;
+&amp;lt;body&amp;gt;&lt;br /&gt;
+&amp;lt;a&amp;gt;second&amp;lt;/a&amp;gt;&lt;br /&gt;
+&amp;lt;h1&amp;gt;second&amp;lt;/h1&amp;gt;&lt;br /&gt;
+&amp;lt;/body&amp;gt;&lt;br /&gt;
+&amp;lt;/html&amp;gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">http://example.com/2023/08/12/first/</guid>
+            <title>first</title>
+            <link>http://example.com/2023/08/12/first/</link>
+            <pubDate>Sat, 12 Aug 2023 17:06:28 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;br /&gt;
+&amp;lt;html&amp;gt;&lt;br /&gt;
+&amp;lt;head&amp;gt;&lt;br /&gt;
+&amp;lt;meta charset=&amp;quot;utf-8&amp;quot;&amp;gt;&lt;br /&gt;
+&amp;lt;title&amp;gt;first&amp;lt;/title&amp;gt;&lt;br /&gt;
+&amp;lt;/head&amp;gt;&lt;br /&gt;
+&amp;lt;body&amp;gt;&lt;br /&gt;
+&amp;lt;a&amp;gt;first&amp;lt;/a&amp;gt;&lt;br /&gt;
+&amp;lt;h1&amp;gt;first&amp;lt;/h1&amp;gt;&lt;br /&gt;
+&amp;lt;/body&amp;gt;&lt;br /&gt;
+&amp;lt;/html&amp;gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">http://example.com/2023/08/12/third/</guid>
+            <title>my first article</title>
+            <link>http://example.com/2023/08/12/third/</link>
+            <pubDate>Sat, 12 Aug 2023 14:55:37 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;br /&gt;
+&amp;lt;html&amp;gt;&lt;br /&gt;
+&amp;lt;head&amp;gt;&lt;br /&gt;
+&amp;lt;meta charset=&amp;quot;utf-8&amp;quot;&amp;gt;&lt;br /&gt;
+&amp;lt;title&amp;gt;test&amp;lt;/title&amp;gt;&lt;br /&gt;
+&amp;lt;/head&amp;gt;&lt;br /&gt;
+&amp;lt;body&amp;gt;&lt;br /&gt;
+&amp;lt;a&amp;gt; 你好，世界 &amp;lt;/a&amp;gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;a&amp;gt; 你好，世界 &amp;lt;/a&amp;gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;h1&amp;gt; 你好，世界 &amp;lt;/h1&amp;gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;p&amp;gt; 你好，世界 &amp;lt;/p&amp;gt;&lt;/p&gt;
+&lt;p&gt;&amp;lt;/body&amp;gt;&lt;br /&gt;
+&amp;lt;/html&amp;gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>
