@@ -12,7 +12,8 @@
             <title>建站说明</title>
             <link>http://example.com/2023/08/13/%E5%BB%BA%E7%AB%99%E8%AF%B4%E6%98%8E/</link>
             <pubDate>Sun, 13 Aug 2023 23:52:33 +0800</pubDate>
-            <description><![CDATA[ &lt;p&gt;一时兴起，决定搭建个博客玩玩。主要也不知道写什么，博客会慢慢完善。&lt;/p&gt;
+            <description><![CDATA[ &lt;p&gt;一时兴起，决定搭建个博客玩玩。主要也不知道写什么，博客会慢慢完善。看了很多博客主题，感觉个人还是喜欢素一点的。现在发展的太快了，各类优秀的博客主题不断涌现，对我而言，还是朴素些吧。&lt;/p&gt;
+&lt;p&gt;下面测试markdown的渲染，我对markdown解析的要求不高，能写字就行，用不着什么高亮、流程图之类的，适合自己的就好&lt;/p&gt;
 &lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;这是代码块&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 
 
