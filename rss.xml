@@ -5,8 +5,48 @@
         <link>http://example.com</link>
         <description></description>
         <language>en</language>
-        <pubDate>Sun, 13 Aug 2023 10:49:42 +0800</pubDate>
-        <lastBuildDate>Sun, 13 Aug 2023 10:49:42 +0800</lastBuildDate>
+        <pubDate>Sun, 13 Aug 2023 23:52:33 +0800</pubDate>
+        <lastBuildDate>Sun, 13 Aug 2023 23:52:33 +0800</lastBuildDate>
+        <item>
+            <guid isPermalink="true">http://example.com/2023/08/13/%E5%BB%BA%E7%AB%99%E8%AF%B4%E6%98%8E/</guid>
+            <title>建站说明</title>
+            <link>http://example.com/2023/08/13/%E5%BB%BA%E7%AB%99%E8%AF%B4%E6%98%8E/</link>
+            <pubDate>Sun, 13 Aug 2023 23:52:33 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;一时兴起，决定搭建个博客玩玩。主要也不知道写什么，博客会慢慢完善。&lt;/p&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;这是代码块&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+
+
+&lt;p&gt;这是公式块&lt;br&gt;$$&lt;br&gt;\Gamma(z) &amp;#x3D; \int_0^\infty t^{z-1}e^{-t}dt,.&lt;br&gt;\Gamma(z) &amp;#x3D; \int_0^\infty t^{z-1}e^{-t}dt,.&lt;br&gt;$$&lt;/p&gt;
+&lt;p&gt;这是表格&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;这是雪人表情&lt;/p&gt;
+&lt;p&gt;:snowman:&lt;/p&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">http://example.com/2023/08/13/mermaid-Test/</guid>
             <title>流程图显示</title>

@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>建站说明</title>
+      <link href="/2023/08/13/%E5%BB%BA%E7%AB%99%E8%AF%B4%E6%98%8E/"/>
+      <url>/2023/08/13/%E5%BB%BA%E7%AB%99%E8%AF%B4%E6%98%8E/</url>
+      
+        <content type="html"><![CDATA[<p>一时兴起，决定搭建个博客玩玩。主要也不知道写什么，博客会慢慢完善。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这是代码块</span><br></pre></td></tr></table></figure><p>这是公式块<br>$$<br>\Gamma(z) &#x3D; \int_0^\infty t^{z-1}e^{-t}dt,.<br>\Gamma(z) &#x3D; \int_0^\infty t^{z-1}e^{-t}dt,.<br>$$</p><p>这是表格</p><table><thead><tr><th></th><th></th><th></th></tr></thead><tbody><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr></tbody></table><p>这是雪人表情</p><p>:snowman:</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>流程图显示</title>
       <link href="/2023/08/13/mermaid-Test/"/>
       <url>/2023/08/13/mermaid-Test/</url>
