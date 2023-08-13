@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>流程图显示</title>
+      <link href="/2023/08/13/mermaid-Test/"/>
+      <url>/2023/08/13/mermaid-Test/</url>
+      
+        <content type="html"><![CDATA[<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">    A [Square Rect] -- Link text --&gt; B ((Circle))</span><br><span class="line">    A --&gt; C (Round Rect)</span><br><span class="line">    B --&gt; D &#123;Rhombus&#125;</span><br><span class="line">    C --&gt; D</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">    loop Daily query</span><br><span class="line">        Alice-&gt;&gt;Bob: Hello Bob, how are you?</span><br><span class="line">        alt is sick</span><br><span class="line">            Bob-&gt;&gt;Alice: Not so good :(</span><br><span class="line">        else is well</span><br><span class="line">            Bob-&gt;&gt;Alice: Feeling fresh like a daisy</span><br><span class="line">        end</span><br><span class="line"></span><br><span class="line">        opt Extra response</span><br><span class="line">            Bob-&gt;&gt;Alice: Thanks for asking</span><br><span class="line">        end</span><br><span class="line">    end</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>second</title>
+      <link href="/2023/08/12/second/"/>
+      <url>/2023/08/12/second/</url>
+      
+        <content type="html"><![CDATA[<!DOCTYPE html><html><head><meta charset="utf-8"><title>second</title></head><body><a>second</a><h1>second</h1></body></html>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>first</title>
+      <link href="/2023/08/12/first/"/>
+      <url>/2023/08/12/first/</url>
+      
+        <content type="html"><![CDATA[<!DOCTYPE html><html><head><meta charset="utf-8"><title>first</title></head><body><a>first</a><h1>first</h1></body></html>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>my first article</title>
+      <link href="/2023/08/12/third/"/>
+      <url>/2023/08/12/third/</url>
+      
+        <content type="html"><![CDATA[<!DOCTYPE html><html><head><meta charset="utf-8"><title>test</title></head><body><a>你好，世界</a><p><a>你好，世界</a></p><h1>你好，世界</h1> <p>你好，世界</p> </body></html>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
+</search>
