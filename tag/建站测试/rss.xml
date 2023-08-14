@@ -19,5 +19,78 @@
 &lt;p&gt;&lt;img src=&#34;/%E5%9B%BE%E7%89%87%E6%B5%8B%E8%AF%95.assets/image-20230815074733533.png&#34; alt=&#34;image-20230815074733533&#34;&gt;&lt;/p&gt;
  ]]></description>
         </item>
+        <item>
+            <guid isPermalink="true">http://example.com/2023/08/13/mermaid-Test/</guid>
+            <title>流程图显示</title>
+            <link>http://example.com/2023/08/13/mermaid-Test/</link>
+            <category>建站测试</category>
+            <pubDate>Sun, 13 Aug 2023 10:49:42 +0800</pubDate>
+            <description><![CDATA[ &lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;graph LR&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    A [Square Rect] -- Link text --&amp;gt; B ((Circle))&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    A --&amp;gt; C (Round Rect)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    B --&amp;gt; D &amp;#123;Rhombus&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    C --&amp;gt; D&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sequenceDiagram&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    loop Daily query&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        Alice-&amp;gt;&amp;gt;Bob: Hello Bob, how are you?&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        alt is sick&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            Bob-&amp;gt;&amp;gt;Alice: Not so good :(&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        else is well&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            Bob-&amp;gt;&amp;gt;Alice: Feeling fresh like a daisy&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        end&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        opt Extra response&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            Bob-&amp;gt;&amp;gt;Alice: Thanks for asking&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        end&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    end&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt; ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">http://example.com/2023/08/12/second/</guid>
+            <title>second</title>
+            <link>http://example.com/2023/08/12/second/</link>
+            <category>建站测试</category>
+            <pubDate>Sat, 12 Aug 2023 17:07:13 +0800</pubDate>
+            <description><![CDATA[ &lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&#34;utf-8&#34;&gt;
+&lt;title&gt;second&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;a&gt;second&lt;/a&gt;
+&lt;h1&gt;second&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt; ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">http://example.com/2023/08/12/first/</guid>
+            <title>first</title>
+            <link>http://example.com/2023/08/12/first/</link>
+            <category>建站测试</category>
+            <pubDate>Sat, 12 Aug 2023 17:06:28 +0800</pubDate>
+            <description><![CDATA[ &lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&#34;utf-8&#34;&gt;
+&lt;title&gt;first&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;a&gt;first&lt;/a&gt;
+&lt;h1&gt;first&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">http://example.com/2023/08/12/third/</guid>
+            <title>my first article</title>
+            <link>http://example.com/2023/08/12/third/</link>
+            <category>建站测试</category>
+            <pubDate>Sat, 12 Aug 2023 14:55:37 +0800</pubDate>
+            <description><![CDATA[ &lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&#34;utf-8&#34;&gt;
+&lt;title&gt;test&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;a&gt;你好，世界&lt;/a&gt;
+
+&lt;p&gt;&lt;a&gt;你好，世界&lt;/a&gt;&lt;/p&gt;
+&lt;h1&gt;你好，世界&lt;/h1&gt;
+
+&lt;p&gt;你好，世界&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+ ]]></description>
+        </item>
     </channel>
 </rss>

@@ -44,6 +44,12 @@
       
       
       
+        <tags>
+            
+            <tag> 建站测试 </tag>
+            
+        </tags>
+      
     </entry>
     
     
@@ -56,6 +62,12 @@
         <content type="html"><![CDATA[<!DOCTYPE html><html><head><meta charset="utf-8"><title>second</title></head><body><a>second</a><h1>second</h1></body></html>]]></content>
       
       
+      
+        <tags>
+            
+            <tag> 建站测试 </tag>
+            
+        </tags>
       
     </entry>
     
@@ -70,6 +82,12 @@
       
       
       
+        <tags>
+            
+            <tag> 建站测试 </tag>
+            
+        </tags>
+      
     </entry>
     
     
@@ -79,9 +97,15 @@
       <link href="/2023/08/12/third/"/>
       <url>/2023/08/12/third/</url>
       
-        <content type="html"><![CDATA[<!DOCTYPE html><html><head><meta charset="utf-8"><title>test</title></head><body><a>你好，世界</a><p><a>你好，世界</a></p><h1>你好，世界</h1> <p>你好，世界</p> </body></html>]]></content>
+        <content type="html"><![CDATA[<!DOCTYPE html><html><head><meta charset="utf-8"><title>test</title></head><body><a>你好，世界</a><p><a>你好，世界</a></p><h1>你好，世界</h1><p>你好，世界</p></body></html>]]></content>
       
       
+      
+        <tags>
+            
+            <tag> 建站测试 </tag>
+            
+        </tags>
       
     </entry>
     

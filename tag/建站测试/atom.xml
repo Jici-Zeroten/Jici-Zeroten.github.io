@@ -16,4 +16,77 @@
         <category term="建站测试" />
         <updated>2023-08-14T23:46:03.000Z</updated>
     </entry>
+    <entry>
+        <id>http://example.com/2023/08/13/mermaid-Test/</id>
+        <title>流程图显示</title>
+        <link rel="alternate" href="http://example.com/2023/08/13/mermaid-Test/"/>
+        <content type="html">&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;graph LR&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    A [Square Rect] -- Link text --&amp;gt; B ((Circle))&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    A --&amp;gt; C (Round Rect)&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    B --&amp;gt; D &amp;#123;Rhombus&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    C --&amp;gt; D&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;figure class=&#34;highlight plaintext&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sequenceDiagram&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    loop Daily query&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        Alice-&amp;gt;&amp;gt;Bob: Hello Bob, how are you?&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        alt is sick&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            Bob-&amp;gt;&amp;gt;Alice: Not so good :(&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        else is well&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            Bob-&amp;gt;&amp;gt;Alice: Feeling fresh like a daisy&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        end&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        opt Extra response&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;            Bob-&amp;gt;&amp;gt;Alice: Thanks for asking&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;        end&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    end&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</content>
+        <category term="建站测试" />
+        <updated>2023-08-13T02:49:42.307Z</updated>
+    </entry>
+    <entry>
+        <id>http://example.com/2023/08/12/second/</id>
+        <title>second</title>
+        <link rel="alternate" href="http://example.com/2023/08/12/second/"/>
+        <content type="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&#34;utf-8&#34;&gt;
+&lt;title&gt;second&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;a&gt;second&lt;/a&gt;
+&lt;h1&gt;second&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</content>
+        <category term="建站测试" />
+        <updated>2023-08-12T09:07:13.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://example.com/2023/08/12/first/</id>
+        <title>first</title>
+        <link rel="alternate" href="http://example.com/2023/08/12/first/"/>
+        <content type="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&#34;utf-8&#34;&gt;
+&lt;title&gt;first&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;a&gt;first&lt;/a&gt;
+&lt;h1&gt;first&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</content>
+        <category term="建站测试" />
+        <updated>2023-08-12T09:06:28.000Z</updated>
+    </entry>
+    <entry>
+        <id>http://example.com/2023/08/12/third/</id>
+        <title>my first article</title>
+        <link rel="alternate" href="http://example.com/2023/08/12/third/"/>
+        <content type="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&#34;utf-8&#34;&gt;
+&lt;title&gt;test&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;a&gt;你好，世界&lt;/a&gt;
+
+&lt;p&gt;&lt;a&gt;你好，世界&lt;/a&gt;&lt;/p&gt;
+&lt;h1&gt;你好，世界&lt;/h1&gt;
+
+&lt;p&gt;你好，世界&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+</content>
+        <category term="建站测试" />
+        <updated>2023-08-12T06:55:37.000Z</updated>
+    </entry>
 </feed>
