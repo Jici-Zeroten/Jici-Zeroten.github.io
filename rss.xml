@@ -5,8 +5,20 @@
         <link>http://example.com</link>
         <description></description>
         <language>en</language>
-        <pubDate>Sun, 13 Aug 2023 23:52:33 +0800</pubDate>
-        <lastBuildDate>Sun, 13 Aug 2023 23:52:33 +0800</lastBuildDate>
+        <pubDate>Tue, 15 Aug 2023 07:46:03 +0800</pubDate>
+        <lastBuildDate>Tue, 15 Aug 2023 07:46:03 +0800</lastBuildDate>
+        <category>建站测试</category>
+        <item>
+            <guid isPermalink="true">http://example.com/2023/08/15/%E5%9B%BE%E7%89%87%E6%B5%8B%E8%AF%95/</guid>
+            <title>图片测试</title>
+            <link>http://example.com/2023/08/15/%E5%9B%BE%E7%89%87%E6%B5%8B%E8%AF%95/</link>
+            <category>建站测试</category>
+            <pubDate>Tue, 15 Aug 2023 07:46:03 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;&lt;img src=&#34;/%E5%9B%BE%E7%89%87%E6%B5%8B%E8%AF%95.assets/image-20230815074655175.png&#34; alt=&#34;image-20230815074655175&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/%E5%9B%BE%E7%89%87%E6%B5%8B%E8%AF%95.assets/image-20230815074722240.png&#34; alt=&#34;image-20230815074722240&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/%E5%9B%BE%E7%89%87%E6%B5%8B%E8%AF%95.assets/image-20230815074733533.png&#34; alt=&#34;image-20230815074733533&#34;&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">http://example.com/2023/08/13/%E5%BB%BA%E7%AB%99%E8%AF%B4%E6%98%8E/</guid>
             <title>建站说明</title>

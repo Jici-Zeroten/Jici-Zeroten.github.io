@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://example.com</id>
+    <title>Jici&#39;s Blog • Posts by &#34;建站测试&#34; tag</title>
+    <link href="http://example.com" />
+    <updated>2023-08-14T23:46:03.000Z</updated>
+    <category term="建站测试" />
+    <entry>
+        <id>http://example.com/2023/08/15/%E5%9B%BE%E7%89%87%E6%B5%8B%E8%AF%95/</id>
+        <title>图片测试</title>
+        <link rel="alternate" href="http://example.com/2023/08/15/%E5%9B%BE%E7%89%87%E6%B5%8B%E8%AF%95/"/>
+        <content type="html">&lt;p&gt;&lt;img src=&#34;/%E5%9B%BE%E7%89%87%E6%B5%8B%E8%AF%95.assets/image-20230815074655175.png&#34; alt=&#34;image-20230815074655175&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/%E5%9B%BE%E7%89%87%E6%B5%8B%E8%AF%95.assets/image-20230815074722240.png&#34; alt=&#34;image-20230815074722240&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/%E5%9B%BE%E7%89%87%E6%B5%8B%E8%AF%95.assets/image-20230815074733533.png&#34; alt=&#34;image-20230815074733533&#34;&gt;&lt;/p&gt;
+</content>
+        <category term="建站测试" />
+        <updated>2023-08-14T23:46:03.000Z</updated>
+    </entry>
+</feed>
