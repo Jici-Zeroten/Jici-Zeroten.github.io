@@ -19,12 +19,14 @@
             "url": "http://example.com/2023/08/13/%E5%BB%BA%E7%AB%99%E8%AF%B4%E6%98%8E/",
             "title": "建站说明",
             "date_published": "2023-08-13T15:52:33.000Z",
-            "content_html": "<p>一时兴起，决定搭建个博客玩玩。主要也不知道写什么，博客会慢慢完善。看了很多博客主题，感觉个人还是喜欢素一点的。现在发展的太快了，各类优秀的博客主题不断涌现，对我而言，还是朴素些吧。</p>\n<p>下面测试markdown的渲染，我对markdown解析的要求不高，能写字就行，用不着什么高亮、流程图之类的，适合自己的就好</p>\n<figure class=\"highlight python\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">这是代码块</span><br></pre></td></tr></table></figure>\n\n\n\n<p>这是公式块<br>$$<br>\\Gamma(z) &#x3D; \\int_0^\\infty t^{z-1}e^{-t}dt,.<br>\\Gamma(z) &#x3D; \\int_0^\\infty t^{z-1}e^{-t}dt,.<br>$$</p>\n<p>这是表格</p>\n<table>\n<thead>\n<tr>\n<th></th>\n<th></th>\n<th></th>\n</tr>\n</thead>\n<tbody><tr>\n<td></td>\n<td></td>\n<td></td>\n</tr>\n<tr>\n<td></td>\n<td></td>\n<td></td>\n</tr>\n<tr>\n<td></td>\n<td></td>\n<td></td>\n</tr>\n</tbody></table>\n<p>这是雪人表情</p>\n<p>:snowman:</p>\n",
-            "tags": []
+            "content_html": "<p>一时兴起，决定搭建个博客玩玩。主要也不知道写什么，博客会慢慢完善。看了很多博客主题，感觉个人还是喜欢素一点的。现在发展的太快了，各类优秀的博客主题不断涌现，对我而言，还是朴素些吧。我会测试一些markdown的渲染，我对markdown解析的要求不高，能写字就行，用不着什么高亮、流程图之类的，适合自己的就好，相应的插件会慢慢补上</p>\n<p>下面测试代码块、公式块、表格、表情</p>\n<figure class=\"highlight python\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">这是代码块</span><br></pre></td></tr></table></figure>\n\n\n\n<p>这是公式块<br>$$<br>\\Gamma(z) &#x3D; \\int_0^\\infty t^{z-1}e^{-t}dt,.<br>\\Gamma(z) &#x3D; \\int_0^\\infty t^{z-1}e^{-t}dt,.<br>$$</p>\n<p>这是表格</p>\n<table>\n<thead>\n<tr>\n<th></th>\n<th></th>\n<th></th>\n</tr>\n</thead>\n<tbody><tr>\n<td></td>\n<td></td>\n<td></td>\n</tr>\n<tr>\n<td></td>\n<td></td>\n<td></td>\n</tr>\n<tr>\n<td></td>\n<td></td>\n<td></td>\n</tr>\n</tbody></table>\n<p>这是雪人表情</p>\n<p>:snowman:</p>\n",
+            "tags": [
+                "建站测试"
+            ]
         },
         {
-            "id": "http://example.com/2023/08/13/mermaid-Test/",
-            "url": "http://example.com/2023/08/13/mermaid-Test/",
+            "id": "http://example.com/2023/08/13/%E6%B5%81%E7%A8%8B%E5%9B%BE%E6%B5%8B%E8%AF%95/",
+            "url": "http://example.com/2023/08/13/%E6%B5%81%E7%A8%8B%E5%9B%BE%E6%B5%8B%E8%AF%95/",
             "title": "流程图显示",
             "date_published": "2023-08-13T02:49:42.307Z",
             "content_html": "<figure class=\"highlight plaintext\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br><span class=\"line\">2</span><br><span class=\"line\">3</span><br><span class=\"line\">4</span><br><span class=\"line\">5</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">graph LR</span><br><span class=\"line\">    A [Square Rect] -- Link text --&gt; B ((Circle))</span><br><span class=\"line\">    A --&gt; C (Round Rect)</span><br><span class=\"line\">    B --&gt; D &#123;Rhombus&#125;</span><br><span class=\"line\">    C --&gt; D</span><br></pre></td></tr></table></figure>\n\n<figure class=\"highlight plaintext\"><table><tr><td class=\"gutter\"><pre><span class=\"line\">1</span><br><span class=\"line\">2</span><br><span class=\"line\">3</span><br><span class=\"line\">4</span><br><span class=\"line\">5</span><br><span class=\"line\">6</span><br><span class=\"line\">7</span><br><span class=\"line\">8</span><br><span class=\"line\">9</span><br><span class=\"line\">10</span><br><span class=\"line\">11</span><br><span class=\"line\">12</span><br><span class=\"line\">13</span><br></pre></td><td class=\"code\"><pre><span class=\"line\">sequenceDiagram</span><br><span class=\"line\">    loop Daily query</span><br><span class=\"line\">        Alice-&gt;&gt;Bob: Hello Bob, how are you?</span><br><span class=\"line\">        alt is sick</span><br><span class=\"line\">            Bob-&gt;&gt;Alice: Not so good :(</span><br><span class=\"line\">        else is well</span><br><span class=\"line\">            Bob-&gt;&gt;Alice: Feeling fresh like a daisy</span><br><span class=\"line\">        end</span><br><span class=\"line\"></span><br><span class=\"line\">        opt Extra response</span><br><span class=\"line\">            Bob-&gt;&gt;Alice: Thanks for asking</span><br><span class=\"line\">        end</span><br><span class=\"line\">    end</span><br></pre></td></tr></table></figure>",
@@ -33,29 +35,9 @@
             ]
         },
         {
-            "id": "http://example.com/2023/08/12/second/",
-            "url": "http://example.com/2023/08/12/second/",
-            "title": "second",
-            "date_published": "2023-08-12T09:07:13.000Z",
-            "content_html": "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<title>second</title>\n</head>\n<body>\n<a>second</a>\n<h1>second</h1>\n</body>\n</html>",
-            "tags": [
-                "建站测试"
-            ]
-        },
-        {
-            "id": "http://example.com/2023/08/12/first/",
-            "url": "http://example.com/2023/08/12/first/",
-            "title": "first",
-            "date_published": "2023-08-12T09:06:28.000Z",
-            "content_html": "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<title>first</title>\n</head>\n<body>\n<a>first</a>\n<h1>first</h1>\n</body>\n</html>\n\n",
-            "tags": [
-                "建站测试"
-            ]
-        },
-        {
-            "id": "http://example.com/2023/08/12/third/",
-            "url": "http://example.com/2023/08/12/third/",
-            "title": "my first article",
+            "id": "http://example.com/2023/08/12/%E4%BD%A0%E5%A5%BD%E4%B8%96%E7%95%8C/",
+            "url": "http://example.com/2023/08/12/%E4%BD%A0%E5%A5%BD%E4%B8%96%E7%95%8C/",
+            "title": "你好，世界",
             "date_published": "2023-08-12T06:55:37.000Z",
             "content_html": "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<title>test</title>\n</head>\n<body>\n<a>你好，世界</a>\n\n<p><a>你好，世界</a></p>\n<h1>你好，世界</h1>\n\n<p>你好，世界</p>\n\n</body>\n</html>\n\n",
             "tags": [

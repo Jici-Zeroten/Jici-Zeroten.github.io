@@ -27,9 +27,15 @@
       <link href="/2023/08/13/%E5%BB%BA%E7%AB%99%E8%AF%B4%E6%98%8E/"/>
       <url>/2023/08/13/%E5%BB%BA%E7%AB%99%E8%AF%B4%E6%98%8E/</url>
       
-        <content type="html"><![CDATA[<p>一时兴起，决定搭建个博客玩玩。主要也不知道写什么，博客会慢慢完善。看了很多博客主题，感觉个人还是喜欢素一点的。现在发展的太快了，各类优秀的博客主题不断涌现，对我而言，还是朴素些吧。</p><p>下面测试markdown的渲染，我对markdown解析的要求不高，能写字就行，用不着什么高亮、流程图之类的，适合自己的就好</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这是代码块</span><br></pre></td></tr></table></figure><p>这是公式块<br>$$<br>\Gamma(z) &#x3D; \int_0^\infty t^{z-1}e^{-t}dt,.<br>\Gamma(z) &#x3D; \int_0^\infty t^{z-1}e^{-t}dt,.<br>$$</p><p>这是表格</p><table><thead><tr><th></th><th></th><th></th></tr></thead><tbody><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr></tbody></table><p>这是雪人表情</p><p>:snowman:</p>]]></content>
+        <content type="html"><![CDATA[<p>一时兴起，决定搭建个博客玩玩。主要也不知道写什么，博客会慢慢完善。看了很多博客主题，感觉个人还是喜欢素一点的。现在发展的太快了，各类优秀的博客主题不断涌现，对我而言，还是朴素些吧。我会测试一些markdown的渲染，我对markdown解析的要求不高，能写字就行，用不着什么高亮、流程图之类的，适合自己的就好，相应的插件会慢慢补上</p><p>下面测试代码块、公式块、表格、表情</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这是代码块</span><br></pre></td></tr></table></figure><p>这是公式块<br>$$<br>\Gamma(z) &#x3D; \int_0^\infty t^{z-1}e^{-t}dt,.<br>\Gamma(z) &#x3D; \int_0^\infty t^{z-1}e^{-t}dt,.<br>$$</p><p>这是表格</p><table><thead><tr><th></th><th></th><th></th></tr></thead><tbody><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr></tbody></table><p>这是雪人表情</p><p>:snowman:</p>]]></content>
       
       
+      
+        <tags>
+            
+            <tag> 建站测试 </tag>
+            
+        </tags>
       
     </entry>
     
@@ -37,8 +43,8 @@
     
     <entry>
       <title>流程图显示</title>
-      <link href="/2023/08/13/mermaid-Test/"/>
-      <url>/2023/08/13/mermaid-Test/</url>
+      <link href="/2023/08/13/%E6%B5%81%E7%A8%8B%E5%9B%BE%E6%B5%8B%E8%AF%95/"/>
+      <url>/2023/08/13/%E6%B5%81%E7%A8%8B%E5%9B%BE%E6%B5%8B%E8%AF%95/</url>
       
         <content type="html"><![CDATA[<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">    A [Square Rect] -- Link text --&gt; B ((Circle))</span><br><span class="line">    A --&gt; C (Round Rect)</span><br><span class="line">    B --&gt; D &#123;Rhombus&#125;</span><br><span class="line">    C --&gt; D</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">    loop Daily query</span><br><span class="line">        Alice-&gt;&gt;Bob: Hello Bob, how are you?</span><br><span class="line">        alt is sick</span><br><span class="line">            Bob-&gt;&gt;Alice: Not so good :(</span><br><span class="line">        else is well</span><br><span class="line">            Bob-&gt;&gt;Alice: Feeling fresh like a daisy</span><br><span class="line">        end</span><br><span class="line"></span><br><span class="line">        opt Extra response</span><br><span class="line">            Bob-&gt;&gt;Alice: Thanks for asking</span><br><span class="line">        end</span><br><span class="line">    end</span><br></pre></td></tr></table></figure>]]></content>
       
@@ -55,47 +61,9 @@
     
     
     <entry>
-      <title>second</title>
-      <link href="/2023/08/12/second/"/>
-      <url>/2023/08/12/second/</url>
-      
-        <content type="html"><![CDATA[<!DOCTYPE html><html><head><meta charset="utf-8"><title>second</title></head><body><a>second</a><h1>second</h1></body></html>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 建站测试 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>first</title>
-      <link href="/2023/08/12/first/"/>
-      <url>/2023/08/12/first/</url>
-      
-        <content type="html"><![CDATA[<!DOCTYPE html><html><head><meta charset="utf-8"><title>first</title></head><body><a>first</a><h1>first</h1></body></html>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> 建站测试 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>my first article</title>
-      <link href="/2023/08/12/third/"/>
-      <url>/2023/08/12/third/</url>
+      <title>你好，世界</title>
+      <link href="/2023/08/12/%E4%BD%A0%E5%A5%BD%E4%B8%96%E7%95%8C/"/>
+      <url>/2023/08/12/%E4%BD%A0%E5%A5%BD%E4%B8%96%E7%95%8C/</url>
       
         <content type="html"><![CDATA[<!DOCTYPE html><html><head><meta charset="utf-8"><title>test</title></head><body><a>你好，世界</a><p><a>你好，世界</a></p><h1>你好，世界</h1><p>你好，世界</p></body></html>]]></content>
       
