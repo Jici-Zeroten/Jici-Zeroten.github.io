@@ -115,6 +115,25 @@ var _hmt = _hmt || [];
   	<div class="content">
     	 
 
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
 
 	
 		<div class="page-header">
@@ -142,6 +161,8 @@ var _hmt = _hmt || [];
 
 
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$x</span> = <span class="string">&quot;just go go!&quot;</span> ;</span><br></pre></td></tr></table></figure>
+
+
 
 
 
@@ -177,7 +198,7 @@ var _hmt = _hmt || [];
 </tr>
 </tbody></table>
 <p>这是雪人表情</p>
-<p><span class="github-emoji" alias="snowman" style fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/26c4.png?v8">&#x26c4;</span></p>
+<p><span class="emoji" alias="snowman" style fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/26c4.png?v8">&#x26c4;</span></p>
 	  
 	</div>
 
@@ -256,6 +277,8 @@ var _hmt = _hmt || [];
 
 
 
+
+
 	</div>
   </div>
   <div class="container-narrow">
@@ -301,5 +324,20 @@ var _hmt = _hmt || [];
      searchFunc(path, 'local-search-input', 'local-search-result');
    </script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
    </html>
