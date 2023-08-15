@@ -8,7 +8,7 @@
       <link href="/2023/08/15/%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E6%B5%8B%E8%AF%95/"/>
       <url>/2023/08/15/%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E6%B5%8B%E8%AF%95/</url>
       
-        <content type="html"><![CDATA[<p>$$<br>J_\alpha(x) &#x3D; \sum_{m&#x3D;0}^\infty \frac{(-1)^m}{m! \Gamma (m + \alpha + 1)} {\left({ \frac{x}{2} }\right)}^{2m + \alpha}<br>$$</p><p>$$<br>evidence_{i}&#x3D;\sum_{j}W_{ij}x_{j}+b_{i}<br>$$</p><p>$$<br>\begin {matrix}<br>   1 &amp; 2 &amp; 3 \\<br>   4 &amp; 5 &amp; 6 \\<br>   7 &amp; 8 &amp; 9<br>  \end {matrix}<br>$$</p><p>$$<br>\frac{x}{2y} +\frac{x-y}{x+y}<br>$$</p>]]></content>
+        <content type="html"><![CDATA[<p>数学公式渲染也修好了，下面测试几个数学公式，数学公式的渲染要阅读全文才会展示，预览图是不显示的</p><p>$$<br>J_\alpha(x) &#x3D; \sum_{m&#x3D;0}^\infty \frac{(-1)^m}{m! \Gamma (m + \alpha + 1)} {\left({ \frac{x}{2} }\right)}^{2m + \alpha}<br>$$</p><p>$$<br>evidence_{i}&#x3D;\sum_{j}W_{ij}x_{j}+b_{i}<br>$$</p><p>$$<br>\begin {matrix}<br>   1 &amp; 2 &amp; 3 \\<br>   4 &amp; 5 &amp; 6 \\<br>   7 &amp; 8 &amp; 9<br>  \end {matrix}<br>$$</p><p>$$<br>\frac{x}{2y} +\frac{x-y}{x+y}<br>$$</p>]]></content>
       
       
       
