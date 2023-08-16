@@ -70,7 +70,23 @@ sub=&gt;subroutine: 子例程
 out=&gt;inputoutput: 输出
 st(right)-&gt;in-&gt;op-&gt;cond
 cond(yes,right)-&gt;out-&gt;e
-cond(no)-&gt;sub{&#34;scale&#34;:1,&#34;line-width&#34;:2,&#34;line-length&#34;:50,&#34;text-margin&#34;:10,&#34;font-size&#34;:12}">
+cond(no)-&gt;sub{&#34;scale&#34;:1,&#34;line-width&#34;:2,&#34;line-length&#34;:50,&#34;text-margin&#34;:10,&#34;font-size&#34;:12}  var code = document.getElementById(&#34;flowchart-0-code&#34;).value;  var options = JSON.parse(decodeURIComponent(document.getElementById(&#34;flowchart-0-options&#34;).value));  var diagram = flowchart.parse(code);  diagram.drawSVG(&#34;flowchart-0&#34;, options);st=&gt;start: Start
+i=&gt;inputoutput: 输入年份n
+cond1=&gt;condition: n能否被4整除？
+cond2=&gt;condition: n能否被100整除？
+cond3=&gt;condition: n能否被400整除？
+o1=&gt;inputoutput: 输出非闰年
+o2=&gt;inputoutput: 输出非闰年
+o3=&gt;inputoutput: 输出闰年
+o4=&gt;inputoutput: 输出闰年
+e=&gt;end
+st-&gt;i-&gt;cond1
+cond1(no)-&gt;o1-&gt;e
+cond1(yes)-&gt;cond2
+cond2(no)-&gt;o3-&gt;e
+cond2(yes)-&gt;cond3
+cond3(yes)-&gt;o2-&gt;e
+cond3(no)-&gt;o4-&gt;e{&#34;scale&#34;:1,&#34;line-width&#34;:2,&#34;line-length&#34;:50,&#34;text-margin&#34;:10,&#34;font-size&#34;:12}  var code = document.getElementById(&#34;flowchart-1-code&#34;).value;  var options = JSON.parse(decodeURIComponent(document.getElementById(&#34;flowchart-1-options&#34;).value));  var diagram = flowchart.parse(code);  diagram.drawSVG(&#34;flowchart-1&#34;, options);">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -267,7 +283,7 @@ var _hmt = _hmt || [];
 
 <div id="flowchart-1" class="flow-chart"></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: 开始节点
+<p><script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: 开始节点
 in=>inputoutput: 输入
 e=>end: 结束节点
 op=>operation: 操作节点
@@ -292,7 +308,8 @@ cond1(yes)->cond2
 cond2(no)->o3->e
 cond2(yes)->cond3
 cond3(yes)->o2->e
-cond3(no)->o4->e</textarea><textarea id="flowchart-1-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-1-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-1-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-1", options);</script>	  
+cond3(no)->o4->e</textarea><textarea id="flowchart-1-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-1-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-1-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-1", options);</script></p>
+	  
 	</div>
 
 	<div>
