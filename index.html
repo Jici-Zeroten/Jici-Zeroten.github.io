@@ -173,7 +173,7 @@ var _hmt = _hmt || [];
 <p>这是复杂公式块<br>$$<br>\Gamma(z) &#x3D; \int_0^\infty t^{z-1}e^{-t}dt,.<br>\Gamma(z) &#x3D; \int_0^\infty t^{z-1}e^{-t}dt,.<br>$$</p>
 <p>$$<br>\lim\limits_{x \to \infty} \exp(-x) &#x3D; 0<br>$$</p>
 <p>$$<br>X(m,n)&#x3D;<br>\begin{cases}<br>x(n),\<br>x(n-1),\<br>x(n+1)<br>\end{cases}<br>$$</p>
-<p>这是表格</p>
+<p>这是表格！</p>
 <table>
 <thead>
 <tr>
@@ -248,6 +248,33 @@ var _hmt = _hmt || [];
 	
 	</div>
   <a type="button" href="/2023/08/12/你好世界/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2023/08/16/表格测试/" >表格测试</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2023-08-16  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		
+	
+	</div>
+  <a type="button" href="/2023/08/16/表格测试/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -349,7 +376,7 @@ var _hmt = _hmt || [];
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
-			<a href="/2023/08/13/流程图测试/" >流程图显示</a>
+			<a href="/2023/08/13/流程图测试/" >流程图测试</a>
 		</h3>
 		</div>
 	<div class="col-md-4">
@@ -363,9 +390,84 @@ var _hmt = _hmt || [];
   <div class="row">
 	
 	
-		<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">    A [Square Rect] -- Link text --&gt; B ((Circle))</span><br><span class="line">    A --&gt; C (Round Rect)</span><br><span class="line">    B --&gt; D &#123;Rhombus&#125;</span><br><span class="line">    C --&gt; D</span><br></pre></td></tr></table></figure>
+		<p>修好了流程图的渲染，现在支持mermaid和flowchart等主流流程图的渲染了</p>
+<p>mermaid流程图</p>
+<pre class="mermaid">sequenceDiagram
+    loop Daily query
+        Alice->>Bob: Hello Bob, how are you?
+        alt is sick
+            Bob->>Alice: Not so good :(
+        else is well
+            Bob->>Alice: Feeling fresh like a daisy
+        end
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">sequenceDiagram</span><br><span class="line">    loop Daily query</span><br><span class="line">        Alice-&gt;&gt;Bob: Hello Bob, how are you?</span><br><span class="line">        alt is sick</span><br><span class="line">            Bob-&gt;&gt;Alice: Not so good :(</span><br><span class="line">        else is well</span><br><span class="line">            Bob-&gt;&gt;Alice: Feeling fresh like a daisy</span><br><span class="line">        end</span><br><span class="line"></span><br><span class="line">        opt Extra response</span><br><span class="line">            Bob-&gt;&gt;Alice: Thanks for asking</span><br><span class="line">        end</span><br><span class="line">    end</span><br></pre></td></tr></table></figure>
+        opt Extra response
+            Bob->>Alice: Thanks for asking
+        end
+    end</pre>
+
+
+
+
+
+<pre class="mermaid">graph TD
+    B((开始)) -->C{判断}
+    C --  a=1 -->D[执行语句1]
+    C --  a=2  -->E[执行语句2]
+    C --  a=3 -->F[执行语句3]
+    C -- a=4  -->G[执行语句4]
+    D--> AA((结束))
+    E--> AA
+    F--> AA
+   G--> AA</pre>
+
+<pre class="mermaid">graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;</pre>
+
+
+
+
+
+<p>flowchart流程图</p>
+<div id="flowchart-0" class="flow-chart"></div>
+
+
+
+
+
+
+
+<div id="flowchart-1" class="flow-chart"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: 开始节点
+in=>inputoutput: 输入
+e=>end: 结束节点
+op=>operation: 操作节点
+cond=>condition: 条件节点
+sub=>subroutine: 子例程
+out=>inputoutput: 输出
+st(right)->in->op->cond
+cond(yes,right)->out->e
+cond(no)->sub</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script><textarea id="flowchart-1-code" style="display: none">st=>start: Start
+i=>inputoutput: 输入年份n
+cond1=>condition: n能否被4整除？
+cond2=>condition: n能否被100整除？
+cond3=>condition: n能否被400整除？
+o1=>inputoutput: 输出非闰年
+o2=>inputoutput: 输出非闰年
+o3=>inputoutput: 输出闰年
+o4=>inputoutput: 输出闰年
+e=>end
+st->i->cond1
+cond1(no)->o1->e
+cond1(yes)->cond2
+cond2(no)->o3->e
+cond2(yes)->cond3
+cond3(yes)->o2->e
+cond3(no)->o4->e</textarea><textarea id="flowchart-1-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-1-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-1-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-1", options);</script>
 	
 	</div>
   <a type="button" href="/2023/08/13/流程图测试/#more" class="btn btn-default more">Read More</a>
@@ -411,7 +513,7 @@ var _hmt = _hmt || [];
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/建站测试/">建站测试<span>6</span></a></li>
+			<li><a href="/tags/建站测试/">建站测试<span>7</span></a></li>
 		
 		 
 		</ul>
@@ -423,6 +525,10 @@ var _hmt = _hmt || [];
 <div class="widget">
   <h4>Recent Posts</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2023/08/16/表格测试/" ><i class="fa fa-file-o"></i>表格测试</a>
+      </li>
     
       <li>
         <a href="/2023/08/15/数学公式测试/" ><i class="fa fa-file-o"></i>数学公式测试</a>
@@ -438,10 +544,6 @@ var _hmt = _hmt || [];
     
       <li>
         <a href="/2023/08/13/建站说明/" ><i class="fa fa-file-o"></i>建站说明</a>
-      </li>
-    
-      <li>
-        <a href="/2023/08/13/流程图测试/" ><i class="fa fa-file-o"></i>流程图显示</a>
       </li>
     
   </ul>
@@ -481,6 +583,13 @@ var _hmt = _hmt || [];
       with help from <a href="http://hexo.io/" target="_blank">Hexo</a>,<a target="_blank" rel="noopener" href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>,<a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a> and <a href="http://getbootstrap.com/" target="_blank">BOOTSTRA.386</a>. 
      <br> Theme by <a target="_blank" rel="noopener" href="http://github.com/wzpan/hexo-theme-freemind/">Freemind.386</a>.    
 </p>
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
  </footer>
 </div> <!-- container-narrow -->
   
