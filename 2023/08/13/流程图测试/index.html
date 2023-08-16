@@ -14,7 +14,63 @@ mermaid流程图
 sequenceDiagram
     loop Daily query
         Alice-&gt;&gt;Bob: Hello Bob, how are you?
-        alt is ">
+        alt is sick
+            Bob-&gt;&gt;Alice: Not so good :(
+        else is well
+            Bob-&gt;&gt;Alice: Feeling fresh like a daisy
+        end
+
+        opt Extra response
+            Bob-&gt;&gt;Alice: Thanks for asking
+        end
+    end
+
+
+
+
+
+graph TD
+    B((开始)) --&gt;C{判断}
+    C --  a=1 --&gt;D[执行语句1]
+    C --  a=2  --&gt;E[执行语句2]
+    C --  a=3 --&gt;F[执行语句3]
+    C -- a=4  --&gt;G[执行语句4]
+    D--&gt; AA((结束))
+    E--&gt; AA
+    F--&gt; AA
+   G--&gt; AA
+
+graph TD;
+    A--&gt;B;
+    A--&gt;C;
+    B--&gt;D;
+    C--&gt;D;
+
+
+
+
+
+flowchart流程图
+
+
+
+
+
+
+
+
+
+
+st=&gt;start: 开始节点
+in=&gt;inputoutput: 输入
+e=&gt;end: 结束节点
+op=&gt;operation: 操作节点
+cond=&gt;condition: 条件节点
+sub=&gt;subroutine: 子例程
+out=&gt;inputoutput: 输出
+st(right)-&gt;in-&gt;op-&gt;cond
+cond(yes,right)-&gt;out-&gt;e
+cond(no)-&gt;sub{&#34;scale&#34;:1,&#34;line-width&#34;:2,&#34;line-length&#34;:50,&#34;text-margin&#34;:10,&#34;font-size&#34;:12}">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
