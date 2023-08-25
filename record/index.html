@@ -6,17 +6,25 @@
   <meta http-equiv="cache-control" content="no-cache">
   <meta http-equiv="expires" content="0">
   
-  <title>建站说明 | Jici&#39;s Blog</title>
+  <title>record | Jici&#39;s Blog</title>
   <meta name="author" content="Jici">
   
-  <meta name="description" content="一时兴起，决定搭建个博客玩玩。主要也不知道写什么，博客会慢慢完善。看了很多博客主题，感觉个人还是喜欢素一点的。现在发展的太快了，各类优秀的博客主题不断涌现，对我而言，还是朴素些吧。我会测试一些markdown的渲染，我对markdown解析的要求不高，能写字就行，用不着什么高亮、流程图之类的，适合自己的就好，相应的插件会慢慢补上
-下面测试代码块、公式块、表格、表情
-这是代码块">
+  <meta name="description" content="排行榜
+    
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 容器 */
+        .rank-container {
+            width: 650px;
+  ">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="建站说明"/>
+  <meta property="og:title" content="record"/>
   <meta property="og:site_name" content="Jici&#39;s Blog"/>
 
   
@@ -116,109 +124,204 @@ var _hmt = _hmt || [];
   <div class="container">
   	<div class="content">
     	 
-
-  
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-  });
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-
-
 	
 		<div class="page-header">
-			<h1> 建站说明</h1>
+			<h1> record</h1>
 		</div>
 	
 
 
 
-<div class="row post">
+<div class="row page">
 	<!-- cols -->
 	
-	<div id="top_meta"></div>
-	<div class="col-md-9">
+	<div class="col-md-12">
 	
 
 	<!-- content -->
 	<div class="mypage">		
 	  		
 
-	  <p>一时兴起，决定搭建个博客玩玩。主要也不知道写什么，博客会慢慢完善。看了很多博客主题，感觉个人还是喜欢素一点的。现在发展的太快了，各类优秀的博客主题不断涌现，对我而言，还是朴素些吧。我会测试一些markdown的渲染，我对markdown解析的要求不高，能写字就行，用不着什么高亮、流程图之类的，适合自己的就好，相应的插件会慢慢补上</p>
-<p>下面测试代码块、公式块、表格、表情</p>
-<pre class="line-numbers language-Python" data-language="Python"><code class="language-Python">这是代码块<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+	  <!DOCTYPE html>
+<html>
 
+<head>
+    <meta charset="utf-8">
+    <title>排行榜</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
 
+        /* 容器 */
+        .rank-container {
+            width: 650px;
+            color: #333;
+            font-size: 14px;
+            background-color: #fff;
+            border-radius: 5px;
+            border: 1px solid silver;
+            margin: 100px auto;
+        }
 
-<pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token variable">$x</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"just go go!"</span> <span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+        /* 标题 */
+        .rank-title {
+            font-size: 30px;
+            padding: 30px 20px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
+        /* 内容主体 */
+        .rank-body {
+            padding: 0 30px 20px;
+        }
 
+        /* 每项样式 */
+        .item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
 
+        /* 数字 */
+        .item .num {
+            font-size: 20px;
+            margin-right: 20px;
+        }
 
+        /* 作者 */
+        .item .author {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
 
-<p>这是简单公式块<br>$$<br>7x \times 2y \neq 3z<br>$$</p>
-<p>$$<br>7x + 2y &#x3D; 3z<br>$$</p>
-<p>$$<br>x^3+x^9+x^y<br>$$</p>
-<p>这是复杂公式块<br>$$<br>\Gamma(z) &#x3D; \int_0^\infty t^{z-1}e^{-t}dt,.<br>\Gamma(z) &#x3D; \int_0^\infty t^{z-1}e^{-t}dt,.<br>$$</p>
-<p>$$<br>\lim\limits_{x \to \infty} \exp(-x) &#x3D; 0<br>$$</p>
-<p>$$<br>X(m,n)&#x3D;<br>\begin{cases}<br>x(n),\<br>x(n-1),\<br>x(n+1)<br>\end{cases}<br>$$</p>
-<p>这是表格</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<p>这是雪人表情</p>
-<p><span class="emoji" alias="snowman" style fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/26c4.png?v8">&#x26c4;</span></p>
-	  
+        /* 头像 */
+        .item .avatar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 46px;
+            height: 46px;
+            margin-right: 10px;
+            position: relative;
+        }
+
+        .item .avatar img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .item .avatar .img-bg {
+            width: 46px;
+            height: 54px;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+
+        /* 能力值 */
+        .item .rank-ability {
+            color: #999;
+        }
+
+        .item:nth-child(1) .num {
+            color: #de5149;
+        }
+
+        .item:nth-child(2) .num {
+            color: #ef8634;
+        }
+
+        .item:nth-child(3) .num {
+            color: #f6cb46;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="rank-container">
+        <div class="rank-title">靶机记录榜</div>
+        <div class="rank-body">
+            <div class="item">
+                <div class="num">1</div>
+                <dl class="author">
+                    <dt class="avatar">
+                        <!-- <img src="../img/a.jpg" class="img-bg"> -->
+                        <img src="/record/img/a.jpg">
+                    </dt>
+                    <dd>游山记</dd>
+                </dl>
+                <div class="rank-ability">100万能力值</div>
+            </div>
+            <div class="item">
+                <div class="num">2</div>
+                <dl class="author">
+                    <dt class="avatar">
+                        <!-- <img src="../img/a.jpg" class="img-bg"> -->
+                        <img src="/record/img/a.jpg">
+                    </dt>
+                    <dd>hello world</dd>
+                </dl>
+                <div class="rank-ability">100万能力值</div>
+            </div>
+            <div class="item">
+                <div class="num">3</div>
+                <dl class="author">
+                    <dt class="avatar">
+                        <!-- <img src="../img/a.jpg" class="img-bg"> -->
+                        <img src="/record/img/a.jpg">
+                    </dt>
+                    <dd>hello CSS</dd>
+                </dl>
+                <div class="rank-ability">90万能力值</div>
+            </div>
+            <div class="item">
+                <div class="num">4</div>
+                <dl class="author">
+                    <dt class="avatar">
+                        <img src="/record/img/a.jpg" class="img_bg">
+                    </dt>
+                    <dd>hello JavaScript</dd>
+                </dl>
+                <div class="rank-ability">80万能力值</div>
+            </div>
+            <div class="item">
+                <div class="num">5</div>
+                <dl class="author">
+                    <dt class="avatar">
+                        <img src="/record/img/a.jpg" class="img_bg">
+                    </dt>
+                    <dd>hello 前端</dd>
+                </dl>
+                <div class="rank-ability">70万能力值</div>
+            </div>
+            <div class="item">
+                <div class="num">6</div>
+                <dl class="author">
+                    <dt class="avatar">
+                        <img src="/record/img/a.jpg" class="img_bg">
+                    </dt>
+                    <dd>贝尔加湖 </dd>
+                </dl>
+                <div class="rank-ability">60万能力值</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>	  
 	</div>
 
 	<div>
   	<center>
 	<div class="pagination">
-
-    
-    
-    <a href="/2023/08/15/图片测试/" type="button" class="btn btn-default"><i
-                class="fa fa-arrow-circle-o-left"></i> Prev</a>
-    
-
-    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
-    
-    <a href="/2023/08/13/流程图测试/" type="button" class="btn btn-default ">Next<i
-                class="fa fa-arrow-circle-o-right"></i></a>
-    
 
     
 </div>
@@ -228,56 +331,12 @@ var _hmt = _hmt || [];
 	
 	<!-- comment -->
 	
-<section id="comment">
-    <h2 class="title">Comments</h2>
-
-    
-</section>
-
 
 	</div> <!-- col-md-9/col-md-12 -->
 		
-	
-	<div id="side_meta">
-		<div class="col-md-3" id="post_meta"> 
-
-	<!-- date -->
-	
-	<div class="meta-widget">
-	<i class="fa fa-clock-o"></i>
-	2023-08-13 
-	</div>
-	
-
-	<!-- categories -->
-    
-
-	<!-- tags -->
-	
-	<div class="meta-widget">
-	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
-    <ul id="tags" class="tag_box list-unstyled collapse in">	  
-	    
-  <li><a href="/tags/建站测试/">建站测试<span>8</span></a></li>
-    </ul>
-	</div>
-		
-
-	<!-- toc -->
-	<div class="meta-widget">
-	
-	</div>
-	
-    <hr>
-	
-</div><!-- col-md-3 -->
-
-	</div>
 		
 
 </div><!-- row -->
-
-
 
 
 
