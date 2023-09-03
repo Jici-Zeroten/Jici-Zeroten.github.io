@@ -17,6 +17,8 @@ jQuery(document).ready(function ($) {
             "color": "rgb(" + ~~(Math.floor(Math.random() * 128 + 128)) + "," + ~~(Math.floor(Math.random() * 128 + 128)) + "," + ~~(Math.floor(Math.random() * 128 + 128)) + ")"
             // 暖色
             // "color": "rgb(" + ~~(Math.floor(Math.random() * 128 + 64)) + "," + ~~(Math.floor(Math.random() * 128 + 64)) + "," + ~~(Math.floor(Math.random() * 128 + 64)) + ")"
+            // 纯随机
+            // "color": "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
         });
         $("body").append($i);
         $i.animate({
