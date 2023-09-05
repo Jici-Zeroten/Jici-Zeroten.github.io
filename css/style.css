@@ -256,7 +256,7 @@ blockquote li,
     font-family: DOS-en, DOS, SimHei, Monaco, Menlo, Consolas, 'Courier New', monospace
 }
 
-img,
+img:not(.item .avatar .img-bg):not(.item .avatar img),
 video {
     max-width: 97.5%;
     margin: 15px auto;
