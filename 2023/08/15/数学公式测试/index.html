@@ -10,8 +10,8 @@
   <meta name="author" content="Jici">
   
   <meta name="description" content="数学公式渲染也修好了，下面测试几个数学公式，为了提高性能，数学公式要阅读全文才会渲染，预览图是不显示的
-
-J_\alpha(x) = \sum_{m=0}^\infty \frac{(-1)^m}{m! \Gamma (m + \alpha + 1)} {\left({ \frac{x}{2} }\">
+$$J_\alpha(x) &amp;#x3D; \sum_{m&amp;#x3D;0}^\infty \frac{(-1)^m}{m! \Gamma (m + \alpha + 1)} {\left({ \frac{x}{2} }\right)}^{2m + \alpha}$$
+$$evidence_{i}&amp;#x3D;\sum_{j}W_{ij}x_{j}+b_{i}$$">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -157,15 +157,11 @@ var _hmt = _hmt || [];
 	  		
 
 	  <p>数学公式渲染也修好了，下面测试几个数学公式，为了提高性能，数学公式要阅读全文才会渲染，预览图是不显示的</p>
-<script type="math/tex; mode=display">
-J_\alpha(x) = \sum_{m=0}^\infty \frac{(-1)^m}{m! \Gamma (m + \alpha + 1)} {\left({ \frac{x}{2} }\right)}^{2m + \alpha}</script><script type="math/tex; mode=display">
-evidence_{i}=\sum_{j}W_{ij}x_{j}+b_{i}</script><script type="math/tex; mode=display">
-\begin {matrix}
-   1 & 2 & 3 \\\\
-   4 & 5 & 6 \\\\
-   7 & 8 & 9
-  \end {matrix}</script><script type="math/tex; mode=display">
-\frac{x}{2y} +\frac{x-y}{x+y}</script>	  
+<p>$$<br>J_\alpha(x) &#x3D; \sum_{m&#x3D;0}^\infty \frac{(-1)^m}{m! \Gamma (m + \alpha + 1)} {\left({ \frac{x}{2} }\right)}^{2m + \alpha}<br>$$</p>
+<p>$$<br>evidence_{i}&#x3D;\sum_{j}W_{ij}x_{j}+b_{i}<br>$$</p>
+<p>$$<br>\begin {matrix}<br>   1 &amp; 2 &amp; 3 \\<br>   4 &amp; 5 &amp; 6 \\<br>   7 &amp; 8 &amp; 9<br>  \end {matrix}<br>$$</p>
+<p>$$<br>\frac{x}{2y} +\frac{x-y}{x+y}<br>$$</p>
+	  
 	</div>
 
 	<div>
@@ -321,6 +317,21 @@ setInterval("createtime()",250);
      searchFunc(path, 'local-search-input', 'local-search-result');
    </script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/ni-j.model.json"},"display":{"position":"left","width":260,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
    </html>
 <!-- 雪花特效 -->
