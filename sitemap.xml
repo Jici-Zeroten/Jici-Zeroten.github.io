@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jici-zeroten.github.io/2023/09/16/%E4%BB%95%E9%80%94%E4%B8%8D%E9%A1%BA%EF%BC%8C%E8%8B%A6%E4%B9%90%E4%BA%BA%E7%94%9F/</loc>
+    
+    <lastmod>2023-09-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://jici-zeroten.github.io/record/page2.html</loc>
     
     <lastmod>2023-09-16</lastmod>
@@ -135,6 +144,13 @@
     <priority>1.0</priority>
   </url>
 
+  
+  <url>
+    <loc>https://jici-zeroten.github.io/tags/%E9%86%92%E8%A8%80/</loc>
+    <lastmod>2023-09-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
   
   <url>
     <loc>https://jici-zeroten.github.io/tags/%E5%BB%BA%E7%AB%99%E6%B5%8B%E8%AF%95/</loc>
