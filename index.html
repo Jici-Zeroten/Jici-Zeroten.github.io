@@ -276,8 +276,15 @@ var _hmt = _hmt || [];
 	
 	
 		<p>数学公式渲染也修好了，下面测试几个数学公式，为了提高性能，数学公式要阅读全文才会渲染，预览图是不显示的</p>
-<p>$$<br>J_\alpha(x) &#x3D; \sum_{m&#x3D;0}^\infty \frac{(-1)^m}{m! \Gamma (m + \alpha + 1)} {\left({ \frac{x}{2} }\right)}^{2m + \alpha}<br>$$</p>
-<p>$$<br>evidence_{i}&#x3D;\sum_{j}W_{ij}x_{j}+b_{i}<br>$$</p>
+<script type="math/tex; mode=display">
+J_\alpha(x) = \sum_{m=0}^\infty \frac{(-1)^m}{m! \Gamma (m + \alpha + 1)} {\left({ \frac{x}{2} }\right)}^{2m + \alpha}</script><script type="math/tex; mode=display">
+evidence_{i}=\sum_{j}W_{ij}x_{j}+b_{i}</script><script type="math/tex; mode=display">
+\begin {matrix}
+   1 & 2 & 3 \\\\
+   4 & 5 & 6 \\\\
+   7 & 8 & 9
+  \end {matrix}</script><script type="math/tex; mode=display">
+\frac{x}{2y} +\frac{x-y}{x+y}</script>
 	
 	</div>
   <a type="button" href="/2023/08/15/数学公式测试/#more" class="btn btn-default more">Read More</a>
@@ -334,8 +341,8 @@ var _hmt = _hmt || [];
 	
 	
 		<p>花了点时间把站点的图片渲染插件修好了，现在展示图片应该没问题了，下面放几张壁纸测试一下</p>
-<p><img src="/2023/08/15/%E5%9B%BE%E7%89%87%E6%B5%8B%E8%AF%95/image-20230815074655175.png" alt="image-20230815074655175"></p>
-<p><img src="/2023/08/15/%E5%9B%BE%E7%89%87%E6%B5%8B%E8%AF%95/image-20230815074722240.png" alt="image-20230815074722240"></p>
+<p><img src="/2023/08/15/%E5%9B%BE%E7%89%87%E6%B5%8B%E8%AF%95/08/15/%E5%9B%BE%E7%89%87%E6%B5%8B%E8%AF%95/image-20230815074655175.png" alt="image-20230815074655175"></p>
+<p><img src="/2023/08/15/%E5%9B%BE%E7%89%87%E6%B5%8B%E8%AF%95/08/15/%E5%9B%BE%E7%89%87%E6%B5%8B%E8%AF%95/image-20230815074722240.png" alt="image-20230815074722240"></p>
 	
 	</div>
   <a type="button" href="/2023/08/15/图片测试/#more" class="btn btn-default more">Read More</a>
@@ -405,16 +412,8 @@ var _hmt = _hmt || [];
 	
 		<h1>你好，世界</h1>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>test</title>
-</head>
-<body>
-<p>你好，世界</p>
-
-</body></html>
+<p>&lt;!DOCTYPE html&gt;</p>
+<p><html></html></p>
 	
 	</div>
   <a type="button" href="/2023/08/12/你好世界/#more" class="btn btn-default more">Read More</a>
@@ -537,11 +536,21 @@ var _hmt = _hmt || [];
     }
   </script>
 
-<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
 <span class="post-meta-divider">|</span>
 <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+<script>
+var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a||"interactive"===document.readyState||"complete"===document.readyState?c.call(document):b.push(function(){return c.call(this)}),this},d=function(){for(var a=0,c=b.length;c>a;a++)b[a].apply(document);b=[]},e=function(){a||(a=!0,d.call(window),document.removeEventListener?document.removeEventListener("DOMContentLoaded",e,!1):document.attachEvent&&(document.detachEvent("onreadystatechange",e),window==window.top&&(clearInterval(c),c=null)))},document.addEventListener?document.addEventListener("DOMContentLoaded",e,!1):document.attachEvent&&(document.attachEvent("onreadystatechange",function(){/loaded|complete/.test(document.readyState)&&e()}),window==window.top&&(c=setInterval(function(){try{a||document.documentElement.doScroll("left")}catch(b){return}e()},5)))}(),bszCaller={fetch:function(a,b){var c="BusuanziCallback_"+Math.floor(1099511627776*Math.random());window[c]=this.evalCall(b),a=a.replace("=BusuanziCallback","="+c),scriptTag=document.createElement("SCRIPT"),scriptTag.type="text/javascript",scriptTag.defer=!0,scriptTag.src=a,scriptTag.referrerPolicy="no-referrer-when-downgrade",document.getElementsByTagName("HEAD")[0].appendChild(scriptTag)},evalCall:function(a){return function(b){ready(function(){try{a(b),scriptTag.parentElement.removeChild(scriptTag)}catch(c){bszTag.hides()}})}}},bszCaller.fetch("//busuanzi.ibruce.info/busuanzi?jsonpCallback=BusuanziCallback",function(a){bszTag.texts(a),bszTag.shows()}),bszTag={bszs:["site_pv","page_pv","site_uv"],texts:function(a){this.bszs.map(function(b){var c=document.getElementById("busuanzi_value_"+b);c&&(c.innerHTML=a[b])})},hides:function(){this.bszs.map(function(a){var b=document.getElementById("busuanzi_container_"+a);b&&(b.style.display="")})},shows:function(){this.bszs.map(function(a){var b=document.getElementById("busuanzi_container_"+a);b&&(b.style.display="inline")})}};
+</script>
+
+
+<!--<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span class="post-meta-divider">|</span>
+<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>-->
 <!--<span class="post-meta-divider">|</span>
 <span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人</span>-->
+
 
 <div>
 <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
