@@ -177,22 +177,23 @@ var _hmt = _hmt || [];
 	  <p>一时兴起，决定搭建个博客玩玩。主要也不知道写什么，博客会慢慢完善。看了很多博客主题，感觉个人还是喜欢素一点的。现在发展的太快了，各类优秀的博客主题不断涌现，内容过于丰富。对我而言，还是朴素些吧，朴素拥有无数潜能，也能享受到开发一个又一个模块的乐趣。我会测试一些markdown的渲染，我对markdown解析的要求不高，能写字就行，用不着什么高亮、流程图之类的，适合自己的就好，相应的插件会慢慢补上和调试</p>
 <p>下面测试代码块、公式块、表格、表情</p>
 <pre class="line-numbers language-Python" data-language="Python"><code class="language-Python">这是代码块<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-
 <pre class="line-numbers language-php" data-language="php"><code class="language-php">$x &#x3D; &quot;just go go!&quot; ;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-
-
-
-<p>这是简单公式块<br>$$<br>7x \times 2y \neq 3z<br>$$</p>
-<p>$$<br>7x + 2y &#x3D; 3z<br>$$</p>
-<p>$$<br>x^3+x^9+x^y<br>$$</p>
-<p>这是复杂公式块<br>$$<br>\Gamma(z) &#x3D; \int_0^\infty t^{z-1}e^{-t}dt,.<br>\Gamma(z) &#x3D; \int_0^\infty t^{z-1}e^{-t}dt,.<br>$$</p>
-<p>$$<br>\lim\limits_{x \to \infty} \exp(-x) &#x3D; 0<br>$$</p>
-<p>$$<br>X(m,n)&#x3D;<br>\begin{cases}<br>x(n),\<br>x(n-1),\<br>x(n+1)<br>\end{cases}<br>$$</p>
-<p>这是表格</p>
+<p>这是简单公式块</p>
+<script type="math/tex; mode=display">
+7x \times 2y \neq 3z</script><script type="math/tex; mode=display">
+7x + 2y = 3z</script><script type="math/tex; mode=display">
+x^3+x^9+x^y</script><p>这是复杂公式块</p>
+<script type="math/tex; mode=display">
+\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,. 
+\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.</script><script type="math/tex; mode=display">
+\lim\limits_{x \to \infty} \exp(-x) = 0</script><script type="math/tex; mode=display">
+X(m,n)=
+\begin{cases}
+x(n),\\
+x(n-1),\\
+x(n+1)
+\end{cases}</script><p>这是表格</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -201,11 +202,7 @@ var _hmt = _hmt || [];
 <th></th>
 </tr>
 </thead>
-<tbody><tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
+<tbody>
 <tr>
 <td></td>
 <td></td>
@@ -216,7 +213,13 @@ var _hmt = _hmt || [];
 <td></td>
 <td></td>
 </tr>
-</tbody></table>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>这是雪人表情</p>
 <p><span class="emoji" alias="snowman" style fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/26c4.png?v8">&#x26c4;</span></p>
 	  
@@ -385,6 +388,21 @@ setInterval("createtime()",250);
      searchFunc(path, 'local-search-input', 'local-search-result');
    </script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/ni-j.model.json"},"display":{"position":"left","width":260,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
    </html>
 <!-- 雪花特效 -->
