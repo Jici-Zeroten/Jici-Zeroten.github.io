@@ -101,7 +101,7 @@
                 var hitokotoElements = document.getElementsByClassName('hitokoto');
                 for (var i = 0; i < hitokotoElements.length; i++) {
                 (function (index) {
-                        fetch('https://v1.hitokoto.cn?c=b&c=d&c=i&c=j&c=k')
+                        fetch('https://v1.hitokoto.cn?c=i&c=j&c=k')
                         .then(function (res) {
                                 return res.json();
                         })
@@ -852,6 +852,11 @@
 		<article class="white-panel">
 			<img src="img/144.png" class="thumb">
 			<h1><a href="#">Title 144</a></h1>
+	  		<p class="hitokoto">正在加载一言...</p>
+		</article>
+		<article class="white-panel">
+			<img src="img/145.png" class="thumb">
+			<h1><a href="#">Title 145</a></h1>
 	  		<p class="hitokoto">正在加载一言...</p>
 		</article>
     </section>
