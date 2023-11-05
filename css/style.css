@@ -346,8 +346,23 @@ header h1 {
 }
 
 h1 {
+    font-size: 1.9em;
+    margin-bottom: .6667em
+}
+h2 {
+    font-size: 1.7em;
+    margin-bottom: .6667em
+}
+h3 {
     font-size: 1.5em;
-    line-height: 1.2em;
+    margin-bottom: .6667em
+}
+h4 {
+    font-size: 1.3em;
+    margin-bottom: .6667em
+}
+h5 {
+    font-size: 1.1em;
     margin-bottom: .6667em
 }
 
