@@ -203,7 +203,7 @@ var _hmt = _hmt || [];
 	
 	
 		<p>提权手法总览：</p>
-<p><img src="/2023/10/30/%E6%8F%90%E6%9D%83%E6%89%8B%E6%B3%95/10/30/%E6%8F%90%E6%9D%83%E6%89%8B%E6%B3%95/1645420997-889076-image.png" alt="img"></p>
+<p><img src="/2023/10/30/%E6%8F%90%E6%9D%83%E6%89%8B%E6%B3%95/1645420997-889076-image.png" alt="img"></p>
 <h1 id="Windows提权"><a href="#Windows提权" class="headerlink" title="Windows提权"></a>Windows提权</h1>
 	
 	</div>
@@ -252,7 +252,8 @@ var _hmt = _hmt || [];
 </li>
 <li><p>有目的地的人生才会迷路，我只是来世界散步</p>
 </li>
-<li>死亡，是不是也算脱离生命危险</li>
+<li><p>死亡，是不是也算脱离生命危险</p>
+</li>
 </ul>
 
 	
@@ -283,10 +284,10 @@ var _hmt = _hmt || [];
 	
 		<p>关于漏洞危害定级</p>
 <ul>
-<li>getshell、后台、影响业务——中/高危</li>
-<li>间接危害，如XSS——中/低危【反射型XSS是低危】，SQL注入【大多数都在中危，少部分高危】</li>
+<li>getshell、后台、影响业务——中&#x2F;高危</li>
+<li>间接危害，如XSS——中&#x2F;低危【反射型XSS是低危】，SQL注入【大多数都在中危，少部分高危】</li>
 </ul>
-<p><br></p>
+<br>
 	
 	</div>
   <a type="button" href="/2023/10/29/渗透之常识/#more" class="btn btn-default more">Read More</a>
@@ -343,33 +344,33 @@ var _hmt = _hmt || [];
 	
 	
 		<h1 id="猜测接口找到越权漏洞"><a href="#猜测接口找到越权漏洞" class="headerlink" title="猜测接口找到越权漏洞"></a>猜测接口找到越权漏洞</h1><ol>
-<li><p>使用f12开发者工具，寻找js文件，里面一般会有一些接口，形如：api/模块名、api/v1/模块名、域名/api/模块名、域名/api/v1/模块名【在找 js 文件的时候，可以关注下有没有以 runtime 命名的 js 文件，因为在这种 js 文件中会包含其他 js 文件的名称（包括当前页面没有加载的 js 文件），这样利用 runtime js 文件就发现了更多的 js 文件，使得找到 api 接口的概率又大了些】</p>
+<li><p>使用f12开发者工具，寻找js文件，里面一般会有一些接口，形如：api&#x2F;模块名、api&#x2F;v1&#x2F;模块名、域名&#x2F;api&#x2F;模块名、域名&#x2F;api&#x2F;v1&#x2F;模块名【在找 js 文件的时候，可以关注下有没有以 runtime 命名的 js 文件，因为在这种 js 文件中会包含其他 js 文件的名称（包括当前页面没有加载的 js 文件），这样利用 runtime js 文件就发现了更多的 js 文件，使得找到 api 接口的概率又大了些】</p>
 </li>
 <li><p>尝试访问接口，直接在浏览器输入接口网址即可</p>
 </li>
-<li><p>判断一下该接口的作用(添加？删除？修改？查询？)，以确定下一步的构造【比如，某个js文件中只有查询的接口，那么接下来可以尝试一下构造添加、修改和删除接口】<img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231027141911393.png" alt="image-20231027141911393"></p>
+<li><p>判断一下该接口的作用(添加？删除？修改？查询？)，以确定下一步的构造【比如，某个js文件中只有查询的接口，那么接下来可以尝试一下构造添加、修改和删除接口】<img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231027141911393.png" alt="image-20231027141911393"></p>
 </li>
 <li><p>尝试构造接口，下面是一些后台模块常见的接口格式</p>
 <p>添加接口</p>
 <ul>
-<li>POST/PUT /api/模块名</li>
-<li>POST /api/模块名/add</li>
+<li>POST&#x2F;PUT &#x2F;api&#x2F;模块名</li>
+<li>POST &#x2F;api&#x2F;模块名&#x2F;add</li>
 </ul>
 <p>删除接口</p>
 <ul>
-<li>DELETE /api/模块名/id</li>
-<li>GET /api/模块名/del?id=</li>
-<li>POST /api/模块名/</li>
+<li>DELETE &#x2F;api&#x2F;模块名&#x2F;id</li>
+<li>GET &#x2F;api&#x2F;模块名&#x2F;del?id&#x3D;</li>
+<li>POST &#x2F;api&#x2F;模块名&#x2F;</li>
 </ul>
 <p>修改接口</p>
 <ul>
-<li>POST /api/模块名/modify</li>
-<li>POST /api/模块名/</li>
+<li>POST &#x2F;api&#x2F;模块名&#x2F;modify</li>
+<li>POST &#x2F;api&#x2F;模块名&#x2F;</li>
 </ul>
 <p>查询接口</p>
 <ul>
-<li>GET /api/模块名/list</li>
-<li>GET /api/模块名/all</li>
+<li>GET &#x2F;api&#x2F;模块名&#x2F;list</li>
+<li>GET &#x2F;api&#x2F;模块名&#x2F;all</li>
 </ul>
 <p>其他说明</p>
 <ul>
@@ -405,7 +406,7 @@ var _hmt = _hmt || [];
 	
 	
 		<p>外网信息收集方式一览：</p>
-<p><img src="/2023/10/25/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E6%89%8B%E6%B3%95%E5%A4%87%E5%BF%98%E5%BD%95/10/25/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E6%89%8B%E6%B3%95%E5%A4%87%E5%BF%98%E5%BD%95/1641980627-617290-image.png" alt="img"></p>
+<p><img src="/2023/10/25/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E6%89%8B%E6%B3%95%E5%A4%87%E5%BF%98%E5%BD%95/1641980627-617290-image.png" alt="img"></p>
 <p>通用字典制作：一本针对性强的字典，能够提高命中率，更加精准</p>
 	
 	</div>
@@ -549,13 +550,13 @@ var _hmt = _hmt || [];
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/建站测试/">建站测试<span>8</span></a></li>
-		
 			<li><a href="/tags/渗透测试/">渗透测试<span>5</span></a></li>
+		
+			<li><a href="/tags/醒言/">醒言<span>3</span></a></li>
 		
 			<li><a href="/tags/哲学与思考/">哲学与思考<span>1</span></a></li>
 		
-			<li><a href="/tags/醒言/">醒言<span>3</span></a></li>
+			<li><a href="/tags/建站测试/">建站测试<span>8</span></a></li>
 		
 		 
 		</ul>

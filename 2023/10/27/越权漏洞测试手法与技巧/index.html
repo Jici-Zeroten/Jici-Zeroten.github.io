@@ -10,7 +10,7 @@
   <meta name="author" content="Jici">
   
   <meta name="description" content="猜测接口找到越权漏洞
-使用f12开发者工具，寻找js文件，里面一般会有一些接口，形如：api/模块名、api/v1/模块名、域名/api/模块名、域名/api/v1/模块名【在找 js 文件的时候，可以关注下有没有以 runtime 命名的 js 文件，因为在这种 js 文件中会包含其他 js 文件的名称（包括当前页面没有加载的 js 文件），这样利用 runtime js 文件就发现了更多的 js 文件，使得找到 api 接口的概率又大了些】
+使用f12开发者工具，寻找js文件，里面一般会有一些接口，形如：api&amp;#x2F;模块名、api&amp;#x2F;v1&amp;#x2F;模块名、域名&amp;#x2F;api&amp;#x2F;模块名、域名&amp;#x2F;api&amp;#x2F;v1&amp;#x2F;模块名【在找 js 文件的时候，可以关注下有没有以 runtime 命名的 js 文件，因为在这种 js 文件中会包含其他 js 文件的名称（包括当前页面没有加载的 js 文件），这样利用 runtime js 文件就发现了更多的 js 文件，使得找到 api 接口的概率又大了些】
 
 尝试访问接口，直接在浏览器输入接口网址即可
 
@@ -19,24 +19,24 @@
 尝试构造接口，下面是一些后台模块常见的接口格式
 添加接口
 
-POST/PUT /api/模块名
-POST /api/模块名/add
+POST&amp;#x2F;PUT &amp;#x2F;api&amp;#x2F;模块名
+POST &amp;#x2F;api&amp;#x2F;模块名&amp;#x2F;add
 
 删除接口
 
-DELETE /api/模块名/id
-GET /api/模块名/del?id=
-POST /api/模块名/
+DELETE &amp;#x2F;api&amp;#x2F;模块名&amp;#x2F;id
+GET &amp;#x2F;api&amp;#x2F;模块名&amp;#x2F;del?id&amp;#x3D;
+POST &amp;#x2F;api&amp;#x2F;模块名&amp;#x2F;
 
 修改接口
 
-POST /api/模块名/modify
-POST /api/模块名/
+POST &amp;#x2F;api&amp;#x2F;模块名&amp;#x2F;modify
+POST &amp;#x2F;api&amp;#x2F;模块名&amp;#x2F;
 
 查询接口
 
-GET /api/模块名/list
-GET /api/模块名/all
+GET &amp;#x2F;api&amp;#x2F;模块名&amp;#x2F;list
+GET &amp;#x2F;api&amp;#x2F;模块名&amp;#x2F;all
 
 其他说明
 
@@ -208,33 +208,33 @@ var _hmt = _hmt || [];
 	  		
 
 	  <h1 id="猜测接口找到越权漏洞"><a href="#猜测接口找到越权漏洞" class="headerlink" title="猜测接口找到越权漏洞"></a>猜测接口找到越权漏洞</h1><ol>
-<li><p>使用f12开发者工具，寻找js文件，里面一般会有一些接口，形如：api/模块名、api/v1/模块名、域名/api/模块名、域名/api/v1/模块名【在找 js 文件的时候，可以关注下有没有以 runtime 命名的 js 文件，因为在这种 js 文件中会包含其他 js 文件的名称（包括当前页面没有加载的 js 文件），这样利用 runtime js 文件就发现了更多的 js 文件，使得找到 api 接口的概率又大了些】</p>
+<li><p>使用f12开发者工具，寻找js文件，里面一般会有一些接口，形如：api&#x2F;模块名、api&#x2F;v1&#x2F;模块名、域名&#x2F;api&#x2F;模块名、域名&#x2F;api&#x2F;v1&#x2F;模块名【在找 js 文件的时候，可以关注下有没有以 runtime 命名的 js 文件，因为在这种 js 文件中会包含其他 js 文件的名称（包括当前页面没有加载的 js 文件），这样利用 runtime js 文件就发现了更多的 js 文件，使得找到 api 接口的概率又大了些】</p>
 </li>
 <li><p>尝试访问接口，直接在浏览器输入接口网址即可</p>
 </li>
-<li><p>判断一下该接口的作用(添加？删除？修改？查询？)，以确定下一步的构造【比如，某个js文件中只有查询的接口，那么接下来可以尝试一下构造添加、修改和删除接口】<img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231027141911393.png" alt="image-20231027141911393"></p>
+<li><p>判断一下该接口的作用(添加？删除？修改？查询？)，以确定下一步的构造【比如，某个js文件中只有查询的接口，那么接下来可以尝试一下构造添加、修改和删除接口】<img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231027141911393.png" alt="image-20231027141911393"></p>
 </li>
 <li><p>尝试构造接口，下面是一些后台模块常见的接口格式</p>
 <p>添加接口</p>
 <ul>
-<li>POST/PUT /api/模块名</li>
-<li>POST /api/模块名/add</li>
+<li>POST&#x2F;PUT &#x2F;api&#x2F;模块名</li>
+<li>POST &#x2F;api&#x2F;模块名&#x2F;add</li>
 </ul>
 <p>删除接口</p>
 <ul>
-<li>DELETE /api/模块名/id</li>
-<li>GET /api/模块名/del?id=</li>
-<li>POST /api/模块名/</li>
+<li>DELETE &#x2F;api&#x2F;模块名&#x2F;id</li>
+<li>GET &#x2F;api&#x2F;模块名&#x2F;del?id&#x3D;</li>
+<li>POST &#x2F;api&#x2F;模块名&#x2F;</li>
 </ul>
 <p>修改接口</p>
 <ul>
-<li>POST /api/模块名/modify</li>
-<li>POST /api/模块名/</li>
+<li>POST &#x2F;api&#x2F;模块名&#x2F;modify</li>
+<li>POST &#x2F;api&#x2F;模块名&#x2F;</li>
 </ul>
 <p>查询接口</p>
 <ul>
-<li>GET /api/模块名/list</li>
-<li>GET /api/模块名/all</li>
+<li>GET &#x2F;api&#x2F;模块名&#x2F;list</li>
+<li>GET &#x2F;api&#x2F;模块名&#x2F;all</li>
 </ul>
 <p>其他说明</p>
 <ul>
@@ -252,19 +252,18 @@ var _hmt = _hmt || [];
 <li>IOS .wxapkg 文件默认存放路径：<code>/var/mobile/Containers/Data/Application/&#123;系统UUID&#125;/Library/WechatPrivate/&#123;user哈希值&#125;/WeApp/LocalCache/release/&#123;小程序的AppID&#125;</code></li>
 <li>Android .wxapkg 默认文件存放路径：<code>/data/data/com.tencent.mm/MicroMsg/&#123;user哈希值&#125;/appbrand/pkg/</code></li>
 </ul>
+<p>说明：以上是默认存放路径，如果更改过微信文件保存路径，可以在微信设置中查看</p>
+<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030150424988.png" alt="image-20231030150424988"></p>
+<p>目录展示：目录下有一堆wx开头的目录，后面的一串字符就是对应的小程序ID【可以在访问小程序时通过抓包获取到。如果不想抓包又想知道小程序ID，有个技巧，可以把这些目录删掉，重新访问小程序时会再次自动下载，根据日期来找到对应的包即可】<img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030145000259.png" alt="image-20231030145000259"></p>
+</li>
+<li><p>Windows版的小程序包自动在外部加了一层的加密(所以才需要解密，只有解密了才能解包)，我们看到的包名统一为：_<em>APP</em>_.wxapkg</p>
 </li>
 </ol>
-<p>   说明：以上是默认存放路径，如果更改过微信文件保存路径，可以在微信设置中查看</p>
-<p>   <img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030150424988.png" alt="image-20231030150424988"></p>
-<p>   目录展示：目录下有一堆wx开头的目录，后面的一串字符就是对应的小程序ID【可以在访问小程序时通过抓包获取到。如果不想抓包又想知道小程序ID，有个技巧，可以把这些目录删掉，重新访问小程序时会再次自动下载，根据日期来找到对应的包即可】<img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030145000259.png" alt="image-20231030145000259"></p>
-<ol>
-<li>Windows版的小程序包自动在外部加了一层的加密(所以才需要解密，只有解密了才能解包)，我们看到的包名统一为：_<em>APP_</em>.wxapkg</li>
-</ol>
-<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030145549897.png" alt="image-20231030145549897"></p>
+<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030145549897.png" alt="image-20231030145549897"></p>
 <p>说明：如果打开后看到多个.wxapkg，这是一种防御手段，称为分包，处理方式还是一样，对所有.wxapkg文件进行解密、解包即可(无非就是多逆向几个包而已)【文件大小最大的一般是主包】</p>
-<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030210013880.png" alt="image-20231030210013880"></p>
+<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030210013880.png" alt="image-20231030210013880"></p>
 <p>使用010editor打开，可以看到V1MMWX这样的文件头，V1MMWX标识就是加密后所添加的标识</p>
-<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030145738408.png" alt></p>
+<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030145738408.png"></p>
 <p>Windows版的微信小程序的加密流程：</p>
 <ol>
 <li>首先pbkdf2生成AES的key。利用微信小程序id字符串为pass，salt为<strong>saltiest</strong> 迭代次数为1000。调用pbkdf2生成一个32位的key</li>
@@ -278,7 +277,7 @@ var _hmt = _hmt || [];
 <li><a target="_blank" rel="noopener" href="https://github.com/BlackTrace/pc_wxapkg_decrypt">https://github.com/BlackTrace/pc_wxapkg_decrypt</a></li>
 </ul>
 <p>这里使用pc_wxapkg_decrypt进行解密：</p>
-<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030175422842.png" alt="image-20231030175422842"></p>
+<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030175422842.png" alt="image-20231030175422842"></p>
 <ul>
 <li>注意：<ul>
 <li>路径中不要带空格，否则会报错，类似“Program File”这种，要避免</li>
@@ -288,13 +287,14 @@ var _hmt = _hmt || [];
 </ul>
 <pre class="line-numbers language-none"><code class="language-none">#.\pc_wxapkg_decrypt.exe -wxid 小程序ID -in __APP__.wxapkg路径
 .\pc_wxapkg_decrypt.exe -wxid wx518a2b2e96ce3ca0 -in C:\Users\Zeroten\Desktop\微信小程序解包测试\__APP__.wxapkg<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030180007316.png" alt="image-20231030180007316"></p>
+
+<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030180007316.png" alt="image-20231030180007316"></p>
 <p>解密后的文件默认名称为dec.wxapkg，会直接生成在pc_wxapkg_decrypt.exe所在目录下</p>
-<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030180405972.png" alt="image-20231030180405972"></p>
+<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030180405972.png" alt="image-20231030180405972"></p>
 <p>解密后的包就是需要通过解析来获取小程序源码的包，这里先使用010editor查看小程序的结构</p>
-<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030180830409.png" alt="image-20231030180830409"></p>
+<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030180830409.png" alt="image-20231030180830409"></p>
 <p>从旁边的文件目录中可以看出，这种包并非是一个压缩格式的包，而是一个二进制的包，所以需要特定的方法解包</p>
-<ol>
+<ol start="3">
 <li>解包操作：</li>
 </ol>
 <p>下面两个github项目都可以微信小程序进行解包操作：</p>
@@ -303,29 +303,34 @@ var _hmt = _hmt || [];
 </ul>
 <pre class="line-numbers language-none"><code class="language-none">#执行后，会在dec.wxapkg目录下生成解包后的文件夹
 python3 unwxapkg.py dec.wxapkg<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030182724709.png" alt="image-20231030182724709"></p>
-<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030182857180.png" alt="image-20231030182857180"></p>
-<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030182913615.png" alt="image-20231030182913615"></p>
+
+<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030182724709.png" alt="image-20231030182724709"></p>
+<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030182857180.png" alt="image-20231030182857180"></p>
+<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030182913615.png" alt="image-20231030182913615"></p>
 <p>目录介绍：</p>
-<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030210847809.png" alt="image-20231030210847809"></p>
-<p>敏感关键词：appid、secret(如果这个appid和secret可以使用，就能获取到seesion_key)，下面是微信官方的小程序登录流程【<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/login.html】">https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/login.html】</a></p>
-<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030212430785.png" alt="image-20231030212430785"></p>
-<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/api-login.2fcc9f35.jpg" alt="img"></p>
-<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030212404448.png" alt="image-20231030212404448"></p>
+<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030210847809.png" alt="image-20231030210847809"></p>
+<p>敏感关键词：appid、secret(如果这个appid和secret可以使用，就能获取到seesion_key)，下面是微信官方的小程序登录流程【<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/login.html%E3%80%91">https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/login.html】</a></p>
+<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030212430785.png" alt="image-20231030212430785"></p>
+<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/api-login.2fcc9f35.jpg" alt="img"></p>
+<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030212404448.png" alt="image-20231030212404448"></p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/xuedingmiaojun/wxappUnpacker">https://github.com/xuedingmiaojun/wxappUnpacker</a></li>
 </ul>
 <pre class="line-numbers language-none"><code class="language-none">#执行后，会在dec.wxapkg目录下生成解包后的文件夹
 node wuWxapkg.js dec.wxapkg<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030185209297.png" alt="image-20231030185209297"></p>
-<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030185415461.png" alt="image-20231030185415461"></p>
-<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030185634433.png" alt="image-20231030185634433"></p>
+
+<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030185209297.png" alt="image-20231030185209297"></p>
+<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030185415461.png" alt="image-20231030185415461"></p>
+<p><img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231030185634433.png" alt="image-20231030185634433"></p>
 <p>如提示，检测到此包是分包后的子包，使用-s参数指定存放路径即可</p>
 <pre class="line-numbers language-none"><code class="language-none">#node wuWxapkg.js 分包.wxapkg -s&#x3D;&#x2F;分包所在目录
 node wuWxapkg.js _19871000_28.wxapkg -s&#x3D;..&#x2F;_1514036652_28<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
 <p>鸣谢：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://misakikata.github.io/2021/03/微信小程序解包/">微信小程序解包 ~ Misaki’s Blog (misakikata.github.io)</a></li>
+<li><a target="_blank" rel="noopener" href="https://misakikata.github.io/2021/03/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%A7%A3%E5%8C%85/">微信小程序解包 ~ Misaki’s Blog (misakikata.github.io)</a></li>
 <li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/QAKBcW9TzyH0bFW_oYZgIA">攻防实战]外网突破 (qq.com)</a></li>
 </ul>
 	  
