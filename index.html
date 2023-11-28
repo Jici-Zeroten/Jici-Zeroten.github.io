@@ -173,12 +173,40 @@ var _hmt = _hmt || [];
   <div class="row">
 	
 	
-		<p>2023-11-20：笔记是学习过程的产物，新笔记的制作和旧笔记的整理(格式转化和排版等)都需要时间，主要是个人接触计算机以来的一些技术栈，涉及内容大类总览如下，各位小伙伴稍安勿躁</p>
-<p><img src="/2023/11/20/%E5%85%AC%E5%91%8A/image-20231120111143155.png" alt="image-20231120111143155"></p>
-<p>每个人都是有自己的生活的，我不想写博客成为一种枷锁，大家也要警惕“拿来主义”，在学习过程中要有自己的思想，热爱自由，享受学习</p>
+		<p>2023-11-28：新增站点字数统计、对外开放“关于我”专栏</p>
+<hr>
+<p>2023-11-20：笔记是学习过程的产物，新笔记的制作和旧笔记的整理(格式转化和排版等)都需要时间，主要是个人接触计算机以来的一些技术栈，涉及内容大类总览如下，各位小伙伴稍安勿躁</p>
 	
 	</div>
   <a type="button" href="/2023/11/20/公告/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
+			<a href="/2023/11/24/Nginx学习笔记/" title="Nginx在实际的渗透环境中是经常遇到的，企业通过Nginx可以实现一些奇妙的效果(如果你不知道这种架构，可能会一时摸不清头脑)，本文给出一些Nginx需要了解的常识">Nginx学习笔记</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2023-11-24  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<h1 id="Nginx处理的问题"><a href="#Nginx处理的问题" class="headerlink" title="Nginx处理的问题"></a>Nginx处理的问题</h1><p><img src="/2023/11/24/Nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image1.png"></p>
+<p><img src="/2023/11/24/Nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image2.png"></p>
+	
+	</div>
+  <a type="button" href="/2023/11/24/Nginx学习笔记/#more" class="btn btn-default more">Read More</a>
 </div>
 
 		
@@ -281,8 +309,10 @@ var _hmt = _hmt || [];
 </li>
 <li><p>有目的地的人生才会迷路，我只是来世界散步</p>
 </li>
-<li>死亡，是不是也算脱离生命危险</li>
-<li>如果每次苏醒意味着梦中的自己正死去，那现实里死去，会在梦中醒来吗</li>
+<li><p>死亡，是不是也算脱离生命危险</p>
+</li>
+<li><p>如果每次苏醒意味着梦中的自己正死去，那现实里死去，会在梦中醒来吗</p>
+</li>
 </ul>
 
 	
@@ -313,10 +343,10 @@ var _hmt = _hmt || [];
 	
 		<p>关于漏洞危害定级</p>
 <ul>
-<li>getshell、后台、影响业务——中/高危</li>
-<li>间接危害，如XSS——中/低危【反射型XSS是低危】，SQL注入【大多数都在中危，少部分高危】</li>
+<li>getshell、后台、影响业务——中&#x2F;高危</li>
+<li>间接危害，如XSS——中&#x2F;低危【反射型XSS是低危】，SQL注入【大多数都在中危，少部分高危】</li>
 </ul>
-<p><br></p>
+<br>
 	
 	</div>
   <a type="button" href="/2023/10/29/渗透之常识/#more" class="btn btn-default more">Read More</a>
@@ -373,7 +403,7 @@ var _hmt = _hmt || [];
 	
 	
 		<h1 id="猜测接口找到越权漏洞"><a href="#猜测接口找到越权漏洞" class="headerlink" title="猜测接口找到越权漏洞"></a>猜测接口找到越权漏洞</h1><ol>
-<li><p>使用f12开发者工具，寻找js文件，里面一般会有一些接口，形如：api/模块名、api/v1/模块名、域名/api/模块名、域名/api/v1/模块名【在找 js 文件的时候，可以关注下有没有以 runtime 命名的 js 文件，因为在这种 js 文件中会包含其他 js 文件的名称（包括当前页面没有加载的 js 文件），这样利用 runtime js 文件就发现了更多的 js 文件，使得找到 api 接口的概率又大了些】</p>
+<li><p>使用f12开发者工具，寻找js文件，里面一般会有一些接口，形如：api&#x2F;模块名、api&#x2F;v1&#x2F;模块名、域名&#x2F;api&#x2F;模块名、域名&#x2F;api&#x2F;v1&#x2F;模块名【在找 js 文件的时候，可以关注下有没有以 runtime 命名的 js 文件，因为在这种 js 文件中会包含其他 js 文件的名称（包括当前页面没有加载的 js 文件），这样利用 runtime js 文件就发现了更多的 js 文件，使得找到 api 接口的概率又大了些】</p>
 </li>
 <li><p>尝试访问接口，直接在浏览器输入接口网址即可</p>
 </li>
@@ -382,24 +412,24 @@ var _hmt = _hmt || [];
 <li><p>尝试构造接口，下面是一些后台模块常见的接口格式</p>
 <p>添加接口</p>
 <ul>
-<li>POST/PUT /api/模块名</li>
-<li>POST /api/模块名/add</li>
+<li>POST&#x2F;PUT &#x2F;api&#x2F;模块名</li>
+<li>POST &#x2F;api&#x2F;模块名&#x2F;add</li>
 </ul>
 <p>删除接口</p>
 <ul>
-<li>DELETE /api/模块名/id</li>
-<li>GET /api/模块名/del?id=</li>
-<li>POST /api/模块名/</li>
+<li>DELETE &#x2F;api&#x2F;模块名&#x2F;id</li>
+<li>GET &#x2F;api&#x2F;模块名&#x2F;del?id&#x3D;</li>
+<li>POST &#x2F;api&#x2F;模块名&#x2F;</li>
 </ul>
 <p>修改接口</p>
 <ul>
-<li>POST /api/模块名/modify</li>
-<li>POST /api/模块名/</li>
+<li>POST &#x2F;api&#x2F;模块名&#x2F;modify</li>
+<li>POST &#x2F;api&#x2F;模块名&#x2F;</li>
 </ul>
 <p>查询接口</p>
 <ul>
-<li>GET /api/模块名/list</li>
-<li>GET /api/模块名/all</li>
+<li>GET &#x2F;api&#x2F;模块名&#x2F;list</li>
+<li>GET &#x2F;api&#x2F;模块名&#x2F;all</li>
 </ul>
 <p>其他说明</p>
 <ul>
@@ -472,35 +502,6 @@ var _hmt = _hmt || [];
 </div>
 
 		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2023/10/06/黑客精神/" >黑客精神</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2023-10-06  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<p>&emsp;&emsp;前段时间太忙，把自己累倒了。学习路上，也要保重身体啊。无意间在网上看到一个帖子，与我的三观很契合，我由衷希望这种黑客精神留存在每一个技术人的血液里。帖子如下：</p>
-<p>&emsp;&emsp;真正的黑客是这样的：<br>&emsp;&emsp;1. 一个计算机系统，不论软件还是硬件，在他们面前，就是一副清晰复杂又美妙的迷宫图，他了解迷宫的形状，边界，每个转弯，每个回廊，每个回路，每个岔口。<br>&emsp;&emsp;2. 你问他，这里有个难题，该怎么解决？<br>&emsp;&emsp;3. 他说：给我10秒，我来看一下。他看了一下他脑海中的那副迷宫图，找到你的难题的起点以及终点，发现它们离得很近，他说：哦，简单，你先朝这边走，然后朝那边走，然后这么拐个弯，就到终点了<br>&emsp;&emsp;4. 你又说：我太胖了，这里有个门太小，我过不去，怎么办？<br>&emsp;&emsp;5. 他哦了一声：这样啊？你等一下。他又看了看那副图，思索了片刻，然后说：这里还有个路，不算太远，但是有点绕，我给你画个图吧。<br>&emsp;&emsp;6. 你拿着图，按着走，于是到终点了。</p>
-<p>&emsp;&emsp;真正的黑客绝不是故弄玄虚生怕别人看出自己几斤几两的人，真正的黑客，能把看似复杂难解的问题，清晰明了地说清楚。而对某个问题确实不知道答案时，也不会胡说一通掩盖自己，只会说：这个我现在不知道。如果你想知道答案，我可以花时间研究一下看看。“黑客精神”这个词已经不仅仅局限在封闭的圈子中了，很幸运，在我的圈子中遇到了那些真正具备黑客精神的人，他（她）们热情而充满活力，很感谢，一位位领路人。</p>
-	
-	</div>
-  <a type="button" href="/2023/10/06/黑客精神/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
 
 		</div>
 
@@ -550,13 +551,13 @@ var _hmt = _hmt || [];
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/建站测试/">建站测试<span>8</span></a></li>
+			<li><a href="/tags/醒言/">醒言<span>3</span></a></li>
 		
-			<li><a href="/tags/渗透测试/">渗透测试<span>6</span></a></li>
+			<li><a href="/tags/渗透测试/">渗透测试<span>7</span></a></li>
 		
 			<li><a href="/tags/哲学与思考/">哲学与思考<span>1</span></a></li>
 		
-			<li><a href="/tags/醒言/">醒言<span>3</span></a></li>
+			<li><a href="/tags/建站测试/">建站测试<span>8</span></a></li>
 		
 		 
 		</ul>
@@ -568,6 +569,10 @@ var _hmt = _hmt || [];
 <div class="widget">
   <h4>Recent Posts</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2023/11/24/Nginx学习笔记/"  title="Nginx在实际的渗透环境中是经常遇到的，企业通过Nginx可以实现一些奇妙的效果(如果你不知道这种架构，可能会一时摸不清头脑)，本文给出一些Nginx需要了解的常识" ><i class="fa fa-file-o"></i>Nginx学习笔记</a>
+      </li>
     
       <li>
         <a href="/2023/11/20/公告/" ><i class="fa fa-file-o"></i>公告-Blog大事纪</a>
@@ -583,10 +588,6 @@ var _hmt = _hmt || [];
     
       <li>
         <a href="/2023/10/29/一言/" ><i class="fa fa-file-o"></i>一言</a>
-      </li>
-    
-      <li>
-        <a href="/2023/10/29/渗透之常识/" ><i class="fa fa-file-o"></i>渗透之常识</a>
       </li>
     
   </ul>
@@ -667,6 +668,7 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
     } 
 setInterval("createtime()",250);
 </script>
+<span class="num"> | 及辞已经在本站记录了: 25.2k 字</span>
 </div> </footer>
 </div> <!-- container-narrow -->
   
@@ -703,6 +705,21 @@ setInterval("createtime()",250);
      searchFunc(path, 'local-search-input', 'local-search-result');
    </script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/ni-j.model.json"},"display":{"position":"left","width":260,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
    </html>
 <!-- 雪花特效 -->
