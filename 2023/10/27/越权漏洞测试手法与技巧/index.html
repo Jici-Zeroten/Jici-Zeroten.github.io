@@ -44,7 +44,7 @@ POST发包的值常为{}，即{“键1”:”值”,”键2”:”值”}
 
 
 
-微信小程序接口未授权">
+前端接口信息本质上是JS信息收集，可以使用工具：">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -242,6 +242,12 @@ var _hmt = _hmt || [];
 </ul>
 </li>
 </ol>
+<p>前端接口信息本质上是JS信息收集，可以使用工具：</p>
+<ul>
+<li>JSFinder：<a target="_blank" rel="noopener" href="https://github.com/Threezh1/JSFinder">https://github.com/Threezh1/JSFinder</a></li>
+<li>URLFinder：<a target="_blank" rel="noopener" href="https://github.com/pingc0y/URLFinder">https://github.com/pingc0y/URLFinder</a></li>
+</ul>
+<p>这里再说明一下为什么要多多关注JS文件：JS文件与HTML、CSS等文件统一作为前端文件，是可以通过浏览器访问到的，相对于HTML和CSS等文件的显示和美化作用，JS文件将会能够将页面的功能点进行升华。对于渗透测试来说，&#x3D;&#x3D;JS文件不仅仅能够找到一些URL、内网IP地址、手机号、调用的组件版本等信息，还存在一些接口，因为前端需要，所以一些接口将会在JS文件中直接或间接呈现&#x3D;&#x3D;</p>
 <h1 id="微信小程序接口未授权"><a href="#微信小程序接口未授权" class="headerlink" title="微信小程序接口未授权"></a>微信小程序接口未授权</h1><h2 id="微信小程序解包"><a href="#微信小程序解包" class="headerlink" title="微信小程序解包"></a>微信小程序解包</h2><p>微信小程序解包介绍：微信小程序解包是指将微信小程序的源代码从其原始的.wxapkg文件中提取出来，以便进行分析、修改或反编译。一些开发者可能会使用这种技术来了解小程序的内部工作原理，或者为了进行安全审计。请注意，微信小程序的反编译和解包操作可能会违反微信的服务条款</p>
 <p>.wxapkg文件介绍：.wxapkg文件是微信小程序的打包文件格式(所以又称微信小程序包、微信小程序源码包)，它是一种压缩文件，通常包含了一个或多个小程序的代码、资源和配置信息等。可以将.wxapkg文件解压缩成一个目录结构，其中包含了小程序的所有文件和文件夹，例如JavaScript、CSS、图片、音频、视频、配置文件等【微信小程序在运行时，会在用户系统中生成一个后缀为wxapkg的程序包，通过反编译这个包，我们便可以获取到此小程序的前端代码，通过分析前端代码，可以得到后端接口与传输数据】</p>
 <p>操作手法：想要对微信小程序进行解包操作，首先是要获取目标小程序的wxapkg文件。wxapkg文件是微信小程序的安装包文件格式，用于将小程序的代码、资源以及其他必要的文件打包成一个单独的文件。但是Windows环境下的wxapkg文件中的js代码和资源文件一般是被加密的，需要使用专门设计的解密工具先进行解密，再进行解包操作，获取文件内容。iOS和Android平台下可直接进行解包操作</p>
@@ -390,7 +396,7 @@ node wuWxapkg.js _19871000_28.wxapkg -s&#x3D;..&#x2F;_1514036652_28<span aria-hi
 	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
     <ul id="tags" class="tag_box list-unstyled collapse in">	  
 	    
-  <li><a href="/tags/渗透测试/">渗透测试<span>7</span></a></li>
+  <li><a href="/tags/渗透测试/">渗透测试<span>8</span></a></li>
     </ul>
 	</div>
 		
@@ -463,7 +469,7 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
     } 
 setInterval("createtime()",250);
 </script>
-<span class="num"> | 及辞已经在本站记录了: 25.2k 字</span>
+<span class="num"> | 及辞已经在本站记录了: 27.9k 字</span>
 </div> </footer>
 </div> <!-- container-narrow -->
   
