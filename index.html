@@ -188,6 +188,35 @@ var _hmt = _hmt || [];
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="title">
+			<a href="/2023/11/29/斜体粗体测试/" >斜体粗体测试</a>
+		</h3>
+		</div>
+	<div class="col-md-4">
+		<div class="date">post @ 2023-11-29  </div>
+		</div>
+	</div>
+	
+
+
+			<div class="entry">
+  <div class="row">
+	
+	
+		<p>正常：Hello 你好</p>
+<p>粗体：<strong>Hello</strong> 你好</p>
+<p>斜体：<em>Hello</em> 你好</p>
+	
+	</div>
+  <a type="button" href="/2023/11/29/斜体粗体测试/#more" class="btn btn-default more">Read More</a>
+</div>
+
+		
+			
+	
+	<!-- display as entry -->
+<div class="row">
+	<div class="col-md-8">
+		<h3 class="title">
 			<a href="/2023/11/29/XML学习笔记/" title="发现word和markdown互转时的排版会消耗大量时间，并且markdown在处理word表格样式时显得十分混乱，这里选择最朴素也是最适合展示的方式——图片，一来能解决排版这一复杂问题，二来也更能把时间花费在学习新东西和新笔记的制作上。虽然感觉还是不够完美，但这是我目前想到的最优解，我有自己的考量。">XML学习笔记</a>
 		</h3>
 		</div>
@@ -230,8 +259,8 @@ var _hmt = _hmt || [];
   <div class="row">
 	
 	
-		<h1 id="手机验证码问题导致的任意用户登录"><a href="#手机验证码问题导致的任意用户登录" class="headerlink" title="手机验证码问题导致的任意用户登录"></a>手机验证码问题导致的任意用户登录</h1><p>手机验证码导致的任意用户登录主要包括：验证码爆破、验证码明文返回、存在万能验证码、验证码未绑定用户、获取验证码的手机号字段可双写、验证码为空&#x2F;任意验证码可成功验证等。下面展开来讲。</p>
-<h2 id="验证码爆破"><a href="#验证码爆破" class="headerlink" title="验证码爆破"></a>验证码爆破</h2>
+		<p>[TOC]</p>
+<h1 id="手机验证码问题导致的任意用户登录"><a href="#手机验证码问题导致的任意用户登录" class="headerlink" title="手机验证码问题导致的任意用户登录"></a>手机验证码问题导致的任意用户登录</h1><p>手机验证码导致的任意用户登录主要包括：验证码爆破、验证码明文返回、存在万能验证码、验证码未绑定用户、获取验证码的手机号字段可双写、验证码为空&#x2F;任意验证码可成功验证等。下面展开来讲。</p>
 	
 	</div>
   <a type="button" href="/2023/11/28/任意用户登录漏洞挖掘思路/#more" class="btn btn-default more">Read More</a>
@@ -258,9 +287,8 @@ var _hmt = _hmt || [];
   <div class="row">
 	
 	
-		<br>
-
-<h1 id="Nginx处理的问题"><a href="#Nginx处理的问题" class="headerlink" title="Nginx处理的问题"></a>Nginx处理的问题</h1><p><img src="/2023/11/24/Nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image1.png"></p>
+		<h1 id="Nginx处理的问题"><a href="#Nginx处理的问题" class="headerlink" title="Nginx处理的问题"></a>Nginx处理的问题</h1><p><img src="/2023/11/24/Nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image1.png"></p>
+<p><img src="/2023/11/24/Nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image2.png"></p>
 	
 	</div>
   <a type="button" href="/2023/11/24/Nginx学习笔记/#more" class="btn btn-default more">Read More</a>
@@ -439,68 +467,6 @@ var _hmt = _hmt || [];
 </div>
 
 		
-			
-	
-	<!-- display as entry -->
-<div class="row">
-	<div class="col-md-8">
-		<h3 class="title">
-			<a href="/2023/10/27/越权漏洞测试手法与技巧/" >越权漏洞测试手法与技巧</a>
-		</h3>
-		</div>
-	<div class="col-md-4">
-		<div class="date">post @ 2023-10-27  </div>
-		</div>
-	</div>
-	
-
-
-			<div class="entry">
-  <div class="row">
-	
-	
-		<h1 id="猜测接口找到越权漏洞"><a href="#猜测接口找到越权漏洞" class="headerlink" title="猜测接口找到越权漏洞"></a>猜测接口找到越权漏洞</h1><ol>
-<li><p>使用f12开发者工具，寻找js文件，里面一般会有一些接口，形如：api&#x2F;模块名、api&#x2F;v1&#x2F;模块名、域名&#x2F;api&#x2F;模块名、域名&#x2F;api&#x2F;v1&#x2F;模块名【在找 js 文件的时候，可以关注下有没有以 runtime 命名的 js 文件，因为在这种 js 文件中会包含其他 js 文件的名称（包括当前页面没有加载的 js 文件），这样利用 runtime js 文件就发现了更多的 js 文件，使得找到 api 接口的概率又大了些】</p>
-</li>
-<li><p>尝试访问接口，直接在浏览器输入接口网址即可</p>
-</li>
-<li><p>判断一下该接口的作用(添加？删除？修改？查询？)，以确定下一步的构造【比如，某个js文件中只有查询的接口，那么接下来可以尝试一下构造添加、修改和删除接口】<img src="/2023/10/27/%E8%B6%8A%E6%9D%83%E6%BC%8F%E6%B4%9E%E6%B5%8B%E8%AF%95%E6%89%8B%E6%B3%95%E4%B8%8E%E6%8A%80%E5%B7%A7/image-20231027141911393.png" alt="image-20231027141911393"></p>
-</li>
-<li><p>尝试构造接口，下面是一些后台模块常见的接口格式</p>
-<p>添加接口</p>
-<ul>
-<li>POST&#x2F;PUT &#x2F;api&#x2F;模块名</li>
-<li>POST &#x2F;api&#x2F;模块名&#x2F;add</li>
-</ul>
-<p>删除接口</p>
-<ul>
-<li>DELETE &#x2F;api&#x2F;模块名&#x2F;id</li>
-<li>GET &#x2F;api&#x2F;模块名&#x2F;del?id&#x3D;</li>
-<li>POST &#x2F;api&#x2F;模块名&#x2F;</li>
-</ul>
-<p>修改接口</p>
-<ul>
-<li>POST &#x2F;api&#x2F;模块名&#x2F;modify</li>
-<li>POST &#x2F;api&#x2F;模块名&#x2F;</li>
-</ul>
-<p>查询接口</p>
-<ul>
-<li>GET &#x2F;api&#x2F;模块名&#x2F;list</li>
-<li>GET &#x2F;api&#x2F;模块名&#x2F;all</li>
-</ul>
-<p>其他说明</p>
-<ul>
-<li>POST发包的值常为{}，即{“键1”:”值”,”键2”:”值”}</li>
-</ul>
-</li>
-</ol>
-<p>前端接口信息本质上是JS信息收集，可以使用工具：</p>
-	
-	</div>
-  <a type="button" href="/2023/10/27/越权漏洞测试手法与技巧/#more" class="btn btn-default more">Read More</a>
-</div>
-
-		
 
 		</div>
 
@@ -550,13 +516,13 @@ var _hmt = _hmt || [];
 		<h4>Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/建站测试/">建站测试<span>8</span></a></li>
-		
-			<li><a href="/tags/醒言/">醒言<span>3</span></a></li>
+			<li><a href="/tags/建站测试/">建站测试<span>9</span></a></li>
 		
 			<li><a href="/tags/哲学与思考/">哲学与思考<span>1</span></a></li>
 		
-			<li><a href="/tags/渗透测试/">渗透测试<span>8</span></a></li>
+			<li><a href="/tags/醒言/">醒言<span>3</span></a></li>
+		
+			<li><a href="/tags/渗透测试/">渗透测试<span>9</span></a></li>
 		
 		 
 		</ul>
@@ -568,6 +534,10 @@ var _hmt = _hmt || [];
 <div class="widget">
   <h4>Recent Posts</h4>
   <ul class="entry list-unstyled">
+    
+      <li>
+        <a href="/2023/11/29/斜体粗体测试/" ><i class="fa fa-file-o"></i>斜体粗体测试</a>
+      </li>
     
       <li>
         <a href="/2023/11/29/XML学习笔记/"  title="发现word和markdown互转时的排版会消耗大量时间，并且markdown在处理word表格样式时显得十分混乱，这里选择最朴素也是最适合展示的方式——图片，一来能解决排版这一复杂问题，二来也更能把时间花费在学习新东西和新笔记的制作上。虽然感觉还是不够完美，但这是我目前想到的最优解，我有自己的考量。" ><i class="fa fa-file-o"></i>XML学习笔记</a>
@@ -583,10 +553,6 @@ var _hmt = _hmt || [];
     
       <li>
         <a href="/2023/11/20/公告/" ><i class="fa fa-file-o"></i>公告-Blog大事纪</a>
-      </li>
-    
-      <li>
-        <a href="/2023/11/19/信安术语/"  title="这是我学习信安过程中个人整理的一些必要术语，原本使用word编写，现在转为markdown释放。目前没有找到实现无痛word转markdown的方法(网络上的一些方法多多少少有一些瑕疵)，我倒是尝试出一套方案，但是感觉还是不够优雅..." ><i class="fa fa-file-o"></i>信安术语</a>
       </li>
     
   </ul>

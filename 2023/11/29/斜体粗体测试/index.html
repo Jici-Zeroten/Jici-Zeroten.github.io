@@ -6,29 +6,17 @@
   <meta http-equiv="cache-control" content="no-cache">
   <meta http-equiv="expires" content="0">
   
-  <title>流程图测试 | Jici&#39;s Blog</title>
+  <title>斜体粗体测试 | Jici&#39;s Blog</title>
   <meta name="author" content="Jici">
   
-  <meta name="description" content="修好了流程图的渲染，现在支持mermaid和flowchart等主流流程图的渲染了
-mermaid流程图
-sequenceDiagram
-    loop Daily query
-        Alice-&gt;&gt;Bob: Hello Bob, how are you?
-        alt is sick
-            Bob-&gt;&gt;Alice: Not so good :(
-        else is well
-            Bob-&gt;&gt;Alice: Feeling fresh like a daisy
-        end
-
-        opt Extra response
-            Bob-&gt;&gt;Alice: Thanks for asking
-        end
-    end">
+  <meta name="description" content="正常：Hello 你好
+粗体：Hello 你好
+斜体：Hello 你好">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="流程图测试"/>
+  <meta property="og:title" content="斜体粗体测试"/>
   <meta property="og:site_name" content="Jici&#39;s Blog"/>
 
   
@@ -169,7 +157,7 @@ var _hmt = _hmt || [];
 
 	
 		<div class="page-header">
-			<h1> 流程图测试</h1>
+			<h1> 斜体粗体测试</h1>
 		</div>
 	
 
@@ -186,84 +174,10 @@ var _hmt = _hmt || [];
 	<div class="mypage">		
 	  		
 
-	  <p>修好了流程图的渲染，现在支持mermaid和flowchart等主流流程图的渲染了</p>
-<p>mermaid流程图</p>
-<pre class="mermaid">sequenceDiagram
-    loop Daily query
-        Alice->>Bob: Hello Bob, how are you?
-        alt is sick
-            Bob->>Alice: Not so good :(
-        else is well
-            Bob->>Alice: Feeling fresh like a daisy
-        end
-
-        opt Extra response
-            Bob->>Alice: Thanks for asking
-        end
-    end</pre>
-
-
-
-
-
-<pre class="mermaid">graph TD
-    B((开始)) -->C{判断}
-    C --  a=1 -->D[执行语句1]
-    C --  a=2  -->E[执行语句2]
-    C --  a=3 -->F[执行语句3]
-    C -- a=4  -->G[执行语句4]
-    D--> AA((结束))
-    E--> AA
-    F--> AA
-   G--> AA</pre>
-
-<pre class="mermaid">graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;</pre>
-
-
-
-
-
-<p>flowchart流程图</p>
-<div id="flowchart-0" class="flow-chart"></div>
-
-
-
-
-
-
-
-<div id="flowchart-1" class="flow-chart"></div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script><textarea id="flowchart-0-code" style="display: none">st=>start: 开始节点
-in=>inputoutput: 输入
-e=>end: 结束节点
-op=>operation: 操作节点
-cond=>condition: 条件节点
-sub=>subroutine: 子例程
-out=>inputoutput: 输出
-st(right)->in->op->cond
-cond(yes,right)->out->e
-cond(no)->sub</textarea><textarea id="flowchart-0-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-0-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-0-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-0", options);</script><textarea id="flowchart-1-code" style="display: none">st=>start: Start
-i=>inputoutput: 输入年份n
-cond1=>condition: n能否被4整除？
-cond2=>condition: n能否被100整除？
-cond3=>condition: n能否被400整除？
-o1=>inputoutput: 输出非闰年
-o2=>inputoutput: 输出非闰年
-o3=>inputoutput: 输出闰年
-o4=>inputoutput: 输出闰年
-e=>end
-st->i->cond1
-cond1(no)->o1->e
-cond1(yes)->cond2
-cond2(no)->o3->e
-cond2(yes)->cond3
-cond3(yes)->o2->e
-cond3(no)->o4->e</textarea><textarea id="flowchart-1-options" style="display: none">{"scale":1,"line-width":2,"line-length":50,"text-margin":10,"font-size":12}</textarea><script>  var code = document.getElementById("flowchart-1-code").value;  var options = JSON.parse(decodeURIComponent(document.getElementById("flowchart-1-options").value));  var diagram = flowchart.parse(code);  diagram.drawSVG("flowchart-1", options);</script>	  
+	  <p>正常：Hello 你好</p>
+<p>粗体：<strong>Hello</strong> 你好</p>
+<p>斜体：<em>Hello</em> 你好</p>
+	  
 	</div>
 
 	<div>
@@ -272,13 +186,12 @@ cond3(no)->o4->e</textarea><textarea id="flowchart-1-options" style="display: no
 
     
     
-    <a href="/2023/08/13/建站说明/" type="button" class="btn btn-default"><i
-                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
     
 
     <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
     
-    <a href="/2023/08/12/你好世界/" type="button" class="btn btn-default ">Next<i
+    <a href="/2023/11/29/XML学习笔记/" type="button" class="btn btn-default ">Next<i
                 class="fa fa-arrow-circle-o-right"></i></a>
     
 
@@ -307,7 +220,7 @@ cond3(no)->o4->e</textarea><textarea id="flowchart-1-options" style="display: no
 	
 	<div class="meta-widget">
 	<i class="fa fa-clock-o"></i>
-	2023-08-13 
+	2023-11-29 
 	</div>
 	
 

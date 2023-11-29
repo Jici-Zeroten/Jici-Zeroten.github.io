@@ -374,6 +374,7 @@ h5,
 h6 {
     text-rendering: optimizelegibility;
     font-weight: bold;
+    line-height: 1.2em;
     font-family: DOS-en, DOS, SimHei, Monaco, Menlo, Consolas, 'Courier New', monospace;
     color: #fff
 }
@@ -388,11 +389,15 @@ h2 {
     -webkit-background-clip: border-box;
     -webkit-background-origin: padding-box;
     -webkit-background-size: cover;
-    padding: 10px 20px 0 20px;
+    padding: 10px 20px 0px;
     margin: -20px -20px 20px;
     color: #fff;
     border-radius: 6px 6px 0 0;
     font-size: 1.3em
+}
+
+em{
+    font-style:oblique;
 }
 
 .page .entry {
@@ -403,21 +408,6 @@ h2 {
 .page .entry .row {
     padding-left: 20px;
     padding-right: 5px
-}
-
-.page .entry h2 {
-    display: block;
-    overflow: hidden;
-    width: 0;
-    height: 0;
-    margin: -20px 0
-}
-
-.page .entry h3 {
-    display: block;
-    overflow: hidden;
-    width: 0;
-    height: 0
 }
 
 .page .entry .col-md-8 {
@@ -472,7 +462,7 @@ h2 {
     list-style: circle;
     line-height: 1em;
     margin-bottom: 0;
-    padding: 10px 20px
+    padding: 10px 12px
 }
 
 .toc-article li {
@@ -482,12 +472,12 @@ h2 {
 
 .toc-article ol {
     list-style: square;
-    padding: 5px 20px
+    padding: 5px 10px
 }
 
 .toc-article ol ol {
     list-style: circle;
-    padding: 5px 20px
+    padding: 5px 10px
 }
 
 .line {
