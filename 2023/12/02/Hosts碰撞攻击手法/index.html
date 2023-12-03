@@ -1,0 +1,532 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Hosts碰撞攻击手法 | Jici&#39;s Blog</title>
+  <meta name="author" content="Jici">
+  
+  <meta name="description" content="Hosts碰撞简介首先有四个常识需要注意：
+
+隐形资产 &amp;#x3D;&amp;#x3D;  隐藏资产
+
+&amp;#x3D;&amp;#x3D;host注入 ≠ host型的ssrf ≠ hosts碰撞&amp;#x3D;&amp;#x3D;，host碰撞属于host头攻击的一种
+
+反向代理服务器 &amp;#x3D;&amp;#x3D; 反代服务器
+
+报文头 &amp;#x3D;&amp;#x3D; 标头">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Hosts碰撞攻击手法"/>
+  <meta property="og:site_name" content="Jici&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-70812759-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?cb5448498d7169c668b07c2b255d62c1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">Jici&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>所有文章
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>关于我
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/record" title="Record all kinds of completed target machines">
+			  <i class=""></i>记录榜
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/plan" title="Record what needs to be done and what is worth doing">
+			  <i class=""></i>计划清单
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/friendlinks" title="my friends">
+			  <i class=""></i>友情链接
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/pictureGallery" title="Record some exquisite pictures">
+			  <i class=""></i>画廊
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+	
+		<div class="page-header">
+			<h1> Hosts碰撞攻击手法</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="Hosts碰撞简介"><a href="#Hosts碰撞简介" class="headerlink" title="Hosts碰撞简介"></a>Hosts碰撞简介</h1><p>首先有四个常识需要注意：</p>
+<ul>
+<li><p>隐形资产 &#x3D;&#x3D;  隐藏资产</p>
+</li>
+<li><p>&#x3D;&#x3D;host注入 ≠ host型的ssrf ≠ hosts碰撞&#x3D;&#x3D;，host碰撞属于host头攻击的一种</p>
+</li>
+<li><p>反向代理服务器 &#x3D;&#x3D; 反代服务器</p>
+</li>
+<li><p>报文头 &#x3D;&#x3D; 标头</p>
+</li>
+</ul>
+<p>再介绍一下Hosts碰撞有什么用：</p>
+<ul>
+<li><p>发现隐形资产</p>
+</li>
+<li><p>暴露内网系统</p>
+</li>
+<li><p>找到业务系统的真实IP</p>
+</li>
+<li><p>绕过云WAF的安全防护</p>
+</li>
+</ul>
+<p>隐形资产是什么？为什么会有隐形资产？</p>
+<p>在渗透测试中，我们会搜集很多IP资产、域名资产，通过端口扫描能够发现其开放的端口。比如都开放了如web端口——对于域名资产的场景是：通过域名能正常访问，对域名做解析发现该域名指向的是一个内网ip。对于IP资产的场景是：通过IP访问状态码报4xx(如400、403、404)禁止我们访问、5xx错误、显示200却对任何输入不做响应。对于同一个资产的场景是：使用其真实IP无法访问，只有域名才能访问。出现这种情况是因为：&#x3D;&#x3D;大部分是因为中间件(如反向代理服务器Nginx)对直接IP访问进行了限制，必须使用域名访问。这些资产大部分是内部员工使用的系统，使用外网IP，但是绑定的域名是内部域名，外网DNS服务器无法解析，必须在本地hosts文件写入绑定关系，才可正常使用内部域名访问&#x3D;&#x3D;。举个例子，一个网站对外主域名为<code>www.test.com</code>，而内网中存在多个业务系统，都绑定了内网域名，比如<code>manage.test.com</code>，这是内网自定义的域名，无法在公网DNS解析到，因为公网无法解析其IP，显然无法直接访问到。系统管理员其实是这样配置的，利用Apache或Nginx进行配置，使得无法直接通过IP去访问系统。因为公网DNS无法解析自定义子域名，因此访问系统有两个条件：知道系统的内网域名和对应的IP，再利用本地DNS解析(在本地hosts文件写入绑定关系)即可访问。这时候就出现了隐形资产概念，&#x3D;&#x3D;隐形资产的出现往往是因为配置错误或是配置未及时回收等原因而造成的&#x3D;&#x3D;，以Nginx为例，Nginx作为反代服务器，后面的业务有时是隐藏的，下面是一副典型的企业部署架构图</p>
+<p><img src="/2023/12/02/Hosts%E7%A2%B0%E6%92%9E%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20231203111457669.png" alt="image-20231203111457669"></p>
+<p>基于这幅架构图，可以很好地看出隐形资产的由来：&#x3D;&#x3D;现在很多较大的公司比较流行资产统一把控，也就是把自己所有的资产全部收缩进内网，然后使用Nginx或是Apache反代服务器，想对外网开放某个资产的时候，就通过这个反代服务器新添加个配置映射出去&#x3D;&#x3D;</p>
+<p>也就存在两种典型的漏洞场景：</p>
+<ul>
+<li>对于nginx背后隐藏的业务，即不开放到外网的业务，如测试环境或预生产环境，将公网的域名解析清除了，但是Nginx配置没有及时清除，&#x3D;&#x3D;绑定正确的host就能正常访问到&#x3D;&#x3D;【业务通过 DNS 解析到外网，后面删除了A记录(但是 nginx&#x2F;Apache 的反向代理还没删除)】</li>
+<li>出于安全性考虑，外网Nginx和内网Nginx是需要做严格区分，但这里却没区分内外网。使用同一个Nginx完成内网和外网服务配置，通过公网域名解析到公网，内网DNS解析到内网。这个时候，&#x3D;&#x3D;绑定正确的host就可以访问到内网系统&#x3D;&#x3D;</li>
+</ul>
+<p>隐形资产在渗透过程中的价值不言而喻，上面的漏洞场景都提到了一种利用手法，即“绑定正确的host就能访问”，这也就有了Hosts碰撞攻击。</p>
+<h1 id="Hosts碰撞原理"><a href="#Hosts碰撞原理" class="headerlink" title="Hosts碰撞原理"></a>Hosts碰撞原理</h1><p>原理在上面已经零零散散地提到了，这里先简单说明下DNS解析机制，当我们访问某个域名时，会解析到对应的IP去访问业务系统，大致顺序如下(1~4)：</p>
+<ol>
+<li>浏览器缓存，先检查自身缓存中有没有被解析过的这个域名对应的ip地址</li>
+<li>本地缓存hosts文件，记录域名和对应的IP地址（&#x3D;&#x3D;此步骤就是hosts碰撞的修改点&#x3D;&#x3D;）</li>
+<li>本区域域名服务器(LDNS)，即你所在或附近城市的域名服务器，大约80%的域名解析到这里就完成了</li>
+<li>再高一级域名服务器，如果还是解析不到就继续往上一级查</li>
+</ol>
+<p>结合DNS解析机制，给出一张hosts碰撞原理图，如下</p>
+<p><img src="/2023/12/02/Hosts%E7%A2%B0%E6%92%9E%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20231203114746007.png" alt="image-20231203114746007"></p>
+<p>再提一下Host报文头，从HTTP &#x2F; 1.1开始，Host报文头是必需的请求报文头。它指定客户端要访问的域名。例如，当用户访问<code>https://example.net/web-security</code>时，其浏览器将组成一个包含Host报文头的请求，如下所示：</p>
+<pre class="line-numbers language-none"><code class="language-none">GET &#x2F;web-security HTTP&#x2F;1.1
+Host: example.net<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>在Nginx、Apache中，可以通过相应配置文件进行域名绑定，使得直接访问IP是无法访问成功的，而访问其绑定的域名才可以访问成功。</p>
+<p>&#x3D;&#x3D;将请求数据包的host报文头替换为某个域名时，再访问反代服务器的ip，如果Nginx&#x2F;Apache的反向代理的host配置没删除，就会把请求转发到内网对应的host业务服务器上，接着返回该业务的信息，实现本该隐藏的业务访问&#x3D;&#x3D;</p>
+<p>知道了原理，我们就可以收集内网系统的域名和目标资产的IP段，将两者进行组合遍历，便可发现一些暴露在公网的内网资产(即隐形资产)了【通过将域名和IP进行组合遍历，一旦匹配到后端代理服务器上的域名绑定配置，就可以访问到对应的业务系统，从而发现隐形资产。将域名和IP进行组合遍历的过程就是域名和IP进行捆绑碰撞的过程，Hosts碰撞中的“碰撞”一词就体现在这】</p>
+<p>下面举个例子加深印象：</p>
+<pre class="line-numbers language-none"><code class="language-none">场景：外网有个ip: 47.10.10.1，它的域名为: test.com
+
+现在它对映射规则配置不当，即存在Hosts碰撞
+
+对外映射的域名1: a.test.com
+对外映射的域名2: b.test.com
+内部Nginx&#x2F;Apache反代服务器映射的域名: ab.test.com
+
+那么这种情况下如果我们进行Hosts碰撞，撞了一个 ab.test.com 进去
+那么Nginx&#x2F;Apache反代服务器接收到这个 host: ab.test.com 
+就会直接去请求这个所谓的被收缩进内网的资源（即隐藏资源），然后返回<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h1 id="Hosts碰撞攻击手法"><a href="#Hosts碰撞攻击手法" class="headerlink" title="Hosts碰撞攻击手法"></a>Hosts碰撞攻击手法</h1><p>Hosts碰撞流程：</p>
+<ul>
+<li>搜集指向目标内网IP的域名</li>
+<li>搜集目标IP资产</li>
+<li>进行碰撞</li>
+</ul>
+<p>下面对每一个流程进行介绍</p>
+<h2 id="搜集指向目标内网IP的域名"><a href="#搜集指向目标内网IP的域名" class="headerlink" title="搜集指向目标内网IP的域名"></a>搜集指向目标内网IP的域名</h2><p>域名来源主要有：</p>
+<ul>
+<li><p>在对该目标进行信息收集时收集到的域名</p>
+</li>
+<li><p>子域名挖掘</p>
+</li>
+<li><p>自定义常用内部域名字典（内网办公系统常用的域名、子域名等）</p>
+</li>
+</ul>
+<p>这里列举一下内网办公系统常用的子域名：</p>
+<pre class="line-numbers language-none"><code class="language-none">#主域名为www.test.com
+oa.test.com
+user.test.com
+mail.test.com
+sso.test.com
+portal.test.com<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="搜集目标IP资产"><a href="#搜集目标IP资产" class="headerlink" title="搜集目标IP资产"></a>搜集目标IP资产</h2><p>IP来源主要有：</p>
+<ul>
+<li><p>在对该目标进行信息收集时收集到的ip</p>
+</li>
+<li><p>ping 收集到的域名获取 ip</p>
+</li>
+<li><p>自定义ip段字典</p>
+</li>
+</ul>
+<p>&#x3D;&#x3D;原则上任何一个ip都有host碰撞的价值&#x3D;&#x3D;，但是为了提高效率，要对ip做一些简单的筛选，流程和原则如下：</p>
+<ol>
+<li>筛选未使用cdn的ip地址</li>
+<li>对ip段进行常见web端口扫描(最好是开放web服务的资产)</li>
+<li>访问时状态码为40x、50x的ip</li>
+</ol>
+<p>这里给出一些相应工具：</p>
+<ul>
+<li>检测cdn的工具<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/alwaystest18/cdnChecker">https://github.com/alwaystest18/cdnChecker</a></li>
+</ul>
+</li>
+<li>生成ip段工具<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/projectdiscovery/mapcidr">https://github.com/projectdiscovery/mapcidr</a></li>
+</ul>
+</li>
+<li>web端口扫描工具<ul>
+<li>Nmap</li>
+<li>Masscan</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/projectdiscovery/naabu">https://github.com/projectdiscovery/naabu</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="进行碰撞"><a href="#进行碰撞" class="headerlink" title="进行碰撞"></a>进行碰撞</h2><p>实际渗透过程中会使用到的Hosts碰撞工具：</p>
+<ul>
+<li>HostCollision：<a target="_blank" rel="noopener" href="https://github.com/pmiaowu/HostCollision">https://github.com/pmiaowu/HostCollision</a></li>
+<li>Hosts_scan：<a target="_blank" rel="noopener" href="https://github.com/fofapro/Hosts_scan">https://github.com/fofapro/Hosts_scan</a></li>
+<li>hostscan：<a target="_blank" rel="noopener" href="https://github.com/cckuailong/hostscan">https://github.com/cckuailong/hostscan</a></li>
+</ul>
+<p>这里再说一点，目前github上面的工具主要针对80、443端口做Hosts碰撞，但是其实还有大量其它的端口存在nginx业务返回码是40x，所以可以给这些工具做一个扩展功能，把对应IP开放的web端口也加入到Hosts碰撞工具中进行碰撞，这样可以收集更多的隐形资产。</p>
+<p>下面再给出一种使用BurpSuite进行Hosts碰撞的方法——本质上就是对某个 IP 的 Host 头的值进行 Fuzz。但注意，该方法仅能对单个IP进行Hosts碰撞，如下：</p>
+<ol>
+<li>收集域名形成FUZZ字典</li>
+<li>将可能存在Hosts碰撞的ip的请求报文发送到BurpSuite的 Intruder 模块</li>
+<li>标记Host报文头的值后导入FUZZ字典即可开始Hosts碰撞</li>
+</ol>
+<p>这里再说一下找到隐形资产后，使用浏览器访问的两种方法，如下：</p>
+<ul>
+<li><p>修改本地hosts文件，添加碰撞出来的IP和域名后，浏览器直接访问即可</p>
+<p>windows：C:\Windows\System32\Drivers\etc\hosts</p>
+<p>linux：&#x2F;etc&#x2F;hosts</p>
+<p><img src="/2023/12/02/Hosts%E7%A2%B0%E6%92%9E%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20231203171356377.png" alt="image-20231203171356377"><img src="/2023/12/02/Hosts%E7%A2%B0%E6%92%9E%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20231203171428354.png" alt="image-20231203171428354"></p>
+</li>
+<li><p>在burp中设置，浏览器挂上burp代理后，进行访问<img src="/2023/12/02/Hosts%E7%A2%B0%E6%92%9E%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20231203171509102.png" alt="image-20231203171509102"></p>
+<p><img src="/2023/12/02/Hosts%E7%A2%B0%E6%92%9E%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20231203171525180.png" alt="image-20231203171525180"></p>
+</li>
+</ul>
+<h1 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://www.tx1ee.cc/2022/01/16/host%E7%A2%B0%E6%92%9E%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90%E5%AE%9E%E6%88%98/">https://www.tx1ee.cc/2022/01/16/host%E7%A2%B0%E6%92%9E%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90%E5%AE%9E%E6%88%98/</a></li>
+<li><a target="_blank" rel="noopener" href="https://cn-sec.com/archives/1198135.html">https://cn-sec.com/archives/1198135.html</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.hackdig.com/10/hack-513892.htm">http://www.hackdig.com/10/hack-513892.htm</a></li>
+<li><a target="_blank" rel="noopener" href="https://m.freebuf.com/articles/web/341893.html">https://m.freebuf.com/articles/web/341893.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.wangan.com/p/7fy7f8f2d523a3ad#0x01HOSTS%E7%A2%B0%E6%92%9E">https://www.wangan.com/p/7fy7f8f2d523a3ad#0x01HOSTS%E7%A2%B0%E6%92%9E</a></li>
+<li><a target="_blank" rel="noopener" href="https://m.freebuf.com/articles/web/290348.html">https://m.freebuf.com/articles/web/290348.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xiaozi/p/16336539.html">https://www.cnblogs.com/xiaozi/p/16336539.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/VaqbmE1b2hlHqRYdGeUwmQ">https://mp.weixin.qq.com/s/VaqbmE1b2hlHqRYdGeUwmQ</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.yuque.com/pmiaowu/bomi9w/fgg2vg">https://www.yuque.com/pmiaowu/bomi9w/fgg2vg</a></li>
+</ul>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+
+    
+    
+    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2023/12/02/Docker学习笔记/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2023-12-02 
+	</div>
+	
+
+	<!-- categories -->
+    
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/渗透测试/">渗透测试<span>15</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2023 Jici
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>    
+</p>
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+
+<span class="post-meta-divider">|</span>
+<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+<script>
+var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a||"interactive"===document.readyState||"complete"===document.readyState?c.call(document):b.push(function(){return c.call(this)}),this},d=function(){for(var a=0,c=b.length;c>a;a++)b[a].apply(document);b=[]},e=function(){a||(a=!0,d.call(window),document.removeEventListener?document.removeEventListener("DOMContentLoaded",e,!1):document.attachEvent&&(document.detachEvent("onreadystatechange",e),window==window.top&&(clearInterval(c),c=null)))},document.addEventListener?document.addEventListener("DOMContentLoaded",e,!1):document.attachEvent&&(document.attachEvent("onreadystatechange",function(){/loaded|complete/.test(document.readyState)&&e()}),window==window.top&&(c=setInterval(function(){try{a||document.documentElement.doScroll("left")}catch(b){return}e()},5)))}(),bszCaller={fetch:function(a,b){var c="BusuanziCallback_"+Math.floor(1099511627776*Math.random());window[c]=this.evalCall(b),a=a.replace("=BusuanziCallback","="+c),scriptTag=document.createElement("SCRIPT"),scriptTag.type="text/javascript",scriptTag.defer=!0,scriptTag.src=a,scriptTag.referrerPolicy="no-referrer-when-downgrade",document.getElementsByTagName("HEAD")[0].appendChild(scriptTag)},evalCall:function(a){return function(b){ready(function(){try{a(b),scriptTag.parentElement.removeChild(scriptTag)}catch(c){bszTag.hides()}})}}},bszCaller.fetch("//busuanzi.ibruce.info/busuanzi?jsonpCallback=BusuanziCallback",function(a){bszTag.texts(a),bszTag.shows()}),bszTag={bszs:["site_pv","page_pv","site_uv"],texts:function(a){this.bszs.map(function(b){var c=document.getElementById("busuanzi_value_"+b);c&&(c.innerHTML=a[b])})},hides:function(){this.bszs.map(function(a){var b=document.getElementById("busuanzi_container_"+a);b&&(b.style.display="")})},shows:function(){this.bszs.map(function(a){var b=document.getElementById("busuanzi_container_"+a);b&&(b.style.display="inline")})}};
+</script>
+
+
+<!--<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span class="post-meta-divider">|</span>
+<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>-->
+<!--<span class="post-meta-divider">|</span>
+<span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人</span>-->
+
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("08/12/2023 00:00:00");//在此处修改你的建站时间
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已勉强运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+<span class="num"> | 及辞已经在本站记录了: 34.4k 字</span>
+</div> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/ni-j.model.json"},"display":{"position":"left","width":260,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+   </html>
+
+<!-- 雪花特效 -->
+<!-- 直接引用公网CDN在线文件 -->
+<!-- <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/xuehuapiaoluo.js">-->
+<!-- 引用本地文件 -->
+<!--<script type="text/javascript" src="\js\snow.js"></script>-->
+
+<!-- 樱花花特效 -->
+<!-- 直接引用公网CDN在线文件 -->
+<!--<script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/sakura.js"></script>-->
+<!-- 引用本地文件 -->
+<script type="text/javascript" src="\js\sakura.js"></script>
+
+
+<!-- 数字雨 
+<canvas id="canvas" width="1440" height="900" ></canvas>
+<script type="text/javascript" src="/js/DigitalRain.js"></script>-->
+
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+
+<!--图片预加载-->
+<script src="//instant.page/3.0.0" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
