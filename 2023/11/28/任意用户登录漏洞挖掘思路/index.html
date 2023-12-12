@@ -202,7 +202,8 @@ def handleResponse(req, interesting):
 <p>&#x3D;&#x3D;目前常用的4~6位数验证码，如果不加其他限制(如访问次数)的情况下，均可以爆破&#x3D;&#x3D;</p>
 <h2 id="验证码明文返回"><a href="#验证码明文返回" class="headerlink" title="验证码明文返回"></a>验证码明文返回</h2><p>获取手机验证码时，验证码直接在返回包里</p>
 <p><img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231128152103594.png" alt="image-20231128152103594"></p>
-<h2 id="存在万能验证码"><a href="#存在万能验证码" class="headerlink" title="存在万能验证码"></a>存在万能验证码</h2><p>一般是测试为了功能测试方便，设置了诸如000000，123456之类的万能验证码，项目上线时忘记下掉，导致任意用户登录。同样的，手机号码同样可能存在万能手机号，如13888888888等，这里提供一个脚本可以生成以138、192等常规开头的手机号码：</p>
+<h2 id="存在万能验证码"><a href="#存在万能验证码" class="headerlink" title="存在万能验证码"></a>存在万能验证码</h2><p>一般是测试为了功能测试方便，设置了诸如000000、111111、123456之类的万能验证码，项目上线时忘记删掉，导致任意用户登录。</p>
+<p>同样的，手机号码同样可能存在万能手机号，如13888888888等，这里提供一个脚本可以生成以138、192等常规开头的手机号码：</p>
 <pre class="line-numbers language-none"><code class="language-none"># 特殊手机号生成
 import itertools
 a &#x3D; [&#39;11111111&#39;, &#39;00000000&#39;,&#39;22222222&#39;,&#39;33333333&#39;,&#39;44444444&#39;,&#39;55555555&#39;,&#39;66666666&#39;,&#39;77777777&#39;,&#39;88888888&#39;,&#39;99999999&#39;,&#39;12345678&#39;]
@@ -263,9 +264,26 @@ with open(&#39;phone.txt&#39;,&#39;a&#39;) as f:
 <h2 id="验证码为空-任意验证码可成功验证"><a href="#验证码为空-任意验证码可成功验证" class="headerlink" title="验证码为空&#x2F;任意验证码可成功验证"></a>验证码为空&#x2F;任意验证码可成功验证</h2><p>比较奇葩的例子，验证码为空时，手机号正确则成功登录（账号密码登录体系也发现过这种情况，空密码的情况下账号存在即登录）</p>
 <h2 id="补充-由于验证码导致的短信轰炸"><a href="#补充-由于验证码导致的短信轰炸" class="headerlink" title="(补充)由于验证码导致的短信轰炸"></a>(补充)由于验证码导致的短信轰炸</h2><p>说到验证码，这里可以再提一下由于验证码导致的短信轰炸。有以下测试思路：</p>
 <ul>
-<li>&#x3D;&#x3D;在一些能接受验证码的地方，有一些参数是判定验证码是否获取成功、获取已发送短信的次数。我们测试短信轰炸漏洞的时候可以尝试删除一些参数然后观察响应结果&#x3D;&#x3D;</li>
-<li>&#x3D;&#x3D;在手机号&#x2F;邮箱的传参处输入一些特殊符号进行绕过短信限制(如逗号,)&#x3D;&#x3D;，有些发送手机号的接口或者邮箱接口当发送时抓包，如果在接受手机参数处没有过滤好一些特殊符号，会导致短信轰炸<img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231130141131827.png" alt="image-20231130141131827"></li>
+<li><p>&#x3D;&#x3D;在一些能接受验证码的地方，有一些参数是判定验证码是否获取成功、获取已发送短信的次数。我们测试短信轰炸漏洞的时候可以尝试删除一些参数然后观察响应结果&#x3D;&#x3D;</p>
+</li>
+<li><p>&#x3D;&#x3D;在手机号&#x2F;邮箱的传参处输入一些特殊符号进行绕过短信限制(如逗号,)&#x3D;&#x3D;，有些发送手机号的接口或者邮箱接口当发送时抓包，如果在接受手机参数处没有过滤好一些特殊符号，会导致短信轰炸<img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231130141131827.png" alt="image-20231130141131827"></p>
+<p>这里提供几种思路，这里以手机号15312341234，请求参数为mobile&#x3D;15312341234为例：</p>
+<ul>
+<li>手机号前添加国际电话区号，以中国地区为例，即+8615312341234，这样的话服务器就有可能判定为和15312341234是不同的手机号</li>
+<li>手机号前面加上<code> 空格、86、086、0086、+86、0、00、/r、/n、?、#、!</code></li>
+<li>手机号后面加上<code>+、++、,</code></li>
 </ul>
+</li>
+<li><p>添加XFF头，有的时候服务器是按照IP地址进行判定的，可以不断更好XFF，实现短信爆破</p>
+</li>
+<li><p>添加多个值或添加多个参数（类似上面的手机号字段可双写）<img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231212161335770.png" alt="image-20231212161335770"></p>
+</li>
+<li><p>并发请求。可以使用burpsuite进行并发请求，能导致短信轰炸</p>
+</li>
+</ul>
+<blockquote>
+<p>关于验证码渗透可以移步到我的另一篇文章《验证码渗透总结》</p>
+</blockquote>
 <h1 id="凭证安全问题导致的任意用户登录"><a href="#凭证安全问题导致的任意用户登录" class="headerlink" title="凭证安全问题导致的任意用户登录"></a>凭证安全问题导致的任意用户登录</h1><h2 id="凭证泄露"><a href="#凭证泄露" class="headerlink" title="凭证泄露"></a>凭证泄露</h2><h3 id="页面缓存被搜索引擎抓取"><a href="#页面缓存被搜索引擎抓取" class="headerlink" title="页面缓存被搜索引擎抓取"></a>页面缓存被搜索引擎抓取</h3><p>&#x3D;&#x3D;页面缓存被搜索引擎抓取&#x3D;&#x3D;，搜索引擎直接搜索该域名或者搭配搜索引擎的其他语法。如果发现&#x3D;&#x3D;有登录后的页面被抓取&#x3D;&#x3D;，可以尝试直接访问登录目标账户。谷歌搜索语法：</p>
 <ul>
 <li>site:example.com.cn</li>
@@ -310,6 +328,8 @@ with open(&#39;phone.txt&#39;,&#39;a&#39;) as f:
 <li><p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1730673">渗透测测技巧之手机号爆破-腾讯云开发者社区-腾讯云 (tencent.com)</a></p>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/0S_MQIgpyj0IVwcziXppJw">https://mp.weixin.qq.com/s/0S_MQIgpyj0IVwcziXppJw</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://forum.butian.net/share/2602">奇安信攻防社区-验证码渗透最全总结 (butian.net)</a></p>
 </li>
 </ul>
 	  
@@ -369,7 +389,7 @@ with open(&#39;phone.txt&#39;,&#39;a&#39;) as f:
 	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
     <ul id="tags" class="tag_box list-unstyled collapse in">	  
 	    
-  <li><a href="/tags/渗透测试/">渗透测试<span>16</span></a></li>
+  <li><a href="/tags/渗透测试/">渗透测试<span>18</span></a></li>
     </ul>
 	</div>
 		
@@ -448,7 +468,7 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
     } 
 setInterval("createtime()",250);
 </script>
-<span class="num"> | 及辞已经在本站记录了: 34.4k 字</span>
+<span class="num"> | 及辞已经在本站记录了: 37.6k 字</span>
 </div> </footer>
 </div> <!-- container-narrow -->
   
