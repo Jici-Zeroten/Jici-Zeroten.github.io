@@ -165,48 +165,60 @@ var _hmt = _hmt || [];
 	  		
 
 	  <h1 id="RuoYi系统"><a href="#RuoYi系统" class="headerlink" title="RuoYi系统"></a>RuoYi系统</h1><h2 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h2><p>先简单介绍一下RuoYi系统和Druid数据库，如下：</p>
-<p><img src="/2023/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/image-20231129234836963.png" alt="image-20231129234836963"></p>
+<p><img src="/2023/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/image-20231129234836963.png" alt="image-20231129234836963"></p>
 <p>RuoYi是一个基于Java技术开发的后台管理系统，目前官方同步在维护的有3个版本：</p>
 <ul>
-<li>若依不分离版本：==RuoYi==是基于经典技术组合（Spring Boot、Apache Shiro、MyBatis、Thymeleaf）主要目的让开发者注重专注业务，降低技术难度，从而节省人力成本，缩短项目周期，提高软件安全质量【<a target="_blank" rel="noopener" href="https://gitee.com/y_project/RuoYi】">https://gitee.com/y_project/RuoYi】</a></li>
-<li>若依前后端分离版本：==RuoYi-Vue==是一个 Java EE 企业级快速开发平台，基于经典技术组合（Spring Boot、Spring Security、MyBatis、Jwt、Vue），内置模块如：部门管理、角色用户、菜单及按钮授权、数据权限、系统参数、日志管理、代码生成等。在线定时任务配置；支持集群，支持多数据源，支持分布式事务【<a target="_blank" rel="noopener" href="https://gitee.com/y_project/RuoYi-Vue】">https://gitee.com/y_project/RuoYi-Vue】</a></li>
-<li>若依微服务版本：==RuoYi-Cloud== 是一个 Java EE 分布式微服务架构平台，基于经典技术组合（Spring Boot、Spring Cloud &amp; Alibaba、Vue、Element），内置模块如：部门管理、角色用户、菜单及按钮授权、数据权限、系统参数、日志管理、代码生成等。在线定时任务配置；支持集群，支持多数据源【<a target="_blank" rel="noopener" href="https://gitee.com/y_project/RuoYi-Cloud】">https://gitee.com/y_project/RuoYi-Cloud】</a></li>
+<li>若依不分离版本：&#x3D;&#x3D;RuoYi&#x3D;&#x3D;是基于经典技术组合（Spring Boot、Apache Shiro、MyBatis、Thymeleaf）主要目的让开发者注重专注业务，降低技术难度，从而节省人力成本，缩短项目周期，提高软件安全质量【<a target="_blank" rel="noopener" href="https://gitee.com/y_project/RuoYi%E3%80%91">https://gitee.com/y_project/RuoYi】</a></li>
+<li>若依前后端分离版本：&#x3D;&#x3D;RuoYi-Vue&#x3D;&#x3D;是一个 Java EE 企业级快速开发平台，基于经典技术组合（Spring Boot、Spring Security、MyBatis、Jwt、Vue），内置模块如：部门管理、角色用户、菜单及按钮授权、数据权限、系统参数、日志管理、代码生成等。在线定时任务配置；支持集群，支持多数据源，支持分布式事务【<a target="_blank" rel="noopener" href="https://gitee.com/y_project/RuoYi-Vue%E3%80%91">https://gitee.com/y_project/RuoYi-Vue】</a></li>
+<li>若依微服务版本：&#x3D;&#x3D;RuoYi-Cloud&#x3D;&#x3D; 是一个 Java EE 分布式微服务架构平台，基于经典技术组合（Spring Boot、Spring Cloud &amp; Alibaba、Vue、Element），内置模块如：部门管理、角色用户、菜单及按钮授权、数据权限、系统参数、日志管理、代码生成等。在线定时任务配置；支持集群，支持多数据源【<a target="_blank" rel="noopener" href="https://gitee.com/y_project/RuoYi-Cloud%E3%80%91">https://gitee.com/y_project/RuoYi-Cloud】</a></li>
 </ul>
 <h2 id="针对RuoYi系统的信息收集手法"><a href="#针对RuoYi系统的信息收集手法" class="headerlink" title="针对RuoYi系统的信息收集手法"></a>针对RuoYi系统的信息收集手法</h2><h3 id="图标收集法"><a href="#图标收集法" class="headerlink" title="图标收集法"></a>图标收集法</h3><pre class="line-numbers language-none"><code class="language-none">#使用Fofa搜索
 (icon_hash&#x3D;&quot;-1231872293&quot; || icon_hash&#x3D;&quot;706913071&quot;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h3 id="关键词收集法"><a href="#关键词收集法" class="headerlink" title="关键词收集法"></a>关键词收集法</h3><p>网页中/网页标题的关键字<code>若依管理系统</code>或者<code>RuoYi</code>，不过注意这些关键词是RuoYi默认页面的，实际开发过程中大部分存在二改的情况</p>
+
+
+
+<h3 id="关键词收集法"><a href="#关键词收集法" class="headerlink" title="关键词收集法"></a>关键词收集法</h3><p>网页中&#x2F;网页标题的关键字<code>若依管理系统</code>或者<code>RuoYi</code>，不过注意这些关键词是RuoYi默认页面的，实际开发过程中大部分存在二改的情况</p>
 <pre class="line-numbers language-none"><code class="language-none">#使用Fofa搜索
 title&#x3D;&quot;登录若依系统&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
 <h3 id="若依前后端分离版本中的后端收集"><a href="#若依前后端分离版本中的后端收集" class="headerlink" title="若依前后端分离版本中的后端收集"></a>若依前后端分离版本中的后端收集</h3><ul>
-<li><p>主要依据一些RuoYi后端常用的欢迎语：<img src="/2023/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/image-20231130105515795.png" alt="image-20231130105515795">实际开发中存在很多二改版本，大概会修改“RuoYi后台管理框架”这段文字，如下<img src="/2023/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/image-20231130105632621.png" alt="image-20231130105632621"></p>
+<li><p>主要依据一些RuoYi后端常用的欢迎语：<img src="/2023/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/image-20231130105515795.png" alt="image-20231130105515795">实际开发中存在很多二改版本，大概会修改“RuoYi后台管理框架”这段文字，如下<img src="/2023/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/image-20231130105632621.png" alt="image-20231130105632621"></p>
 <pre class="line-numbers language-none"><code class="language-none">#通过使用Fofa进行内容匹配搜索
 body&#x3D;&quot;请通过前端地址访问&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
-<li><p>除了存在后台欢迎语的情况，也可能做了弱权限校验，会出现以下提示语<img src="/2023/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/image-20231130105951096.png" alt="image-20231130105951096"></p>
+<li><p>除了存在后台欢迎语的情况，也可能做了弱权限校验，会出现以下提示语<img src="/2023/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/image-20231130105951096.png" alt="image-20231130105951096"></p>
 <pre class="line-numbers language-none"><code class="language-none">#通过使用Fofa进行内容匹配搜索
 body&#x3D;&#39;认证失败，无法访问系统资源&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
 <ul>
 <li><p>如果针对的是挖教育src的漏洞，可以组合下面这条语句筛选教育网段的站点</p>
 <pre class="line-numbers language-none"><code class="language-none">org&#x3D;&quot;China Education and Research Network Center&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src="/2023/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/image-20231130113157303.png" alt="image-20231130113157303"></p>
+
+<p><img src="/2023/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/image-20231130113157303.png" alt="image-20231130113157303"></p>
 </li>
 </ul>
 </li>
 </ul>
 <h3 id="druid目录探测"><a href="#druid目录探测" class="headerlink" title="druid目录探测"></a>druid目录探测</h3><p>如果配置不当可能不需要druid密码，访问以下路径，即可直接访问druid</p>
 <pre class="line-numbers language-none"><code class="language-none">&#x2F;druid&#x2F;index.html<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p>若依默认的druid后台路径如下</p>
 <pre class="line-numbers language-none"><code class="language-none">&#x2F;druid&#x2F;login.html<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src="/2023/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/image-20231130113347437.png" alt="image-20231130113347437"></p>
+
+<p><img src="/2023/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/image-20231130113347437.png" alt="image-20231130113347437"></p>
 <p>若依存在默认的api，druid的后台路径也可能在api下</p>
 <pre class="line-numbers language-none"><code class="language-none">&#x2F;prod-api&#x2F;druid&#x2F;login.html
 
 &#x2F;dev-api&#x2F;druid&#x2F;login.html<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p><img src="/2023/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/image-20231130122223016.png" alt="image-20231130122223016"></p>
+
+<p><img src="/2023/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/image-20231130122223016.png" alt="image-20231130122223016"></p>
 <p>如果开发者在开发过程中使用了自定义的路径，可以先在主系统登录错误一次，查看返回数据包中有没有暴露目录，或者对api进行逐级爬取和访问，找到可疑api后进行拼接访问</p>
 <pre class="line-numbers language-none"><code class="language-none">&#x2F;&#123;发现的api&#125;&#x2F;druid&#x2F;login.html<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src="/2023/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/image-20231130122742040.png" alt="image-20231130122742040"></p>
-<p><img src="/2023/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/image-20231130122825611.png" alt="image-20231130122825611"></p>
+
+<p><img src="/2023/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/image-20231130122742040.png" alt="image-20231130122742040"></p>
+<p><img src="/2023/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/image-20231130122825611.png" alt="image-20231130122825611"></p>
 <p>这里再给出druid常见的后台路径地址：</p>
 <pre class="line-numbers language-none"><code class="language-none">&#x2F;druid&#x2F;index.html
 &#x2F;druid&#x2F;login.html
@@ -220,17 +232,21 @@ body&#x3D;&#39;认证失败，无法访问系统资源&#39;<span aria-hidden="tr
 &#x2F;api&#x2F;druid&#x2F;index.html
 &#x2F;admin&#x2F;druid&#x2F;login.html
 &#x2F;admin-api&#x2F;druid&#x2F;login.html<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>常见druid未授权访问路径：</p>
 <pre class="line-numbers language-none"><code class="language-none">&#x2F;druid&#x2F;websession.html		#用于监控和管理Web会话Session，保存着大量会话Session
 &#x2F;system&#x2F;druid&#x2F;websession.html
 &#x2F;webpage&#x2F;system&#x2F;druid&#x2F;websession.html<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+
+
 <h3 id="druid爆破"><a href="#druid爆破" class="headerlink" title="druid爆破"></a>druid爆破</h3><p>druid爆破主要分为：</p>
 <ul>
 <li><p>后台弱口令爆破</p>
 </li>
 <li><p>通过泄露的Session爆破，实现未授权访问</p>
-<p>比如在/druid/websession.html页面获取到了大量Session，就可以收集这些Session进行爆破，如下<img src="/2023/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/image-20231130134748196.png" alt="image-20231130134748196"><img src="/2023/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/image-20231130133838546.png" alt="image-20231130133838546"></p>
-<p>收集这些Session，再找一条看起来像登录后台才能访问的路径(可以使用目录爆破、逐级爬取访问得到，一般是带home关键词的路径)，在BurpSuite中进行爆破<img src="/2023/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/image-20231130134411183.png" alt="image-20231130134411183"><img src="/2023/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/image-20231130134457117.png" alt="image-20231130134457117"><img src="/2023/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/image-20231130134530807.png" alt="image-20231130134530807"></p>
+<p>比如在&#x2F;druid&#x2F;websession.html页面获取到了大量Session，就可以收集这些Session进行爆破，如下<img src="/2023/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/image-20231130134748196.png" alt="image-20231130134748196"><img src="/2023/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/image-20231130133838546.png" alt="image-20231130133838546"></p>
+<p>收集这些Session，再找一条看起来像登录后台才能访问的路径(可以使用目录爆破、逐级爬取访问得到，一般是带home关键词的路径)，在BurpSuite中进行爆破<img src="/2023/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/image-20231130134411183.png" alt="image-20231130134411183"><img src="/2023/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/image-20231130134457117.png" alt="image-20231130134457117"><img src="/2023/11/29/%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%A1%86%E6%9E%B6%E7%9A%84%E6%B8%97%E9%80%8F/image-20231130134530807.png" alt="image-20231130134530807"></p>
 </li>
 </ul>
 <h1 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h1><ul>
@@ -368,7 +384,7 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
     } 
 setInterval("createtime()",250);
 </script>
-<span class="num"> | 及辞已经在本站记录了: 109.5k 字</span>
+<span class="num"> | 及辞已经在本站记录了: 110.5k 字</span>
 </div> </footer>
 </div> <!-- container-narrow -->
   
@@ -405,21 +421,6 @@ setInterval("createtime()",250);
      searchFunc(path, 'local-search-input', 'local-search-result');
    </script>
 
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/ni-j.model.json"},"display":{"position":"left","width":260,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
    </html>
 
