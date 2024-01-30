@@ -174,9 +174,9 @@ Akagi.exe 62<span aria-hidden="true" class="line-numbers-rows"><span></span><spa
 <pre class="line-numbers language-none"><code class="language-none">C:\Program Files\Common Files\WgpSec\TeamsSix.exe<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>可以看到这个路径中有两个空格，那么对于 Windows 来说，它会尝试找到与空格前名字相匹配的程序，然后执行它。以上面的 exe 文件路径为例，Windows 会依次尝试执行以下程序：</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python">C:\Program.exe
-C:\Program Files\Common.exe
-C:\Program Files\Common Files\WgpSec\TeamsSix.exe<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">C<span class="token punctuation">:</span>\Program<span class="token punctuation">.</span>exe
+C<span class="token punctuation">:</span>\Program Files\Common<span class="token punctuation">.</span>exe
+C<span class="token punctuation">:</span>\Program Files\Common Files\WgpSec\TeamsSix<span class="token punctuation">.</span>exe<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>由于 Windows 服务通常是以 SYSTEM 权限运行的，所以在系统找到空格前的程序并执行时，也将以 SYSTEM 权限运行这个程序。所以当我们把木马程序命名为 Program.exe ，然后放到 C 盘下，当上面的 TeamsSix.exe 程序重新执行时，系统就会执行我们的木马，如果这个程序是系统服务程序，那么就可以获取到对应程序的权限。</p>
 <pre class="line-numbers language-none"><code class="language-none">#通过下面的命令来查找系统中存在可信任服务路径的程序
@@ -289,18 +289,18 @@ run<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span>
 
 
 
+<script>
+var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a||"interactive"===document.readyState||"complete"===document.readyState?c.call(document):b.push(function(){return c.call(this)}),this},d=function(){for(var a=0,c=b.length;c>a;a++)b[a].apply(document);b=[]},e=function(){a||(a=!0,d.call(window),document.removeEventListener?document.removeEventListener("DOMContentLoaded",e,!1):document.attachEvent&&(document.detachEvent("onreadystatechange",e),window==window.top&&(clearInterval(c),c=null)))},document.addEventListener?document.addEventListener("DOMContentLoaded",e,!1):document.attachEvent&&(document.attachEvent("onreadystatechange",function(){/loaded|complete/.test(document.readyState)&&e()}),window==window.top&&(c=setInterval(function(){try{a||document.documentElement.doScroll("left")}catch(b){return}e()},5)))}(),bszCaller={fetch:function(a,b){var c="BusuanziCallback_"+Math.floor(1099511627776*Math.random());window[c]=this.evalCall(b),a=a.replace("=BusuanziCallback","="+c),scriptTag=document.createElement("SCRIPT"),scriptTag.type="text/javascript",scriptTag.defer=!0,scriptTag.src=a,scriptTag.referrerPolicy="no-referrer-when-downgrade",document.getElementsByTagName("HEAD")[0].appendChild(scriptTag)},evalCall:function(a){return function(b){ready(function(){try{a(b),scriptTag.parentElement.removeChild(scriptTag)}catch(c){bszTag.hides()}})}}},bszCaller.fetch("http://busuanzi.ibruce.info/busuanzi?jsonpCallback=BusuanziCallback",function(a){bszTag.texts(a),bszTag.shows()}),bszTag={bszs:["site_pv","page_pv","site_uv"],texts:function(a){this.bszs.map(function(b){var c=document.getElementById("busuanzi_value_"+b);c&&(c.innerHTML=a[b])})},hides:function(){this.bszs.map(function(a){var b=document.getElementById("busuanzi_container_"+a);b&&(b.style.display="none")})},shows:function(){this.bszs.map(function(a){var b=document.getElementById("busuanzi_container_"+a);b&&(b.style.display="inline")})}};
+</script>
 <span class="post-meta-divider">|</span>
 <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
-<script>
-var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a||"interactive"===document.readyState||"complete"===document.readyState?c.call(document):b.push(function(){return c.call(this)}),this},d=function(){for(var a=0,c=b.length;c>a;a++)b[a].apply(document);b=[]},e=function(){a||(a=!0,d.call(window),document.removeEventListener?document.removeEventListener("DOMContentLoaded",e,!1):document.attachEvent&&(document.detachEvent("onreadystatechange",e),window==window.top&&(clearInterval(c),c=null)))},document.addEventListener?document.addEventListener("DOMContentLoaded",e,!1):document.attachEvent&&(document.attachEvent("onreadystatechange",function(){/loaded|complete/.test(document.readyState)&&e()}),window==window.top&&(c=setInterval(function(){try{a||document.documentElement.doScroll("left")}catch(b){return}e()},5)))}(),bszCaller={fetch:function(a,b){var c="BusuanziCallback_"+Math.floor(1099511627776*Math.random());window[c]=this.evalCall(b),a=a.replace("=BusuanziCallback","="+c),scriptTag=document.createElement("SCRIPT"),scriptTag.type="text/javascript",scriptTag.defer=!0,scriptTag.src=a,scriptTag.referrerPolicy="no-referrer-when-downgrade",document.getElementsByTagName("HEAD")[0].appendChild(scriptTag)},evalCall:function(a){return function(b){ready(function(){try{a(b),scriptTag.parentElement.removeChild(scriptTag)}catch(c){bszTag.hides()}})}}},bszCaller.fetch("//busuanzi.ibruce.info/busuanzi?jsonpCallback=BusuanziCallback",function(a){bszTag.texts(a),bszTag.shows()}),bszTag={bszs:["site_pv","page_pv","site_uv"],texts:function(a){this.bszs.map(function(b){var c=document.getElementById("busuanzi_value_"+b);c&&(c.innerHTML=a[b])})},hides:function(){this.bszs.map(function(a){var b=document.getElementById("busuanzi_container_"+a);b&&(b.style.display="")})},shows:function(){this.bszs.map(function(a){var b=document.getElementById("busuanzi_container_"+a);b&&(b.style.display="inline")})}};
-</script>
 
 
-<!--<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <span class="post-meta-divider">|</span>
-<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>-->
-<!--<span class="post-meta-divider">|</span>
-<span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人</span>-->
+<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+<span class="post-meta-divider">|</span>
+<span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人</span> -->
 
 
 <div>
@@ -321,7 +321,7 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
     } 
 setInterval("createtime()",250);
 </script>
-<span class="num"> | 及辞已经在本站记录了: 110.5k 字</span>
+<span class="num"> | 及辞已经在本站记录了: 110.6k 字</span>
 </div> </footer>
 </div> <!-- container-narrow -->
   
