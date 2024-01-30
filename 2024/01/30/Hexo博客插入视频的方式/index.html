@@ -11,6 +11,7 @@
   
   <meta name="description" content="HTML超链接跳转#简单的超链接跳转，不再赘述
 &amp;lt;a href&amp;#x3D;&amp;quot;https:&amp;#x2F;&amp;#x2F;test.com&amp;#x2F;example.mp4&amp;quot;&amp;gt;点此查看视频&amp;lt;&amp;#x2F;a&amp;gt;
+
 Markdown超链接跳转">
   
   
@@ -164,11 +165,14 @@ var _hmt = _hmt || [];
 
 	  <h1 id="HTML超链接跳转"><a href="#HTML超链接跳转" class="headerlink" title="HTML超链接跳转"></a>HTML超链接跳转</h1><pre class="line-numbers language-none"><code class="language-none">#简单的超链接跳转，不再赘述
 &lt;a href&#x3D;&quot;https:&#x2F;&#x2F;test.com&#x2F;example.mp4&quot;&gt;点此查看视频&lt;&#x2F;a&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
 <h1 id="Markdown超链接跳转"><a href="#Markdown超链接跳转" class="headerlink" title="Markdown超链接跳转"></a>Markdown超链接跳转</h1><pre class="line-numbers language-none"><code class="language-none">![点此查看视频](xxx&#x2F;example.mp4)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <h1 id="hexo-tag-mmedia插件"><a href="#hexo-tag-mmedia插件" class="headerlink" title="hexo-tag-mmedia插件"></a>hexo-tag-mmedia插件</h1><pre class="line-numbers language-none"><code class="language-none">#进入hexo目录，安装插件
 cnpm install hexo-tag-mmedia@1
 或
 cnpm install hexo-tag-mmedia<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p><img src="/2024/01/30/Hexo%E5%8D%9A%E5%AE%A2%E6%8F%92%E5%85%A5%E8%A7%86%E9%A2%91%E7%9A%84%E6%96%B9%E5%BC%8F/image-20240130195053986.png" alt="image-20240130195053986"></p>
 <blockquote>
 <p>我使用的是 hexo-tag-mmedia 1.2.1 版本</p>
@@ -181,20 +185,23 @@ mmedia:
       key: vaule
 #之后在需要插入视频文件的地方，按照如下格式书写
 &#123;% mmedia &quot;video&quot; &quot;src:example.mp4&quot; &quot;autoplay:false&quot; %&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <blockquote>
 <p>所有 video标签的原生属性均可添加</p>
 </blockquote>
 <h1 id="使用iframe标签"><a href="#使用iframe标签" class="headerlink" title="使用iframe标签"></a>使用iframe标签</h1><pre class="line-numbers language-none"><code class="language-none">&lt;iframe src&#x3D;&quot;example.mp4&quot; scrolling&#x3D;&quot;no&quot; border&#x3D;&quot;0&quot; frameborder&#x3D;&quot;no&quot; framespacing&#x3D;&quot;0&quot; allowfullscreen&#x3D;&quot;true&quot;&gt; &lt;&#x2F;iframe&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p><img src="/2024/01/30/Hexo%E5%8D%9A%E5%AE%A2%E6%8F%92%E5%85%A5%E8%A7%86%E9%A2%91%E7%9A%84%E6%96%B9%E5%BC%8F/image-20240130200054309.png" alt="image-20240130200054309"></p>
 <blockquote>
 <p>这里就衍生出来另一种方法，就是将要插入的视频上传至视频网站如Youtube、Bilibili，然后使用视频网站提供的内嵌代码，本质还是使用iframe标签，如下</p>
 </blockquote>
 <p><img src="/2024/01/30/Hexo%E5%8D%9A%E5%AE%A2%E6%8F%92%E5%85%A5%E8%A7%86%E9%A2%91%E7%9A%84%E6%96%B9%E5%BC%8F/image-20240130202519624.png" alt="image-20240130202519624"></p>
-<p><img src="/2024/01/30/Hexo%E5%8D%9A%E5%AE%A2%E6%8F%92%E5%85%A5%E8%A7%86%E9%A2%91%E7%9A%84%E6%96%B9%E5%BC%8F/image-20240130202632579.png" alt="image-20240130202632579"></p>
+<p><img src="/2024/01/30/Hexo%E5%8D%9A%E5%AE%A2%E6%8F%92%E5%85%A5%E8%A7%86%E9%A2%91%E7%9A%84%E6%96%B9%E5%BC%8F/Hexo%E5%8D%9A%E5%AE%A2%E6%8F%92%E5%85%A5%E8%A7%86%E9%A2%91%E7%9A%84%E6%96%B9%E5%BC%8F%5Cimage-20240130202632579.png" alt="image-20240130202632579"></p>
 <h1 id="使用video标签"><a href="#使用video标签" class="headerlink" title="使用video标签"></a>使用video标签</h1><pre class="line-numbers language-none"><code class="language-none">&lt;video src&#x3D;&quot;xxx&#x2F;example.mp4&quot;&gt;&lt;&#x2F;video&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>video标签可选属性<img src="/2024/01/30/Hexo%E5%8D%9A%E5%AE%A2%E6%8F%92%E5%85%A5%E8%A7%86%E9%A2%91%E7%9A%84%E6%96%B9%E5%BC%8F/image-20240130201928052.png" alt="image-20240130201928052"></p>
+
+<p>video标签可选属性<img src="/2024/01/30/Hexo%E5%8D%9A%E5%AE%A2%E6%8F%92%E5%85%A5%E8%A7%86%E9%A2%91%E7%9A%84%E6%96%B9%E5%BC%8F/Hexo%E5%8D%9A%E5%AE%A2%E6%8F%92%E5%85%A5%E8%A7%86%E9%A2%91%E7%9A%84%E6%96%B9%E5%BC%8F%5Cimage-20240130201928052.png" alt="image-20240130201928052"></p>
 <h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><ul>
-<li>一定要明确视频文件的路径，比如有时候要带路径（如：xxx/example.mp4），有时候不要（如：example.mp4）</li>
+<li>一定要明确视频文件的路径，比如有时候要带路径（如：xxx&#x2F;example.mp4），有时候不要（如：example.mp4）</li>
 <li>以上的方法针对不同的情况作用效果不同，以我的博客为例，仅有HTML超链接跳转、Markdown超链接跳转、hexo-tag-mmedia插件这三种方式起作用。但理论上，以上的方法都是能够实现在hexo博客中插入视频的</li>
 </ul>
 <h1 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h1><ul>
@@ -300,17 +307,18 @@ mmedia:
 
 
 
-<span class="post-meta-divider">|</span>
+<!-- <span class="post-meta-divider">|</span>
 <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+
 <script>
 var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a||"interactive"===document.readyState||"complete"===document.readyState?c.call(document):b.push(function(){return c.call(this)}),this},d=function(){for(var a=0,c=b.length;c>a;a++)b[a].apply(document);b=[]},e=function(){a||(a=!0,d.call(window),document.removeEventListener?document.removeEventListener("DOMContentLoaded",e,!1):document.attachEvent&&(document.detachEvent("onreadystatechange",e),window==window.top&&(clearInterval(c),c=null)))},document.addEventListener?document.addEventListener("DOMContentLoaded",e,!1):document.attachEvent&&(document.attachEvent("onreadystatechange",function(){/loaded|complete/.test(document.readyState)&&e()}),window==window.top&&(c=setInterval(function(){try{a||document.documentElement.doScroll("left")}catch(b){return}e()},5)))}(),bszCaller={fetch:function(a,b){var c="BusuanziCallback_"+Math.floor(1099511627776*Math.random());window[c]=this.evalCall(b),a=a.replace("=BusuanziCallback","="+c),scriptTag=document.createElement("SCRIPT"),scriptTag.type="text/javascript",scriptTag.defer=!0,scriptTag.src=a,scriptTag.referrerPolicy="no-referrer-when-downgrade",document.getElementsByTagName("HEAD")[0].appendChild(scriptTag)},evalCall:function(a){return function(b){ready(function(){try{a(b),scriptTag.parentElement.removeChild(scriptTag)}catch(c){bszTag.hides()}})}}},bszCaller.fetch("http://busuanzi.ibruce.info/busuanzi?jsonpCallback=BusuanziCallback",function(a){bszTag.texts(a),bszTag.shows()}),bszTag={bszs:["site_pv","page_pv","site_uv"],texts:function(a){this.bszs.map(function(b){var c=document.getElementById("busuanzi_value_"+b);c&&(c.innerHTML=a[b])})},hides:function(){this.bszs.map(function(a){var b=document.getElementById("busuanzi_container_"+a);b&&(b.style.display="none")})},shows:function(){this.bszs.map(function(a){var b=document.getElementById("busuanzi_container_"+a);b&&(b.style.display="inline")})}};
-</script>
+</script> -->
 
 
-<!-- <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <span class="post-meta-divider">|</span>
 <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
-<span class="post-meta-divider">|</span>
+<!-- <span class="post-meta-divider">|</span>
 <span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人</span> -->
 
 
@@ -332,7 +340,7 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
     } 
 setInterval("createtime()",250);
 </script>
-<span class="num"> | 及辞已经在本站记录了: 110k 字</span>
+<span class="num"> | 及辞已经在本站记录了: 111.1k 字</span>
 </div> </footer>
 </div> <!-- container-narrow -->
   
@@ -369,21 +377,6 @@ setInterval("createtime()",250);
      searchFunc(path, 'local-search-input', 'local-search-result');
    </script>
 
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <!-- hexo injector body_end start --><script src="/assets/mmedia/mmedia-loader.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/ni-j.model.json"},"display":{"position":"left","width":260,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
    </html>
 
