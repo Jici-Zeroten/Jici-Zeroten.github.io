@@ -165,19 +165,23 @@ var _hmt = _hmt || [];
 	  <p>提权手法总览：</p>
 <p><img src="/2023/10/30/%E6%8F%90%E6%9D%83%E6%89%8B%E6%B3%95/1645420997-889076-image.png" alt="img"></p>
 <h1 id="Windows提权"><a href="#Windows提权" class="headerlink" title="Windows提权"></a>Windows提权</h1><h2 id="1、ByPassUAC"><a href="#1、ByPassUAC" class="headerlink" title="1、ByPassUAC"></a>1、ByPassUAC</h2><p>说明：ByPassUAC 的方法一般有利用系统白名单程序、COM接口以及利用 Windows 自身漏洞等方式。常见工具有 PowerShell 版的 Yamabiko 和需要自己编译的 C 语言版的 UACME 等，UACME 目前已经支持了72 种 ByPassUAC 的方法。</p>
-<p>UACME 项目地址：<a target="_blank" rel="noopener" href="https://github.com/hfiref0x/UACME.git。克隆">https://github.com/hfiref0x/UACME.git。克隆</a> UACME 项目到本地后，使用 Visual Studio/MinGW进行编译，然后运行即可</p>
+<p>UACME 项目地址：<a target="_blank" rel="noopener" href="https://github.com/hfiref0x/UACME.git%E3%80%82%E5%85%8B%E9%9A%86">https://github.com/hfiref0x/UACME.git。克隆</a> UACME 项目到本地后，使用 Visual Studio&#x2F;MinGW进行编译，然后运行即可</p>
 <pre class="line-numbers language-none"><code class="language-none">#例如以下命令，表示使用 UACME 里的第 62 个方法进行 ByPassUAC，执行成功后，就会直接弹出管理员窗口，没有弹窗提示
 Akagi.exe 62<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
 <p><img src="/2023/10/30/%E6%8F%90%E6%9D%83%E6%89%8B%E6%B3%95/1645421010-482508-image.png" alt="img"></p>
 <h2 id="2、Windows错误配置"><a href="#2、Windows错误配置" class="headerlink" title="2、Windows错误配置"></a>2、Windows错误配置</h2><h3 id="可信任服务路径"><a href="#可信任服务路径" class="headerlink" title="可信任服务路径"></a>可信任服务路径</h3><p>说明：可信任服务路径 ( Trusted Service Paths ) 漏洞利用了 Windows 文件路径解析的特性，可信任服务路径指的是包含空格且没有引号的路径，比如像如下的路径：</p>
 <pre class="line-numbers language-none"><code class="language-none">C:\Program Files\Common Files\WgpSec\TeamsSix.exe<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
 <p>可以看到这个路径中有两个空格，那么对于 Windows 来说，它会尝试找到与空格前名字相匹配的程序，然后执行它。以上面的 exe 文件路径为例，Windows 会依次尝试执行以下程序：</p>
 <pre class="line-numbers language-python" data-language="python"><code class="language-python">C<span class="token punctuation">:</span>\Program<span class="token punctuation">.</span>exe
 C<span class="token punctuation">:</span>\Program Files\Common<span class="token punctuation">.</span>exe
 C<span class="token punctuation">:</span>\Program Files\Common Files\WgpSec\TeamsSix<span class="token punctuation">.</span>exe<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
 <p>由于 Windows 服务通常是以 SYSTEM 权限运行的，所以在系统找到空格前的程序并执行时，也将以 SYSTEM 权限运行这个程序。所以当我们把木马程序命名为 Program.exe ，然后放到 C 盘下，当上面的 TeamsSix.exe 程序重新执行时，系统就会执行我们的木马，如果这个程序是系统服务程序，那么就可以获取到对应程序的权限。</p>
 <pre class="line-numbers language-none"><code class="language-none">#通过下面的命令来查找系统中存在可信任服务路径的程序
 wmic service get name,displayname,pathname,startmode|findstr &#x2F;i &quot;Auto&quot; |findstr &#x2F;i &#x2F;v &quot;C:\Windows\\&quot; |findstr&#x2F;i &#x2F;v &quot;&quot;&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
 <p><img src="/2023/10/30/%E6%8F%90%E6%9D%83%E6%89%8B%E6%B3%95/image-20231030231742942.png" alt="image-20231030231742942"></p>
 <p>如下的例子，可以看到 C:\Program Files\OpenSSH\bin\cygrunsrv.exe 存在包含空格且没有引号的路径。</p>
 <p><img src="/2023/10/30/%E6%8F%90%E6%9D%83%E6%89%8B%E6%B3%95/1645421028-663071-image.png" alt="img"></p>
@@ -185,6 +189,7 @@ wmic service get name,displayname,pathname,startmode|findstr &#x2F;i &quot;Auto&
 <pre class="line-numbers language-none"><code class="language-none">use windows&#x2F;local&#x2F;unquoted_service_path
 set session 1
 run<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
 <p><img src="/2023/10/30/%E6%8F%90%E6%9D%83%E6%89%8B%E6%B3%95/1645421042-666334-image.png" alt="img"></p>
 <h3 id="AlwaysInstallElevated"><a href="#AlwaysInstallElevated" class="headerlink" title="AlwaysInstallElevated"></a>AlwaysInstallElevated</h3>	  
 	</div>
@@ -316,7 +321,7 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
     } 
 setInterval("createtime()",250);
 </script>
-<span class="num"> | 及辞已经在本站记录了: 109.6k 字</span>
+<span class="num"> | 及辞已经在本站记录了: 111.1k 字</span>
 </div> </footer>
 </div> <!-- container-narrow -->
   

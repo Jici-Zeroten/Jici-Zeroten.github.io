@@ -6,13 +6,18 @@
   <meta http-equiv="cache-control" content="no-cache">
   <meta http-equiv="expires" content="0">
   
-  <title>技巧 | Jici&#39;s Blog</title>
+  <title>Hexo博客插入视频的方式 | Jici&#39;s Blog</title>
   <meta name="author" content="Jici">
+  
+  <meta name="description" content="HTML超链接跳转#简单的超链接跳转，不再赘述
+&amp;lt;a href&amp;#x3D;&amp;quot;https:&amp;#x2F;&amp;#x2F;test.com&amp;#x2F;example.mp4&amp;quot;&amp;gt;点此查看视频&amp;lt;&amp;#x2F;a&amp;gt;
+
+Markdown超链接跳转">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="Hexo博客插入视频的方式"/>
   <meta property="og:site_name" content="Jici&#39;s Blog"/>
 
   
@@ -58,7 +63,7 @@ var _hmt = _hmt || [];
 </script>
 
 
-<meta name="generator" content="Hexo 6.3.0"></head>
+<!-- hexo injector head_end start --><script> let HEXO_MMEDIA_DATA = { js: [], css: [], aplayerData: [], metingData: [], artPlayerData: [], dplayerData: []}; </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
 
  <body>  
   <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -119,131 +124,167 @@ var _hmt = _hmt || [];
   	<div class="content">
     	 
 
-<!-- title -->
-<div class="page-header">
-  <h1 class="archive-title-tag"><i class="fa fa-archive"></i> 技巧</h1>
-</div>
-
-<div class="row page">
-  <!-- cols -->
   
-  <div class="col-md-9">
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
 	
-
-	  <div id="top_search"></div>
-
-	  <div class="archive">
-		
-		
-		
-			
-			
-			<h4 class="archive-ul" data-toggle="collapse" data-target="#2024">2024<b class="caret"></b></h4>
-			<ul id="2024" class="collapse in">
-			
-		
-		<li class="listing-item">
-		<span class="date_class"> 2024-01-29 </span> &raquo;
-		
-		   <span class="title"><a href="/2024/01/29/silk音频格式转mp3/" >silk音频格式转mp3</a></span>
-		
-		</li>			
-		
-		</ul>
+		<div class="page-header">
+			<h1> Hexo博客插入视频的方式</h1>
 		</div>
-
-</div> <!-- col-md-9/col-md-12 -->
-
-
-<div class="col-md-3">
-	<div id="sidebar">
 	
-			
-  <div id="site_search">
-   <div class="form-group">
-    <input type="text" id="local-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control"/>
-   </div>  
-  <div id="local-search-result"></div>
-  </div>
 
 
-		
-			
-		
-			
-	<div class="widget">
-		<h4>Tag Cloud</h4>
-		<ul class="tag_box inline list-unstyled">		
-		
-			<li><a href="/tags/建站测试/">建站测试<span>10</span></a></li>
-		
-			<li><a href="/tags/软件开发/">软件开发<span>2</span></a></li>
-		
-			<li><a href="/tags/哲学与思考/">哲学与思考<span>1</span></a></li>
-		
-			<li><a href="/tags/醒言/">醒言<span>3</span></a></li>
-		
-			<li><a href="/tags/技巧/">技巧<span>1</span></a></li>
-		
-			<li><a href="/tags/渗透测试/">渗透测试<span>19</span></a></li>
-		
-		 
-		</ul>
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="HTML超链接跳转"><a href="#HTML超链接跳转" class="headerlink" title="HTML超链接跳转"></a>HTML超链接跳转</h1><pre class="line-numbers language-none"><code class="language-none">#简单的超链接跳转，不再赘述
+&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;test.com&#x2F;example.mp4&quot;&gt;点此查看视频&lt;&#x2F;a&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h1 id="Markdown超链接跳转"><a href="#Markdown超链接跳转" class="headerlink" title="Markdown超链接跳转"></a>Markdown超链接跳转</h1><pre class="line-numbers language-none"><code class="language-none">![点此查看视频](xxx&#x2F;example.mp4)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h1 id="hexo-tag-mmedia插件"><a href="#hexo-tag-mmedia插件" class="headerlink" title="hexo-tag-mmedia插件"></a>hexo-tag-mmedia插件</h1><pre class="line-numbers language-none"><code class="language-none">#进入hexo目录，安装插件
+cnpm install hexo-tag-mmedia@1
+或
+cnpm install hexo-tag-mmedia<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="/2024/01/30/Hexo%E5%8D%9A%E5%AE%A2%E6%8F%92%E5%85%A5%E8%A7%86%E9%A2%91%E7%9A%84%E6%96%B9%E5%BC%8F/image-20240130195053986.png" alt="image-20240130195053986"></p>
+<blockquote>
+<p>我使用的是 hexo-tag-mmedia 1.2.1 版本</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">#在hexo目录（不是主题目录）的_config.yml的文件中添加
+mmedia:
+  video:
+    default:
+      autoplay: true
+      key: vaule
+#之后在需要插入视频文件的地方，按照如下格式书写
+&#123;% mmedia &quot;video&quot; &quot;src:example.mp4&quot; &quot;autoplay:false&quot; %&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>所有 video标签的原生属性均可添加</p>
+</blockquote>
+<h1 id="使用iframe标签"><a href="#使用iframe标签" class="headerlink" title="使用iframe标签"></a>使用iframe标签</h1><pre class="line-numbers language-none"><code class="language-none">&lt;iframe src&#x3D;&quot;example.mp4&quot; scrolling&#x3D;&quot;no&quot; border&#x3D;&quot;0&quot; frameborder&#x3D;&quot;no&quot; framespacing&#x3D;&quot;0&quot; allowfullscreen&#x3D;&quot;true&quot;&gt; &lt;&#x2F;iframe&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="/2024/01/30/Hexo%E5%8D%9A%E5%AE%A2%E6%8F%92%E5%85%A5%E8%A7%86%E9%A2%91%E7%9A%84%E6%96%B9%E5%BC%8F/image-20240130200054309.png" alt="image-20240130200054309"></p>
+<blockquote>
+<p>这里就衍生出来另一种方法，就是将要插入的视频上传至视频网站如Youtube、Bilibili，然后使用视频网站提供的内嵌代码，本质还是使用iframe标签，如下</p>
+</blockquote>
+<p><img src="/2024/01/30/Hexo%E5%8D%9A%E5%AE%A2%E6%8F%92%E5%85%A5%E8%A7%86%E9%A2%91%E7%9A%84%E6%96%B9%E5%BC%8F/image-20240130202519624.png" alt="image-20240130202519624"></p>
+<p><img src="/2024/01/30/Hexo%E5%8D%9A%E5%AE%A2%E6%8F%92%E5%85%A5%E8%A7%86%E9%A2%91%E7%9A%84%E6%96%B9%E5%BC%8F/Hexo%E5%8D%9A%E5%AE%A2%E6%8F%92%E5%85%A5%E8%A7%86%E9%A2%91%E7%9A%84%E6%96%B9%E5%BC%8F%5Cimage-20240130202632579.png" alt="image-20240130202632579"></p>
+<h1 id="使用video标签"><a href="#使用video标签" class="headerlink" title="使用video标签"></a>使用video标签</h1><pre class="line-numbers language-none"><code class="language-none">&lt;video src&#x3D;&quot;xxx&#x2F;example.mp4&quot;&gt;&lt;&#x2F;video&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>video标签可选属性<img src="/2024/01/30/Hexo%E5%8D%9A%E5%AE%A2%E6%8F%92%E5%85%A5%E8%A7%86%E9%A2%91%E7%9A%84%E6%96%B9%E5%BC%8F/Hexo%E5%8D%9A%E5%AE%A2%E6%8F%92%E5%85%A5%E8%A7%86%E9%A2%91%E7%9A%84%E6%96%B9%E5%BC%8F%5Cimage-20240130201928052.png" alt="image-20240130201928052"></p>
+<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><ul>
+<li>一定要明确视频文件的路径，比如有时候要带路径（如：xxx&#x2F;example.mp4），有时候不要（如：example.mp4）</li>
+<li>以上的方法针对不同的情况作用效果不同，以我的博客为例，仅有HTML超链接跳转、Markdown超链接跳转、hexo-tag-mmedia插件这三种方式起作用。但理论上，以上的方法都是能够实现在hexo博客中插入视频的</li>
+</ul>
+<h1 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://www.marapython.com/posts/html-video/#%E5%85%B6%E4%BB%96%E9%97%AE%E9%A2%98">https://www.marapython.com/posts/html-video/#%E5%85%B6%E4%BB%96%E9%97%AE%E9%A2%98</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.u2sb.com/OpenSw/hexo-tag-mmedia/version0.html#config-yml">https://www.u2sb.com/OpenSw/hexo-tag-mmedia/version0.html#config-yml</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1JQ4y1c7iR/">https://www.bilibili.com/video/BV1JQ4y1c7iR/</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=DBALQKxcMkI">https://www.youtube.com/watch?v=DBALQKxcMkI</a></li>
+</ul>
+	  
 	</div>
 
+	<div>
+  	<center>
+	<div class="pagination">
 
-		
-			
-<div class="widget">
-  <h4>Recent Posts</h4>
-  <ul class="entry list-unstyled">
     
-      <li>
-        <a href="/2024/01/30/公告/" ><i class="fa fa-file-o"></i>公告-Blog大事纪</a>
-      </li>
     
-      <li>
-        <a href="/2024/01/29/silk音频格式转mp3/" ><i class="fa fa-file-o"></i>silk音频格式转mp3</a>
-      </li>
+    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
     
-      <li>
-        <a href="/2023/12/24/内网安全学习笔记/" ><i class="fa fa-file-o"></i>内网安全学习笔记</a>
-      </li>
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
     
-      <li>
-        <a href="/2023/12/24/github技巧/" ><i class="fa fa-file-o"></i>github技巧</a>
-      </li>
+    <a href="/2024/01/30/公告/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
     
-      <li>
-        <a href="/2023/12/24/git学习笔记/" ><i class="fa fa-file-o"></i>git学习笔记</a>
-      </li>
+
     
-  </ul>
 </div>
 
-		
-			
-<div class="widget">
-	<h4>Links</h4>
-	<ul class="blogroll list-unstyled">
+    </center>
+	</div>
 	
-		<li><i class="fa fa-rss"></i><a href="https://blog.csdn.net/m0_66842854?spm=1000.2115.3001.5343" title="My CSDN account." target="_blank">My CSDN</a></li>
+	<!-- comment -->
 	
-		<li><i class="fa fa-github"></i><a href="https://github.com/Jici-Zeroten" title="My Github account." target="_blank">My Github</a></li>
-	
-		<li><i class="fa fa-pencil-square-o"></i><a href="https://jici-zeroten.github.io/text-to-handwriting/" title="text-to-handwriting" target="_blank">My Project：从文本到手写</a></li>
-	
-		<li><i class="fa fa-pencil-square-o"></i><a href="https://github.com/Jici-Zeroten/ScriptWarehouse" title="ScriptWarehouse" target="_blank">My Project：ScriptWarehouse</a></li>
-	
-		<li><i class="fa fa-pencil-square-o"></i><a href="https://jici-zeroten.github.io/Hacker-Grammar-Templates/" title="Hacker-Grammar-Templates" target="_blank">My Project：黑客语法模板</a></li>
-	
-	</ul>
-</div>
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
 
 
+	</div> <!-- col-md-9/col-md-12 -->
 		
-	</div> <!-- sidebar -->
-</div> <!-- col-md-3 -->
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2024-01-30 
+	</div>
+	
+
+	<!-- categories -->
+    
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/一点技巧/">一点技巧<span>2</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
 
 
 
@@ -298,7 +339,7 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
     } 
 setInterval("createtime()",250);
 </script>
-<span class="num"> | 及辞已经在本站记录了: 109.6k 字</span>
+<span class="num"> | 及辞已经在本站记录了: 111.1k 字</span>
 </div> </footer>
 </div> <!-- container-narrow -->
   
@@ -350,7 +391,7 @@ setInterval("createtime()",250);
     });
 </script>
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/ni-j.model.json"},"display":{"position":"left","width":260,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<!-- hexo injector body_end start --><script src="/assets/mmedia/mmedia-loader.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/ni-j.model.json"},"display":{"position":"left","width":260,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
    </html>
 
 <!-- 雪花特效 -->

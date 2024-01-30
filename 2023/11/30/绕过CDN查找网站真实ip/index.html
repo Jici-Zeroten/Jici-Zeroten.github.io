@@ -9,7 +9,7 @@
   <title>绕过CDN查找网站真实ip | Jici&#39;s Blog</title>
   <meta name="author" content="Jici">
   
-  <meta name="description" content="CDN简单介绍CDN即内容分发网络，主要解决因传输距离和不同运营商节点造成的网络速度性能低下的问题。说的简单点，就是一组在不同运营商之间的对接点上的高速缓存服务器，==把用户经常访问的静态数据资源直接缓存到节点服务器上，当用户再次请求时，会直接分发到离用户近的节点服务器上响应给用户，当用户有实际数据交互时才会从远程Web服务器上响应==，这样可以大大提高网站的响应速度及用户体验。
+  <meta name="description" content="CDN简单介绍CDN即内容分发网络，主要解决因传输距离和不同运营商节点造成的网络速度性能低下的问题。说的简单点，就是一组在不同运营商之间的对接点上的高速缓存服务器，&amp;#x3D;&amp;#x3D;把用户经常访问的静态数据资源直接缓存到节点服务器上，当用户再次请求时，会直接分发到离用户近的节点服务器上响应给用户，当用户有实际数据交互时才会从远程Web服务器上响应&amp;#x3D;&amp;#x3D;，这样可以大大提高网站的响应速度及用户体验。
 使用CDN有以下优势：">
   
   
@@ -161,12 +161,12 @@ var _hmt = _hmt || [];
 	<div class="mypage">		
 	  		
 
-	  <h1 id="CDN简单介绍"><a href="#CDN简单介绍" class="headerlink" title="CDN简单介绍"></a>CDN简单介绍</h1><p>CDN即内容分发网络，主要解决因传输距离和不同运营商节点造成的网络速度性能低下的问题。说的简单点，就是一组在不同运营商之间的对接点上的高速缓存服务器，==把用户经常访问的静态数据资源直接缓存到节点服务器上，当用户再次请求时，会直接分发到离用户近的节点服务器上响应给用户，当用户有实际数据交互时才会从远程Web服务器上响应==，这样可以大大提高网站的响应速度及用户体验。</p>
+	  <h1 id="CDN简单介绍"><a href="#CDN简单介绍" class="headerlink" title="CDN简单介绍"></a>CDN简单介绍</h1><p>CDN即内容分发网络，主要解决因传输距离和不同运营商节点造成的网络速度性能低下的问题。说的简单点，就是一组在不同运营商之间的对接点上的高速缓存服务器，&#x3D;&#x3D;把用户经常访问的静态数据资源直接缓存到节点服务器上，当用户再次请求时，会直接分发到离用户近的节点服务器上响应给用户，当用户有实际数据交互时才会从远程Web服务器上响应&#x3D;&#x3D;，这样可以大大提高网站的响应速度及用户体验。</p>
 <p>使用CDN有以下优势：</p>
 <ul>
 <li>提高用户访问速率，优化用户使用体验</li>
 <li>隐藏真实服务器的IP</li>
-<li>提供WAF功能，目前很多CDN也提供了WAF的功能，我们的访问请求会先经过CDN节点的过滤，该过滤可对SQL注入、XSS、Webshell上传、命令注入、恶意扫描等攻击行为进行有效检测和拦截。==CDN节点将认为无害的数据提交给真实的主机服务器==</li>
+<li>提供WAF功能，目前很多CDN也提供了WAF的功能，我们的访问请求会先经过CDN节点的过滤，该过滤可对SQL注入、XSS、Webshell上传、命令注入、恶意扫描等攻击行为进行有效检测和拦截。&#x3D;&#x3D;CDN节点将认为无害的数据提交给真实的主机服务器&#x3D;&#x3D;</li>
 </ul>
 <p>CDN的配置方式如下：</p>
 <ol>
@@ -179,9 +179,9 @@ var _hmt = _hmt || [];
 <p><img src="/2023/11/30/%E7%BB%95%E8%BF%87CDN%E6%9F%A5%E6%89%BE%E7%BD%91%E7%AB%99%E7%9C%9F%E5%AE%9Eip/image-20231130193306251.png" alt="image-20231130193306251"></p>
 <p>几种访问方式的不同：</p>
 <ul>
-<li>传统访问：用户访问域名—&gt;解析服务器ip地址—&gt;访问目标主机</li>
-<li>CDN加速访问：用户访问域名—&gt;CDN节点—&gt;真实服务器ip—&gt;访问目标主机</li>
-<li>带waf的cdn：用户访问域名—&gt;CDN节点(waf)—&gt;真实服务器ip—&gt;访问目标主机</li>
+<li>传统访问：用户访问域名–&gt;解析服务器ip地址–&gt;访问目标主机</li>
+<li>CDN加速访问：用户访问域名–&gt;CDN节点–&gt;真实服务器ip–&gt;访问目标主机</li>
+<li>带waf的cdn：用户访问域名–&gt;CDN节点(waf)–&gt;真实服务器ip–&gt;访问目标主机</li>
 </ul>
 <h1 id="检测有无CDN"><a href="#检测有无CDN" class="headerlink" title="检测有无CDN"></a>检测有无CDN</h1><p>检测CDN的方法有很多，下面列举几种</p>
 <ul>
@@ -214,7 +214,7 @@ var _hmt = _hmt || [];
 <li><a target="_blank" rel="noopener" href="https://securitytrails.com/">https://securitytrails.com/</a></li>
 <li><a target="_blank" rel="noopener" href="https://sitereport.netcraft.com/">https://sitereport.netcraft.com/</a></li>
 </ul>
-<p>除了过去的 DNS 记录，即使是当前的记录也可能泄漏原始服务器 IP。例如，==MX 记录也可能泄漏原始服务器IP==</p>
+<p>除了过去的 DNS 记录，即使是当前的记录也可能泄漏原始服务器 IP。例如，&#x3D;&#x3D;MX 记录也可能泄漏原始服务器IP&#x3D;&#x3D;</p>
 <h2 id="查询子域名"><a href="#查询子域名" class="headerlink" title="查询子域名"></a>查询子域名</h2><p>一般适用于主站开启cdn，而子域名没有配置cdn的情况。毕竟 CDN 还是不便宜的，所以很多站长可能只会对主站或者流量大的子站点做了 CDN，而很多小站子站点又跟主站在同一台服务器或者同一个 C 段内，此时就可以通过查询子域名对应的 IP 来辅助查找网站的真实 IP。那么这里就要先挖掘对应主域的子域名了，属于信息搜集的一种，有以下几种手段：</p>
 <ol>
 <li><p>搜索引擎查询</p>
@@ -229,18 +229,19 @@ baidu.com -www<span aria-hidden="true" class="line-numbers-rows"><span></span><s
 <li><a target="_blank" rel="noopener" href="http://subdomain.chaxun.la/">http://subdomain.chaxun.la/</a></li>
 <li><a target="_blank" rel="noopener" href="http://searchdns.netcraft.com/">http://searchdns.netcraft.com/</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.virustotal.com/">https://www.virustotal.com/</a></li>
-<li><a target="_blank" rel="noopener" href="https://dnsdb.io/zh-cn/【输入baidu.com">https://dnsdb.io/zh-cn/【输入baidu.com</a> type:A就能收集百度的子域名和ip】</li>
+<li><a target="_blank" rel="noopener" href="https://dnsdb.io/zh-cn/%E3%80%90%E8%BE%93%E5%85%A5baidu.com">https://dnsdb.io/zh-cn/【输入baidu.com</a> type:A就能收集百度的子域名和ip】</li>
 </ul>
 </li>
-<li>子域名爆破工具<ul>
+<li><p>子域名爆破工具</p>
+</li>
+</ol>
+<ul>
 <li>Layer子域名挖掘机</li>
 <li>wydomain：<a target="_blank" rel="noopener" href="https://github.com/ring04h/wydomain">https://github.com/ring04h/wydomain</a></li>
 <li>subDomainsBrute:<a target="_blank" rel="noopener" href="https://github.com/lijiejie/">https://github.com/lijiejie/</a></li>
 <li>Sublist3r:<a target="_blank" rel="noopener" href="https://github.com/aboul3la/Sublist3r">https://github.com/aboul3la/Sublist3r</a></li>
 </ul>
-</li>
-</ol>
-<h2 id="Mx记录或邮件配合备案信息-又称利用网站邮件头信息、邮件服务器"><a href="#Mx记录或邮件配合备案信息-又称利用网站邮件头信息、邮件服务器" class="headerlink" title="Mx记录或邮件配合备案信息(又称利用网站邮件头信息、邮件服务器)"></a>Mx记录或邮件配合备案信息(又称利用网站邮件头信息、邮件服务器)</h2><p>一般的邮件系统都在内部，没有经过CDN的解析。很多站点都有发送邮件的功能，如Rss邮件订阅、邮箱注册、邮箱找回密码，==只要有邮箱发送功能，我们就可以让服务器给我们的邮箱服务器发邮件，查看邮件，寻找邮件头中的邮件服务器域名IP，ping这个邮件服务器的域名，就可以获得目标的真实IP==(必须是目标自己的邮件服务器，第三方或者公共邮件服务器是没有用的)，==或者在邮件源码(邮件头信息)里面就会包含服务器的真实 IP==<img src="/2023/11/30/%E7%BB%95%E8%BF%87CDN%E6%9F%A5%E6%89%BE%E7%BD%91%E7%AB%99%E7%9C%9F%E5%AE%9Eip/image-20231130233303722.png" alt="image-20231130233303722"><img src="/2023/11/30/%E7%BB%95%E8%BF%87CDN%E6%9F%A5%E6%89%BE%E7%BD%91%E7%AB%99%E7%9C%9F%E5%AE%9Eip/image-20231130233345141.png" alt="image-20231130233345141"></p>
+<h2 id="Mx记录或邮件配合备案信息-又称利用网站邮件头信息、邮件服务器"><a href="#Mx记录或邮件配合备案信息-又称利用网站邮件头信息、邮件服务器" class="headerlink" title="Mx记录或邮件配合备案信息(又称利用网站邮件头信息、邮件服务器)"></a>Mx记录或邮件配合备案信息(又称利用网站邮件头信息、邮件服务器)</h2><p>一般的邮件系统都在内部，没有经过CDN的解析。很多站点都有发送邮件的功能，如Rss邮件订阅、邮箱注册、邮箱找回密码，&#x3D;&#x3D;只要有邮箱发送功能，我们就可以让服务器给我们的邮箱服务器发邮件，查看邮件，寻找邮件头中的邮件服务器域名IP，ping这个邮件服务器的域名，就可以获得目标的真实IP&#x3D;&#x3D;(必须是目标自己的邮件服务器，第三方或者公共邮件服务器是没有用的)，&#x3D;&#x3D;或者在邮件源码(邮件头信息)里面就会包含服务器的真实 IP&#x3D;&#x3D;<img src="/2023/11/30/%E7%BB%95%E8%BF%87CDN%E6%9F%A5%E6%89%BE%E7%BD%91%E7%AB%99%E7%9C%9F%E5%AE%9Eip/image-20231130233303722.png" alt="image-20231130233303722"><img src="/2023/11/30/%E7%BB%95%E8%BF%87CDN%E6%9F%A5%E6%89%BE%E7%BD%91%E7%AB%99%E7%9C%9F%E5%AE%9Eip/image-20231130233345141.png" alt="image-20231130233345141"></p>
 <h2 id="国外主机解析域名-又称国外多ping"><a href="#国外主机解析域名-又称国外多ping" class="headerlink" title="国外主机解析域名(又称国外多ping)"></a>国外主机解析域名(又称国外多ping)</h2><p>大部分 CDN 厂商因为各种原因(如节约成本)只做了国内的线路，而针对国外的线路可能几乎没有，此时我们使用国外的DNS查询，很可能获取到真实IP。下面使用一些国外多ping的网站：</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://asm.ca.com/zh_cn/ping.php">https://asm.ca.com/zh_cn/ping.php</a></li>
@@ -260,7 +261,7 @@ baidu.com -www<span aria-hidden="true" class="line-numbers-rows"><span></span><s
 <h1 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h1><ul>
 <li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1933535">渗透测试 | 绕过CDN查找网站真实ip-腾讯云开发者社区-腾讯云 (tencent.com)</a></li>
 <li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/CDm3MUZ5yttN71oEOIaPxQ">https://mp.weixin.qq.com/s/CDm3MUZ5yttN71oEOIaPxQ</a></li>
-<li><a target="_blank" rel="noopener" href="https://xie.infoq.cn/article/1b1d530f772e33b669f6cbedf">11种绕过CDN查找真实IP方法<em>网络安全</em>喀拉峻_InfoQ写作社区</a></li>
+<li><a target="_blank" rel="noopener" href="https://xie.infoq.cn/article/1b1d530f772e33b669f6cbedf">11种绕过CDN查找真实IP方法_网络安全_喀拉峻_InfoQ写作社区</a></li>
 <li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1634648">绕过CDN寻找真实IP的8种方法-腾讯云开发者社区-腾讯云 (tencent.com)</a></li>
 <li><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/823990">信息收集——绕过CDN查找真实IP（最实用的方法）-阿里云开发者社区 (aliyun.com)</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_19446965/article/details/118164229">渗透测试-CDN绕过_渗透之cdn绕过-CSDN博客</a></li>
@@ -396,7 +397,7 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
     } 
 setInterval("createtime()",250);
 </script>
-<span class="num"> | 及辞已经在本站记录了: 109.6k 字</span>
+<span class="num"> | 及辞已经在本站记录了: 111.1k 字</span>
 </div> </footer>
 </div> <!-- container-narrow -->
   
