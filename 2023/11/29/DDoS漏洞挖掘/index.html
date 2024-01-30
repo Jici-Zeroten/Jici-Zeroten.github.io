@@ -163,7 +163,7 @@ var _hmt = _hmt || [];
 	  <p>这里先简单介绍一下DDoS</p>
 <p><img src="/2023/11/29/DDoS%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/image-20231129204650908.png" alt="image-20231129204650908"></p>
 <p><img src="/2023/11/29/DDoS%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/image-20231129204700389.png" alt="image-20231129204700389"></p>
-<p>在漏洞挖掘的时候还会碰到其他造成DDoS的漏洞，&#x3D;&#x3D;这里注意一点，DDoS不一定要通过不断发包导致&#x3D;&#x3D;</p>
+<p>在漏洞挖掘的时候还会碰到其他造成DDoS的漏洞，==这里注意一点，DDoS不一定要通过不断发包导致==</p>
 <h1 id="图像大小与请求参数可修改"><a href="#图像大小与请求参数可修改" class="headerlink" title="图像大小与请求参数可修改"></a>图像大小与请求参数可修改</h1><p>图片大小相关参数可控导致DDoS &gt; 影响服务端对图片处理的参数可控，进而可通过修改参数导致服务端分配大量资源处理图片，造成DDoS效果。攻击者不需要在此类攻击中投入资源，但服务器可能会分配所需的像素缓冲区（导致内存不足）或者执行随图像大小变化的计算（导致占用服务器CPU）。通过这种能一次请求大型资源的漏洞，也会造成DDos。</p>
 <p>这一类的漏洞挖掘，可以使用BurpSuite的Image Size Issues插件</p>
 <p>下载地址：<a target="_blank" rel="noopener" href="https://github.com/portswigger/image-size-issues">https://github.com/portswigger/image-size-issues</a>  </p>
@@ -277,11 +277,11 @@ var _hmt = _hmt || [];
 
 
 
+<span class="post-meta-divider">|</span>
+<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
 <script>
 var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a||"interactive"===document.readyState||"complete"===document.readyState?c.call(document):b.push(function(){return c.call(this)}),this},d=function(){for(var a=0,c=b.length;c>a;a++)b[a].apply(document);b=[]},e=function(){a||(a=!0,d.call(window),document.removeEventListener?document.removeEventListener("DOMContentLoaded",e,!1):document.attachEvent&&(document.detachEvent("onreadystatechange",e),window==window.top&&(clearInterval(c),c=null)))},document.addEventListener?document.addEventListener("DOMContentLoaded",e,!1):document.attachEvent&&(document.attachEvent("onreadystatechange",function(){/loaded|complete/.test(document.readyState)&&e()}),window==window.top&&(c=setInterval(function(){try{a||document.documentElement.doScroll("left")}catch(b){return}e()},5)))}(),bszCaller={fetch:function(a,b){var c="BusuanziCallback_"+Math.floor(1099511627776*Math.random());window[c]=this.evalCall(b),a=a.replace("=BusuanziCallback","="+c),scriptTag=document.createElement("SCRIPT"),scriptTag.type="text/javascript",scriptTag.defer=!0,scriptTag.src=a,scriptTag.referrerPolicy="no-referrer-when-downgrade",document.getElementsByTagName("HEAD")[0].appendChild(scriptTag)},evalCall:function(a){return function(b){ready(function(){try{a(b),scriptTag.parentElement.removeChild(scriptTag)}catch(c){bszTag.hides()}})}}},bszCaller.fetch("http://busuanzi.ibruce.info/busuanzi?jsonpCallback=BusuanziCallback",function(a){bszTag.texts(a),bszTag.shows()}),bszTag={bszs:["site_pv","page_pv","site_uv"],texts:function(a){this.bszs.map(function(b){var c=document.getElementById("busuanzi_value_"+b);c&&(c.innerHTML=a[b])})},hides:function(){this.bszs.map(function(a){var b=document.getElementById("busuanzi_container_"+a);b&&(b.style.display="none")})},shows:function(){this.bszs.map(function(a){var b=document.getElementById("busuanzi_container_"+a);b&&(b.style.display="inline")})}};
 </script>
-<span class="post-meta-divider">|</span>
-<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
 
 
 <!-- <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
@@ -309,7 +309,7 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
     } 
 setInterval("createtime()",250);
 </script>
-<span class="num"> | 及辞已经在本站记录了: 111.1k 字</span>
+<span class="num"> | 及辞已经在本站记录了: 110k 字</span>
 </div> </footer>
 </div> <!-- container-narrow -->
   
