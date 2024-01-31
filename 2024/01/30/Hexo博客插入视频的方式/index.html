@@ -196,10 +196,10 @@ mmedia:
 <p>这里就衍生出来另一种方法，就是将要插入的视频上传至视频网站如Youtube、Bilibili，然后使用视频网站提供的内嵌代码，本质还是使用iframe标签，如下</p>
 </blockquote>
 <p><img src="/2024/01/30/Hexo%E5%8D%9A%E5%AE%A2%E6%8F%92%E5%85%A5%E8%A7%86%E9%A2%91%E7%9A%84%E6%96%B9%E5%BC%8F/image-20240130202519624.png" alt="image-20240130202519624"></p>
-<p><img src="/2024/01/30/Hexo%E5%8D%9A%E5%AE%A2%E6%8F%92%E5%85%A5%E8%A7%86%E9%A2%91%E7%9A%84%E6%96%B9%E5%BC%8F/Hexo%E5%8D%9A%E5%AE%A2%E6%8F%92%E5%85%A5%E8%A7%86%E9%A2%91%E7%9A%84%E6%96%B9%E5%BC%8F%5Cimage-20240130202632579.png" alt="image-20240130202632579"></p>
+<p><img src="/2024/01/30/Hexo%E5%8D%9A%E5%AE%A2%E6%8F%92%E5%85%A5%E8%A7%86%E9%A2%91%E7%9A%84%E6%96%B9%E5%BC%8F/image-20240130202632579.png" alt="image-20240130202632579"></p>
 <h1 id="使用video标签"><a href="#使用video标签" class="headerlink" title="使用video标签"></a>使用video标签</h1><pre class="line-numbers language-none"><code class="language-none">&lt;video src&#x3D;&quot;xxx&#x2F;example.mp4&quot;&gt;&lt;&#x2F;video&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<p>video标签可选属性<img src="/2024/01/30/Hexo%E5%8D%9A%E5%AE%A2%E6%8F%92%E5%85%A5%E8%A7%86%E9%A2%91%E7%9A%84%E6%96%B9%E5%BC%8F/Hexo%E5%8D%9A%E5%AE%A2%E6%8F%92%E5%85%A5%E8%A7%86%E9%A2%91%E7%9A%84%E6%96%B9%E5%BC%8F%5Cimage-20240130201928052.png" alt="image-20240130201928052"></p>
+<p>video标签可选属性<img src="/2024/01/30/Hexo%E5%8D%9A%E5%AE%A2%E6%8F%92%E5%85%A5%E8%A7%86%E9%A2%91%E7%9A%84%E6%96%B9%E5%BC%8F/image-20240130201928052.png" alt="image-20240130201928052"></p>
 <h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><ul>
 <li>一定要明确视频文件的路径，比如有时候要带路径（如：xxx&#x2F;example.mp4），有时候不要（如：example.mp4）</li>
 <li>以上的方法针对不同的情况作用效果不同，以我的博客为例，仅有HTML超链接跳转、Markdown超链接跳转、hexo-tag-mmedia插件这三种方式起作用。但理论上，以上的方法都是能够实现在hexo博客中插入视频的</li>
@@ -377,6 +377,21 @@ setInterval("createtime()",250);
      searchFunc(path, 'local-search-input', 'local-search-result');
    </script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <!-- hexo injector body_end start --><script src="/assets/mmedia/mmedia-loader.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/ni-j.model.json"},"display":{"position":"left","width":260,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
    </html>
 
