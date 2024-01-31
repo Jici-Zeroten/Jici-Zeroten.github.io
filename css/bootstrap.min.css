@@ -1548,7 +1548,7 @@ h3:after {
 
 h1 {
     font-size: 18px;
-    text-transform: uppercase
+    text-transform: none;
 }
 
 h2 {
@@ -1810,7 +1810,7 @@ u:after {
 
 
 strong {
-    text-transform: uppercase
+    text-transform: none;
 }
 
 .list-unstyled {
