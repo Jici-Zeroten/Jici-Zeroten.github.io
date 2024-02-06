@@ -188,7 +188,7 @@ var _hmt = _hmt || [];
 <li>file.php%0a</li>
 <li>file.php%00</li>
 <li>file.php%0d%0a</li>
-<li>file.php/</li>
+<li>file.php&#x2F;</li>
 <li>file.php.\</li>
 <li>file.</li>
 <li>file.php….</li>
@@ -333,9 +333,26 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
         document.getElementById("timeDate").innerHTML = "本站已勉强运行 "+dnum+" 天 "; 
         document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
     } 
-setInterval("createtime()",250);
+    setInterval("createtime()",250);
 </script>
-<span class="num"> | 及辞已经在本站记录了: 110k 字</span>
+<br><br>
+<span class="num">及辞已经在本站记录了 111.1k 字</span>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    fetch('/imageCount.json')
+      .then(response => response.json())
+      .then(data => {
+        const imageCount = data.count;
+        const imageCountElement = document.getElementById('imageCount');
+        imageCountElement.textContent = `共计收录了 ${imageCount} 张图片`;
+      })
+      .catch(error => {
+        console.error('Failed to load image count:', error);
+      });
+  });
+</script>
+<br><br>
+<span id="imageCount">正在加载图片数目...</span>
 </div> </footer>
 </div> <!-- container-narrow -->
   

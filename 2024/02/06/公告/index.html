@@ -9,9 +9,9 @@
   <title>公告-Blog大事纪 | Jici&#39;s Blog</title>
   <meta name="author" content="Jici">
   
-  <meta name="description" content="2024-01-30：增加视频渲染功能，支持对视频进行渲染
+  <meta name="description" content="2024-02-06：新增站点图片数统计
 
-2023-12-01：更换樱花雨特效背景、新增图片预加载功能、优化站点搜索功能、扩充tag条数上限">
+2024-01-30：增加视频渲染功能，支持对视频进行渲染">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -162,7 +162,9 @@ var _hmt = _hmt || [];
 	<div class="mypage">		
 	  		
 
-	  <p>2024-01-30：增加视频渲染功能，支持对视频进行渲染</p>
+	  <p>2024-02-06：新增站点图片数统计</p>
+<hr>
+<p>2024-01-30：增加视频渲染功能，支持对视频进行渲染</p>
 <hr>
 <p>2023-12-01：更换樱花雨特效背景、新增图片预加载功能、优化站点搜索功能、扩充tag条数上限</p>
 <hr>
@@ -171,7 +173,7 @@ var _hmt = _hmt || [];
 <p>2023-11-28：新增站点字数统计、对外开放“关于我”专栏</p>
 <hr>
 <p>2023-11-20：笔记是学习过程的产物，新笔记的制作和旧笔记的整理(格式转化和排版等)都需要时间，主要是个人接触计算机以来的一些技术栈，涉及内容大类总览如下，各位小伙伴稍安勿躁</p>
-<p><img src="/2024/01/30/%E5%85%AC%E5%91%8A/image-20231120111143155.png" alt="image-20231120111143155"></p>
+<p><img src="/2024/02/06/%E5%85%AC%E5%91%8A/image-20231120111143155.png" alt="image-20231120111143155"></p>
 <p>每个人都是有自己的生活的，我不想写博客成为一种枷锁，大家也要警惕“拿来主义”，在学习过程中要有自己的思想，热爱自由，享受学习</p>
 <hr>
 <p>2023-10-29：陆续释放个人笔记（受TeamsSix师傅影响，无限学习、无限分享、无限进步）</p>
@@ -202,13 +204,12 @@ var _hmt = _hmt || [];
 
     
     
-    <a href="/2024/01/30/Hexo博客插入视频的方式/" type="button" class="btn btn-default"><i
-                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
     
 
     <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
     
-    <a href="/2024/01/29/silk音频格式转mp3/" type="button" class="btn btn-default ">Next<i
+    <a href="/2024/02/05/Python学习笔记/" type="button" class="btn btn-default ">Next<i
                 class="fa fa-arrow-circle-o-right"></i></a>
     
 
@@ -237,7 +238,7 @@ var _hmt = _hmt || [];
 	
 	<div class="meta-widget">
 	<i class="fa fa-clock-o"></i>
-	2024-01-30 
+	2024-02-06 
 	</div>
 	
 
@@ -314,9 +315,26 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
         document.getElementById("timeDate").innerHTML = "本站已勉强运行 "+dnum+" 天 "; 
         document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
     } 
-setInterval("createtime()",250);
+    setInterval("createtime()",250);
 </script>
-<span class="num"> | 及辞已经在本站记录了: 110k 字</span>
+<br><br>
+<span class="num">及辞已经在本站记录了 111.1k 字</span>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    fetch('/imageCount.json')
+      .then(response => response.json())
+      .then(data => {
+        const imageCount = data.count;
+        const imageCountElement = document.getElementById('imageCount');
+        imageCountElement.textContent = `共计收录了 ${imageCount} 张图片`;
+      })
+      .catch(error => {
+        console.error('Failed to load image count:', error);
+      });
+  });
+</script>
+<br><br>
+<span id="imageCount">正在加载图片数目...</span>
 </div> </footer>
 </div> <!-- container-narrow -->
   
