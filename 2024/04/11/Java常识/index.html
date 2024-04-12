@@ -1,0 +1,518 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>Java常识 | Jici&#39;s Blog</title>
+  <meta name="author" content="Jici">
+  
+  <meta name="description" content="这里不会讨论Java基础的学习（Java基础学习移步至Java学习笔记 ），主要是Java底层逻辑的一些常识。
+
+Bean">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Java常识"/>
+  <meta property="og:site_name" content="Jici&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon-16x16.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-70812759-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?cb5448498d7169c668b07c2b255d62c1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<!-- hexo injector head_end start --><script> let HEXO_MMEDIA_DATA = { js: [], css: [], aplayerData: [], metingData: [], artPlayerData: [], dplayerData: []}; </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">Jici&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>所有文章
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>关于我
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/record" title="Record all kinds of completed target machines">
+			  <i class=""></i>记录榜
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/plan" title="Record what needs to be done and what is worth doing">
+			  <i class=""></i>计划清单
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/friendlinks" title="my friends">
+			  <i class=""></i>友情链接
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/pictureGallery" title="Record some exquisite pictures">
+			  <i class=""></i>画廊
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+	
+		<div class="page-header">
+			<h1> Java常识</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <blockquote>
+<p>这里不会讨论Java基础的学习（Java基础学习移步至<a href="https://jici-zeroten.github.io/2024/04/10/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Java学习笔记 </a>），主要是Java底层逻辑的一些常识。</p>
+</blockquote>
+<h1>Bean</h1>
+<p><img src="/2024/04/11/Java%E5%B8%B8%E8%AF%86/image-20240410102434377.png" alt="image-20240410102434377"></p>
+<h1>Java Bean</h1>
+<p>上面说了Bean的中文含义是“豆子”，顾名思义JavaBean是一段Java小程序。<mark>Java Bean实际上是指一种特殊的Java类，它通常用来实现一些比较常用的简单功能，并可以很容易的被重用或者是插入其他应用程序中去。所有遵循一定编程原则的Java类都可以被称作JavaBean</mark>。</p>
+<p>Java Bean是基于Java的组件模型，由属性、方法、事件3部分组成。在该模型中，<mark>JavaBean可以被修改或与其他组件结合以生成新组件或完整的程序。它是一种Java类，通过封装成为具有某种功能或者处理某个业务的对象。因此，也可以通过嵌在JSP页面内的Java代码访问Bean及其属性</mark>。</p>
+<p>Bean的含义是可重复使用的Java组件。所谓组件就是一个由可以自行进行内部管理的一个或几个类所组成、外界不了解其内部信息和运行方式的群体。使用它的对象只能通过接口来操作。</p>
+<p>这里借助维基百科的词条做一个总结：</p>
+<p><img src="/2024/04/11/Java%E5%B8%B8%E8%AF%86/image-20240410105013977.png" alt="image-20240410105013977"></p>
+<p>这里我再总结一下Java Bean的规范：</p>
+<ol>
+<li>这个类所有属性为private</li>
+<li>这个类必须具有一个公共的（public）无参构造函数</li>
+<li>private属性必须提供public的getter和setter来给外部访问，并且方法的命名也必须遵循一定的命名规范</li>
+<li>这个类是可序列化的，要实现serializable接口</li>
+</ol>
+<p>下面通过Java代码来体会一下：</p>
+<p><img src="/2024/04/11/Java%E5%B8%B8%E8%AF%86/image-20240410105708254.png" alt="image-20240410105708254"></p>
+<p><img src="/2024/04/11/Java%E5%B8%B8%E8%AF%86/image-20240410105856903.png" alt="image-20240410105856903"></p>
+<h1>Spring Bean</h1>
+<p>首先，Spring 是一个强大的开源框架，用于构建 Java 应用程序。而<mark>Spring Bean 是一种由 Spring 容器管理的对象</mark>。这些对象可以是普通的 Java 对象，但它们由 Spring 负责创建、配置和管理。Spring 的 IOC（控制反转）机制使得 Bean 的创建和管理变得更加灵活和集中化。</p>
+<blockquote>
+<p>这里补充一下对于IOC机制、 IOC容器、Spring 容器的理解</p>
+</blockquote>
+<p><img src="/2024/04/11/Java%E5%B8%B8%E8%AF%86/image-20240410111208861.png" alt="image-20240410111208861"></p>
+<blockquote>
+<p>IOC控制反转是一种面向对象编程的设计模式，它可以将程序的控制权从应用程序本身转移到一个外部容器中，由容器来负责管理对象的创建和销毁</p>
+</blockquote>
+<p>Spring容器可以理解为生产对象的地方，在这里容器不只是帮我们创建了对象那么简单，它负责了对象的整个生命周期（即创建、装配、销毁），而这里对象的创建管理的控制权都交给了Spring容器，所以这是一种控制权的反转，称为IOC机制，而实现了了IOC机制的容器，就称为IOC容器，所以Spring容器属于IOC容器的一种。</p>
+<blockquote>
+<p>IOC机制不只是Spring才有，很多框架也都有该技术。</p>
+</blockquote>
+<h1>Java Bean和Spring Bean的区别和联系</h1>
+<p><img src="/2024/04/11/Java%E5%B8%B8%E8%AF%86/image-20240410130903687.png" alt="image-20240410130903687"><img src="/2024/04/11/Java%E5%B8%B8%E8%AF%86/image-20240410130912709.png" alt="image-20240410130912709"></p>
+<p><mark>Spring 的 Bean 对象在一定程度上扩展了普通的 Java Bean对象的概念</mark>，以提供更多的功能和便利性。</p>
+<p>为了方便理解，我分别从<code>装配和管理</code>、<code>依赖注入</code>、<code>切面和增强</code>、<code>生命周期管理</code>、<code>配置</code>、<code>写法</code>等方面做一个对比总结：</p>
+<ul>
+<li>装配和管理： 普通的Java Bean对象需要自行创建和管理，而 Spring 的 Bean 则由 Spring 容器负责创建、配置和管理。这为我们的程序提供了更大的灵活性和可维护性，无须再像以前一样经常需要new 对象来使用，现在我们将创建对象的任务交给 Spring 来做，我们只需要在需要用的地方注入对象就可以。</li>
+<li>依赖注入： Spring 的 Bean 可以通过依赖注入（DI）来自动解决它们之间的依赖关系。这意味着我们可以将一个 Bean 注入到另一个 Bean 中，而无需手动实例化（new）它们或处理依赖关系。</li>
+<li>切面和增强： Spring 的 Bean 支持面向切面编程（AOP），这使我们可以将横切关注点（如日志记录、事务管理等）从业务逻辑中分离出来，使代码更加干净和模块化。说白了就是我们可以封装日志记录、事务管理的代码，等程序运行到我们想要切入的地方（即类中的方法）时，Spring AOP 会将我们封装的日志记录、事务管理等代码追加到切入点的前后啥的。</li>
+<li>生命周期管理： Spring 的 Bean 可以通过初始化和销毁回调方法来管理其生命周期。我们可以在 Bean 初始化之前或销毁之后执行特定的操作，如通过 @PostConstruct 来初始化前对属性进行赋值或者通过实现 InitializingBean 接口进行初始化</li>
+<li>配置： 普通的Java Bean对象通常在代码中硬编码配置，而<mark>Spring 的 Bean 可以通过 XML 配置、Java 注解或 Java 配置类进行配置</mark>，使得配置更加灵活和可管理。</li>
+<li>写法：传统Java Bean作为值对象，要求每个属性都提供getter和setter方法；但Spring中的Bean仅需为接受<code>设值注入</code>的属性提供setter方法</li>
+</ul>
+<h1>JMX</h1>
+<p>Java Management Extensions（JMX）是Java平台中一个重要的管理和监控技术，通过使用JMX，开发人员可以轻松地实现对Java应用程序进行监控和管理。</p>
+<h2 id="JMX介绍">JMX介绍</h2>
+<p><mark>JMX是Java平台的一个标准规范，它定义了一组API和协议，用于管理和监控Java应用程序的运行状态</mark>。JMX提供了一种统一的方式来访问Java应用程序的各种资源，包括操作系统、虚拟机、应用程序服务器和自定义应用程序组件等。</p>
+<p>JMX的主要功能包括：</p>
+<ol>
+<li>监控和管理Java应用程序的运行状态：JMX为Java应用程序提供了一种标准化的方式来访问应用程序内部的各种状态信息，比如内存使用情况、线程状态、GC情况等等。这些信息可以用于监控和管理应用程序的性能和可用性。</li>
+<li>远程访问和管理：JMX支持通过网络远程访问和管理Java应用程序，使得开发人员可以随时随地地监控和管理应用程序的运行状态。</li>
+<li>自定义MBean：JMX允许开发人员创建自定义MBean（Managed Bean），通过MBean可以暴露应用程序内部的状态信息和操作，从而方便开发人员进行监控和管理。</li>
+</ol>
+<blockquote>
+<p>是不是和Spring Boot Actuator的功能很像，Spring Boot Actuator就用到了 JMX。此外，JConsole和VisualVM 也用到了 JMX。</p>
+</blockquote>
+<p><img src="/2024/04/11/Java%E5%B8%B8%E8%AF%86/image-20240410140129109.png" alt="image-20240410140129109"></p>
+<h2 id="JMX架构与MBean">JMX架构与MBean</h2>
+<p>JMX的架构由三个主要组件组成：</p>
+<ol>
+<li>MBean： <mark>MBean是Managed Bean的缩写（中文可译为&quot;托管Bean&quot;），它是JMX中的核心概念。MBean用于暴露应用程序内部的状态信息和操作，比如内存使用情况、线程状态、GC情况等等。MBean可以被动态地创建、注册和注销</mark>，使得开发人员可以非常方便地将应用程序的状态信息暴露给JMX。</li>
+<li>MBean Server： MBean Server是JMX的核心组件，它提供了MBean的注册、查询和调用等功能。MBean Server负责管理所有注册到它上面的MBean，并通过JMX协议向外部提供服务。在Java应用程序中，每个JVM只有一个MBean Server实例。</li>
+<li>JMX Agent： JMX Agent是JMX的客户端组件，它允许开发人员通过网络远程访问和管理MBean Server。JMX Agent可以以独立进程的形式运行，也可以作为Java应用程序的一部分嵌入到应用程序中。</li>
+</ol>
+<p><mark>MBean就是一种规范的 Java Bean（即属于Java Bean的一种）</mark>，集成和实现了一套标准的Java Bean 接口。在JMX中MBean代表一个被管理的资源【运行在Java虚拟机（JVM）上的资源】实例，例如应用程序或Java EE服务（事务监控、JDBC驱动程序等）。MBean会通过接口定义（这样外界就可以获取被管理的资源的状态和操纵MBean的行为），给出这些资源的一些特定操作，比如：</p>
+<ol>
+<li>属性的读和写操作</li>
+<li>可以被执行的操作</li>
+<li>显示描述信息</li>
+</ol>
+<p>JMX 中共有四种类型的 MBean，分别是 <code>Standard MBean(标准MBean)</code>、<code> Dynamic MBean(动态MBean)</code>、<code>Open MBean(开放式MBean)</code>、<code>MXBean(管理扩展Bean)</code>、<code>Model MBean(模型MBean)</code>。具体如下：</p>
+<ol>
+<li>Standard MBean（标准MBean）：
+<ul>
+<li>Standard MBean是最简单的一种MBean类型，它是通过Java接口和具体实现类的方式定义的。</li>
+<li>Standard MBean的接口定义了MBean的管理接口，实现类提供了具体的实现逻辑。</li>
+<li>Standard MBean可以使用Java的反射机制自动生成MBean的管理接口和实现类的代码。</li>
+</ul>
+</li>
+<li>Dynamic MBean（动态MBean）：
+<ul>
+<li>Dynamic MBean是一种更灵活和动态的MBean类型，它不需要在编译时定义接口和实现类。</li>
+<li>Dynamic MBean通过实现DynamicMBean接口来定义管理接口，并在运行时动态地提供管理属性和操作。</li>
+<li>Dynamic MBean可以在运行时动态地添加、删除或修改其管理属性和操作。</li>
+</ul>
+</li>
+<li>Open MBean（开放式MBean）：
+<ul>
+<li>Open MBean是一种与特定Java类型无关的MBean类型，它可以管理任意类型的Java对象。</li>
+<li>Open MBean使用MBean描述符来定义管理接口和属性，可以管理任意类型的对象和属性。</li>
+<li>Open MBean可以通过MBean描述符提供属性类型、访问权限、合法值等信息。</li>
+</ul>
+</li>
+<li>MXBean（管理扩展Bean）：
+<ul>
+<li>MXBean是一种特殊类型的MBean，它通过Java接口和具体实现类的方式定义。</li>
+<li>MXBean的接口定义了MBean的管理接口，实现类提供了具体的实现逻辑。</li>
+<li>MXBean使用一组特定的注解来定义属性、操作和通知，并提供了更严格的类型限制和安全性。</li>
+</ul>
+</li>
+<li>Model MBean（模型MBean）：
+<ul>
+<li>Model MBean是JMX中的一种特殊类型的MBean，它提供了更灵活和可编程的管理机制。</li>
+<li>Model MBean允许开发者在运行时动态地定义和管理MBean的属性、操作和通知。</li>
+<li>Model MBean通过中间层的&quot;模型&quot;来将MBean的管理接口与实际的实现逻辑分离开来，实现了解耦和灵活的管理能力。</li>
+<li>Model MBean可以通过配置和编程的方式进行定制，开发者可以在运行时为Model MBean设置属性、操作和通知，并为其提供自定义的实现逻辑。</li>
+<li>Model MBean的管理接口可以通过MBeanInfo对象进行描述，包括属性、操作和通知等信息。</li>
+</ul>
+</li>
+</ol>
+<h2 id="MXBean">MXBean</h2>
+<p><mark>MXBean 是一种MBean</mark>。更准确的来说，MXBean是一种引用预定义数据类型（例如java.util.Date）的MBean。通过这种方式，可以确保任何客户机（包括远程客户机）都可以使用MBean，而不需要客户机访问代表MBean类型的特定的类。MXBean提供一种方便的方法来绑定数据，而不需要客户端进行特殊的绑定操作。</p>
+<h1>鸣谢</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/JavaBeans">JavaBeans - 维基百科，自由的百科全书 (wikipedia.org)</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/1252599548343744/1260474416351680">JavaBean - 廖雪峰的官方网站 (liaoxuefeng.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://i.bjpowernode.com/article/676.html">简述Java中的Bean是什么意思 - 动力节点在线 (bjpowernode.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/dufufd/article/details/101557976">Java Bean 与Spring Bean 的区别_bean和springbean的区别-CSDN博客</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/7267477662360633359">Spring 扫盲系列（一）- Java Bean 与 Spring Bean 的区别 - 掘金 (juejin.cn)</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904184098062350">【java开发Spring篇】之理解Spring容器、BeanFactory和ApplicationContext - 掘金 (juejin.cn)</a></li>
+<li><a target="_blank" rel="noopener" href="https://open.alipay.com/portal/forum/post/129601028">JMX介绍及简单使用-支付宝开发者社区 (alipay.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/expleeve/article/details/37502501">MBean与MXBean的区别_mbean和mxbean-CSDN博客</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6856949531003748365">面试官问我 JMX 了解不，我说：什么？ - 掘金 (juejin.cn)</a></li>
+<li><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/MBean/3606231">MBean_百度百科 (baidu.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1361455">Java管理扩展特殊MBean之MXBean学习-腾讯云开发者社区-腾讯云 (tencent.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903934281138183">Java SE基础巩固（十三）：JMX - 掘金 (juejin.cn)</a></li>
+</ul>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+
+    
+    
+    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2024/04/10/Java学习笔记/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2024-04-11 
+	</div>
+	
+
+	<!-- categories -->
+    
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/常识与技巧/">常识与技巧<span>11</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2024 Jici
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>    
+</p>
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+
+<span class="post-meta-divider">|</span>
+本站总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;次</span>
+
+<script>
+var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a||"interactive"===document.readyState||"complete"===document.readyState?c.call(document):b.push(function(){return c.call(this)}),this},d=function(){for(var a=0,c=b.length;c>a;a++)b[a].apply(document);b=[]},e=function(){a||(a=!0,d.call(window),document.removeEventListener?document.removeEventListener("DOMContentLoaded",e,!1):document.attachEvent&&(document.detachEvent("onreadystatechange",e),window==window.top&&(clearInterval(c),c=null)))},document.addEventListener?document.addEventListener("DOMContentLoaded",e,!1):document.attachEvent&&(document.attachEvent("onreadystatechange",function(){/loaded|complete/.test(document.readyState)&&e()}),window==window.top&&(c=setInterval(function(){try{a||document.documentElement.doScroll("left")}catch(b){return}e()},5)))}(),bszCaller={fetch:function(a,b){var c="BusuanziCallback_"+Math.floor(1099511627776*Math.random());window[c]=this.evalCall(b),a=a.replace("=BusuanziCallback","="+c),scriptTag=document.createElement("SCRIPT"),scriptTag.type="text/javascript",scriptTag.defer=!0,scriptTag.src=a,scriptTag.referrerPolicy="no-referrer-when-downgrade",document.getElementsByTagName("HEAD")[0].appendChild(scriptTag)},evalCall:function(a){return function(b){ready(function(){try{a(b),scriptTag.parentElement.removeChild(scriptTag)}catch(c){bszTag.hides()}})}}},bszCaller.fetch("//busuanzi.ibruce.info/busuanzi?jsonpCallback=BusuanziCallback",function(a){bszTag.texts(a),bszTag.shows()}),bszTag={bszs:["site_pv","page_pv","site_uv"],texts:function(a){this.bszs.map(function(b){var c=document.getElementById("busuanzi_value_"+b);c&&(c.innerHTML=a[b])})},hides:function(){this.bszs.map(function(a){var b=document.getElementById("busuanzi_container_"+a);b&&(b.style.display="none")})},shows:function(){this.bszs.map(function(a){var b=document.getElementById("busuanzi_container_"+a);b&&(b.style.display="inline")})}};
+</script>
+
+
+<!-- <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span class="post-meta-divider">|</span>
+<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+<span class="post-meta-divider">|</span>
+<span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人</span> -->
+
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("08/12/2023 00:00:00");//在此处修改你的建站时间
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已勉强运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+    setInterval("createtime()",250);
+</script>
+<br><br>
+<span class="num">及辞已经在本站记录了 131k 字</span>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    fetch('/imageCount.json')
+      .then(response => response.json())
+      .then(data => {
+        const imageCount = data.count;
+        const imageCountElement = document.getElementById('imageCount');
+        imageCountElement.textContent = `共计收录了 ${imageCount} 张图片`;
+      })
+      .catch(error => {
+        console.error('Failed to load image count:', error);
+      });
+  });
+</script>
+<br><br>
+<span id="imageCount">正在加载图片数目...</span>
+</div> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<!-- hexo injector body_end start --><script src="/assets/mmedia/mmedia-loader.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/ni-j.model.json"},"display":{"position":"left","width":260,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+   </html>
+
+<!-- 雪花特效 -->
+<!-- 直接引用公网CDN在线文件 -->
+<!-- <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/xuehuapiaoluo.js">-->
+<!-- 引用本地文件 -->
+<!--<script type="text/javascript" src="\js\snow.js"></script>-->
+
+<!-- 樱花花特效 -->
+<!-- 直接引用公网CDN在线文件 -->
+<!--<script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/sakura.js"></script>-->
+<!-- 引用本地文件 -->
+<script type="text/javascript" src="\js\sakura.js"></script>
+
+
+<!-- 数字雨 
+<canvas id="canvas" width="1440" height="900" ></canvas>
+<script type="text/javascript" src="/js/DigitalRain.js"></script>-->
+
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+
+<!--图片预加载-->
+<script src="//instant.page/3.0.0" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
