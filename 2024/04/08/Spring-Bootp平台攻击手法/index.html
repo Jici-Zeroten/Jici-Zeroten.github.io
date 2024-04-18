@@ -680,6 +680,12 @@ select * from java.util.LinkedHashMap$Entry x WHERE (toString(x.key).contains(&q
 	<!-- toc -->
 	<div class="meta-widget">
 	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link"><span class="toc-article-text">Spring Boot 端点Fuzz技巧</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link"><span class="toc-article-text">Spring Boot 端点敏感信息泄露</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-article-text">概述</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#trace-%E6%B3%84%E9%9C%B2%E7%94%A8%E6%88%B7%E8%AF%B7%E6%B1%82%E4%BF%A1%E6%81%AF"><span class="toc-article-text">trace 泄露用户请求信息</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#mappings-%E6%B3%84%E9%9C%B2%E8%B7%AF%E7%94%B1%E4%BF%A1%E6%81%AF"><span class="toc-article-text">mappings 泄露路由信息</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#heapdump-%E6%B3%84%E9%9C%B2%E5%A0%86%E6%A0%88%E4%BF%A1%E6%81%AF"><span class="toc-article-text">heapdump 泄露堆栈信息</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E4%BD%BF%E7%94%A8Eclipse-Memory-Analyzer%E8%8E%B7%E5%8F%96"><span class="toc-article-text">使用Eclipse Memory Analyzer获取</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E4%BD%BF%E7%94%A8Java-VisualVM%E8%8E%B7%E5%8F%96"><span class="toc-article-text">使用Java VisualVM获取</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E4%BD%BF%E7%94%A8jhat%E8%8E%B7%E5%8F%96"><span class="toc-article-text">使用jhat获取</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E4%BD%BF%E7%94%A8JDumpSpider%E8%8E%B7%E5%8F%96"><span class="toc-article-text">使用JDumpSpider获取</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E4%BD%BF%E7%94%A8heapdump-tool%E8%8E%B7%E5%8F%96"><span class="toc-article-text">使用heapdump_tool获取</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#env-%E6%B3%84%E9%9C%B2%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF"><span class="toc-article-text">env 泄露配置信息</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E7%BB%95%E8%BF%87%E6%98%9F%E5%8F%B7%E8%84%B1%E6%95%8F"><span class="toc-article-text">绕过星号脱敏</span></a></li></ol></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link"><span class="toc-article-text">漏洞检测与利用工具</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link"><span class="toc-article-text">鸣谢</span></a></li></ol>
+		</div>
+	
 	</div>
 	
     <hr>
@@ -747,7 +753,7 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
     setInterval("createtime()",250);
 </script>
 <br><br>
-<span class="num">及辞已经在本站记录了 131k 字</span>
+<span class="num">及辞已经在本站记录了 135.8k 字</span>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     fetch('/imageCount.json')

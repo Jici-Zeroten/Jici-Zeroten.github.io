@@ -1,0 +1,517 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>IIS短文件名漏洞 | Jici&#39;s Blog</title>
+  <meta name="author" content="Jici">
+  
+  <meta name="description" content="IIS短文件名介绍
+为了兼容基于 MS-DOS 或 16 位 Windows 的程序，Windows 为文件名较长的文件（和文件夹）生成了对应的DOS 8.3 短文件名。
+
+这里介绍一下 MS-DOS 和 DOS 8.3 规则">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="IIS短文件名漏洞"/>
+  <meta property="og:site_name" content="Jici&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon-16x16.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-70812759-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?cb5448498d7169c668b07c2b255d62c1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<!-- hexo injector head_end start --><script> let HEXO_MMEDIA_DATA = { js: [], css: [], aplayerData: [], metingData: [], artPlayerData: [], dplayerData: []}; </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">Jici&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>所有文章
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>关于我
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/record" title="Record all kinds of completed target machines">
+			  <i class=""></i>记录榜
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/plan" title="Record what needs to be done and what is worth doing">
+			  <i class=""></i>计划清单
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/friendlinks" title="my friends">
+			  <i class=""></i>友情链接
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/pictureGallery" title="Record some exquisite pictures">
+			  <i class=""></i>画廊
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+	
+		<div class="page-header">
+			<h1> IIS短文件名漏洞</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1>IIS短文件名介绍</h1>
+<p>为了兼容基于 MS-DOS 或 16 位 Windows 的程序，Windows 为文件名较长的文件（和文件夹）生成了对应的DOS 8.3 短文件名。</p>
+<blockquote>
+<p>这里介绍一下 MS-DOS 和 DOS 8.3 规则</p>
+</blockquote>
+<p>首先是MS-DOS，如下</p>
+<p><img src="/2024/04/18/IIS%E7%9F%AD%E6%96%87%E4%BB%B6%E5%90%8D%E6%BC%8F%E6%B4%9E/image-20240418093636517.png" alt="image-20240418093636517"></p>
+<p><img src="/2024/04/18/IIS%E7%9F%AD%E6%96%87%E4%BB%B6%E5%90%8D%E6%BC%8F%E6%B4%9E/image-20240418093735060.png" alt="image-20240418093735060"></p>
+<p>以及 DOS 8.3 规则，如下</p>
+<p><img src="/2024/04/18/IIS%E7%9F%AD%E6%96%87%E4%BB%B6%E5%90%8D%E6%BC%8F%E6%B4%9E/image-20240418093841395.png" alt="image-20240418093841395"></p>
+<p>如果要在Windows下查看对应的短文件名，可以使用命令 <code>dir /x</code></p>
+<p><img src="/2024/04/18/IIS%E7%9F%AD%E6%96%87%E4%BB%B6%E5%90%8D%E6%BC%8F%E6%B4%9E/image-20240418093953373.png" alt="image-20240418093953373"></p>
+<p><img src="/2024/04/18/IIS%E7%9F%AD%E6%96%87%E4%BB%B6%E5%90%8D%E6%BC%8F%E6%B4%9E/image-20240418101653901.png" alt="image-20240418101653901"></p>
+<p>IIS短文件名的特征：</p>
+<ol>
+<li>只有前六位字符直接显示，后续字符用~1指代。其中数字1还可以递增【即如果存在多个文件名类似的文件（名称前6位必须相同，且后缀名前3位必须相同）】</li>
+<li>后缀名最长只有3位，多余的被截断，超过3位的长文件会生成短文件名</li>
+<li>所有小写字母均转换成大写字母</li>
+<li>长文件名中含有多个“.”，以文件名最后一个“.”作为短文件名后缀</li>
+<li>长文件名前缀/文件夹名字符长度符合0-9和Aa-Zz范围且需要大于等于9位才会生成短文件名，如果包含空格或者其他部分特殊字符，不论长度均会生成短文件</li>
+</ol>
+<h1>IIS短文件名漏洞</h1>
+<h2 id="漏洞描述">漏洞描述</h2>
+<p>IIS短文件名漏洞是由于HTTP请求中携带旧DOS 8.3名称约定（SFN）的代字符（~）波浪号引起的。<mark>它允许远程攻击者访问在Web根目录的文件和文件夹（本不应该被访问）。攻击者可以找到通常无法从外部直接访问的重要文件，并获取有关应用程序基础结构的信息</mark>。</p>
+<h2 id="漏洞成因">漏洞成因</h2>
+<p><mark>当IIS接收到一个短文件名的路径请求时，根据文件是否存在，所回显（或者说响应）的HTTP状态码和错误信息不同</mark>。即基于这个特点，可以根据回显的HTTP状态码和错误信息判断一个文件是否存在。具体的如下：</p>
+<ul>
+<li>访问<code>存在文件</code>的短文件名，会返回<code>404</code>状态码</li>
+<li>访问<code>不存在文件</code>的短文件名，会返回<code>400</code>状态码</li>
+</ul>
+<blockquote>
+<p>注意，依据请求方法不同（如：GET、OPTIONS、TRACE）返回的HTTP状态码类型会有些许出入，但都存在回显不一致的问题，所以都可以根据回显的HTTP状态码和错误信息判断一个文件是否存在。</p>
+<p>具体的，比如 IIS 8.0/IIS 8.5/IIS 10.0，是通过OPTIONS 和 TRACE方法进行猜解的。使用OPTION方法，猜测成功返回404，猜测失败返回的是200；使用 TRACE方法，猜测成功返回404，猜测失败返回的是501</p>
+</blockquote>
+<h2 id="受影响的IIS版本">受影响的IIS版本</h2>
+<pre class="line-numbers language-none"><code class="language-none">IIS 1.0，Windows NT 3.51 
+IIS 3.0，Windows NT 4.0 Service Pack 2 
+IIS 4.0，Windows NT 4.0选项包
+IIS 5.0，Windows 2000 
+IIS 5.1，Windows XP Professional和Windows XP Media Center Edition 
+IIS 6.0，Windows Server 2003和Windows XP Professional x64 Edition 
+IIS 7.0，Windows Server 2008和Windows Vista 
+IIS 7.5，Windows 7（远程启用&lt;customErrors&gt;或没有web.config）
+IIS 7.5，Windows 2008（经典管道模式）
+# 以上受影响范围主要是针对HTTP GET方法，且需要同时安装ASP.NET应用程序
+IIS 8.0，Windows 8, Windows Server 2012
+IIS 8.5，Windows 8.1,Windows Server 2012 R2
+IIS 10.0，Windows 10, Windows Server 2016
+# 以上受影响范围即使没有安装ASP.NET应用程序，通过OPTIONS和TRACE方法也可以猜解成功<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>注意：<a target="_blank" rel="noopener" href="http://xn--IIS-kb0er53o.Net">IIS使用.Net</a> Framework 4时不受影响</p>
+<p>从受影响的IIS版本中不难看出，IIS短文件名漏洞影响范围极大</p>
+</blockquote>
+<p>这里附一张不同Windows系统下默认内置的IIS版本图</p>
+<p><img src="/2024/04/18/IIS%E7%9F%AD%E6%96%87%E4%BB%B6%E5%90%8D%E6%BC%8F%E6%B4%9E/image-20240418140115046.png" alt="image-20240418140115046"></p>
+<h2 id="漏洞危害及利用">漏洞危害及利用</h2>
+<ul>
+<li>
+<p>敏感文件泄露：<mark>先通过IIS短文件漏洞猜测出来的短文件名称，在通过短文件名称继续猜测出全名</mark>（因为IIS由于安全原因不支持短文件名直接访问，所以需要全名），最后通过全名访问导致敏感文件泄露。</p>
+<blockquote>
+<p>这里可以结合其他支持短文件特性的软件（如Apache、Wordpress等）做一个延申</p>
+</blockquote>
+<p>当Apache运行在windows下，如果创建了一个长文件，那么无需猜解长文件，直接用短文件就可以下载。例如，一个名为backup_20180101.sql的长文件，其短文件是BACKUP~1.SQL，攻击者只需要提交BACKUP~1.SQL就可以直接访问并下载该文件</p>
+<blockquote>
+<p>敏感文件泄露可以关注.rar、.zip、.bak、.SQL文件等</p>
+</blockquote>
+<p>这里基于上面的【漏洞成因】，说一下手动猜解的方法，便于理解漏洞原理</p>
+<blockquote>
+<p>还是做一个术语的约定，猜测 ==  猜解。</p>
+<p>因为是手动的过程，如果用工具的话就是所谓的&quot;爆破&quot;、“暴力破解”、“暴力猜解”</p>
+</blockquote>
+<p><img src="/2024/04/18/IIS%E7%9F%AD%E6%96%87%E4%BB%B6%E5%90%8D%E6%BC%8F%E6%B4%9E/image-20240418113326410.png" alt="image-20240418113326410"></p>
+<p>这里再附一张漏洞发现者Soroush Dalili的利用IIS返回的http状态码猜解文件过程图，如下</p>
+<p><img src="/2024/04/18/IIS%E7%9F%AD%E6%96%87%E4%BB%B6%E5%90%8D%E6%BC%8F%E6%B4%9E/image-20240418115241113.png" alt="image-20240418115241113"></p>
+</li>
+<li>
+<p>猜解后台地址：利用逻辑和敏感文件泄露一致，不再赘述</p>
+</li>
+<li>
+<p>拒绝服务攻击：更准确的描述是<code>针对IIS服务器中的.Net Framework进行拒绝服务攻击</code>。攻击者如果在文件夹名称中发送一个不合法的.Net文件请求，.Net Framework将递归搜索所有的根目录，消耗网站资源进而导致DOS问题。这里使用漏洞发现者Soroush Dalili的原话做一个描述，如下</p>
+<p><img src="/2024/04/18/IIS%E7%9F%AD%E6%96%87%E4%BB%B6%E5%90%8D%E6%BC%8F%E6%B4%9E/image-20240418105905476.png" alt="image-20240418105905476"></p>
+</li>
+<li>
+<p>结合绕过Directory Authentication验证（目录身份验证）漏洞，猜解认证目录下的文件：<mark>注意并不是所有版本的IIS都能够绕过认证，这里仅验证了IIS5.1</mark>。方法是，添加<code>:$i30:$INDEX_ALLOCATION</code>到目录名以绕过身份验证，再使用敏感文件泄露的手法，去猜解认证目录下的文件。下面举个例子</p>
+<pre class="line-numbers language-none"><code class="language-none"># 先说绕过Directory Authentication验证
+# 比如要访问受目录身份验证保护的AuthNeeded文件夹下的secretfile.asp【即&#x2F;AuthNeeded&#x2F;secretfile.asp】
+# 可以使用 &#x2F;AuthNeeded:$i30:$INDEX_ALLOCATION&#x2F;secretfile.asp 进行目录身份验证的绕过
+
+# 再说猜解认证目录下的文件
+&#x2F;AuthNeeded::$Index_Allocation&#x2F;*~1*&#x2F;.aspx
+&#x2F;AuthNeeded:$I30:$Index_Allocation&#x2F;*~1*&#x2F;.aspx<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>注意，是在可绕过的前提下猜解，属于一种漏洞组合拳。这里提到，很大一部分原因是，这两个漏洞都是Soroush Dalili发现的</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="漏洞局限性">漏洞局限性</h2>
+<ol>
+<li>此漏洞只能确定前6个字符，如果后面的字符太长、包含特殊字符，很难猜解</li>
+<li>如果文件名本身太短（无短文件名）也是无法猜解的</li>
+<li>如果文件名前6位带空格，8.3格式的短文件名会补进，和真实文件名不匹配</li>
+<li>如果文件夹名前6位字符带点“.”，扫描程序会认为是文件而不是文件夹，最终出现误报</li>
+<li>不支持中文文件名，包括中文文件和中文文件夹。一个中文相当于两个英文字符，故超过4个中文字会产生短文件名，但是<mark>IIS不支持中文猜测</mark></li>
+</ol>
+<h2 id="漏洞相关工具">漏洞相关工具</h2>
+<p>这里推荐3个工具：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/irsdl/IIS-ShortName-Scanner">https://github.com/irsdl/IIS-ShortName-Scanner</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/bitquark/shortscan">https://github.com/bitquark/shortscan</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/lijiejie/IIS_shortname_Scanner">https://github.com/lijiejie/IIS_shortname_Scanner</a></li>
+</ul>
+<h1>鸣谢</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://uuzdaisuki.com/2018/06/28/IIS%E7%9F%AD%E6%96%87%E4%BB%B6%E5%90%8D%E6%BC%8F%E6%B4%9E/#0x00-IIS%E7%9F%AD%E6%96%87%E4%BB%B6%E5%90%8D">IIS短文件名漏洞 - Leticia’s Blog (uuzdaisuki.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/172561.html">IIS深入浅出之短文件漏洞知多少 - FreeBuf网络安全行业门户</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/51a8d0975b1a">IIS短文件名泄露漏洞及MS15-034利用 - 简书 (jianshu.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://teamssix.com/191126-215804.html">【漏洞笔记】IIS短文件名泄露 | TeamsSix</a></li>
+<li><a target="_blank" rel="noopener" href="https://m.freebuf.com/news/197144.html">IIS短文件名泄露漏洞 - FreeBuf网络安全行业门户</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/bmjoker/p/9469293.html">https://www.cnblogs.com/bmjoker/p/9469293.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://soroush.me/blog/2010/07/iis5-1-directory-authentication-bypass-by-using-i30index_allocation/">IIS5.1 Directory Authentication Bypass by using “:$I30:$Index_Allocation” | Soroush Dalili (@irsdl) Blog</a></li>
+<li><a target="_blank" rel="noopener" href="https://soroush.me/downloadable/microsoft_iis_tilde_character_vulnerability_feature.pdf">Microsoft IIS tilde character “~” Vulnerability/Feature – Short File/Folder Name Disclosure (soroush.me)</a></li>
+</ul>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+
+    
+    
+    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2024/04/15/软硬件术语/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2024-04-18 
+	</div>
+	
+
+	<!-- categories -->
+    
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/渗透技巧/">渗透技巧<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
+	   <div id="toc" class="toc collapse in">
+		   <span class="toc-title">Contents</span>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link"><span class="toc-article-text">IIS短文件名介绍</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link"><span class="toc-article-text">IIS短文件名漏洞</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%BC%8F%E6%B4%9E%E6%8F%8F%E8%BF%B0"><span class="toc-article-text">漏洞描述</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%BC%8F%E6%B4%9E%E6%88%90%E5%9B%A0"><span class="toc-article-text">漏洞成因</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E5%8F%97%E5%BD%B1%E5%93%8D%E7%9A%84IIS%E7%89%88%E6%9C%AC"><span class="toc-article-text">受影响的IIS版本</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%BC%8F%E6%B4%9E%E5%8D%B1%E5%AE%B3%E5%8F%8A%E5%88%A9%E7%94%A8"><span class="toc-article-text">漏洞危害及利用</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%BC%8F%E6%B4%9E%E5%B1%80%E9%99%90%E6%80%A7"><span class="toc-article-text">漏洞局限性</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%BC%8F%E6%B4%9E%E7%9B%B8%E5%85%B3%E5%B7%A5%E5%85%B7"><span class="toc-article-text">漏洞相关工具</span></a></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link"><span class="toc-article-text">鸣谢</span></a></li></ol>
+		</div>
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2024 Jici
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>    
+</p>
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+
+<span class="post-meta-divider">|</span>
+本站总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;次</span>
+
+<script>
+var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a||"interactive"===document.readyState||"complete"===document.readyState?c.call(document):b.push(function(){return c.call(this)}),this},d=function(){for(var a=0,c=b.length;c>a;a++)b[a].apply(document);b=[]},e=function(){a||(a=!0,d.call(window),document.removeEventListener?document.removeEventListener("DOMContentLoaded",e,!1):document.attachEvent&&(document.detachEvent("onreadystatechange",e),window==window.top&&(clearInterval(c),c=null)))},document.addEventListener?document.addEventListener("DOMContentLoaded",e,!1):document.attachEvent&&(document.attachEvent("onreadystatechange",function(){/loaded|complete/.test(document.readyState)&&e()}),window==window.top&&(c=setInterval(function(){try{a||document.documentElement.doScroll("left")}catch(b){return}e()},5)))}(),bszCaller={fetch:function(a,b){var c="BusuanziCallback_"+Math.floor(1099511627776*Math.random());window[c]=this.evalCall(b),a=a.replace("=BusuanziCallback","="+c),scriptTag=document.createElement("SCRIPT"),scriptTag.type="text/javascript",scriptTag.defer=!0,scriptTag.src=a,scriptTag.referrerPolicy="no-referrer-when-downgrade",document.getElementsByTagName("HEAD")[0].appendChild(scriptTag)},evalCall:function(a){return function(b){ready(function(){try{a(b),scriptTag.parentElement.removeChild(scriptTag)}catch(c){bszTag.hides()}})}}},bszCaller.fetch("//busuanzi.ibruce.info/busuanzi?jsonpCallback=BusuanziCallback",function(a){bszTag.texts(a),bszTag.shows()}),bszTag={bszs:["site_pv","page_pv","site_uv"],texts:function(a){this.bszs.map(function(b){var c=document.getElementById("busuanzi_value_"+b);c&&(c.innerHTML=a[b])})},hides:function(){this.bszs.map(function(a){var b=document.getElementById("busuanzi_container_"+a);b&&(b.style.display="none")})},shows:function(){this.bszs.map(function(a){var b=document.getElementById("busuanzi_container_"+a);b&&(b.style.display="inline")})}};
+</script>
+
+
+<!-- <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span class="post-meta-divider">|</span>
+<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+<span class="post-meta-divider">|</span>
+<span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人</span> -->
+
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("08/12/2023 00:00:00");//在此处修改你的建站时间
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已勉强运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+    setInterval("createtime()",250);
+</script>
+<br><br>
+<span class="num">及辞已经在本站记录了 135.8k 字</span>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    fetch('/imageCount.json')
+      .then(response => response.json())
+      .then(data => {
+        const imageCount = data.count;
+        const imageCountElement = document.getElementById('imageCount');
+        imageCountElement.textContent = `共计收录了 ${imageCount} 张图片`;
+      })
+      .catch(error => {
+        console.error('Failed to load image count:', error);
+      });
+  });
+</script>
+<br><br>
+<span id="imageCount">正在加载图片数目...</span>
+</div> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<!-- hexo injector body_end start --><script src="/assets/mmedia/mmedia-loader.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/ni-j.model.json"},"display":{"position":"left","width":260,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+   </html>
+
+<!-- 雪花特效 -->
+<!-- 直接引用公网CDN在线文件 -->
+<!-- <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/xuehuapiaoluo.js">-->
+<!-- 引用本地文件 -->
+<!--<script type="text/javascript" src="\js\snow.js"></script>-->
+
+<!-- 樱花花特效 -->
+<!-- 直接引用公网CDN在线文件 -->
+<!--<script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/sakura.js"></script>-->
+<!-- 引用本地文件 -->
+<script type="text/javascript" src="\js\sakura.js"></script>
+
+
+<!-- 数字雨 
+<canvas id="canvas" width="1440" height="900" ></canvas>
+<script type="text/javascript" src="/js/DigitalRain.js"></script>-->
+
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+
+<!--图片预加载-->
+<script src="//instant.page/3.0.0" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
