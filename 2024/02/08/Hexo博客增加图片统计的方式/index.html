@@ -172,8 +172,7 @@ var _hmt = _hmt || [];
 </ul>
 <p>这里就写成脚本形式了，也方便大家依据自己的实际情况进行调整（着重注意目录的相对位置），具体步骤如下</p>
 <ol>
-<li>
-<p>在<code>博客根目录</code>创建scripts文件夹（如果有就不用创建了），创建imageCount.js文件，写入以下脚本</p>
+<li><p>在<code>博客根目录</code>创建scripts文件夹（如果有就不用创建了），创建imageCount.js文件，写入以下脚本</p>
 <pre class="line-numbers language-none"><code class="language-none">const fs &#x3D; require(&#39;fs&#39;);
 const path &#x3D; require(&#39;path&#39;);
 
@@ -199,8 +198,7 @@ const imageCount &#x3D; countImages(path.join(__dirname, &#39;..&#x2F;source&#39
 
 fs.writeFileSync(path.join(__dirname, &#39;..&#x2F;source&#x2F;imageCount.json&#39;), JSON.stringify(&#123; count: imageCount &#125;));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li>
-<p>一般需要显示图片统计的位置都是在页脚处，所以要编辑<code>博客主题的footer.ejs</code>文件，新增下面这段代码</p>
+<li><p>一般需要显示图片统计的位置都是在页脚处，所以要编辑<code>博客主题的footer.ejs</code>文件，新增下面这段代码</p>
 <pre class="line-numbers language-none"><code class="language-none">&lt;script&gt;
   document.addEventListener(&quot;DOMContentLoaded&quot;, function() &#123;
     fetch(&#39;&#x2F;imageCount.json&#39;)
@@ -283,7 +281,7 @@ fs.writeFileSync(path.join(__dirname, &#39;..&#x2F;source&#x2F;imageCount.json&#
 	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
     <ul id="tags" class="tag_box list-unstyled collapse in">	  
 	    
-  <li><a href="/tags/常识与技巧/">常识与技巧<span>12</span></a></li>
+  <li><a href="/tags/常识与技巧/">常识与技巧<span>15</span></a></li>
     </ul>
 	</div>
 		
@@ -358,7 +356,7 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
     setInterval("createtime()",250);
 </script>
 <br><br>
-<span class="num">及辞已经在本站记录了 135.8k 字</span>
+<span class="num">及辞已经在本站记录了 147.1k 字</span>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     fetch('/imageCount.json')
@@ -411,21 +409,6 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
      searchFunc(path, 'local-search-input', 'local-search-result');
    </script>
 
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <!-- hexo injector body_end start --><script src="/assets/mmedia/mmedia-loader.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/ni-j.model.json"},"display":{"position":"left","width":260,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
    </html>
 
