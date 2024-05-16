@@ -10,6 +10,7 @@
   <meta name="author" content="Jici">
   
   <meta name="description" content="Spring Boot介绍
+
 Spring Boot搭建">
   
   
@@ -161,21 +162,24 @@ var _hmt = _hmt || [];
 	<div class="mypage">		
 	  		
 
-	  <h1 id="Spring-Boot介绍"><a href="#Spring-Boot介绍" class="headerlink" title="Spring Boot介绍"></a>Spring Boot介绍</h1><p><img src="/2024/04/07/Spring-Boot%E5%9F%BA%E7%A1%80/image-20240407210527918.png" alt="image-20240407210527918"></p>
-<h1 id="Spring-Boot搭建"><a href="#Spring-Boot搭建" class="headerlink" title="Spring Boot搭建"></a>Spring Boot搭建</h1><blockquote>
+	  <h1>Spring Boot介绍</h1>
+<p><img src="/2024/04/07/Spring-Boot%E5%9F%BA%E7%A1%80/image-20240407210527918.png" alt="image-20240407210527918"></p>
+<h1>Spring Boot搭建</h1>
+<blockquote>
 <p>涉及Java Web开发的必备工具就不赘述了（如Java、Maven、IDEA等），这里直接介绍Spring Boot搭建</p>
 </blockquote>
 <p>搭建Spring Boot有两种方式：</p>
 <ul>
-<li><p>IDEA集成的Spring Initializr：IDEA在创建新项目时就有”Spring Initializr”的选项，具体搭建方式可以参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/csucsgoat/article/details/122556788">这篇文章</a></p>
+<li>
+<p>IDEA集成的Spring Initializr：IDEA在创建新项目时就有&quot;Spring Initializr&quot;的选项，具体搭建方式可以参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/csucsgoat/article/details/122556788">这篇文章</a></p>
 </li>
-<li><p>Spring 官网 start.spring.io：官方提供了一个在线网站用于配置Spring Boot，即<a target="_blank" rel="noopener" href="https://start.spring.io/">Spring Initializr</a>，选择需要的选项后点击”GENERATE”，会得到一个压缩包，解压后用IDEA打开即可（Maven会自动下载依赖）</p>
+<li>
+<p>Spring 官网 <a target="_blank" rel="noopener" href="http://start.spring.io">start.spring.io</a>：官方提供了一个在线网站用于配置Spring Boot，即<a target="_blank" rel="noopener" href="https://start.spring.io/">Spring Initializr</a>，选择需要的选项后点击&quot;GENERATE&quot;，会得到一个压缩包，解压后用IDEA打开即可（Maven会自动下载依赖）</p>
 <p><img src="/2024/04/07/Spring-Boot%E5%9F%BA%E7%A1%80/image-20240407212652448.png" alt="image-20240407212652448"></p>
 <blockquote>
 <p>我个人更喜欢这种方式，下面做一个视频演示</p>
 </blockquote>
-<video src="SpringBoot搭建.mp4"controls></video></video>
-
+<p><video src="SpringBoot搭建.mp4"controls></video></video></p>
 </li>
 </ul>
 <p>找到项目主类的java文件（如DemoApplication.java），添加一个名为/hello的端点，代码如下：</p>
@@ -186,40 +190,46 @@ public String hello(@RequestParam(value &#x3D; &quot;name&quot;,defaultValue&#x3
 	return String.format(&quot;Hello %s!&quot;,name);
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>启动Spring Boot进行测试，具体如下：</p>
-<video src="SpringBoot测试.mp4"controls></video></video>
-
-<h1 id="Spring-Boot其他技巧"><a href="#Spring-Boot其他技巧" class="headerlink" title="Spring Boot其他技巧"></a>Spring Boot其他技巧</h1><h2 id="修改Spring-Boot版本"><a href="#修改Spring-Boot版本" class="headerlink" title="修改Spring Boot版本"></a>修改Spring Boot版本</h2><p>在搭建本地漏洞测试平台时，可能涉及多个Spring Boot版本，这里讲一下如何修改Spring Boot版本。</p>
-<p>以 Maven 项目为例，手动修改 <code>pom.xml</code>文件中的<code>&lt;version&gt;3.2.0&lt;/version&gt;</code>(用于指定 Spring Boot 的版本号)和<code>&lt;java.version&gt;21&lt;/java.version&gt;</code>(用于指定 Java 的版本号)，最后点击”加载Maven变更”即可。</p>
+<p><video src="SpringBoot测试.mp4"controls></video></video></p>
+<h1>Spring Boot其他技巧</h1>
+<h2 id="修改Spring-Boot版本">修改Spring Boot版本</h2>
+<p>在搭建本地漏洞测试平台时，可能涉及多个Spring Boot版本，这里讲一下如何修改Spring Boot版本。</p>
+<p>以 Maven 项目为例，手动修改 <code>pom.xml</code>文件中的<code>&lt;version&gt;3.2.0&lt;/version&gt;</code>(用于指定 Spring Boot 的版本号)和<code>&lt;java.version&gt;21&lt;/java.version&gt;</code>(用于指定 Java 的版本号)，最后点击&quot;加载Maven变更&quot;即可。</p>
 <blockquote>
 <p>因为Spring Boot有最低Java版本的限制，所以在变更Spring Boot版本时，要注意Java版本是否支持</p>
 </blockquote>
 <p>这里附一张各Spring Boot版本对应java版本图，如下：</p>
 <p><img src="/2024/04/07/Spring-Boot%E5%9F%BA%E7%A1%80/image-20240407220654698.png" alt="image-20240407220654698"></p>
 <p>这里还是做一个视频演示，如下：</p>
-<video src="修改SpringBoot版本.mp4"controls></video></video>
-
-<h2 id="修改Web服务端口号"><a href="#修改Web服务端口号" class="headerlink" title="修改Web服务端口号"></a>修改Web服务端口号</h2><p>在项目下的<code>src\main\resources\</code>下的<code>application.properties</code>文件中添加如下配置项即可</p>
+<p><video src="修改SpringBoot版本.mp4"controls></video></video></p>
+<h2 id="修改Web服务端口号">修改Web服务端口号</h2>
+<p>在项目下的<code>src\main\resources\</code>下的<code>application.properties</code>文件中添加如下配置项即可</p>
 <pre class="line-numbers language-none"><code class="language-none"># 比如这里修改为8100端口
 server.port&#x3D;$&#123;port:8100&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><img src="/2024/04/07/Spring-Boot%E5%9F%BA%E7%A1%80/image-20240407223821984.png" alt="image-20240407223821984"></p>
-<h1 id="Spring-Boot-Actuator"><a href="#Spring-Boot-Actuator" class="headerlink" title="Spring Boot Actuator"></a>Spring Boot Actuator</h1><h2 id="Actuator功能说明"><a href="#Actuator功能说明" class="headerlink" title="Actuator功能说明"></a>Actuator功能说明</h2><p>Spring Boot Actuator的功能是在应用程序里提供众多Web端点，通过它们了解应用程序运行时的内部状况。</p>
-<p>注意，==不同版本的Spring Boot所暴露的端点是有差异的==。</p>
+<h1>Spring Boot Actuator</h1>
+<h2 id="Actuator功能说明">Actuator功能说明</h2>
+<p>Spring Boot Actuator的功能是在应用程序里提供众多Web端点，通过它们了解应用程序运行时的内部状况。</p>
+<p>注意，<mark>不同版本的Spring Boot所暴露的端点是有差异的</mark>。</p>
 <p><img src="/2024/04/07/Spring-Boot%E5%9F%BA%E7%A1%80/image-20240408131211589.png" alt="image-20240408131211589"></p>
 <p>这里列举几个Actuator提供的常用端点，如下：</p>
 <p><img src="/2024/04/07/Spring-Boot%E5%9F%BA%E7%A1%80/image-20240408201245395.png" alt="image-20240408201245395"><img src="/2024/04/07/Spring-Boot%E5%9F%BA%E7%A1%80/image-20240408201330698.png" alt="image-20240408201330698"></p>
-<h2 id="Actuator端点暴露"><a href="#Actuator端点暴露" class="headerlink" title="Actuator端点暴露"></a>Actuator端点暴露</h2><p>SpringBoot &lt;= 1.5.x 以下，是不需要任何配置的，直接就可以访问到端点。</p>
+<h2 id="Actuator端点暴露">Actuator端点暴露</h2>
+<p>SpringBoot &lt;= 1.5.x 以下，是不需要任何配置的，直接就可以访问到端点。</p>
 <p>而如果1.5.x&lt;= SpringBoot &lt;=2.x，那么默认只能访问到/<code>health</code>和/<code>info</code>端点。</p>
 <p>当SpringBoot &gt;=2.x时，默认也是只能访问<code>/health</code>、/<code>info</code>，但是访问的端点方式发生了改变，相比于1.x版本的端点多了个前缀 <code>/actutator</code>，即如<code>/health</code> 变成了<code>/actuator/health</code>。</p>
 <p>SpringBoot各版本暴露端点的方式不同，下面列举几个：</p>
 <ul>
-<li><p>Spring Boot 1.5.x：在application.properties中添加如下内容即可暴露所有端点：</p>
+<li>
+<p>Spring Boot 1.5.x：在application.properties中添加如下内容即可暴露所有端点：</p>
 <pre class="line-numbers language-none"><code class="language-none"># 这种操作实质上是关闭认证，允许其他端点未授权访问
 management.security.enabled&#x3D;false
 
 # 如果想要针对某个端点，比如env，则可以这样设置
 endpoints.env.sensitive&#x3D;false<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>Spring Boot &gt;= 2.x：在application.properties中添加如下内容</p>
+<li>
+<p>Spring Boot &gt;= 2.x：在application.properties中添加如下内容</p>
 <pre class="line-numbers language-none"><code class="language-none"># 启用端点env
 management.endpoint.env.enabled&#x3D;true
 # 暴露端点env。如果需要暴露多个端点使用逗号,隔开即可
@@ -231,9 +241,11 @@ management.endpoints.web.exposure.include&#x3D;*<span aria-hidden="true" class="
 </ul>
 <p>这里提一下<code>启用端点</code>和<code>暴露端点</code>：</p>
 <p><img src="/2024/04/07/Spring-Boot%E5%9F%BA%E7%A1%80/image-20240408143655915.png" alt="image-20240408143655915"></p>
-<h2 id="修改管理端点的路径"><a href="#修改管理端点的路径" class="headerlink" title="修改管理端点的路径"></a>修改管理端点的路径</h2><p>管理端点的路径是能够修改的，如下：</p>
+<h2 id="修改管理端点的路径">修改管理端点的路径</h2>
+<p>管理端点的路径是能够修改的，如下：</p>
 <ul>
-<li><p>Spring Boot 1.x：在application.properties中添加下面的配置项</p>
+<li>
+<p>Spring Boot 1.x：在application.properties中添加下面的配置项</p>
 <pre class="line-numbers language-none"><code class="language-none"># 比如将管理端点的路径设为&#x2F;manage
 management.context-path &#x3D;&#x2F;manage<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>端点的访问方式就更改了，如下：</p>
@@ -246,7 +258,8 @@ management.context-path &#x3D;&#x2F;manage<span aria-hidden="true" class="line-n
 &#x2F;manage&#x2F;autoconfig
 &#x2F;manage&#x2F;metrics<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>Spring Boot 2.x：在application.properties中添加下面的配置项</p>
+<li>
+<p>Spring Boot 2.x：在application.properties中添加下面的配置项</p>
 <pre class="line-numbers language-none"><code class="language-none"># 比如将管理端点的路径设为&#x2F;manage
 management.endpoints.web.base-path&#x3D;&#x2F;manage<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>对比一下更改前后的区别，便于理解：</p>
@@ -260,13 +273,16 @@ management.endpoints.web.base-path&#x3D;&#x2F;manage<span aria-hidden="true" cla
 &#x2F;manage&#x2F;health<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
-<h2 id="端点改名"><a href="#端点改名" class="headerlink" title="端点改名"></a>端点改名</h2><p>Spring Boot也支持对端点改名，但是这种情况比较少见</p>
+<h2 id="端点改名">端点改名</h2>
+<p>Spring Boot也支持对端点改名，但是这种情况比较少见</p>
 <pre class="line-numbers language-none"><code class="language-none"># 把&#x2F;health端点改min为&#x2F;healthcheck
 management.endpoints.web.path-mapping.health&#x3D;healthcheck<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h1 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h1><ul>
+<h1>术语</h1>
+<ul>
 <li>端点（endpoint）：就是网址目录，比如<code>http://localhost:8100/hello</code>、<code>http://localhost:8100/actuator</code>中的<code>/hello</code>、<code>/actuator</code>在Spring Boot就称为端点</li>
 </ul>
-<h1 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h1><ul>
+<h1>鸣谢</h1>
+<ul>
 <li><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/9763?time__1311=n4%2BxuDgD9AD%3DDtIYGNDQT4BK4iIKfSoqoSrD&amp;alichlgref=https%3A%2F%2Fwww.google.com%2F#toc-3">Spring Boot Actuator 未授权的测试与利用思路 - 先知社区 (aliyun.com)</a></li>
 <li><a target="_blank" rel="noopener" href="https://springdoc.cn/spring-boot-old-version/">start.spring.io 创建旧版本的 Spring Boot 项目 - spring 中文网 (springdoc.cn)</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/csucsgoat/article/details/122556788">Spring Boot入门三：创建Spring Boot项目；（包括【Spring 官网start.spring.io】方式，【IDEA集成的Spring Initializr】方式）-CSDN博客</a></li>
@@ -341,7 +357,7 @@ management.endpoints.web.path-mapping.health&#x3D;healthcheck<span aria-hidden="
 	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
 	   <div id="toc" class="toc collapse in">
 		   <span class="toc-title">Contents</span>
-			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#Spring-Boot%E4%BB%8B%E7%BB%8D"><span class="toc-article-text">Spring Boot介绍</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#Spring-Boot%E6%90%AD%E5%BB%BA"><span class="toc-article-text">Spring Boot搭建</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#Spring-Boot%E5%85%B6%E4%BB%96%E6%8A%80%E5%B7%A7"><span class="toc-article-text">Spring Boot其他技巧</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E4%BF%AE%E6%94%B9Spring-Boot%E7%89%88%E6%9C%AC"><span class="toc-article-text">修改Spring Boot版本</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E4%BF%AE%E6%94%B9Web%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%8F%A3%E5%8F%B7"><span class="toc-article-text">修改Web服务端口号</span></a></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#Spring-Boot-Actuator"><span class="toc-article-text">Spring Boot Actuator</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Actuator%E5%8A%9F%E8%83%BD%E8%AF%B4%E6%98%8E"><span class="toc-article-text">Actuator功能说明</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Actuator%E7%AB%AF%E7%82%B9%E6%9A%B4%E9%9C%B2"><span class="toc-article-text">Actuator端点暴露</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86%E7%AB%AF%E7%82%B9%E7%9A%84%E8%B7%AF%E5%BE%84"><span class="toc-article-text">修改管理端点的路径</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E7%AB%AF%E7%82%B9%E6%94%B9%E5%90%8D"><span class="toc-article-text">端点改名</span></a></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#%E6%9C%AF%E8%AF%AD"><span class="toc-article-text">术语</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#%E9%B8%A3%E8%B0%A2"><span class="toc-article-text">鸣谢</span></a></li></ol>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link"><span class="toc-article-text">Spring Boot介绍</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link"><span class="toc-article-text">Spring Boot搭建</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link"><span class="toc-article-text">Spring Boot其他技巧</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E4%BF%AE%E6%94%B9Spring-Boot%E7%89%88%E6%9C%AC"><span class="toc-article-text">修改Spring Boot版本</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E4%BF%AE%E6%94%B9Web%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%8F%A3%E5%8F%B7"><span class="toc-article-text">修改Web服务端口号</span></a></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link"><span class="toc-article-text">Spring Boot Actuator</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Actuator%E5%8A%9F%E8%83%BD%E8%AF%B4%E6%98%8E"><span class="toc-article-text">Actuator功能说明</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#Actuator%E7%AB%AF%E7%82%B9%E6%9A%B4%E9%9C%B2"><span class="toc-article-text">Actuator端点暴露</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E4%BF%AE%E6%94%B9%E7%AE%A1%E7%90%86%E7%AB%AF%E7%82%B9%E7%9A%84%E8%B7%AF%E5%BE%84"><span class="toc-article-text">修改管理端点的路径</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E7%AB%AF%E7%82%B9%E6%94%B9%E5%90%8D"><span class="toc-article-text">端点改名</span></a></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link"><span class="toc-article-text">术语</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link"><span class="toc-article-text">鸣谢</span></a></li></ol>
 		</div>
 	
 	</div>
@@ -411,7 +427,7 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
     setInterval("createtime()",250);
 </script>
 <br><br>
-<span class="num">及辞已经在本站记录了 147.1k 字</span>
+<span class="num">及辞已经在本站记录了 146.9k 字</span>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     fetch('/imageCount.json')
@@ -464,6 +480,21 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
      searchFunc(path, 'local-search-input', 'local-search-result');
    </script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <!-- hexo injector body_end start --><script src="/assets/mmedia/mmedia-loader.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/ni-j.model.json"},"display":{"position":"left","width":260,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
    </html>
 

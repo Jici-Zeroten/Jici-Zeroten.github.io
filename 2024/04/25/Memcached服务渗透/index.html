@@ -9,7 +9,8 @@
   <title>Memcached服务渗透 | Jici&#39;s Blog</title>
   <meta name="author" content="Jici">
   
-  <meta name="description" content="Memcached介绍Memcached是一套分布式的高速缓存系统。它以Key-Value（键值对）形式将数据存储在内存中，这些数据通常是应用读取频繁的。正因为内存中数据的读取远远大于硬盘，因此可以用来加速应用的访问。
+  <meta name="description" content="Memcached介绍
+Memcached是一套分布式的高速缓存系统。它以Key-Value（键值对）形式将数据存储在内存中，这些数据通常是应用读取频繁的。正因为内存中数据的读取远远大于硬盘，因此可以用来加速应用的访问。
 Memcached服务默认端口号为11211，连接方式如下">
   
   
@@ -161,13 +162,16 @@ var _hmt = _hmt || [];
 	<div class="mypage">		
 	  		
 
-	  <h1 id="Memcached介绍"><a href="#Memcached介绍" class="headerlink" title="Memcached介绍"></a>Memcached介绍</h1><p>Memcached是一套分布式的高速缓存系统。它以Key-Value（键值对）形式将数据存储在内存中，这些数据通常是应用读取频繁的。正因为内存中数据的读取远远大于硬盘，因此可以用来加速应用的访问。</p>
+	  <h1>Memcached介绍</h1>
+<p>Memcached是一套分布式的高速缓存系统。它以Key-Value（键值对）形式将数据存储在内存中，这些数据通常是应用读取频繁的。正因为内存中数据的读取远远大于硬盘，因此可以用来加速应用的访问。</p>
 <p>Memcached服务默认端口号为<code>11211</code>，连接方式如下</p>
 <pre class="line-numbers language-none"><code class="language-none">telnet IP 11211
 nc -vv IP 11211<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h1 id="Memcached命令"><a href="#Memcached命令" class="headerlink" title="Memcached命令"></a>Memcached命令</h1><p>下面列举Memcached服务器常用的命令。</p>
+<h1>Memcached命令</h1>
+<p>下面列举Memcached服务器常用的命令。</p>
 <ul>
-<li><p>stats：输出 Memcached 服务信息。下面详细解释每个状态项</p>
+<li>
+<p>stats：输出 Memcached 服务信息。下面详细解释每个状态项</p>
 <pre class="line-numbers language-none"><code class="language-none">pid：memcache服务器进程ID
 uptime：服务器已运行秒数
 time：服务器当前Unix时间戳
@@ -207,33 +211,40 @@ total_items：启动以来存储的数据总数
 evictions：LRU释放的对象数目
 reclaimed：已过期的数据条目来存储新数据的数目<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li><p>stats items：查看缓存中存储的键值对的统计信息</p>
+<li>
+<p>stats items：查看缓存中存储的键值对的统计信息</p>
 </li>
-<li><p>set：添加/更新键</p>
+<li>
+<p>set：添加/更新键</p>
 <p><img src="/2024/04/25/Memcached%E6%9C%8D%E5%8A%A1%E6%B8%97%E9%80%8F/image-20240425224936163.png" alt="image-20240425224936163"></p>
 <p><img src="/2024/04/25/Memcached%E6%9C%8D%E5%8A%A1%E6%B8%97%E9%80%8F/image-20240425224947712.png" alt="image-20240425224947712"></p>
 </li>
-<li><p>add：添加键</p>
+<li>
+<p>add：添加键</p>
 <p><img src="/2024/04/25/Memcached%E6%9C%8D%E5%8A%A1%E6%B8%97%E9%80%8F/image-20240425225418346.png" alt="image-20240425225418346"></p>
 <p><img src="/2024/04/25/Memcached%E6%9C%8D%E5%8A%A1%E6%B8%97%E9%80%8F/image-20240425225430362.png" alt="image-20240425225430362"></p>
 </li>
-<li><p>get：获取键的值</p>
+<li>
+<p>get：获取键的值</p>
 <p><img src="/2024/04/25/Memcached%E6%9C%8D%E5%8A%A1%E6%B8%97%E9%80%8F/image-20240425225030852.png" alt="image-20240425225030852"></p>
 </li>
-<li><p>delete：删除键</p>
+<li>
+<p>delete：删除键</p>
 <p><img src="/2024/04/25/Memcached%E6%9C%8D%E5%8A%A1%E6%B8%97%E9%80%8F/image-20240425225224392.png" alt="image-20240425225224392"></p>
 </li>
 </ul>
-<h1 id="Memcached未授权访问"><a href="#Memcached未授权访问" class="headerlink" title="Memcached未授权访问"></a>Memcached未授权访问</h1><p>由于Memcached安全设计缺陷，默认的11211端口不需要密码即可访问，导致攻击者可直接连接Memcached服务并获取其中的信息，造成信息泄露。</p>
+<h1>Memcached未授权访问</h1>
+<p>由于Memcached安全设计缺陷，默认的11211端口不需要密码即可访问，导致攻击者可直接连接Memcached服务并获取其中的信息，造成信息泄露。</p>
 <p>对于Memcached未授权访问，可以使用nmap的脚本扫描验证，如下</p>
 <pre class="line-numbers language-none"><code class="language-none">nmap -sV -p11211 --script&#x3D;&quot;memcached-info&quot; IP<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><img src="/2024/04/25/Memcached%E6%9C%8D%E5%8A%A1%E6%B8%97%E9%80%8F/image-20240425181300043.png" alt="image-20240425181300043"></p>
 <p>出现<code>Authentication: no</code>即代表Memcached存在未授权访问</p>
-<h1 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h1><ul>
+<h1>鸣谢</h1>
+<ul>
 <li><a target="_blank" rel="noopener" href="https://www.runoob.com/memcached/memcached-get-data.html">https://www.runoob.com/memcached/memcached-get-data.html</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/ZhaoSong_/article/details/135029513">https://blog.csdn.net/ZhaoSong_/article/details/135029513</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/eric_sunah/article/details/51612316">https://blog.csdn.net/eric_sunah/article/details/51612316</a></li>
-<li><a target="_blank" rel="noopener" href="https://wiki.96.mk/Web%E5%AE%89%E5%85%A8/Memcache/Memcache%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/#21">https://wiki.96.mk/Web%E5%AE%89%E5%85%A8/Memcache/Memcache%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/#21</a></li>
+<li><a target="_blank" rel="noopener" href="https://wiki.96.mk/Web%E5%AE%89%E5%85%A8/Memcache/Memcache%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/#21">https://wiki.96.mk/Web安全/Memcache/Memcache未授权访问/#21</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/TiramisuPS/p/16476083.html">https://www.cnblogs.com/TiramisuPS/p/16476083.html</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Yuanbangchen/p/16567402.html">https://www.cnblogs.com/Yuanbangchen/p/16567402.html</a></li>
 <li><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1326529">https://developer.aliyun.com/article/1326529</a></li>
@@ -370,7 +381,7 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
     setInterval("createtime()",250);
 </script>
 <br><br>
-<span class="num">及辞已经在本站记录了 147.1k 字</span>
+<span class="num">及辞已经在本站记录了 146.9k 字</span>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     fetch('/imageCount.json')
@@ -423,6 +434,21 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
      searchFunc(path, 'local-search-input', 'local-search-result');
    </script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <!-- hexo injector body_end start --><script src="/assets/mmedia/mmedia-loader.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/ni-j.model.json"},"display":{"position":"left","width":260,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
    </html>
 

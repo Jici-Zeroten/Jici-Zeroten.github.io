@@ -10,7 +10,7 @@
   <meta name="author" content="Jici">
   
   <meta name="description" content="正常：Hello 你好
-双星号粗体：Hello 你好 
+双星号粗体：Hello 你好
 双下划线粗体：Hello 你好">
   
   
@@ -163,17 +163,19 @@ var _hmt = _hmt || [];
 	  		
 
 	  <p>正常：Hello 你好</p>
-<p>双星号粗体：<strong>Hello 你好</strong> </p>
+<p>双星号粗体：<strong>Hello 你好</strong></p>
 <p>双下划线粗体：<strong>Hello 你好</strong></p>
 <p>斜体：<em>Hello</em> 你好</p>
-<p><del>删除文本</del></p>
+<p><s>删除文本</s></p>
 <blockquote>
 <p>一层引用</p>
 <blockquote>
 <p>二层引用</p>
 </blockquote>
 </blockquote>
-<p>加粗并斜体1：<strong><em>Hello 你好</em></strong><br>加粗并斜体2：<strong><em>Hello 你好</em></strong><br>加粗并斜体3：<em><strong>Hello 你好</strong></em></p>
+<p>加粗并斜体1：<em><strong>Hello 你好</strong></em><br>
+加粗并斜体2：<em><strong>Hello 你好</strong></em><br>
+加粗并斜体3：<em><strong>Hello 你好</strong></em></p>
 	  
 	</div>
 
@@ -306,7 +308,7 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
     setInterval("createtime()",250);
 </script>
 <br><br>
-<span class="num">及辞已经在本站记录了 147.1k 字</span>
+<span class="num">及辞已经在本站记录了 146.9k 字</span>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     fetch('/imageCount.json')
@@ -359,6 +361,21 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
      searchFunc(path, 'local-search-input', 'local-search-result');
    </script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <!-- hexo injector body_end start --><script src="/assets/mmedia/mmedia-loader.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/ni-j.model.json"},"display":{"position":"left","width":260,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
    </html>
 

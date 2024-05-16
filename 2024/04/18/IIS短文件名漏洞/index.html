@@ -9,7 +9,8 @@
   <title>IIS短文件名漏洞 | Jici&#39;s Blog</title>
   <meta name="author" content="Jici">
   
-  <meta name="description" content="IIS短文件名介绍为了兼容基于 MS-DOS 或 16 位 Windows 的程序，Windows 为文件名较长的文件（和文件夹）生成了对应的DOS 8.3 短文件名。
+  <meta name="description" content="IIS短文件名介绍
+为了兼容基于 MS-DOS 或 16 位 Windows 的程序，Windows 为文件名较长的文件（和文件夹）生成了对应的DOS 8.3 短文件名。
 
 这里介绍一下 MS-DOS 和 DOS 8.3 规则">
   
@@ -162,7 +163,8 @@ var _hmt = _hmt || [];
 	<div class="mypage">		
 	  		
 
-	  <h1 id="IIS短文件名介绍"><a href="#IIS短文件名介绍" class="headerlink" title="IIS短文件名介绍"></a>IIS短文件名介绍</h1><p>为了兼容基于 MS-DOS 或 16 位 Windows 的程序，Windows 为文件名较长的文件（和文件夹）生成了对应的DOS 8.3 短文件名。</p>
+	  <h1>IIS短文件名介绍</h1>
+<p>为了兼容基于 MS-DOS 或 16 位 Windows 的程序，Windows 为文件名较长的文件（和文件夹）生成了对应的DOS 8.3 短文件名。</p>
 <blockquote>
 <p>这里介绍一下 MS-DOS 和 DOS 8.3 规则</p>
 </blockquote>
@@ -182,8 +184,11 @@ var _hmt = _hmt || [];
 <li>长文件名中含有多个“.”，以文件名最后一个“.”作为短文件名后缀</li>
 <li>长文件名前缀/文件夹名字符长度符合0-9和Aa-Zz范围且需要大于等于9位才会生成短文件名，如果包含空格或者其他部分特殊字符，不论长度均会生成短文件</li>
 </ol>
-<h1 id="IIS短文件名漏洞"><a href="#IIS短文件名漏洞" class="headerlink" title="IIS短文件名漏洞"></a>IIS短文件名漏洞</h1><h2 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h2><p>IIS短文件名漏洞是由于HTTP请求中携带旧DOS 8.3名称约定（SFN）的代字符（~）波浪号引起的。==它允许远程攻击者访问在Web根目录的文件和文件夹（本不应该被访问）。攻击者可以找到通常无法从外部直接访问的重要文件，并获取有关应用程序基础结构的信息==。</p>
-<h2 id="漏洞成因"><a href="#漏洞成因" class="headerlink" title="漏洞成因"></a>漏洞成因</h2><p>==当IIS接收到一个短文件名的路径请求时，根据文件是否存在，所回显（或者说响应）的HTTP状态码和错误信息不同==。即基于这个特点，可以根据回显的HTTP状态码和错误信息判断一个文件是否存在。具体的如下：</p>
+<h1>IIS短文件名漏洞</h1>
+<h2 id="漏洞描述">漏洞描述</h2>
+<p>IIS短文件名漏洞是由于HTTP请求中携带旧DOS 8.3名称约定（SFN）的代字符（~）波浪号引起的。<mark>它允许远程攻击者访问在Web根目录的文件和文件夹（本不应该被访问）。攻击者可以找到通常无法从外部直接访问的重要文件，并获取有关应用程序基础结构的信息</mark>。</p>
+<h2 id="漏洞成因">漏洞成因</h2>
+<p><mark>当IIS接收到一个短文件名的路径请求时，根据文件是否存在，所回显（或者说响应）的HTTP状态码和错误信息不同</mark>。即基于这个特点，可以根据回显的HTTP状态码和错误信息判断一个文件是否存在。具体的如下：</p>
 <ul>
 <li>访问<code>存在文件</code>的短文件名，会返回<code>404</code>状态码</li>
 <li>访问<code>不存在文件</code>的短文件名，会返回<code>400</code>状态码</li>
@@ -192,7 +197,8 @@ var _hmt = _hmt || [];
 <p>注意，依据请求方法不同（如：GET、OPTIONS、TRACE）返回的HTTP状态码类型会有些许出入，但都存在回显不一致的问题，所以都可以根据回显的HTTP状态码和错误信息判断一个文件是否存在。</p>
 <p>具体的，比如 IIS 8.0/IIS 8.5/IIS 10.0，是通过OPTIONS 和 TRACE方法进行猜解的。使用OPTION方法，猜测成功返回404，猜测失败返回的是200；使用 TRACE方法，猜测成功返回404，猜测失败返回的是501</p>
 </blockquote>
-<h2 id="受影响的IIS版本"><a href="#受影响的IIS版本" class="headerlink" title="受影响的IIS版本"></a>受影响的IIS版本</h2><pre class="line-numbers language-none"><code class="language-none">IIS 1.0，Windows NT 3.51 
+<h2 id="受影响的IIS版本">受影响的IIS版本</h2>
+<pre class="line-numbers language-none"><code class="language-none">IIS 1.0，Windows NT 3.51 
 IIS 3.0，Windows NT 4.0 Service Pack 2 
 IIS 4.0，Windows NT 4.0选项包
 IIS 5.0，Windows 2000 
@@ -207,13 +213,15 @@ IIS 8.5，Windows 8.1,Windows Server 2012 R2
 IIS 10.0，Windows 10, Windows Server 2016
 # 以上受影响范围即使没有安装ASP.NET应用程序，通过OPTIONS和TRACE方法也可以猜解成功<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <blockquote>
-<p>注意：IIS使用.Net Framework 4时不受影响</p>
+<p>注意：<a target="_blank" rel="noopener" href="http://xn--IIS-kb0er53o.Net">IIS使用.Net</a> Framework 4时不受影响</p>
 <p>从受影响的IIS版本中不难看出，IIS短文件名漏洞影响范围极大</p>
 </blockquote>
 <p>这里附一张不同Windows系统下默认内置的IIS版本图</p>
 <p><img src="/2024/04/18/IIS%E7%9F%AD%E6%96%87%E4%BB%B6%E5%90%8D%E6%BC%8F%E6%B4%9E/image-20240418140115046.png" alt="image-20240418140115046"></p>
-<h2 id="漏洞危害及利用"><a href="#漏洞危害及利用" class="headerlink" title="漏洞危害及利用"></a>漏洞危害及利用</h2><ul>
-<li><p>敏感文件泄露：==先通过IIS短文件漏洞猜测出来的短文件名称，在通过短文件名称继续猜测出全名==（因为IIS由于安全原因不支持短文件名直接访问，所以需要全名），最后通过全名访问导致敏感文件泄露。</p>
+<h2 id="漏洞危害及利用">漏洞危害及利用</h2>
+<ul>
+<li>
+<p>敏感文件泄露：<mark>先通过IIS短文件漏洞猜测出来的短文件名称，在通过短文件名称继续猜测出全名</mark>（因为IIS由于安全原因不支持短文件名直接访问，所以需要全名），最后通过全名访问导致敏感文件泄露。</p>
 <blockquote>
 <p>这里可以结合其他支持短文件特性的软件（如Apache、Wordpress等）做一个延申</p>
 </blockquote>
@@ -224,18 +232,21 @@ IIS 10.0，Windows 10, Windows Server 2016
 <p>这里基于上面的【漏洞成因】，说一下手动猜解的方法，便于理解漏洞原理</p>
 <blockquote>
 <p>还是做一个术语的约定，猜测 ==  猜解。</p>
-<p>因为是手动的过程，如果用工具的话就是所谓的”爆破”、”暴力破解”、”暴力猜解”</p>
+<p>因为是手动的过程，如果用工具的话就是所谓的&quot;爆破&quot;、“暴力破解”、“暴力猜解”</p>
 </blockquote>
 <p><img src="/2024/04/18/IIS%E7%9F%AD%E6%96%87%E4%BB%B6%E5%90%8D%E6%BC%8F%E6%B4%9E/image-20240418113326410.png" alt="image-20240418113326410"></p>
 <p>这里再附一张漏洞发现者Soroush Dalili的利用IIS返回的http状态码猜解文件过程图，如下</p>
 <p><img src="/2024/04/18/IIS%E7%9F%AD%E6%96%87%E4%BB%B6%E5%90%8D%E6%BC%8F%E6%B4%9E/image-20240418115241113.png" alt="image-20240418115241113"></p>
 </li>
-<li><p>猜解后台地址：利用逻辑和敏感文件泄露一致，不再赘述</p>
+<li>
+<p>猜解后台地址：利用逻辑和敏感文件泄露一致，不再赘述</p>
 </li>
-<li><p>拒绝服务攻击：更准确的描述是<code>针对IIS服务器中的.Net Framework进行拒绝服务攻击</code>。攻击者如果在文件夹名称中发送一个不合法的.Net文件请求，.Net Framework将递归搜索所有的根目录，消耗网站资源进而导致DOS问题。这里使用漏洞发现者Soroush Dalili的原话做一个描述，如下</p>
+<li>
+<p>拒绝服务攻击：更准确的描述是<code>针对IIS服务器中的.Net Framework进行拒绝服务攻击</code>。攻击者如果在文件夹名称中发送一个不合法的.Net文件请求，.Net Framework将递归搜索所有的根目录，消耗网站资源进而导致DOS问题。这里使用漏洞发现者Soroush Dalili的原话做一个描述，如下</p>
 <p><img src="/2024/04/18/IIS%E7%9F%AD%E6%96%87%E4%BB%B6%E5%90%8D%E6%BC%8F%E6%B4%9E/image-20240418105905476.png" alt="image-20240418105905476"></p>
 </li>
-<li><p>结合绕过Directory Authentication验证（目录身份验证）漏洞，猜解认证目录下的文件：==注意并不是所有版本的IIS都能够绕过认证，这里仅验证了IIS5.1==。方法是，添加<code>:$i30:$INDEX_ALLOCATION</code>到目录名以绕过身份验证，再使用敏感文件泄露的手法，去猜解认证目录下的文件。下面举个例子</p>
+<li>
+<p>结合绕过Directory Authentication验证（目录身份验证）漏洞，猜解认证目录下的文件：<mark>注意并不是所有版本的IIS都能够绕过认证，这里仅验证了IIS5.1</mark>。方法是，添加<code>:$i30:$INDEX_ALLOCATION</code>到目录名以绕过身份验证，再使用敏感文件泄露的手法，去猜解认证目录下的文件。下面举个例子</p>
 <pre class="line-numbers language-none"><code class="language-none"># 先说绕过Directory Authentication验证
 # 比如要访问受目录身份验证保护的AuthNeeded文件夹下的secretfile.asp【即&#x2F;AuthNeeded&#x2F;secretfile.asp】
 # 可以使用 &#x2F;AuthNeeded:$i30:$INDEX_ALLOCATION&#x2F;secretfile.asp 进行目录身份验证的绕过
@@ -248,21 +259,24 @@ IIS 10.0，Windows 10, Windows Server 2016
 </blockquote>
 </li>
 </ul>
-<h2 id="漏洞局限性"><a href="#漏洞局限性" class="headerlink" title="漏洞局限性"></a>漏洞局限性</h2><ol>
+<h2 id="漏洞局限性">漏洞局限性</h2>
+<ol>
 <li>此漏洞只能确定前6个字符，如果后面的字符太长、包含特殊字符，很难猜解</li>
 <li>如果文件名本身太短（无短文件名）也是无法猜解的</li>
 <li>如果文件名前6位带空格，8.3格式的短文件名会补进，和真实文件名不匹配</li>
 <li>如果文件夹名前6位字符带点“.”，扫描程序会认为是文件而不是文件夹，最终出现误报</li>
-<li>不支持中文文件名，包括中文文件和中文文件夹。一个中文相当于两个英文字符，故超过4个中文字会产生短文件名，但是==IIS不支持中文猜测==</li>
+<li>不支持中文文件名，包括中文文件和中文文件夹。一个中文相当于两个英文字符，故超过4个中文字会产生短文件名，但是<mark>IIS不支持中文猜测</mark></li>
 </ol>
-<h2 id="漏洞相关工具"><a href="#漏洞相关工具" class="headerlink" title="漏洞相关工具"></a>漏洞相关工具</h2><p>这里推荐3个工具：</p>
+<h2 id="漏洞相关工具">漏洞相关工具</h2>
+<p>这里推荐3个工具：</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/irsdl/IIS-ShortName-Scanner">https://github.com/irsdl/IIS-ShortName-Scanner</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/bitquark/shortscan">https://github.com/bitquark/shortscan</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/lijiejie/IIS_shortname_Scanner">https://github.com/lijiejie/IIS_shortname_Scanner</a></li>
 </ul>
-<h1 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h1><ul>
-<li><a target="_blank" rel="noopener" href="https://uuzdaisuki.com/2018/06/28/IIS短文件名漏洞/#0x00-IIS短文件名">IIS短文件名漏洞 - Leticia’s Blog (uuzdaisuki.com)</a></li>
+<h1>鸣谢</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://uuzdaisuki.com/2018/06/28/IIS%E7%9F%AD%E6%96%87%E4%BB%B6%E5%90%8D%E6%BC%8F%E6%B4%9E/#0x00-IIS%E7%9F%AD%E6%96%87%E4%BB%B6%E5%90%8D">IIS短文件名漏洞 - Leticia’s Blog (uuzdaisuki.com)</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/172561.html">IIS深入浅出之短文件漏洞知多少 - FreeBuf网络安全行业门户</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/51a8d0975b1a">IIS短文件名泄露漏洞及MS15-034利用 - 简书 (jianshu.com)</a></li>
 <li><a target="_blank" rel="noopener" href="https://teamssix.com/191126-215804.html">【漏洞笔记】IIS短文件名泄露 | TeamsSix</a></li>
@@ -339,7 +353,7 @@ IIS 10.0，Windows 10, Windows Server 2016
 	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
 	   <div id="toc" class="toc collapse in">
 		   <span class="toc-title">Contents</span>
-			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#IIS%E7%9F%AD%E6%96%87%E4%BB%B6%E5%90%8D%E4%BB%8B%E7%BB%8D"><span class="toc-article-text">IIS短文件名介绍</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#IIS%E7%9F%AD%E6%96%87%E4%BB%B6%E5%90%8D%E6%BC%8F%E6%B4%9E"><span class="toc-article-text">IIS短文件名漏洞</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%BC%8F%E6%B4%9E%E6%8F%8F%E8%BF%B0"><span class="toc-article-text">漏洞描述</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%BC%8F%E6%B4%9E%E6%88%90%E5%9B%A0"><span class="toc-article-text">漏洞成因</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E5%8F%97%E5%BD%B1%E5%93%8D%E7%9A%84IIS%E7%89%88%E6%9C%AC"><span class="toc-article-text">受影响的IIS版本</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%BC%8F%E6%B4%9E%E5%8D%B1%E5%AE%B3%E5%8F%8A%E5%88%A9%E7%94%A8"><span class="toc-article-text">漏洞危害及利用</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%BC%8F%E6%B4%9E%E5%B1%80%E9%99%90%E6%80%A7"><span class="toc-article-text">漏洞局限性</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%BC%8F%E6%B4%9E%E7%9B%B8%E5%85%B3%E5%B7%A5%E5%85%B7"><span class="toc-article-text">漏洞相关工具</span></a></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#%E9%B8%A3%E8%B0%A2"><span class="toc-article-text">鸣谢</span></a></li></ol>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link"><span class="toc-article-text">IIS短文件名介绍</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link"><span class="toc-article-text">IIS短文件名漏洞</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%BC%8F%E6%B4%9E%E6%8F%8F%E8%BF%B0"><span class="toc-article-text">漏洞描述</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%BC%8F%E6%B4%9E%E6%88%90%E5%9B%A0"><span class="toc-article-text">漏洞成因</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E5%8F%97%E5%BD%B1%E5%93%8D%E7%9A%84IIS%E7%89%88%E6%9C%AC"><span class="toc-article-text">受影响的IIS版本</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%BC%8F%E6%B4%9E%E5%8D%B1%E5%AE%B3%E5%8F%8A%E5%88%A9%E7%94%A8"><span class="toc-article-text">漏洞危害及利用</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%BC%8F%E6%B4%9E%E5%B1%80%E9%99%90%E6%80%A7"><span class="toc-article-text">漏洞局限性</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%BC%8F%E6%B4%9E%E7%9B%B8%E5%85%B3%E5%B7%A5%E5%85%B7"><span class="toc-article-text">漏洞相关工具</span></a></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link"><span class="toc-article-text">鸣谢</span></a></li></ol>
 		</div>
 	
 	</div>
@@ -409,7 +423,7 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
     setInterval("createtime()",250);
 </script>
 <br><br>
-<span class="num">及辞已经在本站记录了 147.1k 字</span>
+<span class="num">及辞已经在本站记录了 146.9k 字</span>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     fetch('/imageCount.json')
@@ -462,6 +476,21 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
      searchFunc(path, 'local-search-input', 'local-search-result');
    </script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <!-- hexo injector body_end start --><script src="/assets/mmedia/mmedia-loader.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/ni-j.model.json"},"display":{"position":"left","width":260,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
    </html>
 
