@@ -1,0 +1,1143 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>无线网络渗透 | Jici&#39;s Blog</title>
+  <meta name="author" content="Jici">
+  
+  <meta name="description" content="无线网络基础
+术语
+
+
+Wi-Fi（Wireless Fidelity，无线保真）：是一种可以将笔记本电脑、手持设备（如手机、平板）等终端以无线方式互相连接的技术。简单地说，它就是一个高频无线电信号。
+
+这里做一个约定，Wi-Fi == WI-FI== WiFi == WIFI
+
+
+
+WLAN：
+
+
+WAP：无线访问接入点（Wireless Access Piont，WAP），相当于一个连接有线网和无线网的桥梁，其主要作用是将各个无线网络客户端连接到一起，然后将无线网络接入以太网。
+
+
+802.11：802.11是IEEE 802.11 Task Group（一个组织）制定的一系列无线局域网标准。
+
+
+蓝牙：是一种无线通信技术，它能够在短距离范围内实现设备间的数据传输和通信。
+
+
+NFC：近场通信（Near Field Communication，缩写为NFC），又称近距离无线通信，是一种短距离的高频无线通信技术，允许电子设备之间进行非接触式点对点数据传输，在十厘米（3.9英吋）内交换数据。
+
+
+网卡芯片：网卡芯片（Network Interface Card Chip，简称NIC芯片）是一种集成电路芯片，用于在计算机或其他设备中提供网络连接功能
+
+网卡芯片是硬件层面的东西，了解芯片的意义在于，并不是所有的无线网卡都支持“监听模式”，而支持“监听模式”的网卡是我们获取进行无线网络渗透的一个必备硬件条件。
+在硬件圈子中，经常听到的3070、3072、8187都指的是芯片类型。这里提一嘴，3070芯片传输速度是150Mbps的，3072是300Mbps，8187是54Mbps">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="无线网络渗透"/>
+  <meta property="og:site_name" content="Jici&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon-16x16.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-70812759-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?cb5448498d7169c668b07c2b255d62c1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<!-- hexo injector head_end start --><script> let HEXO_MMEDIA_DATA = { js: [], css: [], aplayerData: [], metingData: [], artPlayerData: [], dplayerData: []}; </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">Jici&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>所有文章
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>关于我
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/record" title="Record all kinds of completed target machines">
+			  <i class=""></i>记录榜
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/plan" title="Record what needs to be done and what is worth doing">
+			  <i class=""></i>计划清单
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/friendlinks" title="my friends">
+			  <i class=""></i>友情链接
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/pictureGallery" title="Record some exquisite pictures">
+			  <i class=""></i>画廊
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+	
+		<div class="page-header">
+			<h1> 无线网络渗透</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  		
+
+	  <h1>无线网络基础</h1>
+<h2 id="术语">术语</h2>
+<ul>
+<li>
+<p>Wi-Fi（Wireless Fidelity，无线保真）：是一种可以将笔记本电脑、手持设备（如手机、平板）等终端以无线方式互相连接的技术。简单地说，它就是一个高频无线电信号。</p>
+<blockquote>
+<p>这里做一个约定，Wi-Fi == WI-FI== WiFi == WIFI</p>
+</blockquote>
+</li>
+<li>
+<p>WLAN：<img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240604135942841.png" alt="image-20240604135942841"></p>
+</li>
+<li>
+<p>WAP：无线访问接入点（Wireless Access Piont，WAP），相当于一个连接有线网和无线网的桥梁，其主要作用是将各个无线网络客户端连接到一起，然后将无线网络接入以太网。</p>
+</li>
+<li>
+<p>802.11：802.11是IEEE 802.11 Task Group（一个组织）制定的一系列无线局域网标准。</p>
+</li>
+<li>
+<p>蓝牙：是一种无线通信技术，它能够在短距离范围内实现设备间的数据传输和通信。</p>
+</li>
+<li>
+<p>NFC：近场通信（Near Field Communication，缩写为NFC），又称近距离无线通信，是一种短距离的高频无线通信技术，允许电子设备之间进行非接触式点对点数据传输，在十厘米（3.9英吋）内交换数据。</p>
+</li>
+<li>
+<p>网卡芯片：网卡芯片（Network Interface Card Chip，简称NIC芯片）是一种集成电路芯片，用于在计算机或其他设备中提供网络连接功能</p>
+<blockquote>
+<p>网卡芯片是硬件层面的东西，了解芯片的意义在于，并不是所有的无线网卡都支持“监听模式”，而支持“监听模式”的网卡是我们获取进行无线网络渗透的一个必备硬件条件。</p>
+<p>在硬件圈子中，经常听到的3070、3072、8187都指的是芯片类型。这里提一嘴，3070芯片传输速度是150Mbps的，3072是300Mbps，8187是54Mbps</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="Wi-Fi网络结构">Wi-Fi网络结构</h2>
+<p>Wi-Fi网络的组成非常简单，只需要一个AP和一个客户端即可构成一个Wi-Fi网络。但是在Wi-Fi网络中，并不是只可以有一个客户端，而是可以连接多个客户端。</p>
+<p>上面的术语中提到过AP，这里解读一下：<mark>AP也称为基站，所以有时候就合称为AP基站，也就是平常人们说的Wi-Fi热点，更通俗地说就是家里的无线路由器</mark>。它的作用相当于一个转发器，将互联网上其他服务器上的数据转发到客户端。</p>
+<blockquote>
+<p>注意，AP只是一个概念，路由器通常具有有线和无线接口，其中无线接口就是用来提供无线访问接入点功能的（实现了这个概念）。所以，可以说路由器是一种包含无线访问接入点的设备。还有一种关于AP的说法是【AP，是指发送无线信号的无线设备】，这是一种较为笼统的说法，我个人并不赞同，更准确的来说应该称为【AP设备】，AP本身只是一个概念。</p>
+</blockquote>
+<p>除了AP，还有一个概念叫做STA。<mark>STA（Station）称为站点，就是所谓的客户端。站点是指具有Wi-Fi通信功能并且连接到无线网络中的终端设备，如手机、平板和笔记本电脑等</mark>。</p>
+<h2 id="Wi-Fi工作原理">Wi-Fi工作原理</h2>
+<p>在Wi-Fi网络中，数据传输共包括4个过程，分别是：</p>
+<ol>
+<li>AP广播</li>
+<li>AP探测</li>
+<li>身份认证</li>
+<li>数据传输</li>
+</ol>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240604141634044.png" alt="image-20240604141634044"></p>
+<p>下面逐个介绍。</p>
+<h3 id="AP广播">AP广播</h3>
+<p>如果在无线路由器中开启SSID广播功能的话，AP将自动广播自己的SSID名称。其中，SSID是Service Set Identifier的缩写，意思是服务集标识，简单地说，就是用户在无线客户端搜索到的无线信号名称。</p>
+<h3 id="AP探测">AP探测</h3>
+<p>当客户端选择加入哪个无线网络时，将会发送一个AP探测请求，以请求特定无线网络的响应包。然后根据AP给予的响应包，确定AP工作的频段。之后客户端将切换到与AP相同的频段。</p>
+<h3 id="身份认证">身份认证</h3>
+<p>客户端将提供密码，以进行身份认证。如果AP确定客户端提交的认证信息正确后，则允许接入其网络。然后，客户端和AP进行关联，直至关联成功。</p>
+<h3 id="数据传输">数据传输</h3>
+<p>通过前面的3个过程，客户端就成功加入AP所在的无线网络了。此时，客户端就可以和AP进行数据传输了。</p>
+<h2 id="2-4G-5G标准">2.4G/5G标准</h2>
+<p><mark>2.4G和5G是无线通信的两个标准。这两个标准本质上是指Wi-Fi频率不同，而且运行的协议也不同</mark>。其中，2.4G Wi-Fi无线网主要使用的是802.11b/g/n协议；5G Wi-Fi无线网只能使用802.11ac协议。在Wi-Fi网络初期，是没有5GHz这个频段的，由于2.4GHz频段设备越来越多，互相干扰得太厉害，所以就开放了5GHz这个标准。<mark>因为5GHz是高频频段，而且5G频段连接的设备较少，所以理论上比2.4G传输速度更快。但是，由于5GHz频率高，所以波长相对于2.4GHz要短很多，因此穿透性比较弱、传播距离比较短</mark>。</p>
+<blockquote>
+<p>很简单的物理常识，频率高，波长短，穿透性弱，传播距离短</p>
+</blockquote>
+<h2 id="信道和频率">信道和频率</h2>
+<p><mark>信道也称做通道（Channel）、频段，它是以无线信号作为传输载体的数据信号传送通道。简单地说就是无线路由器的工作信道。信道的主要作用就是为了避免信号之间的干扰，所以无线路由器可以在多个信道上运行。</mark></p>
+<p>==2.4GHz（=2400MHz）频段共划分为14个信道，但第14信道一般不用。==每个信道的实际宽度，为22MHz，有效宽度是20MHz，另外还有2MHz的强制隔离频带（类似于公路上的隔离带）。中国可用13个信道（1-13），美国可用11个信道（1-11）。信道及中心频率如下图：</p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240604145540821.png" alt="image-20240604145540821"></p>
+<p>相邻信道中心频点间隔5MHz，相邻的多个信道存在频率重叠，相互不干扰的信道有三组（1、6、11或2、7、12或3、8、13），如下图</p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240604145237633.png" alt="image-20240604145237633"></p>
+<p><mark>5GHz频段的中心频率范围是4.915~5.865GHz。国内规定可用的5G信道只有5个，分别是149、153、157、161、165</mark>。这5个信道及其中心频率如下图：</p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240604203226068.png" alt="image-20240604203226068"></p>
+<h2 id="Wi-Fi网络协议标准">Wi-Fi网络协议标准</h2>
+<p>Wi-Fi网络通用的协议标准是IEEE 802.11。IEEE 802.11是由电气和电子工程师协会（IEEE）为无线局域网络制定的标准。<mark>为了满足用户的需求，IEEE小组又相继推出了一系列的标准，如802.11a、802.11b、802.11g、802.11ac等</mark>。</p>
+<p>这里给出一张<code>802.11 协议历史时间线</code>的图片，如下</p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240606155311802.png" alt="image-20240606155311802"></p>
+<p>虽然802.11协议已经发展了多个标准，但是<mark>目前主流的无线Wi-Fi网络设备都支持802.11a、802.11b、802.11g、802.11n这4个协议标准。而且，802.11n向下兼容，即兼容802.11a/b/g</mark>。这4个协议标准的信道带宽、工作频段和理想速率如下图：</p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240604203758644.png" alt="image-20240604203758644"></p>
+<p>上面也提到了802.11ac协议，它是在802.11a标准上建立起来的，802.11ac协议标准工作的信道、频段及传输理论速率如下</p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240604204251440.png" alt="image-20240604204251440"></p>
+<h2 id="无线路由器的加密模式">无线路由器的加密模式</h2>
+<p>无线路由器的加密模式又叫无线网络加密标准，一般有以下几种：</p>
+<ul>
+<li>WEP</li>
+<li>WPA</li>
+<li>WPA2</li>
+<li>WPA3</li>
+</ul>
+<h3 id="WEP">WEP</h3>
+<h2 id="WEP-2">WEP</h2>
+<ul>
+<li>英文全称：<code>Wired Equivalent Privacy</code></li>
+<li>中文名称：有线等效加密</li>
+<li>提出时间：1997</li>
+<li>使用的算法：RC4</li>
+<li>功能：保护客户端和接入点 (AP) 之间的无线数据免受黑客攻击</li>
+</ul>
+<p>WEP 虽然被广泛使用，但它太容易受到黑客的攻击，网络安全专家检测到WEP的许多漏洞，因此，Wi-Fi 联盟在 2004 年正式将其退役。</p>
+<h3 id="WPA">WPA</h3>
+<ul>
+<li>英文全称：<code>Wi-Fi Protected Access</code></li>
+<li>中文名称：Wi-Fi 访问保护</li>
+<li>提出时间：2003</li>
+<li>使用的算法：TKIP</li>
+</ul>
+<p>由于 WEP 的漏洞，必须开发一种新协议，WPA应运而生，TKIP 使用 256 位密钥而不是 WEP 中的 64 位和 128 位密钥。</p>
+<p>WPA 包括消息完整性检查和临时密钥完整性协议 (TKIP)。</p>
+<p>WPA有两种不同的模式：</p>
+<ul>
+<li>企业模式 (WPA-EAP)</li>
+<li>个人模式 (WPA-PSK)</li>
+</ul>
+<p>TKIP 使用与 WEP 相同的底层机制，因此容易受到许多类似攻击（例如 Chop-Chop、MIC 密钥恢复攻击）的攻击。</p>
+<h3 id="WPA2">WPA2</h3>
+<ul>
+<li>英文全称：<code>Wi-Fi Protected Access Version 2</code></li>
+<li>中文名称：Wi-Fi 访问保护2代</li>
+<li>提出时间：2004</li>
+<li>使用的算法：AES-CCMP</li>
+</ul>
+<p>WPA2 是第一个 WPA 的高级版本。WPA 的脆弱部分在 WPA2 中变得更强大。</p>
+<p>WPA2 用两种更强大的加密和身份验证机制取代了 RC4 和 TKIP：高级加密标准 ( AES ) 和分别使用密码块链接消息身份验证代码协议 ( CCMP ) 的计数器模式。</p>
+<p>WPA2对于家庭网络很实用，但它对企业网络很脆弱，因为，攻击者可以访问使用 WPA2 保护的网络，访问网络后，他们可以访问密码，字典攻击是 WPA2 密码最容易受到攻击的部分。</p>
+<h3 id="WPA3">WPA3</h3>
+<ul>
+<li>英文全称：<code>Wi-Fi Protected Access Version 3</code></li>
+<li>中文名称：Wi-Fi 访问保护3代</li>
+<li>提出时间：2018</li>
+<li>使用的算法：AES-GCMP</li>
+</ul>
+<p>WPA3 使用以下两种 WiFi 安全模式之一：</p>
+<ul>
+<li>WPA3个人模式（WPA3-Personal）：提供 128 位加密，使用 WPA-PSK/预共享密钥</li>
+<li>WPA3企业版（WPA3-Enterprise）：提供 192 位加密，使用 AAA/RADIUS 认证服务器</li>
+</ul>
+<h1>无线网络渗透工具</h1>
+<p>这里给出一些无线网络渗透工具，如下</p>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener" href="https://github.com/kylemcdonald/FreeWifi">FreeWiFi</a>：获得免费的WiFi。</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://github.com/FluxionNetwork/fluxion">fluxion</a>：伪AP钓鱼工具。</p>
+</li>
+<li>
+<p>Wireshark：网络封包分析工具。</p>
+</li>
+<li>
+<p>hcxdumptool：无线认证信息抓包工具。</p>
+</li>
+<li>
+<p>hcxtools：HCCAPX文件处理工具集。</p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240604211807314.png" alt="image-20240604211807314"></p>
+</li>
+<li>
+<p>Kismet：基于Linux的无线网络扫描工具。</p>
+</li>
+<li>
+<p>Bully：利用路由器WPS漏洞破解WiFi密码的工具。</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://github.com/v1s1t0r1sh3r3/airgeddon">Airgeddon</a>：这是一个多用途的bash脚本，用于Linux系统审核无线网络。</p>
+</li>
+<li>
+<p>GISKismet：一个无线网络可视化工具。</p>
+</li>
+<li>
+<p>HostedNetworkStarter：是Windows 7及更高版本的简单工具，可以使用Windows操作系统的WiFi托管网络功能轻松创建无线网络适配器的WiFi热点。</p>
+</li>
+<li>
+<p>inSSIDer：WiFi故障排除和优化工具。</p>
+</li>
+<li>
+<p>LinSSID：Linux下的图形化无线网络扫描和分析工具。</p>
+</li>
+<li>
+<p>Pyrit：一款使用GPU运算的无线密码离线破解工具。</p>
+</li>
+<li>
+<p>NetStumbler：Windows下的扫描和监测无线网络工具。</p>
+</li>
+<li>
+<p>wellenreiter：无线网络分析和安全审计工具。</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://github.com/hkm/whoishere.py">whoishere.py</a>：WiFi客户端检测工具。</p>
+</li>
+<li>
+<p>WiFi Channel Monitor：Windows下的用于监测和分析无线网络工具</p>
+</li>
+<li>
+<p>WifiInfoView：无线网络扫描器。</p>
+</li>
+<li>
+<p>wireless_network_watcher：无线网络扫描器。</p>
+</li>
+<li>
+<p>Aircrack-NG：无线网络分析安全工具集。</p>
+</li>
+<li>
+<p>Reaver：暴力破解WPS加密的工具包。</p>
+</li>
+<li>
+<p>wash：无线信号扫描工具。</p>
+</li>
+<li>
+<p>Wifi Honey：一个Wi-Fi蜜罐脚本</p>
+</li>
+<li>
+<p>AirSnort：是一种无线局域网（WLAN）工具，可以破解802.11b WEP网络上的加密密钥。</p>
+</li>
+<li>
+<p>Asleap：用于检测和攻击 LEAP (Lightweight Extensible Authentication Protocol) 认证机制的开源工具</p>
+<blockquote>
+<p>LEAP是微软在早期Windows操作系统中引入的一种无线网络认证协议。</p>
+</blockquote>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://github.com/DominikStyp/auto-reaver">auto-reaver</a>：使用Reaver进行多个接入点攻击。</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://github.com/Tylous/Auto_EAP">AutoEAP</a>：无线网络自动化登录工具，用于处理 EAP(Extensible Authentication Protocol) 认证方式的无线网络连接。</p>
+</li>
+<li>
+<p>Cowpatty：基于WPA-PSK认证的离线密码破解工具。</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://github.com/mikeryan/crackle">crackle</a>：破解和解密BLE加密。</p>
+</li>
+<li>
+<p>Fern Wifi Cracker：图形化的WIFI密码破解工具。</p>
+</li>
+<li>
+<p>FruityWiFi：无线网络审计工具。</p>
+</li>
+<li>
+<p>Metasploit的getwlanprofiles：是一个简单的Meterpreter脚本，当对Windows 7或Vista框运行时，将提取并下载所有使用Windows客户端设置的无线配置文件。</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://github.com/entropy1337/infernal-twin">infernal-twin</a>：无线网络渗透工具。</p>
+</li>
+<li>
+<p>KillerBee：用于渗透测试802.15.4/ZigBee网络的工具。</p>
+<blockquote>
+<p>802.15.4/ZigBee是一种基于无线个人区域网(WPAN)技术的短距离无线通信标准。它主要应用于物联网(IoT)和智能家居等领域。</p>
+</blockquote>
+</li>
+<li>
+<p>mdk3：无线网络攻击工具。</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://github.com/wiire-a/pixiewps">PixieWPS</a>：离线暴力破解WPS PIN码的工具。</p>
+</li>
+<li>
+<p>reaver-wps：破解无线网络WPS的工具。</p>
+</li>
+<li>
+<p>WEPCrack：是一款用于破解802.11 WEP密钥的开源工具。</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://github.com/DanMcInerney/wifijammer">wifijammer</a>：无线网络干扰工具，可用于断开客户端和无线网络的连接。</p>
+</li>
+<li>
+<p>Wifiphisher：Wi-Fi钓鱼攻击工具。</p>
+</li>
+<li>
+<p>Wifitap：是一个WiFi注入工具集。</p>
+</li>
+<li>
+<p>Wifite：自动化WEP、WPA、WPS破解工具。</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://github.com/cyrus-and/zizzania">zizzania</a>：无线网络拥塞攻击工具。</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://github.com/SYWorks/waidps">waidps</a>：无线审计、入侵检测与防御系统。</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://github.com/DanMcInerney/fakeAP">fakeAP</a>：创建假AP工具。</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://github.com/savio-code/ghost-phisher">ghost-phisher</a>：无线网络渗透工具。</p>
+</li>
+<li>
+<p>Jasager：无线网络渗透工具。</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://github.com/xdavidhu/mitmAP">mitmAP</a>：一个python程序来创建一个假的AP并嗅探数据。</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://github.com/zhongsx/WiFi-Pumpkin">WiFi-Pumpkin</a>：Wi-Fi钓鱼攻击工具。</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://github.com/Viralmaniar/Wifi-Dumper">Wifi-Dumper</a>：用于在Windows机器上转储连接的接入点的WiFi配置文件和明文密码的工具。</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://github.com/LionSec/wifresti">Wifresti</a>：在Windows、Linux和Mac OS中找到无线网络密码。</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://github.com/chrisk44/Hijacker">Hijacker</a>：是一个安卓平台下的无线渗透工具。它的功能非常强大，几乎集成了aircrack-ng 套件、MDK3、Reaver这些工具的功能。</p>
+</li>
+</ul>
+<h1>无线网络渗透的硬件需求</h1>
+<p>在无线网络渗透中最重要的硬件就是需要一张无线网卡，更准确的说是一张支持<code>监听模式</code>的无线网卡。无线网卡有很多，而且每个网卡使用的芯片和驱动不同。所以，并不是所有的无线网卡都可用于无线网络渗透。下面列举一些无线网卡的参数，以供选择：</p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/QQ%E5%9B%BE%E7%89%8720240604224215.png" alt="QQ图片20240604224215"></p>
+<blockquote>
+<p>上图列出了支持网卡的驱动、制造商、是否能够作为AP、是否支持监听，以及支持的协议模式。？表示不确定，yes表示支持，no表示不支持。</p>
+</blockquote>
+<p>无线网卡可以工作在多种模式下，以实现不同的功能。<mark>如果要实施无线渗透，将需要监听网络中的所有数据。所以，必须将无线网卡设置为监听模式</mark>。如果所使用的无线网卡不支持监听模式，则无法监听数据。那么，这里列出一些支持监听模式的无线网卡，如下图</p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/QQ%E5%9B%BE%E7%89%8720240605123730.png" alt="QQ图片20240605123730"></p>
+<h1>无线网卡的基本使用</h1>
+<p>在Linux系统中，如果能正常加载网卡驱动，则我们可以通过以下一些常用命令来查看网卡详细信息。</p>
+<pre class="line-numbers language-none"><code class="language-none"># 查看PCI接口连接的所有设备信息
+lspci
+# 查看USB接口连接的所有设备信息
+lsusb
+# 查看所有无线网卡的硬件参数信息
+iw phy
+或
+iw list
+# 查看所有无线网卡的接口标识信息
+iw dev
+# 查看最近加载的（硬件）驱动日志信息
+dmesg<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>上面提到了PCI设备和PCI接口，这里介绍一下</p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240605130918475.png" alt="image-20240605130918475"></p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240605130932125.png" alt="image-20240605130932125"></p>
+<p>此外，还可以使用<code>ifconfig</code>命令查看当前系统中的网络接口</p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240605132236522.png" alt="image-20240605132236522"></p>
+<p>这里提一下回显信息中的<code>eth0</code>、<code>lo</code>和<code>wlan0</code>。其中，<mark>eth0是有线网络接口，lo是本地回环接口，wlan0是无线网络接口</mark>。</p>
+<p>如果接入的无线网卡没有自动启动的话，可以使用以下命令进行手动启动</p>
+<pre class="line-numbers language-none"><code class="language-none">ifconfig &lt;interface&gt; up
+# interface参数表示将要启用的网卡接口，即使用ifconfig命令获取到的接口名
+# 比如，ifconfig wlan0 up<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>无线网卡使用的协议标准不同，则支持的信道也不同。当无线网卡要接入到一个无线网络时，则客户端需要与AP工作在同一个信道。所以，如果AP支持5GHz频段的信道，无线网卡不支持的话，则可能不能协同工作。所以，用户在接入无线网卡时，也需要确定无线网卡支持的信道。</p>
+<p>使用<code>iwlist</code>工具查看无线网卡支持的信道，如下</p>
+<pre class="line-numbers language-none"><code class="language-none">iwlist &lt;interface&gt; channel<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>比如我的这张无线网卡共支持14个信道，并且显示了每个信道的频率</p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240605133258379.png" alt="image-20240605133258379"></p>
+<h1>无线网卡监听模式的使用</h1>
+<p>无线网络监听模式就是将无线网卡设置为监听状态，以捕获附近其他主机的数据包，进而实施无线网络渗透。对于无线网络渗透测试，通常情况需要将无线网卡设置为监听模式，如扫描网络、嗅探数据包等。</p>
+<h2 id="网络监听原理">网络监听原理</h2>
+<p>无线网络中的数据包是以广播模式传输的，所以用户通过对这些数据包进行监听，即可截取到传输的数据。</p>
+<h2 id="无线网卡的工作模式">无线网卡的工作模式</h2>
+<p>无线网卡一般有4种工作模式，分别是：</p>
+<ul>
+<li>管理模式（Managed）</li>
+<li>主模式（Master）</li>
+<li>点对点模式（Ad-Hoc）</li>
+<li>监听模式（Monitor，也叫RFMON）</li>
+</ul>
+<p>下面将分别介绍这4种工作模式。</p>
+<h3 id="Managed模式">Managed模式</h3>
+<p>Managed模式用于无线客户端直接与无线接入点（Access Point，AP）进行接入连接。在这个模式中，用户可以将无线接入互联网。其中，无线网卡的驱动程序依赖无线AP管理整个通信过程。</p>
+<h3 id="Master模式">Master模式</h3>
+<p>一些无线网卡支持Master模式。这个模式允许无线网卡使用特制的驱动程序和软件工作，作为其他设备的无线AP。主模式主要使用于无线接入点AP，提供无线接入服务及路由功能。例如，无线路由器就是工作在Master模式下。对于普通的PC机来说，如果有合适的硬件也可以变成一台无线AP。</p>
+<h3 id="Ad-Hoc模式">Ad-Hoc模式</h3>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240605134906812.png" alt="image-20240605134906812"></p>
+<h3 id="Monitor模式">Monitor模式</h3>
+<p>监听模式主要用于监控无线网络内部的流量，用于检查网络和排错。如果要捕获无线数据包，用户的无线网卡和配套驱动程序必须支持监听模式。</p>
+<h2 id="监听模式的工作原理">监听模式的工作原理</h2>
+<p><mark>正常情况下，网卡都工作在管理模式，将要发送的数据包发往连接在一起的所有主机，数据包中包含着应该接收数据包主机的正确地址，只有与数据包中目标地址一致的主机才能接收。但是当处于监听模式下时，无论数据包中的目标地址是什么，主机都将接收</mark>，而且网络监听不容易被发现。因为运行网络监听的主机只是被动地接收在局域网中传输的信息，不主动与其他主机交换信息，也没有修改在网络中传输的数据包。</p>
+<h2 id="开启监听模式">开启监听模式</h2>
+<p>由于支持2.4GHz和5GHz的网卡芯片不同，所以启用的监听模式也不同。</p>
+<h3 id="判断网卡是否支持2-4GHz-5GHz">判断网卡是否支持2.4GHz/5GHz</h3>
+<p>判断方法有很多，我列举几个：</p>
+<ul>
+<li>
+<p>直接搜索无线网卡型号，查看厂商给出的信息</p>
+</li>
+<li>
+<p>Windows下</p>
+<pre class="line-numbers language-none"><code class="language-none"># 显示所有无线网卡的驱动程序信息和功能支持
+netsh wlan show drivers<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240605151228881.png" alt="image-20240605151228881"></p>
+<p>&quot;支持的无线电类型&quot;字段处，如果只有802.11 b/g/n，则说明该网卡不支持5GHz，如果包含了802.11a或者802.11ac，则说明该网卡支持5GHz。具体如下</p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240605151422279.png" alt="image-20240605151422279"></p>
+</li>
+<li>
+<p>Linux下</p>
+<pre class="line-numbers language-none"><code class="language-none"># 使用iwlist查看支持的信道
+iwlist &lt;interface&gt; channel
+或者
+# 使用iw命令查看名为Frequencies的字段
+iw list
+或者
+iw phy<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240605151915334.png" alt="image-20240605151915334"></p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240605151803114.png" alt="image-20240605151803114"></p>
+</li>
+</ul>
+<h3 id="启用2-4GHz无线网卡监听">启用2.4GHz无线网卡监听</h3>
+<pre class="line-numbers language-none"><code class="language-none"># 使用Airmon-ng工具来启用监听模式
+airomon-ng start &lt;interface&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240605135430670.png" alt="image-20240605135430670"></p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240605135725455.png" alt="image-20240605135725455"></p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240605135807401.png" alt="image-20240605135807401"></p>
+<p>这里注意一下，开启监听模式后无线网卡有几个信息会变更。</p>
+<p>一是，无线网卡名称会变更，如上图，<code>wlan0</code>变更为<code>wlan0mon</code>。</p>
+<p>二是，监听模式下，无线网卡的Mac地址会显示为一长串字符，如上图，<code>e2:ad:b6:9d:26:69</code>变更为<code>70-F1-1C-47-48-89-00-08-00-00-00-00-00-00-00-00</code>。</p>
+<p>关闭无线网卡监听模式，可以使用</p>
+<pre class="line-numbers language-none"><code class="language-none"># 停止监听
+airmon-ng stop &lt;interface&gt;
+# 比如监听模式下的网卡名为wlan0mon
+airmon-ng stop wlan0mon<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="启用5GHz无线网卡监听">启用5GHz无线网卡监听</h3>
+<p>对于一些支持5GHz频段的无线网卡，也可以使用airmong-ng工具来启用监听。但是，一些芯片的无线网卡无法使用该工具来启用监听，这时候可以使用<code>iwconfig</code>命令来启用5GHz无线网卡为监听模式。先简单介绍一下<code>iwconfig</code>命令：</p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240605141557283.png" alt="image-20240605141557283"></p>
+<p>具体命令如下：</p>
+<pre class="line-numbers language-none"><code class="language-none"># 在启用无线网卡为监听模式时，需要先停止无线网卡。以wlan0为例
+ip link set wlan0 down
+# 注意，执行以上命令后，不会输出任何信息
+# 设置无线网卡为监听模式
+iwconfig wlan0 mode monitor
+# 启动无线网卡
+ip link set wlan0 up
+# 执行以上命令后，也不会输出任何信息
+# 查看无线网卡的工作模式，Mode字段即为工作模式
+iwconfig wlan0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240605143132034.png" alt="image-20240605143132034"></p>
+<p>注意，如果使用<code>iwconfig</code>命令开启无线网卡的监听模式，监听模式下的无线网卡名不会变更。</p>
+<p>停止监听也是一样的逻辑，如下</p>
+<pre class="line-numbers language-none"><code class="language-none"># 还是以wlan0为例，停止无线网卡
+ip link set wlan0 down
+# 设置无线网卡为管理模式
+iwconfig wlan0 mode managed
+# 开启无线网卡
+ip link set wlan0 up
+# 查看无线网卡的工作模式，Mode字段即为工作模式
+iwconfig wlan0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="远程监听">远程监听</h2>
+<p>由于Wi-Fi信号强度的限制，渗透测试人员只能监听主机周围的无线信号。如果想要监听其他位置的主机，则无法扫描到。此时，可以借助树莓派设备，将树莓派放在目标网络附近，来开启远程监听接口。这样，通过远程连接到树莓派，即可实现远程监听。在Aircrack-ng套件中，提供了一个airserv-ng工具，可以为无线网卡创建一个服务。然后，渗透测试人员就可以通过<code>IP:端口号</code>方式，远程访问该无线网卡，进行各项操作。</p>
+<p>airserv-ng工具的语法格式如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">airserv-ng [options]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>主要用到的参数有：</p>
+<ul>
+<li>-p：指定监听的端口号，默认值为666。</li>
+<li>-d：指定使用的无线网络接口。</li>
+<li>-c：指定使用的信道。</li>
+<li>-v：指定的冗余级别。其中，支持的冗余级别有3个（1~3），默认值为1。冗余级别1表示显示连接和断开连接的客户端；冗余级别2表示除了显示冗余级别1的信息外，还显示信道改变请求和无效客户端命令请求信息；冗余级别3表示显示每次向客户机发送数据包时的信息。</li>
+</ul>
+<p>下面做一个远程监听的演示：</p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/QQ%E5%9B%BE%E7%89%8720240606154027.png" alt="QQ图片20240606154027"></p>
+<h1>扫描无线网络</h1>
+<p>扫描无线网络就是侦听周围的无线信号，无线网络信息包括<code>AP名称</code>、<code>工作的信道</code>、<code>MAC地址</code>及<code>连接的客户端</code>等。</p>
+<h2 id="扫描方式">扫描方式</h2>
+<p>有主动和被动两种方式来实施扫描。其中，主动扫描是客户端主动发送探测请求帧，根据响应的信号帧来确定存在的AP；被动扫描是通过监听AP自动发送的信号帧，来确定存在的AP。</p>
+<h3 id="主动扫描">主动扫描</h3>
+<p>主动扫描方式是客户端主动向AP发送探索请求帧。<mark>发送时，请求帧使用NULL或设置的SSID名称。当周围的AP收到该请求后，将会响应该探索信号帧</mark>。该探索响应帧包括信号帧中的所有信息，即使不发送信号的AP也会响应该请求，进而暴露它的存在。所以，基于这种扫描方式，用户能够发现更多个AP。<mark>但是为了AP不被扫描发现，一些网络/系统管理员也可以设置AP，忽略设置为NULL的探索请求。</mark></p>
+<h3 id="被动扫描">被动扫描</h3>
+<p>被动扫描是利用AP每隔一段时间自动发送信号帧的机制进行扫描。但是如果AP不自动广播信号帧的话，则无法发现存在的AP。</p>
+<h2 id="扫描方法">扫描方法</h2>
+<p>这里以Airodump-ng为例介绍扫描AP的方法。</p>
+<p>Airodump-ng是Aircrack-ng工具集中的一个工具，主要用来捕获数据包，以便于Aircrack-ng进行密码破解。用户可以使用该工具扫描AP信息，<mark>该工具支持实时扫描和离线扫描</mark>。</p>
+<h3 id="实时扫描">实时扫描</h3>
+<p>首先要开启无线网卡的监听模式</p>
+<pre class="line-numbers language-none"><code class="language-none"># 开启无线网卡监听模式（比如网卡名为wlan0）
+airmon-ng start wlan0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>进行实时扫描</p>
+<pre class="line-numbers language-none"><code class="language-none">airodump-ng &lt;interface&gt; 
+# 如果要获取AP的生产厂商，可以使用--manufacturer参数，使用该参数后输出的信息相比之前扫描的结果多显示了一列。该列名为MANUFACTURER，即AP的生产厂商信息。
+airodump-ng &lt;interface&gt; --manufacturer
+# 如果要保存成文件可以使用-w参数，用于指定保存捕获数据包的文件名
+airodump-ng &lt;interface&gt; -w &lt;file&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>当用户不需要继续扫描时可使用Ctrl+C组合键退出扫描。这时，捕获到的所有数据包都将保存在以<code>&lt;file&gt;</code>为前缀的的文件中，默认将会生成5个文件。</p>
+<p>比如命令为<code>airodump-ng wlan0mon -w dump</code>，保存的文件如下</p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240627143933097.png" alt="image-20240627143933097"></p>
+<p><code>.cap</code>是一个流量捕获包文件，用户可以将该流量包导入到流量分析器中（如Wireshark）进行分析；<code>.csv</code>文件中的信息是屏幕输出显示的信息；<code>.netxml</code>用来保存地理位置信息。</p>
+<h3 id="离线扫描">离线扫描</h3>
+<p>离线扫描就是通过从捕获的流量包文件中读取AP数据包，以获取AP信息。</p>
+<p>比如使用Wireshark或Tcpdump捕获了一个流量包，下面使用Airodump-ng工具进行离线扫描。</p>
+<pre class="line-numbers language-none"><code class="language-none"># 参数-r表示指定读取的捕获文件。其中，捕获文件的后缀必须是.pcap格式
+airodump-ng -r &lt;pcap&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="扫描开启WPS功能的AP">扫描开启WPS功能的AP</h2>
+<h3 id="WPS功能介绍">WPS功能介绍</h3>
+<p>WPS功能就是使客户端连接WiFi网络时，此连接过程变得非常简单。用户只需按一下无线路由器上的WPS键，或者输入一个PIN码，就能快速地完成无线网络连接，并获得一个WPA加密的无线网络。</p>
+<h3 id="使用wash扫描">使用wash扫描</h3>
+<blockquote>
+<p>使用Airmon-ng也可以，类似的功能基本都有集成</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none"># 注意要开启无线网卡的监听模式，这里不做赘述
+wash -i wlan0mon<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240627154023625.png" alt="image-20240627154023625"></p>
+<p>以上输出信息共显示了7列，分别为BSSID（AP的BSSID）、Ch（AP的工作信道）、dBm（接收的信号强度）、WPS（WPS版本）、Lck（WPS锁定）、Vendor（生产厂商）和ESSID（AP的SSID）。这里主要是分析Lck列，如果该列的值为Yes，则说明该AP锁定了WPS，即没有开启WPS功能；如果显示为No，则表示没有锁定，即开启了WPS功能。</p>
+<h2 id="获取隐藏的ESSID">获取隐藏的ESSID</h2>
+<p>隐藏的ESSID就是指AP不自动广播SSID名称。如果用户不指定该AP的SSID名称的话，则无法接入该无线网络。<mark>一般情况下，用户都会设置广播SSID。但是为了安全起见，一些管理员关闭了SSID广播，即隐藏了ESSID名称</mark>。此时，如果要连接该无线网络，则需要获取隐藏的ESSID名称。</p>
+<p>这里使用mdk3获取隐藏ESSID名称，命令格式</p>
+<pre class="line-numbers language-none"><code class="language-none">mdk3 [interface] p -b a -t 目标AP的MAC地址 -s 发包速率
+# 举个例子
+mdk3 wlan0mon p -b a -t 8C:21:0A:44:09:F8 -s 100<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>解释一下命令，如下</p>
+<ul>
+<li>
+<p>interface：指定监听的网络接口</p>
+</li>
+<li>
+<p>p：指定使用BSSID探测和ESSID暴力破解模式</p>
+</li>
+<li>
+<p>-b a：使用全暴力破解模式</p>
+</li>
+<li>
+<p>-t：指定目标AP的MAC地址</p>
+</li>
+<li>
+<p>-s：设置发包速率</p>
+</li>
+</ul>
+<p>执行命令后，会尝试暴力破解SSID名称。当找到后，将在终端标准输出。类似如下</p>
+<pre class="line-numbers language-none"><code class="language-none">root@daxueba:~# mdk3 wlan0mon p -b a -t 8C:21:0A:44:09:F8 -s 100
+SSID Bruteforce Mode activated!
+Waiting for beacon frame from target...
+Sniffer thread started
+SSID does not seem to be hidden! Found: &quot;Test&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="查找AP漏洞信息">查找AP漏洞信息</h2>
+<p>这里提一下查找AP漏洞信息的网址，如下</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://routerpwn.com/%E3%80%90%E6%8F%90%E4%BE%9B%E4%BA%86%E4%B8%80%E4%BA%9B%E8%B7%AF%E7%94%B1%E5%99%A8%E5%85%AC%E5%BC%80%E7%9A%84%E6%BC%8F%E6%B4%9E%E3%80%91">http://routerpwn.com/【提供了一些路由器公开的漏洞】</a></li>
+</ul>
+<p>一个技巧是，先根据AP的Mac地址查到其具体型号，再查询漏洞，下面给出几个Mac地址查询站：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://mac.bmcx.com/">https://mac.bmcx.com/</a></li>
+<li><a target="_blank" rel="noopener" href="https://7n4.cn/">https://7n4.cn/</a></li>
+</ul>
+<h2 id="扫描未关联的客户端">扫描未关联的客户端</h2>
+<h3 id="什么是关联？">什么是关联？</h3>
+<p>关联主要指客户端发送关联请求包（Association Request）给目标AP，以获取AP的关联响应（Association Response）包。其中，关联请求包中携带了一些协商信息，包括加密方式、支持的速率、支持的功率及其他的一些特性。AP如果都支持这些协商的话，则回应携带OK信息的关联响应（Association Response）包给客户端，并同意其接入。至此，关联成功。但如果AP对客户端的协商信息有异议，则会发送携带错误码的关联响应（Association Response）包给客户端，以拒绝其接入。<mark>如果要接入无线网络，则必须和该无线网络中的AP关联成功</mark>。否则，无法接入其无线网络</p>
+<h3 id="使用hoover工具扫描未关联的客户端">使用hoover工具扫描未关联的客户端</h3>
+<p>hoover工具下载：<a target="_blank" rel="noopener" href="https://github.com/xme/hoover">https://github.com/xme/hoover</a></p>
+<p>命令格式如下</p>
+<pre class="line-numbers language-none"><code class="language-none">perl hoover.pl --interface&#x3D;wlan0mon --tshark- path&#x3D;&#x2F;usr&#x2F;bin&#x2F;tshark --dumpfile&#x3D;result.txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>常用参数如下</p>
+<ul>
+<li>–interface：指定使用的无线网络监听接口。</li>
+<li>–help：显示帮助信息。</li>
+<li>–verbose：标准输出详细信息。</li>
+<li>–ifconfig-path：指定ifconfig库的路径。</li>
+<li>–iwconfig-path：指定iwconfig库的路径。</li>
+<li>–tshark-path：指定tshark库的路径。</li>
+<li>–dumpfile：保存查找到的SSID/MAC地址到一个文件中</li>
+</ul>
+<p>举个例子，执行扫描命令后会出现类似如下的输出</p>
+<pre class="line-numbers language-none"><code class="language-none">root@daxueba:~# &#x2F;root&#x2F;hoover&#x2F;hoover.pl --interface&#x3D;wlan0mon  --tshark- path&#x3D;&#x2F;usr&#x2F;bin&#x2F;tshark --dumpfile&#x3D;result.txt
+Running as user &quot;root&quot; and group &quot;root&quot;. This could be dangerous.
+Capturing on &#39;wlan0mon&#39;
+3 ++ New probe request from 1c:77:f6:60:f2:cc with SSID: Wildcard (Broadcast) [1]
+26 ++ New probe request from 1c:77:f6:60:f2:cc with SSID: Test [2]
+82 ++ New probe request from dc:2b:2a:1d:f7:a6 with SSID: yzty [6]
+156 ++ New probe request from 64:09:80:24:d4:64 with SSID: fkhome [7]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>比如从输出中可以看出，MAC地址为<code>1c:77:f6:60:f2:cc</code>的客户端，正在连接名称为<code>Test</code>的AP。</p>
+<p>扫描一段时间后，按Ctrl+C键即可终止扫描，会得到类似如下的输出：</p>
+<pre class="line-numbers language-none"><code class="language-none">158 ^C!! Received kill signal!
+!! Dumping detected networks:
+!! MAC Address  SSID    Count   Last Seen
+!! ---------    ----    -----   ---------
+!! 1c:77:f6:60:f2:cc    Wildcard (Broadcast)    61      1970&#x2F;01&#x2F;01 08:00:01
+!! 1c:77:f6:60:f2:cc    Test    1       1970&#x2F;01&#x2F;01 08:00:01
+!! 14:f6:5a:ce:ee:2a    yzty    14      1970&#x2F;01&#x2F;01 08:00:14
+!! 64:09:80:24:d4:64    fkhome  1       1970&#x2F;01&#x2F;01 08:01:04
+!! Total unique SSID: 4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>其中以列表形式显示了探索的客户端及SSID个数。在输出的信息中共包括4列，分别为MAC Address（客户端的MAC地址）、SSID（AP的名称）、Count（关联次数）和Last Seen（最后时间）。<mark>通过分析Count列，可以看到哪些客户端与AP关联失败。如果能正常连接网络的话，一般情况下一次就关联成功了。如果没有关联成功，将多次尝试关联</mark>。由此可以说明，Count列的值越大，则说明该客户端没有与AP关联成功。</p>
+<h2 id="查看AP和客户端关联关系">查看AP和客户端关联关系</h2>
+<p>Kali Linux提供了一款名为Airgraph-ng的工具，可以根据Airodump-ng工具生成的CSV文件绘制PNG格式的图。其中，绘制的图有两种类型，分别是AP-客户端关联图和通用探测图。</p>
+<p>直接使用<code>apt install airgraph-ng</code>安装即可。</p>
+<p>Airgraph-ng命令如下：</p>
+<pre class="line-numbers language-none"><code class="language-none"># 先使用airodump-ng捕获相关数据
+airodump-ng wlan0mon -w dump
+# 绘制图像
+airgraph-ng -i &#x2F;root&#x2F;dump-01.csv -o Image.png -g CAPR<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>下面对Airgraph-ng工具的参数做一个介绍</p>
+<ul>
+<li>-h，–help：显示帮助信息。</li>
+<li>-o OUTPUT，–output=OUTPUT：指定输出的图片文件位置，如Image.png。</li>
+<li>-i INPUT，–dump=INPUT：指定使用Airodump-ng生成的CSV格式文件。注意，不是pcap文件。</li>
+<li>-g GRAPH_TYPE，–graph=GRAPH_TYPE：指定生成的图形类型。这里可以指定两种类型，分别是CAPR（Client to AP Relationship）或CPG（Common Probe Graph）。其中，CAPR是一个客户端和AP关联的关联图；CPG是一个通用探测图。</li>
+</ul>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240627165428987.png" alt="image-20240627165428987"></p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240627165406844.png" alt="image-20240627165406844"></p>
+<h1>其他攻击手法</h1>
+<p>我将无线攻击手法分为以下几种形式，如下</p>
+<ul>
+<li>伪造AP</li>
+<li>破解WiFi密码</li>
+<li>断网攻击</li>
+</ul>
+<h2 id="伪造AP">伪造AP</h2>
+<p>伪造AP一般可用作两种方式：骚扰、钓鱼。</p>
+<h3 id="伪造AP骚扰">伪造AP骚扰</h3>
+<p>这种攻击形式主要起到一个骚扰的作用，类似蓝牙弹窗攻击，虽然没什么危害但是搞人心态。</p>
+<blockquote>
+<p>利用形式有很多，比如打广告。</p>
+</blockquote>
+<h4 id="使用mdk3">使用mdk3</h4>
+<pre class="line-numbers language-none"><code class="language-none"># 开启无线网卡监听模式（比如网卡名为wlan0，监听模式下的网卡名为wlan0mon）
+airmon-ng start wlan0
+# 创建一个wifi.lst文件，逐行写入要伪造的WIFI名称（一个、多个都行，但注意名称不能过长）
+vim wifi.list
+# 伪造WIFI热点（-c为可选项，用于指定伪造热点的信道号）
+mdk3 wlan0mon b -c 1 -f wifi.list
+# 除此之外，还可以通过下面的几条命令伪造WIFI热点
+# 伪造一个WIFI热点
+mdk3 wlan0mon b -n test_wifi
+# 伪造多个随机名字的WIFI热点
+mdk3 wlan0mon b -g -c 1
+# 还可以用 -s参数指定伪造WIFI热点的间隔，单位毫秒
+mdk3 wlan0mon b -f wifi.list -c 6 -s 1000<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240628220202303.png" alt="image-20240628220202303"></p>
+<h4 id="使用airbase-ng">使用airbase-ng</h4>
+<p>首先使用airbase-ng伪造1个AP</p>
+<pre class="line-numbers language-none"><code class="language-none">airbase-ng -c 11 -e fake_wifi wlan0mon
+# 解释一下参数，-c用于设置信道号，-e用于设置伪造的AP名<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240627181950964.png" alt="image-20240627181950964"></p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240627181931666.png" alt="image-20240627181931666"></p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240627182104915.png" alt="image-20240627182104915"></p>
+<p><mark>由于Airbase-ng没有提供伪造多个AP，但是可以使用Python的多线程技术实现伪造多个AP</mark>，达到如下效果</p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240627183004759.png" alt="image-20240627183004759"></p>
+<blockquote>
+<p>此外，还要注意AP名称不能过长，应当小于等于20个字节，所以编写脚本时要做好分词</p>
+</blockquote>
+<h3 id="伪造AP钓鱼">伪造AP钓鱼</h3>
+<p>不难发现，通过上面方法伪造的AP是没有密码且无法连接的，所以只能起到【骚扰】的作用，下面介绍如何通过伪造AP钓鱼。</p>
+<h4 id="使用Wifiphisher">使用Wifiphisher</h4>
+<p>wifiphisher是AP钓鱼框架，能够快速、自动化地伪造AP钓鱼。</p>
+<p>安装和启动wifiphisher</p>
+<pre class="line-numbers language-none"><code class="language-none">apt install wifiphisher -y
+wifiphisher<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>启动后wifiphisher会扫描周围的WiFi信号，通过<code>方向键+回车</code>选择想要伪造钓鱼的WiFi</p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240627212123130.png" alt="image-20240627212123130"></p>
+<p>之后会提示选择攻击模式，就是伪造的钓鱼页面，有4种页面</p>
+<ul>
+<li>第一个为登录认证页面</li>
+<li>第二个为浏览器插件更新</li>
+<li>第三个为网卡管理连接</li>
+<li>第四个为固件升级</li>
+</ul>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240627221817154.png" alt="image-20240627221817154"></p>
+<p>同样通过<code>方向键+回车</code>选择即可，之后wifiphisher会伪造一个同AP名的伪AP，并且对原AP下的设备进行<code>Deauthentication攻击</code>(即断网攻击)，当设备重新连接上钓鱼AP时会自动跳转到钓鱼界面，诱导用户输入密码。比如这里使用固件升级钓鱼页面（选项4）：</p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240627224100632.png" alt="image-20240627224100632"></p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240627224349859.png" alt="image-20240627224349859"></p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240627223554171.png" alt="image-20240627223554171"></p>
+<blockquote>
+<p>从上图不难看出，伪造的AP是没有密码的</p>
+</blockquote>
+<p>当用户输入密码时，攻击机上会显示用户输入的密码</p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240627222936163.png" alt="image-20240627222936163"></p>
+<h4 id="使用fluxion">使用fluxion</h4>
+<p>也是一款无线钓鱼工具，项目地址：<a target="_blank" rel="noopener" href="https://github.com/FluxionNetwork/fluxion">https://github.com/FluxionNetwork/fluxion</a></p>
+<p>使用fluxion进行伪造AP钓鱼</p>
+<pre class="line-numbers language-none"><code class="language-none"># 下载
+git clone https:&#x2F;&#x2F;www.github.com&#x2F;FluxionNetwork&#x2F;fluxion.git
+cd fluxion 
+# 安装依赖并启动
+.&#x2F;fluxion.sh -i<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240628161828681.png" alt="image-20240628161828681"></p>
+<p>具体的钓鱼方法可以参考下列文章：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv21621525/">https://www.bilibili.com/read/cv21621525/</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/CrotZZ/article/details/122363374">https://blog.csdn.net/CrotZZ/article/details/122363374</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/forever0heart/article/details/115047566">https://blog.csdn.net/forever0heart/article/details/115047566</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jaxiousy/article/details/124164354">https://blog.csdn.net/jaxiousy/article/details/124164354</a></li>
+</ul>
+<h4 id="使用wifipumpkin3">使用wifipumpkin3</h4>
+<p>wifipumpkin3是一款Python编写的wifi钓鱼攻击强大框架，可以快速方便的搭建一个钓鱼wifi，进行钓鱼或中间人攻击，免去了手动搭建环境的繁琐步骤。</p>
+<p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/P0cL4bs/wifipumpkin3">https://github.com/P0cL4bs/wifipumpkin3</a></p>
+<pre class="line-numbers language-none"><code class="language-none"># 安装
+apt install wifipumpkin3 -y
+# 要使设备连上伪造的AP也能够上网，要关闭防火墙
+# Kali Linux中默认使用的防火墙是ufw（Uncomplicated Firewall）
+# 可以通过以下命令关闭ufw
+apt install ufw -y
+ufw disable
+# 启动
+wifipumpkin3
+# wlan0是无线网卡的名称
+set interface wlan0
+set ssid 伪AP名
+set proxy noproxy
+ignore pydns_server
+start<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>有设备连接伪AP时，会显示设备名，如下</p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240628183348703.png" alt="image-20240628183348703"></p>
+<p>因为放通了防火墙，所以设备连上伪AP是能够正常上网的，请求包和响应包均能看到，如下</p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240628220416477.png" alt="image-20240628220416477"></p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240628184302943.png" alt="image-20240628184302943"></p>
+<p>更进一步可以使用Wireshark监听无线网卡，配合Wireshark自身强大的过滤语法，获取更多信息。</p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240628184517092.png" alt="image-20240628184517092"></p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240628192755409.png" alt="image-20240628192755409"></p>
+<p><img src="/2024/06/04/%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F/image-20240628192857665.png" alt="image-20240628192857665"></p>
+<h4 id="使用airbase-ng-2">使用airbase-ng</h4>
+<h1>鸣谢</h1>
+<ul>
+<li>
+<p>《从实践中学习Kali Linux无线网络渗透测试》</p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://c4pr1c3.github.io/cuc-mis/chap0x01/main.html">第一章 无线网络安全基础 · 移动互联网安全 (c4pr1c3.github.io)</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://www.right.com.cn/forum/thread-195300-1-1.html">破解你就选择3070芯片的网卡不要选8187芯片的-无线网卡对比、评测、驱动、破解等-恩山无线论坛 (right.com.cn)</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="http://www.fishyoung.com/post-294.html">华为 | IEEE 802.11常见标准及2.4GHz、5GHz Wi-Fi介绍 - 飞翔灬吾爱的Blog (fishyoung.com)</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/File:2.4_GHz_Wi-Fi_channels_(802.11b,g_WLAN).svg">File:2.4 GHz Wi-Fi channels (802.11b,g WLAN).svg - 维基百科，自由的百科全书 (wikipedia.org)</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/217169">不止Kali 和 Aircrack-ng | 无线渗透工具合集-阿里云开发者社区 (aliyun.com)</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://www.ddosi.org/b123/">wifi渗透测试工具44款 无线网络入侵检测 - 🔰雨苁ℒ🔰 (ddosi.org)</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/fuchen91/article/details/105098299">如何判断无线网卡是否支持5GHz频段【两种方法】_e431无线网卡支持5ghz吗-CSDN博客</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://bbs.huaweicloud.com/blogs/374837">盘点四种WiFi加密标准：WEP、WPA、WPA2、WPA3-云社区-华为云 (huaweicloud.com)</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/bonelee/p/15321552.html">wifiphisher实现无线渗透WiFi钓鱼 - bonelee - 博客园 (cnblogs.com)</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1867167">无线攻防：wifi攻防从破解到钓鱼-腾讯云开发者社区-腾讯云 (tencent.com)</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://lnng.top/posts/8b06.html">https://lnng.top/posts/8b06.html</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/forever0heart/article/details/115048617">wifipumpkin3搭建钓鱼wifi监听用户行为_wifipumpkin3实战效果-CSDN博客</a></p>
+</li>
+</ul>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+
+    
+    
+    <a type="button" class="btn btn-default disabled"><i class="fa fa-arrow-circle-o-left"></i>Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2024/05/08/代码编译及运行常识/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2024-06-04 
+	</div>
+	
+
+	<!-- categories -->
+    
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/渗透测试/">渗透测试<span>26</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2024 Jici
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>    
+</p>
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+
+<span class="post-meta-divider">|</span>
+本站总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;次</span>
+
+<script>
+var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a||"interactive"===document.readyState||"complete"===document.readyState?c.call(document):b.push(function(){return c.call(this)}),this},d=function(){for(var a=0,c=b.length;c>a;a++)b[a].apply(document);b=[]},e=function(){a||(a=!0,d.call(window),document.removeEventListener?document.removeEventListener("DOMContentLoaded",e,!1):document.attachEvent&&(document.detachEvent("onreadystatechange",e),window==window.top&&(clearInterval(c),c=null)))},document.addEventListener?document.addEventListener("DOMContentLoaded",e,!1):document.attachEvent&&(document.attachEvent("onreadystatechange",function(){/loaded|complete/.test(document.readyState)&&e()}),window==window.top&&(c=setInterval(function(){try{a||document.documentElement.doScroll("left")}catch(b){return}e()},5)))}(),bszCaller={fetch:function(a,b){var c="BusuanziCallback_"+Math.floor(1099511627776*Math.random());window[c]=this.evalCall(b),a=a.replace("=BusuanziCallback","="+c),scriptTag=document.createElement("SCRIPT"),scriptTag.type="text/javascript",scriptTag.defer=!0,scriptTag.src=a,scriptTag.referrerPolicy="no-referrer-when-downgrade",document.getElementsByTagName("HEAD")[0].appendChild(scriptTag)},evalCall:function(a){return function(b){ready(function(){try{a(b),scriptTag.parentElement.removeChild(scriptTag)}catch(c){bszTag.hides()}})}}},bszCaller.fetch("//busuanzi.ibruce.info/busuanzi?jsonpCallback=BusuanziCallback",function(a){bszTag.texts(a),bszTag.shows()}),bszTag={bszs:["site_pv","page_pv","site_uv"],texts:function(a){this.bszs.map(function(b){var c=document.getElementById("busuanzi_value_"+b);c&&(c.innerHTML=a[b])})},hides:function(){this.bszs.map(function(a){var b=document.getElementById("busuanzi_container_"+a);b&&(b.style.display="none")})},shows:function(){this.bszs.map(function(a){var b=document.getElementById("busuanzi_container_"+a);b&&(b.style.display="inline")})}};
+</script>
+
+
+<!-- <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span class="post-meta-divider">|</span>
+<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+<span class="post-meta-divider">|</span>
+<span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人</span> -->
+
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("08/12/2023 00:00:00");//在此处修改你的建站时间
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已勉强运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+    setInterval("createtime()",250);
+</script>
+<br><br>
+<span class="num">及辞已经在本站记录了 160.4k 字</span>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    fetch('/imageCount.json')
+      .then(response => response.json())
+      .then(data => {
+        const imageCount = data.count;
+        const imageCountElement = document.getElementById('imageCount');
+        imageCountElement.textContent = `共计收录了 ${imageCount} 张图片`;
+      })
+      .catch(error => {
+        console.error('Failed to load image count:', error);
+      });
+  });
+</script>
+<br><br>
+<span id="imageCount">正在加载图片数目...</span>
+</div> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<!-- hexo injector body_end start --><script src="/assets/mmedia/mmedia-loader.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/ni-j.model.json"},"display":{"position":"left","width":260,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+   </html>
+
+<!-- 雪花特效 -->
+<!-- 直接引用公网CDN在线文件 -->
+<!-- <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/xuehuapiaoluo.js">-->
+<!-- 引用本地文件 -->
+<!--<script type="text/javascript" src="\js\snow.js"></script>-->
+
+<!-- 樱花花特效 -->
+<!-- 直接引用公网CDN在线文件 -->
+<!--<script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/sakura.js"></script>-->
+<!-- 引用本地文件 -->
+<script type="text/javascript" src="\js\sakura.js"></script>
+
+
+<!-- 数字雨 
+<canvas id="canvas" width="1440" height="900" ></canvas>
+<script type="text/javascript" src="/js/DigitalRain.js"></script>-->
+
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+
+<!--图片预加载-->
+<script src="//instant.page/3.0.0" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
