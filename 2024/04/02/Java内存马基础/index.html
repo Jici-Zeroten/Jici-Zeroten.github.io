@@ -9,8 +9,7 @@
   <title>Java内存马基础 | Jici&#39;s Blog</title>
   <meta name="author" content="Jici">
   
-  <meta name="description" content="什么是内存马
-先简单梳理一下webshell的发展历程，大致如下
+  <meta name="description" content="什么是内存马先简单梳理一下webshell的发展历程，大致如下
 大马==&amp;gt;小马拉大马(先上传小马，之后通过小马来上传大马)==&amp;gt;一句话木马==&amp;gt;加密一句话木马==&amp;gt;加密内存马">
   
   
@@ -162,49 +161,42 @@ var _hmt = _hmt || [];
 	<div class="mypage">		
 	  		
 
-	  <h1>什么是内存马</h1>
-<p>先简单梳理一下webshell的发展历程，大致如下</p>
+	  <h1 id="什么是内存马"><a href="#什么是内存马" class="headerlink" title="什么是内存马"></a>什么是内存马</h1><p>先简单梳理一下webshell的发展历程，大致如下</p>
 <p><code>大马==&gt;小马拉大马(先上传小马，之后通过小马来上传大马)==&gt;一句话木马==&gt;加密一句话木马==&gt;加密内存马</code></p>
 <p>这里在附上一张传统webshell的分类图</p>
 <p><img src="/2024/04/02/Java%E5%86%85%E5%AD%98%E9%A9%AC%E5%9F%BA%E7%A1%80/image-20240402161509484.png" alt="image-20240402161509484"></p>
 <p>内存马是无文件攻击的一种常用手段，不会有文件落地，给检测带来巨大难度。其中，Webshell内存马是在内存中写入恶意后门和木马并执行，达到远程控制Web服务器的一类内存马。</p>
-<h1>Tomcat内存马</h1>
-<p>Java应用服务器有很多，流行的有：</p>
+<h1 id="Tomcat内存马"><a href="#Tomcat内存马" class="headerlink" title="Tomcat内存马"></a>Tomcat内存马</h1><p>Java应用服务器有很多，流行的有：</p>
 <p><img src="/2024/04/02/Java%E5%86%85%E5%AD%98%E9%A9%AC%E5%9F%BA%E7%A1%80/image-20240402162128400.png" alt="image-20240402162128400"></p>
 <p>其中最常见的就是Tomcat，而Java内存马中最典型的就是Tomcat内存马，主要分为以下几类：</p>
 <ul>
-<li>servlet-api 类
-<ul>
+<li>servlet-api 类<ul>
 <li>filter 型</li>
 <li>servlet 型</li>
 </ul>
 </li>
-<li>spring 类
-<ul>
+<li>spring 类<ul>
 <li>拦截器</li>
 <li>controller 型</li>
 </ul>
 </li>
-<li>Java Instrumentation 类
-<ul>
+<li>Java Instrumentation 类<ul>
 <li>agent 型</li>
 </ul>
 </li>
 </ul>
-<h2 id="实现逻辑">实现逻辑</h2>
-<p>Java web有三大组件，分别是Listener、Filter、Servlet</p>
+<h2 id="实现逻辑"><a href="#实现逻辑" class="headerlink" title="实现逻辑"></a>实现逻辑</h2><p>Java web有三大组件，分别是Listener、Filter、Servlet</p>
 <p>这里简单梳理一下这三大组件的作用：</p>
 <ul>
-<li>Servlet：是运行在 Web 服务器或应用服务器上的程序，它是作为来自 HTTP 客户端的请求和 HTTP 服务器上的数据库或应用程序之间的中间层。<mark>它负责处理用户的请求，并根据请求生成相应的返回信息提供给用户</mark>。</li>
-<li>Filter：即过滤器，是对Servlet技术的一个补充，<mark>它负责对到资源的请求或来自资源的响应进行过滤、检查</mark></li>
-<li>Listener：即监听器，<mark>它负责监听客户端、服务端的操作，并触发执行一些代码</mark></li>
+<li>Servlet：是运行在 Web 服务器或应用服务器上的程序，它是作为来自 HTTP 客户端的请求和 HTTP 服务器上的数据库或应用程序之间的中间层。==它负责处理用户的请求，并根据请求生成相应的返回信息提供给用户==。</li>
+<li>Filter：即过滤器，是对Servlet技术的一个补充，==它负责对到资源的请求或来自资源的响应进行过滤、检查==</li>
+<li>Listener：即监听器，==它负责监听客户端、服务端的操作，并触发执行一些代码==</li>
 </ul>
 <p>客户端发起的web请求会依次经过Listener、Filter、Servlet三个组件，我们只要在这个请求的过程中做手脚，在内存中修改已有的组件或者动态注册一个新的组件，插入恶意的shellcode，就可以实现内存马。为了便于理解，附上两张客户端请求的流程图：</p>
 <p><img src="/2024/04/02/Java%E5%86%85%E5%AD%98%E9%A9%AC%E5%9F%BA%E7%A1%80/image-20240402164303562.png" alt="image-20240402164303562"></p>
 <p><img src="/2024/04/02/Java%E5%86%85%E5%AD%98%E9%A9%AC%E5%9F%BA%E7%A1%80/image-20240402164339037.png" alt="image-20240402164339037"></p>
-<h1>鸣谢</h1>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://ruyueattention.github.io/2022/11/15/Java%E5%86%85%E5%AD%98%E9%A9%AC1-Servlet-api%E5%86%85%E5%AD%98%E9%A9%AC/">夺去目光的故事 (ruyueattention.github.io)</a></li>
+<h1 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://ruyueattention.github.io/2022/11/15/Java内存马1-Servlet-api内存马/">夺去目光的故事 (ruyueattention.github.io)</a></li>
 <li><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/11988?time__1311=mqmx0DBG0QYiqYKDsKoeCqetCKY0IPYG8KeD&amp;alichlgref=https%3A%2F%2Fwww.google.com.hk%2F">Tomcat内存马——Filter/servlet/Listener/valve - 先知社区 (aliyun.com)</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/274466.html">一文看懂内存马 - FreeBuf网络安全行业门户</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/renhaoblog/p/16851585.html">内存马的攻防博弈实操 - renblog - 博客园 (cnblogs.com)</a></li>
@@ -341,7 +333,7 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
     setInterval("createtime()",250);
 </script>
 <br><br>
-<span class="num">及辞已经在本站记录了 168.3k 字</span>
+<span class="num">及辞已经在本站记录了 169k 字</span>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     fetch('/imageCount.json')
