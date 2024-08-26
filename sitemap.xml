@@ -695,13 +695,6 @@
 
   
   <url>
-    <loc>https://jici-zeroten.github.io/tags/%E5%B8%B8%E8%AF%86%E4%B8%8E%E6%8A%80%E5%B7%A7/</loc>
-    <lastmod>2024-08-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://jici-zeroten.github.io/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/</loc>
     <lastmod>2024-08-26</lastmod>
     <changefreq>weekly</changefreq>
@@ -716,6 +709,20 @@
   </url>
   
   <url>
+    <loc>https://jici-zeroten.github.io/tags/%E5%B8%B8%E8%AF%86%E4%B8%8E%E6%8A%80%E5%B7%A7/</loc>
+    <lastmod>2024-08-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jici-zeroten.github.io/tags/SEO/</loc>
+    <lastmod>2024-08-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://jici-zeroten.github.io/tags/%E5%8C%BB%E5%AD%A6/</loc>
     <lastmod>2024-08-26</lastmod>
     <changefreq>weekly</changefreq>
@@ -724,13 +731,6 @@
   
   <url>
     <loc>https://jici-zeroten.github.io/tags/%E4%BA%8C%E6%AC%A1%E5%85%83/</loc>
-    <lastmod>2024-08-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://jici-zeroten.github.io/tags/SEO/</loc>
     <lastmod>2024-08-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
