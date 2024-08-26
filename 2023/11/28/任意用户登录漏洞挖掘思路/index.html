@@ -10,7 +10,8 @@
   <meta name="author" content="Jici">
   
   <meta name="description" content="[TOC]
-手机验证码问题导致的任意用户登录手机验证码导致的任意用户登录主要包括：验证码爆破、验证码明文返回、存在万能验证码、验证码未绑定用户、获取验证码的手机号字段可双写、验证码为空/任意验证码可成功验证等。下面展开来讲。">
+手机验证码问题导致的任意用户登录
+手机验证码导致的任意用户登录主要包括：验证码爆破、验证码明文返回、存在万能验证码、验证码未绑定用户、获取验证码的手机号字段可双写、验证码为空/任意验证码可成功验证等。下面展开来讲。">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -162,8 +163,10 @@ var _hmt = _hmt || [];
 	  		
 
 	  <p>[TOC]</p>
-<h1 id="手机验证码问题导致的任意用户登录"><a href="#手机验证码问题导致的任意用户登录" class="headerlink" title="手机验证码问题导致的任意用户登录"></a>手机验证码问题导致的任意用户登录</h1><p>手机验证码导致的任意用户登录主要包括：验证码爆破、验证码明文返回、存在万能验证码、验证码未绑定用户、获取验证码的手机号字段可双写、验证码为空/任意验证码可成功验证等。下面展开来讲。</p>
-<h2 id="验证码爆破"><a href="#验证码爆破" class="headerlink" title="验证码爆破"></a>验证码爆破</h2><p>当登录流程使用手机验证码登录，没有图片验证码/图片验证码可重用/图片验证码简单可识别且后端没有限制手机验证码验证错误次数时，可以尝试爆破手机验证码登录其他用户。</p>
+<h1>手机验证码问题导致的任意用户登录</h1>
+<p>手机验证码导致的任意用户登录主要包括：验证码爆破、验证码明文返回、存在万能验证码、验证码未绑定用户、获取验证码的手机号字段可双写、验证码为空/任意验证码可成功验证等。下面展开来讲。</p>
+<h2 id="验证码爆破">验证码爆破</h2>
+<p>当登录流程使用手机验证码登录，没有图片验证码/图片验证码可重用/图片验证码简单可识别且后端没有限制手机验证码验证错误次数时，可以尝试爆破手机验证码登录其他用户。</p>
 <p>数字验证码的爆破可以是用burpsuite的Turbo Intruder插件编写脚本实现：</p>
 <p><img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231128150318796.png" alt="image-20231128150318796"></p>
 <p><img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231128150416616.png" alt="image-20231128150416616"></p>
@@ -190,16 +193,19 @@ def handleResponse(req, interesting):
         table.add(req)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>简单图像验证码爆破可以使用：</p>
 <ul>
-<li>burpsuite中的captcha-killer-modified插件，下载地址如下<ul>
+<li>burpsuite中的captcha-killer-modified插件，下载地址如下
+<ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/c0ny1/captcha-killer">https://github.com/c0ny1/captcha-killer</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/f0ng/captcha-killer-modified.git">https://github.com/f0ng/captcha-killer-modified.git</a></li>
 </ul>
 </li>
 </ul>
-<p>==目前常用的4~6位数验证码，如果不加其他限制(如访问次数)的情况下，均可以爆破==</p>
-<h2 id="验证码明文返回"><a href="#验证码明文返回" class="headerlink" title="验证码明文返回"></a>验证码明文返回</h2><p>获取手机验证码时，验证码直接在返回包里</p>
+<p><mark>目前常用的4~6位数验证码，如果不加其他限制(如访问次数)的情况下，均可以爆破</mark></p>
+<h2 id="验证码明文返回">验证码明文返回</h2>
+<p>获取手机验证码时，验证码直接在返回包里</p>
 <p><img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231128152103594.png" alt="image-20231128152103594"></p>
-<h2 id="存在万能验证码"><a href="#存在万能验证码" class="headerlink" title="存在万能验证码"></a>存在万能验证码</h2><p>一般是测试为了功能测试方便，设置了诸如000000、111111、123456之类的万能验证码，项目上线时忘记删掉，导致任意用户登录。</p>
+<h2 id="存在万能验证码">存在万能验证码</h2>
+<p>一般是测试为了功能测试方便，设置了诸如000000、111111、123456之类的万能验证码，项目上线时忘记删掉，导致任意用户登录。</p>
 <p>同样的，手机号码同样可能存在万能手机号，如13888888888等，这里提供一个脚本可以生成以138、192等常规开头的手机号码：</p>
 <pre class="line-numbers language-none"><code class="language-none"># 特殊手机号生成
 import itertools
@@ -237,14 +243,18 @@ for i in d3:
 with open(&#39;phone.txt&#39;,&#39;a&#39;) as f:
     for i in phone:
         f.write(str(i) + &#39;\n&#39;)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="验证码未绑定用户"><a href="#验证码未绑定用户" class="headerlink" title="验证码未绑定用户"></a>验证码未绑定用户</h2><p>一般有以下两种情况：</p>
+<h2 id="验证码未绑定用户">验证码未绑定用户</h2>
+<p>一般有以下两种情况：</p>
 <ul>
-<li><p>后端仅验证了验证码是否正确，没有验证验证码与获取手机号的对应关系，导致可以先输入自己的手机号A获取验证码，再输入他人手机号B获取验证码后，填写自己手机号A接收到的验证码，达到登录手机号B的目的</p>
+<li>
+<p>后端仅验证了验证码是否正确，没有验证验证码与获取手机号的对应关系，导致可以先输入自己的手机号A获取验证码，再输入他人手机号B获取验证码后，填写自己手机号A接收到的验证码，达到登录手机号B的目的</p>
 </li>
-<li><p>后端仅验证了手机号与验证码是否正确，并未校验手机号是否为号主本人的，导致可以使用自己的手机号+验证码绕过。常见于用户绑定的功能处，如下例子：<img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231128154250715.png" alt="image-20231128154250715"><img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231128154301804.png" alt="image-20231128154301804"><img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231128154317245.png" alt="image-20231128154317245"><img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231128154328912.png" alt="image-20231128154328912"></p>
+<li>
+<p>后端仅验证了手机号与验证码是否正确，并未校验手机号是否为号主本人的，导致可以使用自己的手机号+验证码绕过。常见于用户绑定的功能处，如下例子：<img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231128154250715.png" alt="image-20231128154250715"><img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231128154301804.png" alt="image-20231128154301804"><img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231128154317245.png" alt="image-20231128154317245"><img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231128154328912.png" alt="image-20231128154328912"></p>
 </li>
 </ul>
-<h2 id="获取验证码的手机号字段可双写"><a href="#获取验证码的手机号字段可双写" class="headerlink" title="获取验证码的手机号字段可双写"></a>获取验证码的手机号字段可双写</h2><p>输入手机号获取验证码时抓包，双写手机号字段，使得两个手机号获取到同一个验证码，便可以登录其他用户</p>
+<h2 id="获取验证码的手机号字段可双写">获取验证码的手机号字段可双写</h2>
+<p>输入手机号获取验证码时抓包，双写手机号字段，使得两个手机号获取到同一个验证码，便可以登录其他用户</p>
 <p><img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231128155132283.png" alt="image-20231128155132283"></p>
 <p>输入自己的手机号抓包，将手机字段后面加一个逗号,或者分号;后再加一个手机号，或者双写手机号字段phone=13333333333&amp;phone=18888888888，具体可以展开想象力，下面举个例子：</p>
 <p>原字段：phone=13333333333</p>
@@ -254,73 +264,108 @@ with open(&#39;phone.txt&#39;,&#39;a&#39;) as f:
 <li>phone=13333333333,18888888888</li>
 <li>phone=13333333333&amp;phone=18888888888</li>
 </ul>
-<p>==当两个手机号均收到一个验证码时大概率漏洞存在==。使用自己的手机号便可以任意登录其他手机号。</p>
-<h2 id="验证码为空-任意验证码可成功验证"><a href="#验证码为空-任意验证码可成功验证" class="headerlink" title="验证码为空/任意验证码可成功验证"></a>验证码为空/任意验证码可成功验证</h2><p>比较奇葩的例子，验证码为空时，手机号正确则成功登录（账号密码登录体系也发现过这种情况，空密码的情况下账号存在即登录）</p>
-<h2 id="补充-由于验证码导致的短信轰炸"><a href="#补充-由于验证码导致的短信轰炸" class="headerlink" title="(补充)由于验证码导致的短信轰炸"></a>(补充)由于验证码导致的短信轰炸</h2><p>说到验证码，这里可以再提一下由于验证码导致的短信轰炸。有以下测试思路：</p>
+<p><mark>当两个手机号均收到一个验证码时大概率漏洞存在</mark>。使用自己的手机号便可以任意登录其他手机号。</p>
+<h2 id="验证码为空-任意验证码可成功验证">验证码为空/任意验证码可成功验证</h2>
+<p>比较奇葩的例子，验证码为空时，手机号正确则成功登录（账号密码登录体系也发现过这种情况，空密码的情况下账号存在即登录）</p>
+<h2 id="补充-由于验证码导致的短信轰炸">(补充)由于验证码导致的短信轰炸</h2>
+<p>说到验证码，这里可以再提一下由于验证码导致的短信轰炸。有以下测试思路：</p>
 <ul>
-<li><p>==在一些能接受验证码的地方，有一些参数是判定验证码是否获取成功、获取已发送短信的次数。我们测试短信轰炸漏洞的时候可以尝试删除一些参数然后观察响应结果==</p>
+<li>
+<p><mark>在一些能接受验证码的地方，有一些参数是判定验证码是否获取成功、获取已发送短信的次数。我们测试短信轰炸漏洞的时候可以尝试删除一些参数然后观察响应结果</mark></p>
 </li>
-<li><p>==在手机号/邮箱的传参处输入一些特殊符号进行绕过短信限制(如逗号,)==，有些发送手机号的接口或者邮箱接口当发送时抓包，如果在接受手机参数处没有过滤好一些特殊符号，会导致短信轰炸<img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231130141131827.png" alt="image-20231130141131827"></p>
+<li>
+<p><mark>在手机号/邮箱的传参处输入一些特殊符号进行绕过短信限制(如逗号,)</mark>，有些发送手机号的接口或者邮箱接口当发送时抓包，如果在接受手机参数处没有过滤好一些特殊符号，会导致短信轰炸<img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231130141131827.png" alt="image-20231130141131827"></p>
 <p>这里提供几种思路，这里以手机号15312341234，请求参数为mobile=15312341234为例：</p>
 <ul>
 <li>手机号前添加国际电话区号，以中国地区为例，即+8615312341234，这样的话服务器就有可能判定为和15312341234是不同的手机号</li>
-<li>手机号前面加上<code>空格、86、086、0086、+86、0、00、/r、/n、?、#、!</code></li>
+<li>手机号前面加上<code> 空格、86、086、0086、+86、0、00、/r、/n、?、#、!</code></li>
 <li>手机号后面加上<code>+、++、,</code></li>
 </ul>
 </li>
-<li><p>添加XFF头，有的时候服务器是按照IP地址进行判定的，可以不断更好XFF，实现短信爆破</p>
+<li>
+<p>添加XFF头，有的时候服务器是按照IP地址进行判定的，可以不断更好XFF，实现短信爆破</p>
 </li>
-<li><p>添加多个值或添加多个参数（类似上面的手机号字段可双写）<img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231212161335770.png" alt="image-20231212161335770"></p>
+<li>
+<p>添加多个值或添加多个参数（类似上面的手机号字段可双写）<img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231212161335770.png" alt="image-20231212161335770"></p>
 </li>
-<li><p>并发请求。可以使用burpsuite进行并发请求，能导致短信轰炸</p>
+<li>
+<p>并发请求。可以使用burpsuite进行并发请求，能导致短信轰炸</p>
 </li>
 </ul>
 <blockquote>
 <p>关于验证码渗透可以移步到我的另一篇文章《验证码渗透总结》</p>
 </blockquote>
-<h1 id="凭证安全问题导致的任意用户登录"><a href="#凭证安全问题导致的任意用户登录" class="headerlink" title="凭证安全问题导致的任意用户登录"></a>凭证安全问题导致的任意用户登录</h1><h2 id="凭证泄露"><a href="#凭证泄露" class="headerlink" title="凭证泄露"></a>凭证泄露</h2><h3 id="页面缓存被搜索引擎抓取"><a href="#页面缓存被搜索引擎抓取" class="headerlink" title="页面缓存被搜索引擎抓取"></a>页面缓存被搜索引擎抓取</h3><p>==页面缓存被搜索引擎抓取==，搜索引擎直接搜索该域名或者搭配搜索引擎的其他语法。如果发现==有登录后的页面被抓取==，可以尝试直接访问登录目标账户。谷歌搜索语法：</p>
+<h1>凭证安全问题导致的任意用户登录</h1>
+<h2 id="凭证泄露">凭证泄露</h2>
+<h3 id="页面缓存被搜索引擎抓取">页面缓存被搜索引擎抓取</h3>
+<p><mark>页面缓存被搜索引擎抓取</mark>，搜索引擎直接搜索该域名或者搭配搜索引擎的其他语法。如果发现<mark>有登录后的页面被抓取</mark>，可以尝试直接访问登录目标账户。谷歌搜索语法：</p>
 <ul>
 <li>site:example.com.cn</li>
 </ul>
-<h3 id="httptrace-druid等组件中的凭证泄露"><a href="#httptrace-druid等组件中的凭证泄露" class="headerlink" title="httptrace/druid等组件中的凭证泄露"></a>httptrace/druid等组件中的凭证泄露</h3><p>这里先介绍一下httptrace spring和druid</p>
+<h3 id="httptrace-druid等组件中的凭证泄露">httptrace/druid等组件中的凭证泄露</h3>
+<p>这里先介绍一下httptrace spring和druid</p>
 <p><img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231128161741551.png" alt="image-20231128161741551"></p>
 <p><img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231128161704911.png" alt="image-20231128161704911"></p>
-<h4 id="httptrace-spring"><a href="#httptrace-spring" class="headerlink" title="httptrace spring"></a>httptrace spring</h4><p>spring的httptrace端点往往会记录用户的会话信息，若发现spring未授权访问且存在类似端点可以访问的话，可尝试获取用户凭证进行登录</p>
+<h4 id="httptrace-spring">httptrace spring</h4>
+<p>spring的httptrace端点往往会记录用户的会话信息，若发现spring未授权访问且存在类似端点可以访问的话，可尝试获取用户凭证进行登录</p>
 <p><img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231128162126651.png" alt="image-20231128162126651"></p>
-<h4 id="durid"><a href="#durid" class="headerlink" title="durid"></a>durid</h4><p>druid的session监控发现有效的会话信息时，可以通过此登录任意用户</p>
+<h4 id="durid">durid</h4>
+<p>druid的session监控发现有效的会话信息时，可以通过此登录任意用户</p>
 <p><img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231128162143975.png" alt="image-20231128162143975"></p>
-<p>==httptrace/druid的等组件的凭据泄露，主要是泄露了会话密钥(即session_key、session_token这些)==，下面再举一个微信小程序官方的sessionkey泄露</p>
-<h4 id="微信小程序官方sessionkey泄露"><a href="#微信小程序官方sessionkey泄露" class="headerlink" title="微信小程序官方sessionkey泄露"></a>微信小程序官方sessionkey泄露</h4><p>微信小程序官方提供了一套微信快捷登录的登录逻辑：用户授权手机号快捷登录时，会将本地的手机号使用sessionkey和iv进行aes加密，后端解密后返回该手机号的登录凭证。当sessionkey发生泄露时，攻击者便可以伪造手机号登录任意手机号</p>
+<p><mark>httptrace/druid的等组件的凭据泄露，主要是泄露了会话密钥(即session_key、session_token这些)</mark>，下面再举一个微信小程序官方的sessionkey泄露</p>
+<h4 id="微信小程序官方sessionkey泄露">微信小程序官方sessionkey泄露</h4>
+<p>微信小程序官方提供了一套微信快捷登录的登录逻辑：用户授权手机号快捷登录时，会将本地的手机号使用sessionkey和iv进行aes加密，后端解密后返回该手机号的登录凭证。当sessionkey发生泄露时，攻击者便可以伪造手机号登录任意手机号</p>
 <p><img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231128162835641.png" alt="image-20231128162835641"></p>
 <p>修改任意手机号，利用sessionkey和iv重新加密数据</p>
 <p><img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231128162922040.png" alt="image-20231128162922040"></p>
 <p>成功登录他人账号</p>
 <p><img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231128163020899.png" alt="image-20231128163020899"></p>
-<h4 id="其他接口中的信息泄露"><a href="#其他接口中的信息泄露" class="headerlink" title="其他接口中的信息泄露"></a>其他接口中的信息泄露</h4><p>这个一般发现于js或者api-docs中的某些特殊接口，例如getToken之类的，有没有取决于开发有没有开发类似的功能接口</p>
+<h4 id="其他接口中的信息泄露">其他接口中的信息泄露</h4>
+<p>这个一般发现于js或者api-docs中的某些特殊接口，例如getToken之类的，有没有取决于开发有没有开发类似的功能接口</p>
 <p><img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231128163705003.png" alt="image-20231128163705003"></p>
-<h2 id="凭证伪造"><a href="#凭证伪造" class="headerlink" title="凭证伪造"></a>凭证伪造</h2><h3 id="jwt未校验参数-使用弱密钥"><a href="#jwt未校验参数-使用弱密钥" class="headerlink" title="jwt未校验参数/使用弱密钥"></a>jwt未校验参数/使用弱密钥</h3><p>当系统使用jwt作为认证字段，且其中关键用户信息字段可以遍历时，若未验参或者使用弱密钥时，便可以将用户信息字段进行更改，删除/爆破弱密钥重新生成签名，到达任意用户登录</p>
-<h4 id="jwt未校验参数"><a href="#jwt未校验参数" class="headerlink" title="jwt未校验参数"></a>jwt未校验参数</h4><p>==删除签名部分(或者更改头部中的alg为none再删除签名)，访问登录后的接口成功访问，说明jwt未验参==</p>
+<h2 id="凭证伪造">凭证伪造</h2>
+<h3 id="jwt未校验参数-使用弱密钥">jwt未校验参数/使用弱密钥</h3>
+<p>当系统使用jwt作为认证字段，且其中关键用户信息字段可以遍历时，若未验参或者使用弱密钥时，便可以将用户信息字段进行更改，删除/爆破弱密钥重新生成签名，到达任意用户登录</p>
+<h4 id="jwt未校验参数">jwt未校验参数</h4>
+<p><mark>删除签名部分(或者更改头部中的alg为none再删除签名)，访问登录后的接口成功访问，说明jwt未验参</mark></p>
 <p><img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231128164251426.png" alt="image-20231128164251426"></p>
-<h4 id="jwt弱密钥"><a href="#jwt弱密钥" class="headerlink" title="jwt弱密钥"></a>jwt弱密钥</h4><p>当jwt使用了弱密钥时，爆破到弱密钥后同样修改jwt中的用户信息字段，使用密钥重新生成签名即可获取到其他用户的jwt字段</p>
-<h3 id="弱cookie"><a href="#弱cookie" class="headerlink" title="弱cookie"></a>弱cookie</h3><p>系统使用cookie认证，且cookie字段过于简单(如明文、base64加密等)，导致可伪造</p>
-<h2 id="凭证过早返回"><a href="#凭证过早返回" class="headerlink" title="凭证过早返回"></a>凭证过早返回</h2><p>一般正常的登录流程为服务端校验完用户身份后，返回用户凭证，但某些系统由于登录前会有很多的查询用户信息类的功能请求，经常导致在登录验证前就返回了用户凭证。</p>
+<h4 id="jwt弱密钥">jwt弱密钥</h4>
+<p>当jwt使用了弱密钥时，爆破到弱密钥后同样修改jwt中的用户信息字段，使用密钥重新生成签名即可获取到其他用户的jwt字段</p>
+<h3 id="弱cookie">弱cookie</h3>
+<p>系统使用cookie认证，且cookie字段过于简单(如明文、base64加密等)，导致可伪造</p>
+<h2 id="凭证过早返回">凭证过早返回</h2>
+<p>一般正常的登录流程为服务端校验完用户身份后，返回用户凭证，但某些系统由于登录前会有很多的查询用户信息类的功能请求，经常导致在登录验证前就返回了用户凭证。</p>
 <p>举例一个金融项目，功能是：输入手机号会先去查询手机号是否为已注册用户，是的话就会进入用户信息查询的逻辑，再跳转登录。在信息查询的阶段过早返回了sessionid，导致任意用户登录。如下：</p>
 <p><img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231128223131840.png" alt="image-20231128223131840"></p>
-<h1 id="逻辑漏洞导致的任意用户登录"><a href="#逻辑漏洞导致的任意用户登录" class="headerlink" title="逻辑漏洞导致的任意用户登录"></a>逻辑漏洞导致的任意用户登录</h1><h2 id="更改登录type"><a href="#更改登录type" class="headerlink" title="更改登录type"></a>更改登录type</h2><p>部分系统有免密登录/快捷登录之类的功能，只要一个账号就能登录，当遇到登录数据包中含有type之类的字段时，可以尝试此方法</p>
+<h1>逻辑漏洞导致的任意用户登录</h1>
+<h2 id="更改登录type">更改登录type</h2>
+<p>部分系统有免密登录/快捷登录之类的功能，只要一个账号就能登录，当遇到登录数据包中含有type之类的字段时，可以尝试此方法</p>
 <p><img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231128224742351.png" alt="image-20231128224742351"></p>
-<h2 id="账号数据覆盖"><a href="#账号数据覆盖" class="headerlink" title="账号数据覆盖"></a>账号数据覆盖</h2><p>常见于账号信息更新处，例如修改手机号、账户重新绑定、修改账号等功能点处</p>
+<h2 id="账号数据覆盖">账号数据覆盖</h2>
+<p>常见于账号信息更新处，例如修改手机号、账户重新绑定、修改账号等功能点处</p>
 <p>以修改手机号为例，此处修改需要输入新手机号与新手机号的验证码</p>
 <p><img src="/2023/11/28/%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%80%9D%E8%B7%AF/image-20231128224911547.png" alt="image-20231128224911547"></p>
 <p>若修改请求中的oldmobile字段为其他手机号，就能将其他用户的账户数据覆盖到新手机号中，达到任意用户登录</p>
-<h1 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h1><ul>
-<li><p><a target="_blank" rel="noopener" href="https://forum.butian.net/share/2553">奇安信攻防社区-任意用户登录漏洞挖掘思路 (butian.net)</a></p>
+<h1>鸣谢</h1>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener" href="https://forum.butian.net/share/2553">奇安信攻防社区-任意用户登录漏洞挖掘思路 (butian.net)</a></p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/v3st1tmq0k6UyWFPlfEO4g">https://mp.weixin.qq.com/s/v3st1tmq0k6UyWFPlfEO4g</a></p>
+<li>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/v3st1tmq0k6UyWFPlfEO4g">https://mp.weixin.qq.com/s/v3st1tmq0k6UyWFPlfEO4g</a></p>
 </li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_28205153/article/details/113832488">Turbo Intruder 使用 - 拥抱十亿请求攻击_TimeShatter的博客-CSDN博客</a></li>
-<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1730673">渗透测测技巧之手机号爆破-腾讯云开发者社区-腾讯云 (tencent.com)</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/0S_MQIgpyj0IVwcziXppJw">https://mp.weixin.qq.com/s/0S_MQIgpyj0IVwcziXppJw</a></li>
-<li><a target="_blank" rel="noopener" href="https://forum.butian.net/share/2602">奇安信攻防社区-验证码渗透最全总结 (butian.net)</a></li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_28205153/article/details/113832488">Turbo Intruder 使用 - 拥抱十亿请求攻击_TimeShatter的博客-CSDN博客</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1730673">渗透测测技巧之手机号爆破-腾讯云开发者社区-腾讯云 (tencent.com)</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/0S_MQIgpyj0IVwcziXppJw">https://mp.weixin.qq.com/s/0S_MQIgpyj0IVwcziXppJw</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="https://forum.butian.net/share/2602">奇安信攻防社区-验证码渗透最全总结 (butian.net)</a></p>
+</li>
 </ul>
 	  
 	</div>
@@ -390,7 +435,7 @@ with open(&#39;phone.txt&#39;,&#39;a&#39;) as f:
 	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
 	   <div id="toc" class="toc collapse in">
 		   <span class="toc-title">Contents</span>
-			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#%E6%89%8B%E6%9C%BA%E9%AA%8C%E8%AF%81%E7%A0%81%E9%97%AE%E9%A2%98%E5%AF%BC%E8%87%B4%E7%9A%84%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95"><span class="toc-article-text">手机验证码问题导致的任意用户登录</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E9%AA%8C%E8%AF%81%E7%A0%81%E7%88%86%E7%A0%B4"><span class="toc-article-text">验证码爆破</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E9%AA%8C%E8%AF%81%E7%A0%81%E6%98%8E%E6%96%87%E8%BF%94%E5%9B%9E"><span class="toc-article-text">验证码明文返回</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E5%AD%98%E5%9C%A8%E4%B8%87%E8%83%BD%E9%AA%8C%E8%AF%81%E7%A0%81"><span class="toc-article-text">存在万能验证码</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E9%AA%8C%E8%AF%81%E7%A0%81%E6%9C%AA%E7%BB%91%E5%AE%9A%E7%94%A8%E6%88%B7"><span class="toc-article-text">验证码未绑定用户</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E8%8E%B7%E5%8F%96%E9%AA%8C%E8%AF%81%E7%A0%81%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%B7%E5%AD%97%E6%AE%B5%E5%8F%AF%E5%8F%8C%E5%86%99"><span class="toc-article-text">获取验证码的手机号字段可双写</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E9%AA%8C%E8%AF%81%E7%A0%81%E4%B8%BA%E7%A9%BA-%E4%BB%BB%E6%84%8F%E9%AA%8C%E8%AF%81%E7%A0%81%E5%8F%AF%E6%88%90%E5%8A%9F%E9%AA%8C%E8%AF%81"><span class="toc-article-text">验证码为空&#x2F;任意验证码可成功验证</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E8%A1%A5%E5%85%85-%E7%94%B1%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E5%AF%BC%E8%87%B4%E7%9A%84%E7%9F%AD%E4%BF%A1%E8%BD%B0%E7%82%B8"><span class="toc-article-text">(补充)由于验证码导致的短信轰炸</span></a></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#%E5%87%AD%E8%AF%81%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98%E5%AF%BC%E8%87%B4%E7%9A%84%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95"><span class="toc-article-text">凭证安全问题导致的任意用户登录</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E5%87%AD%E8%AF%81%E6%B3%84%E9%9C%B2"><span class="toc-article-text">凭证泄露</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E9%A1%B5%E9%9D%A2%E7%BC%93%E5%AD%98%E8%A2%AB%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E6%8A%93%E5%8F%96"><span class="toc-article-text">页面缓存被搜索引擎抓取</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#httptrace-druid%E7%AD%89%E7%BB%84%E4%BB%B6%E4%B8%AD%E7%9A%84%E5%87%AD%E8%AF%81%E6%B3%84%E9%9C%B2"><span class="toc-article-text">httptrace&#x2F;druid等组件中的凭证泄露</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#httptrace-spring"><span class="toc-article-text">httptrace spring</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#durid"><span class="toc-article-text">durid</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AE%98%E6%96%B9sessionkey%E6%B3%84%E9%9C%B2"><span class="toc-article-text">微信小程序官方sessionkey泄露</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#%E5%85%B6%E4%BB%96%E6%8E%A5%E5%8F%A3%E4%B8%AD%E7%9A%84%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2"><span class="toc-article-text">其他接口中的信息泄露</span></a></li></ol></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E5%87%AD%E8%AF%81%E4%BC%AA%E9%80%A0"><span class="toc-article-text">凭证伪造</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#jwt%E6%9C%AA%E6%A0%A1%E9%AA%8C%E5%8F%82%E6%95%B0-%E4%BD%BF%E7%94%A8%E5%BC%B1%E5%AF%86%E9%92%A5"><span class="toc-article-text">jwt未校验参数&#x2F;使用弱密钥</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#jwt%E6%9C%AA%E6%A0%A1%E9%AA%8C%E5%8F%82%E6%95%B0"><span class="toc-article-text">jwt未校验参数</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#jwt%E5%BC%B1%E5%AF%86%E9%92%A5"><span class="toc-article-text">jwt弱密钥</span></a></li></ol></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E5%BC%B1cookie"><span class="toc-article-text">弱cookie</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E5%87%AD%E8%AF%81%E8%BF%87%E6%97%A9%E8%BF%94%E5%9B%9E"><span class="toc-article-text">凭证过早返回</span></a></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#%E9%80%BB%E8%BE%91%E6%BC%8F%E6%B4%9E%E5%AF%BC%E8%87%B4%E7%9A%84%E4%BB%BB%E6%84%8F%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95"><span class="toc-article-text">逻辑漏洞导致的任意用户登录</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%9B%B4%E6%94%B9%E7%99%BB%E5%BD%95type"><span class="toc-article-text">更改登录type</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E8%B4%A6%E5%8F%B7%E6%95%B0%E6%8D%AE%E8%A6%86%E7%9B%96"><span class="toc-article-text">账号数据覆盖</span></a></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#%E9%B8%A3%E8%B0%A2"><span class="toc-article-text">鸣谢</span></a></li></ol>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link"><span class="toc-article-text">手机验证码问题导致的任意用户登录</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E9%AA%8C%E8%AF%81%E7%A0%81%E7%88%86%E7%A0%B4"><span class="toc-article-text">验证码爆破</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E9%AA%8C%E8%AF%81%E7%A0%81%E6%98%8E%E6%96%87%E8%BF%94%E5%9B%9E"><span class="toc-article-text">验证码明文返回</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E5%AD%98%E5%9C%A8%E4%B8%87%E8%83%BD%E9%AA%8C%E8%AF%81%E7%A0%81"><span class="toc-article-text">存在万能验证码</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E9%AA%8C%E8%AF%81%E7%A0%81%E6%9C%AA%E7%BB%91%E5%AE%9A%E7%94%A8%E6%88%B7"><span class="toc-article-text">验证码未绑定用户</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E8%8E%B7%E5%8F%96%E9%AA%8C%E8%AF%81%E7%A0%81%E7%9A%84%E6%89%8B%E6%9C%BA%E5%8F%B7%E5%AD%97%E6%AE%B5%E5%8F%AF%E5%8F%8C%E5%86%99"><span class="toc-article-text">获取验证码的手机号字段可双写</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E9%AA%8C%E8%AF%81%E7%A0%81%E4%B8%BA%E7%A9%BA-%E4%BB%BB%E6%84%8F%E9%AA%8C%E8%AF%81%E7%A0%81%E5%8F%AF%E6%88%90%E5%8A%9F%E9%AA%8C%E8%AF%81"><span class="toc-article-text">验证码为空&#x2F;任意验证码可成功验证</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E8%A1%A5%E5%85%85-%E7%94%B1%E4%BA%8E%E9%AA%8C%E8%AF%81%E7%A0%81%E5%AF%BC%E8%87%B4%E7%9A%84%E7%9F%AD%E4%BF%A1%E8%BD%B0%E7%82%B8"><span class="toc-article-text">(补充)由于验证码导致的短信轰炸</span></a></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link"><span class="toc-article-text">凭证安全问题导致的任意用户登录</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E5%87%AD%E8%AF%81%E6%B3%84%E9%9C%B2"><span class="toc-article-text">凭证泄露</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E9%A1%B5%E9%9D%A2%E7%BC%93%E5%AD%98%E8%A2%AB%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E6%8A%93%E5%8F%96"><span class="toc-article-text">页面缓存被搜索引擎抓取</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#httptrace-druid%E7%AD%89%E7%BB%84%E4%BB%B6%E4%B8%AD%E7%9A%84%E5%87%AD%E8%AF%81%E6%B3%84%E9%9C%B2"><span class="toc-article-text">httptrace&#x2F;druid等组件中的凭证泄露</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#httptrace-spring"><span class="toc-article-text">httptrace spring</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#durid"><span class="toc-article-text">durid</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%AE%98%E6%96%B9sessionkey%E6%B3%84%E9%9C%B2"><span class="toc-article-text">微信小程序官方sessionkey泄露</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#%E5%85%B6%E4%BB%96%E6%8E%A5%E5%8F%A3%E4%B8%AD%E7%9A%84%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2"><span class="toc-article-text">其他接口中的信息泄露</span></a></li></ol></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E5%87%AD%E8%AF%81%E4%BC%AA%E9%80%A0"><span class="toc-article-text">凭证伪造</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#jwt%E6%9C%AA%E6%A0%A1%E9%AA%8C%E5%8F%82%E6%95%B0-%E4%BD%BF%E7%94%A8%E5%BC%B1%E5%AF%86%E9%92%A5"><span class="toc-article-text">jwt未校验参数&#x2F;使用弱密钥</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#jwt%E6%9C%AA%E6%A0%A1%E9%AA%8C%E5%8F%82%E6%95%B0"><span class="toc-article-text">jwt未校验参数</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#jwt%E5%BC%B1%E5%AF%86%E9%92%A5"><span class="toc-article-text">jwt弱密钥</span></a></li></ol></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E5%BC%B1cookie"><span class="toc-article-text">弱cookie</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E5%87%AD%E8%AF%81%E8%BF%87%E6%97%A9%E8%BF%94%E5%9B%9E"><span class="toc-article-text">凭证过早返回</span></a></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link"><span class="toc-article-text">逻辑漏洞导致的任意用户登录</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%9B%B4%E6%94%B9%E7%99%BB%E5%BD%95type"><span class="toc-article-text">更改登录type</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E8%B4%A6%E5%8F%B7%E6%95%B0%E6%8D%AE%E8%A6%86%E7%9B%96"><span class="toc-article-text">账号数据覆盖</span></a></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link"><span class="toc-article-text">鸣谢</span></a></li></ol>
 		</div>
 	
 	</div>
@@ -513,6 +558,21 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
      searchFunc(path, 'local-search-input', 'local-search-result');
    </script>
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <!-- hexo injector body_end start --><script src="/assets/mmedia/mmedia-loader.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/ni-j.model.json"},"display":{"position":"left","width":260,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
    </html>
 

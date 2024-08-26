@@ -1,3 +1,18 @@
+/*
+    Pinterest Grid Plugin
+    Copyright 2014 Mediademons
+    @author smm 16/04/2014
+
+    usage:
+
+     $(document).ready(function() {
+
+        $('#blog-landing').pinterest_grid({
+            no_columns: 4
+        });
+
+    });
+*/
 ;(function ($, window, document, undefined) {
     var pluginName = 'pinterest_grid',
         defaults = {
@@ -5,8 +20,7 @@
             padding_y: 10,
             no_columns: 3,
             margin_bottom: 50,
-            single_column_breakpoint: 700,
-            lazy_load: true // Added lazy_load option
+            single_column_breakpoint: 700
         },
         columns,
         $article,
@@ -14,7 +28,7 @@
 
     function Plugin(element, options) {
         this.element = element;
-        this.options = $.extend({}, defaults, options);
+        this.options = $.extend({}, defaults, options) ;
         this._defaults = defaults;
         this._name = pluginName;
         this.init();
@@ -26,7 +40,7 @@
 
         $(window).resize(function() {
             clearTimeout(resize_finish);
-            resize_finish = setTimeout(function () {
+            resize_finish = setTimeout( function () {
                 self.make_layout_change(self);
             }, 11);
         });
@@ -36,10 +50,6 @@
         setTimeout(function() {
             $(window).resize();
         }, 500);
-
-        if (self.options.lazy_load) {
-            self.initLazyLoad();
-        }
     };
 
     Plugin.prototype.calculate = function (single_column_mode) {
@@ -48,7 +58,7 @@
             row = 0,
             $container = $(this.element),
             container_width = $container.width();
-        $article = $(this.element).children();
+            $article = $(this.element).children();
 
         if(single_column_mode === true) {
             article_width = $container.width() - self.options.padding_x;
@@ -107,10 +117,6 @@
 
         this.tallest($container);
         $(window).resize();
-
-        if (self.options.lazy_load) {
-            self.lazyLoadImages(); // Call lazy load after layout calculation
-        }
     };
 
     Plugin.prototype.tallest = function (_container) {
@@ -135,34 +141,6 @@
         } else {
             _self.calculate(false);
         }
-    };
-
-    Plugin.prototype.initLazyLoad = function () {
-        var self = this;
-        self.observer = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                    var img = entry.target;
-                    img.src = img.dataset.src;
-                    img.classList.remove('lazy');
-                    self.observer.unobserve(img);
-                }
-            });
-        });
-
-        var lazyImages = document.querySelectorAll('img.lazy');
-        lazyImages.forEach(function(img) {
-            self.observer.observe(img);
-        });
-    };
-
-    Plugin.prototype.lazyLoadImages = function () {
-        var lazyImages = document.querySelectorAll('img.lazy');
-        lazyImages.forEach(function(img) {
-            if (img.classList.contains('lazy')) {
-                self.observer.observe(img);
-            }
-        });
     };
 
     $.fn[pluginName] = function (options) {
