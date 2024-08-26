@@ -1148,27 +1148,7 @@
 		</article>
 		<article class="white-panel">
 			<img src="img/203.jpg" class="thumb">
-			<h1><a href="#">Title 203</a></h1>
-			<p class="hitokoto">正在加载一言...</p>
-		</article>
-		<article class="white-panel">
-			<img src="img/204.jpg" class="thumb">
-			<h1><a href="#">Title 204</a></h1>
-			<p class="hitokoto">正在加载一言...</p>
-		</article>
-		<article class="white-panel">
-			<img src="img/205.jpg" class="thumb">
-			<h1><a href="#">Title 205</a></h1>
-			<p class="hitokoto">正在加载一言...</p>
-		</article>
-		<article class="white-panel">
-			<img src="img/206.jpg" class="thumb">
-			<h1><a href="#">Title 206</a></h1>
-			<p class="hitokoto">正在加载一言...</p>
-		</article>
-		<article class="white-panel">
-			<img src="img/207.jpg" class="thumb">
-			<h1><a href="#">Title 207</a></h1>
+			<h1><a href="#">获取原图</a></h1>
 			<p class="hitokoto">正在加载一言...</p>
 		</article>
     </section>
@@ -1197,7 +1177,7 @@
 			var img = article.querySelector('img.thumb');
 
 			// Get the URL of the image
-			var imageUrl = "img_original";
+			var imageUrl = img.src.replace('img', 'img_original');
 			var imageName = imageUrl.substring(imageUrl.lastIndexOf('/') + 1);  // Extract the image file name from URL
 
 			// Create a temporary link element
