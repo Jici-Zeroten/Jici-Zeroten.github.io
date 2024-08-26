@@ -185,13 +185,21 @@ var _hmt = _hmt || [];
 <p>密码字典制作：</p>
 <p>一些常识与实战常用密码规律</p>
 <ul>
-<li><p>针对同一个目标，要注意密码复用(又称撞库、密码碰撞)【如许多设备默认口令的web端和ssh或者telnet的口令是一样的】【内网业务系统习惯使用同一套帐户密码】【有很多管理员为了管理方便，用同一套密码管理不同服务器】</p>
+<li>
+<p>针对同一个目标，要注意密码复用(又称撞库、密码碰撞)【如许多设备默认口令的web端和ssh或者telnet的口令是一样的】【内网业务系统习惯使用同一套帐户密码】【有很多管理员为了管理方便，用同一套密码管理不同服务器】</p>
 </li>
-<li><p>员工姓名全拼、简拼、简单变形(zhangsan、zhangsan123、zs123456等)</p>
+<li>
+<p>员工姓名全拼、简拼、简单变形(zhangsan、zhangsan123、zs123456等)</p>
 </li>
-<li>员工生日/身份证后六位/手机号后六位</li>
-<li>企业域名(xxx.com)、企业英文名或域名#年份(xxx#2018)、企业英文名或域名@123(xxx@123、xxx123、xxx2018)、企业缩写加年份(xxx@2021 xxx*2020)、企业域名+999(xxx.com999、xxx.com666)</li>
-<li>多关注系统后台、组件的默认密码【获得途径：搜索引擎、官方手册等】</li>
+<li>
+<p>员工生日/身份证后六位/手机号后六位</p>
+</li>
+<li>
+<p>企业域名(<a target="_blank" rel="noopener" href="http://xxx.com">xxx.com</a>)、企业英文名或域名#年份(xxx#2018)、企业英文名或域名@123(xxx@123、xxx123、xxx2018)、企业缩写加年份(xxx@2021 xxx*2020)、企业域名+999(xxx.com999、xxx.com666)</p>
+</li>
+<li>
+<p>多关注系统后台、组件的默认密码【获得途径：搜索引擎、官方手册等】</p>
+</li>
 </ul>
 <p>搜索引擎查询(以谷歌为例)：基本思路是site、host配合inurl、intext、intitle，或者filetype找敏感文件。下面列举几个常用的谷歌聚合查询语句，其他搜索引擎类似【注意：用谷歌语法找站的时候，要加点中文，不然搜出来的站可能都是英文站】</p>
 <ul>
@@ -244,28 +252,30 @@ var _hmt = _hmt || [];
 <p>说明：主要是微信公众号或者小程序等新媒体的信息搜集，有以下途径</p>
 <ul>
 <li>微信默认搜索【手动打开微信搜索即可】</li>
-<li>小蓝本搜索【<a target="_blank" rel="noopener" href="https://www.xiaolanben.com/】">https://www.xiaolanben.com/】</a></li>
+<li>小蓝本搜索【<a target="_blank" rel="noopener" href="https://www.xiaolanben.com/%E3%80%91">https://www.xiaolanben.com/】</a></li>
 <li>第三方微信公众号数据分析平台(这类平台大多都要注册一个账号才能使用)</li>
 </ul>
-<p>​            易撰：<a target="_blank" rel="noopener" href="http://www.yizhuan5.com/">http://www.yizhuan5.com/</a></p>
-<p>​            西瓜数据：<a target="_blank" rel="noopener" href="http://data.xiguaji.com/">http://data.xiguaji.com/</a></p>
-<p>​            次幂数据：<a target="_blank" rel="noopener" href="https://www.cimidata.com/">https://www.cimidata.com/</a></p>
+<p>​			易撰：<a target="_blank" rel="noopener" href="http://www.yizhuan5.com/">http://www.yizhuan5.com/</a></p>
+<p>​			西瓜数据：<a target="_blank" rel="noopener" href="http://data.xiguaji.com/">http://data.xiguaji.com/</a></p>
+<p>​			次幂数据：<a target="_blank" rel="noopener" href="https://www.cimidata.com/">https://www.cimidata.com/</a></p>
 <p>fofa信息搜集</p>
 <p>下面以挖通用型漏洞为例，介绍使用fofa进行信息搜集的流程和技巧</p>
 <ol>
-<li>title=”平台”【搜索网站标题中包含”平台”关键字的网站。可以依据名称判断是否为通用的系统，找到通用的系统进行下一步】</li>
-<li>利用标题、图标、js特征文件搜索，找找其他类似的系统<ul>
+<li>title=“平台”【搜索网站标题中包含&quot;平台&quot;关键字的网站。可以依据名称判断是否为通用的系统，找到通用的系统进行下一步】</li>
+<li>利用标题、图标、js特征文件搜索，找找其他类似的系统
+<ul>
 <li><code>icon_hash=&quot;-247388890&quot;</code>【搜索指定icon图标哈希值的资产】</li>
 </ul>
 </li>
 </ol>
 <p>这里也给出教育src的常用fofa信息搜集语法：</p>
 <ul>
-<li>domain=”xx.edu.cn”&amp;&amp;(title=”平台”||title=”系统”)</li>
+<li>domain=“<a target="_blank" rel="noopener" href="http://xx.edu.cn">xx.edu.cn</a>”&amp;&amp;(title=“平台”||title=“系统”)</li>
 </ul>
 <p>信息收集常见路径</p>
 <ul>
-<li><p>ICP备案号—-&gt;<code>fofa / 鹰图</code>搜索</p>
+<li>
+<p>ICP备案号—&gt;<code>fofa / 鹰图</code>搜索</p>
 <blockquote>
 <p>ICP备案号容易收集到边缘资产</p>
 </blockquote>
@@ -456,21 +466,6 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
      searchFunc(path, 'local-search-input', 'local-search-result');
    </script>
 
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <!-- hexo injector body_end start --><script src="/assets/mmedia/mmedia-loader.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/ni-j.model.json"},"display":{"position":"left","width":260,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
    </html>
 

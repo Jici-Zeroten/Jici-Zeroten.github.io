@@ -164,7 +164,9 @@ var _hmt = _hmt || [];
 		 </div> <!-- alert -->
 	  		
 
-	  <h1 id="php平台常见防御手段梳理及对抗"><a href="#php平台常见防御手段梳理及对抗" class="headerlink" title="php平台常见防御手段梳理及对抗"></a>php平台常见防御手段梳理及对抗</h1><h2 id="PHP-INI中进行安全配置"><a href="#PHP-INI中进行安全配置" class="headerlink" title="PHP.INI中进行安全配置"></a>PHP.INI中进行安全配置</h2><p>这类防御手段通过配置PHP.INI的安全选项，达到防御的目的</p>
+	  <h1>php平台常见防御手段梳理及对抗</h1>
+<h2 id="PHP-INI中进行安全配置">PHP.INI中进行安全配置</h2>
+<p>这类防御手段通过配置PHP.INI的安全选项，达到防御的目的</p>
 <pre class="line-numbers language-none"><code class="language-none">安全模式 #推荐还是开启防止大部分PHP攻击
 safe_mode &#x3D; On
 
@@ -187,7 +189,8 @@ register_globals &#x3D; Off
 magicw_quotes_gpc &#x3D; On<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>针对以上安全配置，其中有一些配置是可以被绕过的（仅列举实战中我遇到的）：</p>
 <ul>
-<li><p>open_basedir</p>
+<li>
+<p>open_basedir</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/10070?time__1311=mq%2BxBD9QDQe4RDBkPoGkYXp6xfokhYD&amp;alichlgref=https%3A%2F%2Fwww.google.com.hk%2F">从0学习bypass open_basedir姿势 - 先知社区 (aliyun.com)</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/snowlyzz/article/details/126310439">https://blog.csdn.net/snowlyzz/article/details/126310439</a></li>
@@ -196,55 +199,69 @@ magicw_quotes_gpc &#x3D; On<span aria-hidden="true" class="line-numbers-rows"><s
 <p>以上都是手动绕过原理，实战中一般直接使用插件/工具绕过（蚁剑插件、哥斯拉插件等）</p>
 </blockquote>
 </li>
-<li><p>disable_functions：一般直接使用插件/工具绕过（蚁剑插件、哥斯拉插件等）</p>
+<li>
+<p>disable_functions：一般直接使用插件/工具绕过（蚁剑插件、哥斯拉插件等）</p>
 </li>
 </ul>
-<h1 id="phpinfo信息利用点梳理"><a href="#phpinfo信息利用点梳理" class="headerlink" title="phpinfo信息利用点梳理"></a>phpinfo信息利用点梳理</h1><p><img src="/2024/04/02/php%E5%B9%B3%E5%8F%B0%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20240403163125691.png" alt="image-20240403163125691"></p>
+<h1>phpinfo信息利用点梳理</h1>
+<p><img src="/2024/04/02/php%E5%B9%B3%E5%8F%B0%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20240403163125691.png" alt="image-20240403163125691"></p>
 <p>在实战中，我们常常能获取到phpinfo信息，下面对其中的可能存在的利用点进行梳理</p>
 <ul>
-<li><p>System：操作系统版本等信息（基础信息）</p>
+<li>
+<p>System：操作系统版本等信息（基础信息）</p>
 <blockquote>
 <p>获取具体系统版本，可以用来搜索已知漏洞</p>
 </blockquote>
 </li>
-<li><p>Server API：显示当前 PHP 实例使用的服务器接口模块。如果使用的是<code>FPM/FastCGI</code>，可以衍生出基于FastCGI的众多攻击手法</p>
+<li>
+<p>Server API：显示当前 PHP 实例使用的服务器接口模块。如果使用的是<code>FPM/FastCGI</code>，可以衍生出基于FastCGI的众多攻击手法</p>
 <blockquote>
 <p>基于FastCGI的众多攻击手法和原理，可参考这两篇文章：</p>
 <p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/9544">https://xz.aliyun.com/t/9544</a></p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/620014838">https://zhuanlan.zhihu.com/p/620014838</a></p>
 </blockquote>
 </li>
-<li><p>DOCUMENT_ROOT：网站的绝对路径（对于写shell时很可能有很大的帮助）</p>
+<li>
+<p>DOCUMENT_ROOT：网站的绝对路径（对于写shell时很可能有很大的帮助）</p>
 </li>
-<li><p>SERVER_ADDR：真实ip，通过这个参数可以得到网站服务器的真实ip无视CDN</p>
+<li>
+<p>SERVER_ADDR：真实ip，通过这个参数可以得到网站服务器的真实ip无视CDN</p>
 <blockquote>
-<p>全称<code>$_SERVER[&#39;SERVER_ADDR&#39;]</code>或<code>_SERVER[&#39;SERVER_ADDR&#39;]</code>。也有说<code>$_SERVER[&#39;HTTP_HOST&#39;]</code>、<code>_SERVER[&#39;HTTP_HOST&#39;]</code>、<code>http_x_real_ip</code>会泄露真实ip，但我没遇到过</p>
+<p>全称<code>$_SERVER['SERVER_ADDR']</code>或<code>_SERVER['SERVER_ADDR']</code>。也有说<code>$_SERVER['HTTP_HOST']</code>、<code>_SERVER['HTTP_HOST']</code>、<code>http_x_real_ip</code>会泄露真实ip，但我没遇到过</p>
 </blockquote>
 </li>
-<li><p>allow_url_include：该项如果开启，则支持远程文件包含，如果有存在文件包含的文件则可直接getshell，或可以使用php伪协议</p>
+<li>
+<p>allow_url_include：该项如果开启，则支持远程文件包含，如果有存在文件包含的文件则可直接getshell，或可以使用php伪协议</p>
 </li>
-<li><p>disable_functions：查看禁用的函数</p>
+<li>
+<p>disable_functions：查看禁用的函数</p>
 </li>
-<li><p>DOCUMENT_ROOT：Web根目录</p>
+<li>
+<p>DOCUMENT_ROOT：Web根目录</p>
 <blockquote>
-<p>全称<code>$_SERVER[&#39;DOCUMENT_ROOT&#39;]</code>或<code>_SERVER[&#39;DOCUMENT_ROOT&#39;]</code></p>
+<p>全称<code>$_SERVER['DOCUMENT_ROOT']</code>或<code>_SERVER['DOCUMENT_ROOT']</code></p>
 </blockquote>
 </li>
-<li><p>asp_tags：是否允许在PHP代码中使用ASP风格的标签。php标签有4种形式，如果这个选项不开启的话(一般默认不开启)，使用asp的标签是不会解析的</p>
+<li>
+<p>asp_tags：是否允许在PHP代码中使用ASP风格的标签。php标签有4种形式，如果这个选项不开启的话(一般默认不开启)，使用asp的标签是不会解析的</p>
 <blockquote>
 <p>注意，PHP7中不再含有asp_tags项</p>
 </blockquote>
 </li>
-<li><p>short_open_tag：是否允许使用短标签形式（即<code>&lt;? ?&gt;</code>）来表示PHP代码块</p>
+<li>
+<p>short_open_tag：是否允许使用短标签形式（即<code>&lt;? ?&gt;</code>）来表示PHP代码块</p>
 <blockquote>
 <p>php的常识，&lt;?=等价于&lt;? echo</p>
 </blockquote>
 </li>
-<li><p>enable_dl：是否允许动态加载（dynamic loading）扩展模块（DLL文件）。若要利用扩展库绕过disable_functions，需要开启这个选项才能使用dl()函数</p>
+<li>
+<p>enable_dl：是否允许动态加载（dynamic loading）扩展模块（DLL文件）。若要利用扩展库绕过disable_functions，需要开启这个选项才能使用dl()函数</p>
 </li>
-<li><p>magic_quotes_gpc：是否开启对SQL注入进行防御</p>
+<li>
+<p>magic_quotes_gpc：是否开启对SQL注入进行防御</p>
 </li>
-<li><p>_FILES[“file1”]：临时文件路径。向站点的 phpinfo 页面 post 一个 webshell（自己本地写一个post表单上传页面即可），可以在_FILES [“file1”] 中看到上传的临时文件，==搭配文件包含==，便可以直接 getshell </p>
+<li>
+<p>_FILES[“file1”]：临时文件路径。向站点的 phpinfo 页面 post 一个 webshell（自己本地写一个post表单上传页面即可），可以在_FILES [“file1”] 中看到上传的临时文件，<mark>搭配文件包含</mark>，便可以直接 getshell</p>
 <pre class="line-numbers language-none"><code class="language-none"># 这里附一个post表单上传的代码，选择文件后，点击Submit提交
 &lt;!doctype htm1&gt;
 &lt;html&gt;
@@ -259,23 +276,29 @@ magicw_quotes_gpc &#x3D; On<span aria-hidden="true" class="line-numbers-rows"><s
 <p>打靶遇到过，实战没碰到过，利用条件太苛刻</p>
 </blockquote>
 </li>
-<li><p>DB_USERNAME/DB_PASSWORD：泄露数据库账号密码</p>
+<li>
+<p>DB_USERNAME/DB_PASSWORD：泄露数据库账号密码</p>
 <blockquote>
 <p>如果开发者把数据库信息设置到环境变量中就会显示。此外，直接搜索USERNAME、PASSWORD等关键词也是查找信息泄露的常规方法</p>
 </blockquote>
 </li>
-<li><p>allow_url_fopen：是否允许将URL（HTTP、HTTPS等）作为文件打开处理。</p>
+<li>
+<p>allow_url_fopen：是否允许将URL（HTTP、HTTPS等）作为文件打开处理。</p>
 </li>
-<li><p>allow_url_include：是否允许includeI()和require()函数包含URL（HTTP、HTTPS）作为文件处理。</p>
+<li>
+<p>allow_url_include：是否允许includeI()和require()函数包含URL（HTTP、HTTPS）作为文件处理。</p>
 <blockquote>
 <p>allow_url_fopen和allow_url_include是一对，如果同时开启，可能导致远程文件包含漏洞</p>
 </blockquote>
 </li>
-<li><p>Protocols：支持的网络协议。比较引人注目的就是GOPHER协议了，如果支持GOPHER协议，就能配合SSRF漏洞利用起来</p>
+<li>
+<p>Protocols：支持的网络协议。比较引人注目的就是GOPHER协议了，如果支持GOPHER协议，就能配合SSRF漏洞利用起来</p>
 </li>
-<li><p>Configuration File (php.ini) Path或Loaded Configuration File：php.ini文件路径</p>
+<li>
+<p>Configuration File (php.ini) Path或Loaded Configuration File：php.ini文件路径</p>
 </li>
-<li><p>扩展项：安装的组件/程序也会显示在phpinfo上，比如mysql等，扩展项一般有自己独立的显示框，如下</p>
+<li>
+<p>扩展项：安装的组件/程序也会显示在phpinfo上，比如mysql等，扩展项一般有自己独立的显示框，如下</p>
 <p><img src="/2024/04/02/php%E5%B9%B3%E5%8F%B0%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20240405162253326.png" alt="image-20240405162253326"></p>
 <p>能够获取组件/程序的版本，可以尝试查找历史漏洞，下面列举一些值得关注的组件/程序（爆出过历史漏洞的）</p>
 <ul>
@@ -477,21 +500,6 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
      searchFunc(path, 'local-search-input', 'local-search-result');
    </script>
 
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <!-- hexo injector body_end start --><script src="/assets/mmedia/mmedia-loader.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/ni-j.model.json"},"display":{"position":"left","width":260,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
    </html>
 
