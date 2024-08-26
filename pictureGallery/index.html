@@ -1156,6 +1156,11 @@
 			<h1><a href="#">获取原图</a></h1>
 			<p class="hitokoto">正在加载一言...</p>
 		</article>
+		<article class="white-panel">
+			<img src="img/205.jpg" class="thumb">
+			<h1><a href="#">获取原图</a></h1>
+			<p class="hitokoto">正在加载一言...</p>
+		</article>
     </section>
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	<script src="js/pinterest_grid.js"></script>
@@ -1173,7 +1178,7 @@
 	</script>
 	<!-- 下载图片 -->
 	<script>
-		document.getElementById('downloadLink').addEventListener('click', async function(event) {
+		document.getElementById('downloadLink').addEventListener('click', function(event) {
 			event.preventDefault();  // Prevent the default link behavior
 
 			// Find the closest parent <article> and get the <img> tag within it
@@ -1183,31 +1188,13 @@
 			// Get the URL of the image and replace 'img' with 'img_original'
 			var imageUrl = img.src.replace('img', 'img_original');
 
-			try {
-				// Fetch the image headers to determine its type
-				let response = await fetch(imageUrl, { method: 'HEAD' });
-				let contentType = response.headers.get('Content-Type');
-
-				// Determine the file extension based on Content-Type
-				let extension;
-				if (contentType.includes('image/jpeg')) {
-					extension = 'jpg';
-				} else if (contentType.includes('image/png')) {
-					extension = 'png';
-				} else if (contentType.includes('image/gif')) {
-					extension = 'gif';
-				} else {
-					// Default extension if the type is unknown
-					extension = 'jpg';
-				}
-
-				// Extract the file name from the URL and change the extension
-				let imageName = imageUrl.substring(imageUrl.lastIndexOf('/') + 1, imageUrl.lastIndexOf('.')) + '.' + extension;
-
+			// Function to try downloading with a specific extension
+			function tryDownloadWithExtension(extension) {
 				// Create a temporary link element
-				let tempLink = document.createElement('a');
-				tempLink.href = imageUrl;  // Set the href to the updated image URL
-				tempLink.download = imageName;  // Use the modified image filename with appropriate extension
+				var tempLink = document.createElement('a');
+				var newImageUrl = imageUrl.replace(/\.[^/.]+$/, '.' + extension);  // Replace the current extension
+				tempLink.href = newImageUrl;  // Set the href to the updated image URL
+				tempLink.download = imageUrl.substring(imageUrl.lastIndexOf('/') + 1, imageUrl.lastIndexOf('.')) + '.' + extension;
 
 				// Append the link to the body
 				document.body.appendChild(tempLink);
@@ -1217,9 +1204,21 @@
 
 				// Remove the link from the document
 				document.body.removeChild(tempLink);
+			}
 
-			} catch (error) {
-				console.error('Error fetching image headers:', error);
+			// Try common image extensions
+			var extensions = ['png', 'jpg', 'jpeg', 'gif'];
+			var tried = false;
+
+			for (var i = 0; i < extensions.length; i++) {
+				if (!tried) {
+					try {
+						tryDownloadWithExtension(extensions[i]);
+						tried = true;
+					} catch (error) {
+						console.error('Error downloading image with extension ' + extensions[i] + ':', error);
+					}
+				}
 			}
 		});
 	</script>
