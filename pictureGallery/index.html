@@ -144,8 +144,7 @@
 			4. ............<br>
 	        n. 如果你是像我一样为生活忙碌的人，那你就泡上一杯茶或者咖啡，放上一首自己喜欢的音乐，在这里静静地享受视觉的盛宴。奔跑的路上也别忘了生活，别太亏欠自己，对自己好点。最后，唯热爱永垂不朽。<br>
 	         -->
-			欢迎来到我的数字画廊，这里将展示一些数字绘画以及我所喜爱的诗词歌赋。<br>
-			「琴に囲まれ、囲碁に沈み、書に浸り、画に遊び、詩と酒と花と茶に心を奪われる」，意思是「琴棋书画，诗酒花茶，最入我心」
+			欢迎来到我的数字画廊，这里将展示一些数字绘画以及我所喜爱的诗词歌赋
 		</div>
 	</div>
 	<section id="gallery-wrapper">
@@ -1189,6 +1188,11 @@
 			<a href="#" id="download-link">获取原图</a></h1>
 			<p class="hitokoto">正在加载一言...</p>
 		</article>
+		<article class="white-panel">
+			<img src="img/210.jpg" class="thumb">
+			<a href="#" id="download-link">获取原图</a></h1>
+			<p class="hitokoto">正在加载一言...</p>
+		</article>
     </section>
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	<script src="js/pinterest_grid.js"></script>
@@ -1223,11 +1227,18 @@
 					const imgSrc = img.src;
 					const imgName = imgSrc.substring(imgSrc.lastIndexOf('/') + 1, imgSrc.lastIndexOf('.'));
 					
-					// 设置下载链接的href属性
-					link.href = `img_original/${imgName}.png`;
+					// 创建一个新的下载链接
+					const downloadUrl = `img_original/${imgName}.png`;
 					
-					// 模拟点击下载链接
-					window.location.href = link.href;
+					// 创建一个隐藏的a元素
+					const a = document.createElement('a');
+					a.href = downloadUrl;
+					a.download = `${imgName}.png`; // 设置下载文件的名称
+					
+					// 触发点击事件以下载文件
+					document.body.appendChild(a);
+					a.click();
+					document.body.removeChild(a);
 				});
 			});
 		});
