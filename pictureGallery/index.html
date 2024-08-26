@@ -144,7 +144,8 @@
 			4. ............<br>
 	        n. 如果你是像我一样为生活忙碌的人，那你就泡上一杯茶或者咖啡，放上一首自己喜欢的音乐，在这里静静地享受视觉的盛宴。奔跑的路上也别忘了生活，别太亏欠自己，对自己好点。最后，唯热爱永垂不朽。<br>
 	         -->
-			琴棋书画，诗酒花茶，最入我心
+			欢迎来到我的数字画廊，这里将展示一些数字绘画以及我所喜爱的诗词歌赋。<br>
+			「琴に囲まれ、囲碁に沈み、書に浸り、画に遊び、詩と酒と花と茶に心を奪われる」，意思是「琴棋书画，诗酒花茶，最入我心」
 		</div>
 	</div>
 	<section id="gallery-wrapper">
@@ -1183,6 +1184,11 @@
 			<a href="#" id="download-link">获取原图</a></h1>
 			<p class="hitokoto">正在加载一言...</p>
 		</article>
+		<article class="white-panel">
+			<img src="img/209.jpg" class="thumb">
+			<a href="#" id="download-link">获取原图</a></h1>
+			<p class="hitokoto">正在加载一言...</p>
+		</article>
     </section>
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	<script src="js/pinterest_grid.js"></script>
@@ -1202,34 +1208,26 @@
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
 			// 获取所有的“获取原图”链接
-			const downloadLinks = document.querySelectorAll('article .white-panel a');
-
+			const downloadLinks = document.querySelectorAll('.download-link');
+			
 			downloadLinks.forEach(link => {
+				// 给每个链接添加点击事件
 				link.addEventListener('click', function(event) {
-					event.preventDefault(); // 阻止默认的链接行为
-
-					// 获取当前 <article> 中的 <img> 元素
-					const img = this.closest('article').querySelector('img');
+					event.preventDefault(); // 防止默认的链接行为
 					
-					// 获取图片的 src 属性
-					const imgSrc = img.getAttribute('src');
+					// 获取当前链接所在的article元素
+					const article = link.closest('article');
 					
-					// 从 src 属性中提取文件主名
-					const fileNameWithExt = imgSrc.substring(imgSrc.lastIndexOf('/') + 1); // "5.jpg" 或 "6.jpg"
-					const fileNameWithoutExt = fileNameWithExt.substring(0, fileNameWithExt.lastIndexOf('.')); // "5" 或 "6"
-
-					// 设置下载的文件名，并使用 .png 后缀
-					const downloadFileName = fileNameWithoutExt + '.png';
+					// 获取该article中的图片文件名
+					const img = article.querySelector('img');
+					const imgSrc = img.src;
+					const imgName = imgSrc.substring(imgSrc.lastIndexOf('/') + 1, imgSrc.lastIndexOf('.'));
 					
-					// 创建一个临时的链接元素
-					const tempLink = document.createElement('a');
-					tempLink.href = 'img_original/' + downloadFileName; // 图片的下载地址
-					tempLink.download = downloadFileName; // 设置下载的文件名
-
-					// 触发点击事件以下载图片
-					document.body.appendChild(tempLink);
-					tempLink.click();
-					document.body.removeChild(tempLink);
+					// 设置下载链接的href属性
+					link.href = `img_original/${imgName}.png`;
+					
+					// 模拟点击下载链接
+					window.location.href = link.href;
 				});
 			});
 		});
