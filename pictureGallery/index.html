@@ -1168,6 +1168,11 @@
 			<a href="#" class="download-link">获取原图</a></h1>
 			<p class="hitokoto">正在加载一言...</p>
 		</article>
+		<article class="white-panel">
+			<img src="img/205.jpg" loading="lazy" class="thumb">
+			<a href="#" class="download-link">获取原图</a></h1>
+			<p class="hitokoto">正在加载一言...</p>
+		</article>
     </section>
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	<script src="js/pinterest_grid.js"></script>
@@ -1180,7 +1185,6 @@
                 margin_bottom: 50,
                 single_column_breakpoint: 700
 			});
-			
 		});
 	</script>
 	<!-- 下载图片 -->
@@ -1198,12 +1202,16 @@
 					const img = article.querySelector('img');
 
 					if (img) {
-						// 获取图片的 URL
-						const imgSrc = img.src;
+						// 获取缩略图的 URL
+						const thumbSrc = img.src;
+						// 从缩略图 URL 中提取文件名并替换为 .png
+						const fileName = thumbSrc.substring(thumbSrc.lastIndexOf('/') + 1, thumbSrc.lastIndexOf('.'));
+						const originalImgSrc = `img_original/${fileName}.png`;
+
 						// 创建一个临时的链接元素
 						const tempLink = document.createElement('a');
-						tempLink.href = imgSrc;
-						tempLink.download = imgSrc.split('/').pop(); // 使用图片的文件名作为下载文件名
+						tempLink.href = originalImgSrc;
+						tempLink.download = `${fileName}.png`; // 使用原图的文件名作为下载文件名
 						document.body.appendChild(tempLink);
 						tempLink.click();
 						document.body.removeChild(tempLink);
