@@ -723,13 +723,6 @@
   </url>
   
   <url>
-    <loc>https://jici-zeroten.github.io/tags/%E5%8C%BB%E5%AD%A6/</loc>
-    <lastmod>2024-08-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://jici-zeroten.github.io/tags/%E4%BA%8C%E6%AC%A1%E5%85%83/</loc>
     <lastmod>2024-08-26</lastmod>
     <changefreq>weekly</changefreq>
@@ -738,6 +731,13 @@
   
   <url>
     <loc>https://jici-zeroten.github.io/tags/%E5%BB%BA%E7%AB%99%E6%B5%8B%E8%AF%95/</loc>
+    <lastmod>2024-08-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://jici-zeroten.github.io/tags/%E5%8C%BB%E5%AD%A6/</loc>
     <lastmod>2024-08-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
