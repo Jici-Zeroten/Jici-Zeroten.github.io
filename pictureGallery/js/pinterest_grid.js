@@ -6,7 +6,7 @@
             no_columns: 3,
             margin_bottom: 50,
             single_column_breakpoint: 700,
-            image_quality: 0.8  // 新增的图像压缩质量选项
+            lazy_load: true // Added lazy_load option
         },
         columns,
         $article,
@@ -32,36 +32,14 @@
         });
 
         self.make_layout_change(self);
-        self.processImages();  // 处理图片
 
         setTimeout(function() {
             $(window).resize();
         }, 500);
-    };
 
-    Plugin.prototype.processImages = function () {
-        var self = this;
-        $(self.element).find('img').each(function() {
-            var $img = $(this);
-            var originalSrc = $img.attr('src');
-            var canvas = document.createElement('canvas');
-            var ctx = canvas.getContext('2d');
-
-            var img = new Image();
-            img.src = originalSrc;
-
-            img.onload = function() {
-                var scale = Math.min(1, 1000 / Math.max(img.width, img.height));
-                canvas.width = img.width * scale;
-                canvas.height = img.height * scale;
-                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-                canvas.toBlob(function(blob) {
-                    var newImgSrc = URL.createObjectURL(blob);
-                    $img.attr('src', newImgSrc);
-                }, 'image/jpeg', self.options.image_quality);
-            };
-        });
+        if (self.options.lazy_load) {
+            self.initLazyLoad();
+        }
     };
 
     Plugin.prototype.calculate = function (single_column_mode) {
@@ -70,7 +48,7 @@
             row = 0,
             $container = $(this.element),
             container_width = $container.width();
-            $article = $(this.element).children();
+        $article = $(this.element).children();
 
         if(single_column_mode === true) {
             article_width = $container.width() - self.options.padding_x;
@@ -129,6 +107,10 @@
 
         this.tallest($container);
         $(window).resize();
+
+        if (self.options.lazy_load) {
+            self.lazyLoadImages(); // Call lazy load after layout calculation
+        }
     };
 
     Plugin.prototype.tallest = function (_container) {
@@ -153,6 +135,34 @@
         } else {
             _self.calculate(false);
         }
+    };
+
+    Plugin.prototype.initLazyLoad = function () {
+        var self = this;
+        self.observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    var img = entry.target;
+                    img.src = img.dataset.src;
+                    img.classList.remove('lazy');
+                    self.observer.unobserve(img);
+                }
+            });
+        });
+
+        var lazyImages = document.querySelectorAll('img.lazy');
+        lazyImages.forEach(function(img) {
+            self.observer.observe(img);
+        });
+    };
+
+    Plugin.prototype.lazyLoadImages = function () {
+        var lazyImages = document.querySelectorAll('img.lazy');
+        lazyImages.forEach(function(img) {
+            if (img.classList.contains('lazy')) {
+                self.observer.observe(img);
+            }
+        });
     };
 
     $.fn[pluginName] = function (options) {
