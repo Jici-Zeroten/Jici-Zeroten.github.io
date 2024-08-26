@@ -1,3 +1,18 @@
+/*
+    Pinterest Grid Plugin
+    Copyright 2014 Mediademons
+    @author smm 16/04/2014
+
+    usage:
+
+     $(document).ready(function() {
+
+        $('#blog-landing').pinterest_grid({
+            no_columns: 4
+        });
+
+    });
+*/
 ;(function ($, window, document, undefined) {
     var pluginName = 'pinterest_grid',
         defaults = {
@@ -5,8 +20,7 @@
             padding_y: 10,
             no_columns: 3,
             margin_bottom: 50,
-            single_column_breakpoint: 700,
-            image_quality: 0.8  // 新增的图像压缩质量选项
+            single_column_breakpoint: 700
         },
         columns,
         $article,
@@ -14,7 +28,7 @@
 
     function Plugin(element, options) {
         this.element = element;
-        this.options = $.extend({}, defaults, options);
+        this.options = $.extend({}, defaults, options) ;
         this._defaults = defaults;
         this._name = pluginName;
         this.init();
@@ -26,42 +40,16 @@
 
         $(window).resize(function() {
             clearTimeout(resize_finish);
-            resize_finish = setTimeout(function () {
+            resize_finish = setTimeout( function () {
                 self.make_layout_change(self);
             }, 11);
         });
 
         self.make_layout_change(self);
-        self.processImages();  // 处理图片
 
         setTimeout(function() {
             $(window).resize();
         }, 500);
-    };
-
-    Plugin.prototype.processImages = function () {
-        var self = this;
-        $(self.element).find('img').each(function() {
-            var $img = $(this);
-            var originalSrc = $img.attr('src');
-            var canvas = document.createElement('canvas');
-            var ctx = canvas.getContext('2d');
-
-            var img = new Image();
-            img.src = originalSrc;
-
-            img.onload = function() {
-                var scale = Math.min(1, 1000 / Math.max(img.width, img.height));
-                canvas.width = img.width * scale;
-                canvas.height = img.height * scale;
-                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-                canvas.toBlob(function(blob) {
-                    var newImgSrc = URL.createObjectURL(blob);
-                    $img.attr('src', newImgSrc);
-                }, 'image/jpeg', self.options.image_quality);
-            };
-        });
     };
 
     Plugin.prototype.calculate = function (single_column_mode) {
