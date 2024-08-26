@@ -93,10 +93,10 @@
         <!-- 一言API -->
         <!-- 现代写法，推荐 -->
         <!-- 兼容低版本浏览器 (包括 IE)，可移除 -->
-        <script src="https://cdn.jsdelivr.net/npm/bluebird@3/js/browser/bluebird.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/whatwg-fetch@2.0.3/fetch.min.js"></script>
+        <!--<script src="https://cdn.jsdelivr.net/npm/bluebird@3/js/browser/bluebird.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/whatwg-fetch@2.0.3/fetch.min.js"></script>-->
         <!--End-->
-        <script>
+        <!-- <script>
         function displayHitokoto() {
                 var hitokotoElements = document.getElementsByClassName('hitokoto');
                 for (var i = 0; i < hitokotoElements.length; i++) {
@@ -115,7 +115,7 @@
                 })(i);
                 }
         }
-        </script>
+        </script>-->
 </head>
 <body onload="displayHitokoto()">
 	<div class="page-top">
@@ -1151,6 +1151,11 @@
 			<h1><a href="#">获取原图</a></h1>
 			<p class="hitokoto">正在加载一言...</p>
 		</article>
+		<article class="white-panel">
+			<img src="img/204.jpg" class="thumb">
+			<h1><a href="#">获取原图</a></h1>
+			<p class="hitokoto">正在加载一言...</p>
+		</article>
     </section>
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	<script src="js/pinterest_grid.js"></script>
@@ -1168,31 +1173,54 @@
 	</script>
 	<!-- 下载图片 -->
 	<script>
-		// JavaScript to handle click event and download image
-		document.getElementById('downloadLink').addEventListener('click', function(event) {
+		document.getElementById('downloadLink').addEventListener('click', async function(event) {
 			event.preventDefault();  // Prevent the default link behavior
 
 			// Find the closest parent <article> and get the <img> tag within it
 			var article = this.closest('article');
 			var img = article.querySelector('img.thumb');
 
-			// Get the URL of the image
+			// Get the URL of the image and replace 'img' with 'img_original'
 			var imageUrl = img.src.replace('img', 'img_original');
-			var imageName = imageUrl.substring(imageUrl.lastIndexOf('/') + 1);  // Extract the image file name from URL
 
-			// Create a temporary link element
-			var tempLink = document.createElement('a');
-			tempLink.href = imageUrl;
-			tempLink.download = imageName;  // Use the original image filename
+			try {
+				// Fetch the image headers to determine its type
+				let response = await fetch(imageUrl, { method: 'HEAD' });
+				let contentType = response.headers.get('Content-Type');
 
-			// Append the link to the body
-			document.body.appendChild(tempLink);
+				// Determine the file extension based on Content-Type
+				let extension;
+				if (contentType.includes('image/jpeg')) {
+					extension = 'jpg';
+				} else if (contentType.includes('image/png')) {
+					extension = 'png';
+				} else if (contentType.includes('image/gif')) {
+					extension = 'gif';
+				} else {
+					// Default extension if the type is unknown
+					extension = 'jpg';
+				}
 
-			// Programmatically click the link to trigger the download
-			tempLink.click();
+				// Extract the file name from the URL and change the extension
+				let imageName = imageUrl.substring(imageUrl.lastIndexOf('/') + 1, imageUrl.lastIndexOf('.')) + '.' + extension;
 
-			// Remove the link from the document
-			document.body.removeChild(tempLink);
+				// Create a temporary link element
+				let tempLink = document.createElement('a');
+				tempLink.href = imageUrl;  // Set the href to the updated image URL
+				tempLink.download = imageName;  // Use the modified image filename with appropriate extension
+
+				// Append the link to the body
+				document.body.appendChild(tempLink);
+
+				// Programmatically click the link to trigger the download
+				tempLink.click();
+
+				// Remove the link from the document
+				document.body.removeChild(tempLink);
+
+			} catch (error) {
+				console.error('Error fetching image headers:', error);
+			}
 		});
 	</script>
 	<br><br><br><br><br><br><br><br><br><br>
