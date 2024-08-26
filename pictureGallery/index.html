@@ -1173,6 +1173,11 @@
 			<a href="#" class="download-link">获取原图</a></h1>
 			<p class="hitokoto">正在加载一言...</p>
 		</article>
+		<article class="white-panel">
+			<img src="img/206.jpg" loading="lazy" class="thumb">
+			<a href="#" class="download-link">获取原图</a></h1>
+			<p class="hitokoto">正在加载一言...</p>
+		</article>
     </section>
 	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 	<script src="js/pinterest_grid.js"></script>
@@ -1193,7 +1198,7 @@
 			const links = document.querySelectorAll('.download-link');
 
 			links.forEach(link => {
-				link.addEventListener('click', function(event) {
+				link.addEventListener('click', async function(event) {
 					event.preventDefault(); // 防止默认的链接行为
 
 					// 找到当前链接所在的 article 元素
@@ -1204,17 +1209,34 @@
 					if (img) {
 						// 获取缩略图的 URL
 						const thumbSrc = img.src;
-						// 从缩略图 URL 中提取文件名并替换为 .png
+						// 从缩略图 URL 中提取文件名（不包括扩展名）
 						const fileName = thumbSrc.substring(thumbSrc.lastIndexOf('/') + 1, thumbSrc.lastIndexOf('.'));
-						const originalImgSrc = `img_original/${fileName}.png`;
 
-						// 创建一个临时的链接元素
-						const tempLink = document.createElement('a');
-						tempLink.href = originalImgSrc;
-						tempLink.download = `${fileName}.png`; // 使用原图的文件名作为下载文件名
-						document.body.appendChild(tempLink);
-						tempLink.click();
-						document.body.removeChild(tempLink);
+						// 尝试的文件扩展名
+						const extensions = ['png', 'jpg', 'jpeg'];
+						
+						// 检查文件是否存在并下载
+						for (const ext of extensions) {
+							const originalImgSrc = `img_original/${fileName}.${ext}`;
+							
+							try {
+								// 尝试获取文件头信息
+								const response = await fetch(originalImgSrc, { method: 'HEAD' });
+
+								if (response.ok) {
+									// 如果文件存在，创建一个临时链接并触发下载
+									const tempLink = document.createElement('a');
+									tempLink.href = originalImgSrc;
+									tempLink.download = `${fileName}.${ext}`;
+									document.body.appendChild(tempLink);
+									tempLink.click();
+									document.body.removeChild(tempLink);
+									break; // 成功下载后退出循环
+								}
+							} catch (error) {
+								console.error(`检查 ${originalImgSrc} 时出错`, error);
+							}
+						}
 					}
 				});
 			});
