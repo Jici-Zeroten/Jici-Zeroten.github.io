@@ -6,19 +6,16 @@
   <meta http-equiv="cache-control" content="no-cache">
   <meta http-equiv="expires" content="0">
   
-  <title>从动漫术语看日本文化 | Jici&#39;s Blog</title>
+  <title>推荐系统 | Jici&#39;s Blog</title>
   <meta name="author" content="Jici">
   
-  <meta name="description" content="春之七草
-
-来自《彻夜之歌》中女主的名字七草荠，番剧中其他人物的名字也与【春之七草】的典故有关联
-
-借用的典故是江户时代的春之七草，分别是せり（水芹）、なずな（荠菜）、はこべ（蘩蒌）、ごぎょう（鼠麹草）、ほとけのざ（宝盖草、稻槎菜）、すずな（芜菁、大头菜）、すずしろ（嫁菜、一说是白萝卜）。">
+  <meta name="description" content="小红书推荐系统的基本逻辑
+用户可以点击进入笔记，如果用户在笔记中停留几秒，就意味着用户不是手滑，而是真的对这篇笔记感兴趣，这将会被算作一次有效点击，有效点击就意味着用户对笔记感兴趣，这将被作为推荐系统的一个信号。接下来，用户可能会向下滑动阅读笔记，如果滑动到底更能说明用户对这篇笔记感兴趣（这个滑动到底指的是笔记内容到底，不包含评论部分，当然，用户阅读了评论也能说明用户对这篇笔记（或内容）感兴趣）。">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="从动漫术语看日本文化"/>
+  <meta property="og:title" content="推荐系统"/>
   <meta property="og:site_name" content="Jici&#39;s Blog"/>
 
   
@@ -147,7 +144,7 @@ var _hmt = _hmt || [];
 
 	
 		<div class="page-header">
-			<h1> 从动漫术语看日本文化</h1>
+			<h1> 推荐系统</h1>
 		</div>
 	
 
@@ -164,38 +161,36 @@ var _hmt = _hmt || [];
 	<div class="mypage">		
 	  		
 
-	  <h1>春之七草</h1>
+	  <h1 id="小红书推荐系统的基本逻辑"><a href="#小红书推荐系统的基本逻辑" class="headerlink" title="小红书推荐系统的基本逻辑"></a>小红书推荐系统的基本逻辑</h1><p><img src="/2024/11/02/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/image-20241102165006046.png" alt="image-20241102165006046"></p>
+<p>用户可以点击进入笔记，如果用户在笔记中停留几秒，就意味着用户不是手滑，而是真的对这篇笔记感兴趣，这将会被算作一次有效点击，有效点击就意味着用户对笔记感兴趣，这将被作为推荐系统的一个信号。接下来，用户可能会向下滑动阅读笔记，如果滑动到底更能说明用户对这篇笔记感兴趣（这个<code>滑动到底</code>指的是笔记内容到底，不包含评论部分，当然，用户阅读了评论也能说明用户对这篇笔记（或内容）感兴趣）。</p>
+<h2 id="转化流程"><a href="#转化流程" class="headerlink" title="转化流程"></a>转化流程</h2><p>不同的网站和app都会有不同的转换流程，下图是小红书的转化流程：</p>
+<p><img src="/2024/11/02/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/image-20241103111235766.png" alt="image-20241103111235766"></p>
+<p>对于绝大多数从产品前两步都是曝光和点击（比如Youtube、BiliBili、淘宝、快手、知乎等），值得注意的是抖音不太一样，抖音没有曝光和点击。</p>
+<h2 id="业务指标"><a href="#业务指标" class="headerlink" title="业务指标"></a>业务指标</h2><p>算法工程师优化业务系统是为了提升一些业务指标，如消费侧指标、内容侧指标、系统侧指标等。</p>
+<p>下面简单来说一下消费侧的一些指标。</p>
+<h3 id="消费指标"><a href="#消费指标" class="headerlink" title="消费指标"></a>消费指标</h3><p>这些指标可以反映出用户对推荐是否满意。</p>
+<p><img src="/2024/11/02/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/image-20241103111857385.png" alt="image-20241103111857385"></p>
+<p>==点击率是一个重要的消费指标，但注意不能将点击率作为唯一的优化目标，否则就会导致“骗点击”的内容泛滥==。</p>
+<p>此外，值得关注的一点是，阅读完成率中含有一个名为<code>f（笔记长度）</code>的归一化函数，这个函数与笔记长度有关，这是因为笔记越长完成阅读的比例就越低，如果没有归一化函数，就会对长笔记不公平。</p>
+<p>简单回顾一下归一化函数：</p>
+<p><img src="/2024/11/02/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/image-20241103112546680.png" alt="image-20241103112546680"></p>
+<p>最后还有最重要的一点，==这里列出的指标更准确的应该称为短期消费指标，它们都是有意义的，但它们不是衡量推荐系统好坏的根本指标，一味追求这些短期消费指标是不对的==，因为如果推荐系统只看用户短期兴趣，推很多用户最近感兴趣的内容，虽然会让这些消费指标上涨，但这样的坏处是会竭泽而渔，用户很快会失去兴趣不再活跃，相反，如果把多样性做好，尝试一些用户没看过的话题，虽然这些指标不会上涨，但是有利于提高用户粘性，让用户更活跃。</p>
+<h3 id="北极星指标"><a href="#北极星指标" class="headerlink" title="北极星指标"></a>北极星指标</h3><p>相比短期的消费指标，衡量推荐系统好坏最重要的指标叫做北极星指标。</p>
 <blockquote>
-<p>来自《彻夜之歌》中女主的名字七草荠，番剧中其他人物的名字也与【春之七草】的典故有关联</p>
+<p>北极星指标意思就是最关键的指标，是衡量推荐系统好坏的根本标准</p>
 </blockquote>
-<p>借用的典故是江户时代的春之七草，分别是せり（水芹）、なずな（荠菜）、はこべ（蘩蒌）、ごぎょう（鼠麹草）、ほとけのざ（宝盖草、稻槎菜）、すずな（芜菁、大头菜）、すずしろ（嫁菜、一说是白萝卜）。</p>
+<p>在小红书的推荐系统中，就会考察以下三个维度的北极星指标：</p>
+<p><img src="/2024/11/02/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/image-20241103224849918.png" alt="image-20241103224849918"></p>
+<p>通常来说，点击率（属于消费指标）与时长、阅读数量（属于北极星指标）的涨跌是一致的，万一有冲突，要以北极星指标为准。</p>
+<h2 id="实验流程"><a href="#实验流程" class="headerlink" title="实验流程"></a>实验流程</h2><p>算法工程师的工作就是对模型、特征、策略、系统做改进，从而提升业务指标。对推荐系统的改动能否最终上线要看实验结果说话。下面进行优化推荐系统的实验流程：</p>
+<p><img src="/2024/11/02/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/image-20241103230546701.png" alt="image-20241103230546701"></p>
+<p>离线实验很容易做，因为不需要把算法部署到产品中，没有跟用户实际交互，不需要占用线上流量，也不会对系统和用户产生负面影响。离线实验的结果有参考价值，能大致反映出算法的好坏，但是离线实验没有线上实验可靠，想最终判断算法的好坏，还是要做线上实验。 </p>
 <blockquote>
-<p>有趣的是【荠】在中文语境下是个多音字，称 qí 或者 jì ，通过春之七草的典故可以知道【七草荠】中的荠为【荠菜】，所以发音为 jì。</p>
+<p>比如前面提到的北极星指标，都是线上指标，只能通过线上实验获得。</p>
 </blockquote>
-<p><img src="/2024/07/28/%E4%BB%8E%E5%8A%A8%E6%BC%AB%E6%9C%AF%E8%AF%AD%E7%9C%8B%E6%97%A5%E6%9C%AC%E6%96%87%E5%8C%96/image-20240728214751067.png" alt="image-20240728214751067"></p>
-<h1>修正</h1>
-<p>修正本义为改正、纠正错误。在ACG业界，“修正”也可指对动画或漫画中的不良画面或崩坏画面进行修改（替换、模糊或删除）来达到TV放送或大众渠道出售的要求，经过修正的作品被称为“有修正”，而“无修正”则是没有遮盖不良画面，以其他形式发售的动画或同人本，简称“无修”。</p>
-<blockquote>
-<p>不良画面的修正包括添加圣光、暗牧（暗幕），甚至将一些画面删除</p>
-</blockquote>
-<h1>谭</h1>
-<blockquote>
-<p>形如《乱步奇谭》《古老美好世界的冒险谭》《落第骑士英雄谭》等番名中的谭</p>
-</blockquote>
-<p><img src="/2024/07/28/%E4%BB%8E%E5%8A%A8%E6%BC%AB%E6%9C%AF%E8%AF%AD%E7%9C%8B%E6%97%A5%E6%9C%AC%E6%96%87%E5%8C%96/image-20240730120932031.png" alt="image-20240730120932031"></p>
-<p><mark>在日文中，谭为故事、讲故事的意思</mark>。在中国文化中，也有不少谭的案例，如《古剑奇谭》《天书奇谭》等书籍和<code>天方夜谭</code>这类成语，其实在我国战国时期的《庄子·则阳》就有提到一句话<code>夫子何不谭我于王</code>（翻译成现代文的意思是：你为什么不跟王谈谈我呢？）。通过字形来说，谭分<code>言</code>和<code>覃</code>两部分，<code>言</code>是说话，<code>覃</code>是深的意思，组合起来，谭的本义就是<code>深入交谈</code>的意思。其实日文和中文中的谭意思相近，或者说是同根同源。比如说《乱步奇谭》就是以江户川乱步名作为原案的不可思议的奇妙故事。</p>
-<h1>厨</h1>
-<p>代表着喜欢某一种角色（事物）到近乎走火入魔的地步的人。比如，【JO厨】就是指特别喜欢《JOJO的奇妙冒险》这部动漫的人。</p>
-<h1>推/我推</h1>
-<p>推对应日文中的推（お）す，原本的意思是推荐，即将符合某种地位、身份的人或事物推荐给其他人。 在二次元文化中，【我推】的意思是<code>我喜欢的角色</code>或<code>我支持的人物</code>。比如，XXX是我推 = 我是XXX的粉丝</p>
-<h1>单推/单推人</h1>
-<p>表示只喜欢某个人物、只喜欢某个角色、只对某个人情有独钟。比如，【我单推初音】就是指我只喜欢初音。与其伴生的还有【单推人】这个词，即只喜欢某个人物、只喜欢某个角色、只对某个人情有独钟的一类人。</p>
-<h1>鸣谢</h1>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://ishare.ifeng.com/c/s/7wWdIDgGtaA">被遗忘的“春之七草”__凤凰网 (ifeng.com)</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv273781/">ACG界横走四大天王“谭、谈、伝、传”，你了解多少？ - 哔哩哔哩 (bilibili.com)</a></li>
-</ul>
-	  
+<h2 id="推荐系统的链路"><a href="#推荐系统的链路" class="headerlink" title="推荐系统的链路"></a>推荐系统的链路</h2><p><img src="/2024/11/02/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/image-20241103231616602.png" alt="image-20241103231616602"></p>
+<p><img src="/2024/11/02/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/image-20241103233220064.png" alt="image-20241103233220064"></p>
+<h3 id="召回"><a href="#召回" class="headerlink" title="召回"></a>召回</h3>	  
 	</div>
 
 	<div>
@@ -204,13 +199,13 @@ var _hmt = _hmt || [];
 
     
     
-    <a href="/2024/08/15/HTML学习笔记/" type="button" class="btn btn-default"><i
+    <a href="/2024/11/24/从动漫术语看日本文化/" type="button" class="btn btn-default"><i
                 class="fa fa-arrow-circle-o-left"></i> Prev</a>
     
 
     <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
     
-    <a href="/2024/07/28/中医与穴位/" type="button" class="btn btn-default ">Next<i
+    <a href="/2024/10/31/搜索引擎技术/" type="button" class="btn btn-default ">Next<i
                 class="fa fa-arrow-circle-o-right"></i></a>
     
 
@@ -239,7 +234,7 @@ var _hmt = _hmt || [];
 	
 	<div class="meta-widget">
 	<i class="fa fa-clock-o"></i>
-	2024-07-28 
+	2024-11-02 
 	</div>
 	
 
@@ -252,7 +247,7 @@ var _hmt = _hmt || [];
 	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
     <ul id="tags" class="tag_box list-unstyled collapse in">	  
 	    
-  <li><a href="/tags/二次元/">二次元<span>1</span></a></li>
+  <li><a href="/tags/业务相关/">业务相关<span>1</span></a></li>
     </ul>
 	</div>
 		
@@ -327,7 +322,7 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
     setInterval("createtime()",250);
 </script>
 <br><br>
-<span class="num">及辞已经在本站记录了 170.2k 字</span>
+<span class="num">及辞已经在本站记录了 177.7k 字</span>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     fetch('/imageCount.json')

@@ -1,0 +1,525 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="cache-control" content="no-cache">
+  <meta http-equiv="expires" content="0">
+  
+  <title>编码方式 | Jici&#39;s Blog</title>
+  <meta name="author" content="Jici">
+  
+  <meta name="description" content="在做语料清洗的时候经常需要处理各种字符编码，借此讨论和梳理一下常用编码方式">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="编码方式"/>
+  <meta property="og:site_name" content="Jici&#39;s Blog"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  
+  
+    <link href="/favicon-16x16.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-70812759-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?cb5448498d7169c668b07c2b255d62c1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<!-- hexo injector head_end start --><script> let HEXO_MMEDIA_DATA = { js: [], css: [], aplayerData: [], metingData: [], artPlayerData: [], dplayerData: []}; </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">Jici&#39;s Blog</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class=""></i>所有文章
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class=""></i>关于我
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/record" title="Record all kinds of completed target machines">
+			  <i class=""></i>记录榜
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/plan" title="Record what needs to be done and what is worth doing">
+			  <i class=""></i>计划清单
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/friendlinks" title="my friends">
+			  <i class=""></i>友情链接
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/pictureGallery" title="Record some exquisite pictures">
+			  <i class=""></i>画廊
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+  
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.8/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+	
+		<div class="page-header">
+			<h1> 编码方式</h1>
+		</div>
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+	<!-- content -->
+	<div class="mypage">		
+	  
+		 <div class="alert alert-success description">
+			<i class="fa fa-info-circle"></i> 在做语料清洗的时候经常需要处理各种字符编码，借此讨论和梳理一下常用编码方式
+		 </div> <!-- alert -->
+	  		
+
+	  <h1 id="编码方式的类别"><a href="#编码方式的类别" class="headerlink" title="编码方式的类别"></a>编码方式的类别</h1><p>常用编码方式通常分为以下几类：</p>
+<ul>
+<li>字符编码（如UTF-8、ASCII）</li>
+<li>数据编码（如Base64、URL编码）</li>
+<li>音频视频编码（如MP3、H.264）</li>
+<li>压缩编码（如ZIP、GZIP）</li>
+</ul>
+<h1 id="字符编码"><a href="#字符编码" class="headerlink" title="字符编码"></a>字符编码</h1><p>==常见的字符编码方式有：ASCII、GB2312、GBK、GB18030、UTF8==。 目前用的比较多的是GBK和UTF8（大多数网页采用的是UTF8编码，所以网页源码一般都有<code>&lt;meta charset=&quot;UTF-8&quot;&gt;</code>的标签）。</p>
+<h2 id="常见字符编码方式"><a href="#常见字符编码方式" class="headerlink" title="常见字符编码方式"></a>常见字符编码方式</h2><p>下面按照时间线对几种常见的字符编码方式进行介绍：</p>
+<ul>
+<li><p><strong>1963年：ASCII</strong></p>
+<ul>
+<li>发明国家：美国</li>
+<li>发明人：Robert W. Bemer、John McCarthy等</li>
+<li>编码长度：8位</li>
+<li>原因：为了解决计算机之间数据互换的问题，需要制定一个统一的字符编码方案。</li>
+<li>主要用途：==表示英文字母、数字、标点符号等基本字符==。</li>
+</ul>
+</li>
+<li><p><strong>1977年：Base64</strong></p>
+<ul>
+<li>发明国家：美国</li>
+<li>发明人：Joseph L. Yarbrough</li>
+<li>编码长度：6位</li>
+<li>原因：二进制数据在不同系统之间传输时可能会出现乱码，需要一种编码方式将二进制数据转换为文本形式。</li>
+<li>主要用途：==将二进制数据编码成文本，主要用于电子邮件、HTTP、MIME等协议中传输二进制数据==。</li>
+</ul>
+<blockquote>
+<p>严格来讲，Base64并不是一个字符集或字符编码，而是一种加密方式，用于将二进制数据转换为可打印字符的文本表示，便于在网络上进行传输。它并没有包含字符集的概念，而是将二进制数据表示为一组64个可打印的ASCII字符。</p>
+</blockquote>
+</li>
+<li><p><strong>1980年代初：GB2312</strong></p>
+<ul>
+<li>发明国家：中国</li>
+<li>发明人：国家标准总局</li>
+<li>编码长度：16位</li>
+<li>原因：为了解决中国计算机之间中文数据互换的问题，需要制定</li>
+<li>主要用途：==表示中文字符，是中文字符编码的一种==。</li>
+</ul>
+</li>
+<li><p><strong>1984年：Big5</strong></p>
+<ul>
+<li>发明国家：中国台湾</li>
+<li>发明人：台湾计算机公司（TCA）</li>
+<li>编码长度：16位</li>
+<li>原因：为了解决台湾计算机之间繁体中文数据互换的问题，需要制定一个统一的字符编码方案。</li>
+<li>主要用途：==表示繁体中文字符，广泛用于中国台湾等地==。</li>
+</ul>
+</li>
+<li><p><strong>1987年：ISO-8859-1（Latin-1）</strong></p>
+<ul>
+<li>发明国家：国际标准化组织（ISO）</li>
+<li>发明人：ISO完成的。因此，并没有特定的个人被明确指定为ISO-8859-1的发明人</li>
+<li>编码长度：8位</li>
+<li>原因：为了满足西欧、拉丁美洲和东欧等多种语言的需求，需要一种新的字符编码方案。</li>
+<li>主要用途：==表示西欧语言字符，是ISO-8859系列的一部分==。</li>
+</ul>
+</li>
+<li><p><strong>1991年：Unicode</strong></p>
+<ul>
+<li><p>发明国家：美国</p>
+</li>
+<li><p>发明人：Unicode联盟（Unicode Consortium）</p>
+</li>
+<li><p>编码长度：==取决于具体的编码方式，如UTF-8、UTF-16、UTF-32等==</p>
+<blockquote>
+<p>所以注意理清关系，这里的关系是，UTF-8、UTF-16、UTF-32是Unicode的几种实现方式</p>
+</blockquote>
+</li>
+<li><p>原因：为了能够容纳世界上所有文字和符号，需要制定一个新的字符编码方案。</p>
+</li>
+<li><p>主要用途：==为解决字符集的全球化而设计，包含几乎所有世界上的字符，用于在计算机系统中表示文本。==</p>
+</li>
+</ul>
+</li>
+<li><p><strong>1991年：UTF-16</strong></p>
+<ul>
+<li>发明国家：美国</li>
+<li>发明人：Unicode联盟（Unicode Consortium）</li>
+<li>编码长度：16位</li>
+<li>主要用途：==Unicode字符编码，包括辅助平面字符==。</li>
+</ul>
+</li>
+<li><p><strong>1992年：UTF-8</strong></p>
+<ul>
+<li>发明国家：美国</li>
+<li>发明人：Kenneth Thompson、Rob Pike、Joe Darcy等</li>
+<li>编码长度：8位</li>
+<li>原因：为了提高Unicode的存储效率，需要一种更紧凑的编码方式。</li>
+<li>主要用途：==Unicode字符编码，兼容ASCII，可变长表示字符==。</li>
+</ul>
+</li>
+<li><p><strong>1995年：GBK（Guo Biao Kangxi）</strong></p>
+<ul>
+<li>发明国家：中国</li>
+<li>发明人：国家标准总局</li>
+<li>编码长度：16位</li>
+<li>原因：为了支持所有汉字，需要一种新的字符编码方案。GB2312无法表示所有汉字，需要一种新的字符编码方案来支持所有汉字。</li>
+<li>主要用途：==中文字符编码，是GB2312的扩展，包含更多的汉字和符号，广泛用于中文环境中==。</li>
+</ul>
+</li>
+<li><p><strong>1996年：UTF-32</strong></p>
+<ul>
+<li>发明国家：美国</li>
+<li>发明人：Unicode联盟（Unicode Consortium）</li>
+<li>编码长度：32位</li>
+<li>原因：Unicode可以使用多个字节来表示字符，在某些情况下会导致存储空间浪费。为了提高Unicode的存储效率，需要一种更紧凑的编码方式。</li>
+<li>主要用途：==Unicode字符编码，UTF-32主要用于需要精确表示字符的场合==。</li>
+</ul>
+</li>
+<li><p><strong>2000年：GB18030</strong></p>
+<ul>
+<li>发明国家： 中国</li>
+<li>发明人： 国家标准总局</li>
+<li>编码长度： 变长，可以是1、2、3、或4个字节</li>
+<li>原因：为了支持所有汉字，需要一种新的字符编码方案。GB2312和GBK无法表示所有汉字，需要一种新的字符编码方案来支持所有汉字。</li>
+<li>主要用途：==用于中文字符编码，是GB2312、GBK的扩展，支持更多的汉字和特殊字符。它也兼容Unicode==。</li>
+</ul>
+</li>
+</ul>
+<h2 id="常见字符编码的比较"><a href="#常见字符编码的比较" class="headerlink" title="常见字符编码的比较"></a>常见字符编码的比较</h2><p>这里比较一下几种字符编码方式，如下</p>
+<p><img src="/2024/10/09/%E7%BC%96%E7%A0%81%E6%96%B9%E5%BC%8F/image-20241009145659223.png" alt="image-20241009145659223"></p>
+<h2 id="字符编码的兼容性"><a href="#字符编码的兼容性" class="headerlink" title="字符编码的兼容性"></a>字符编码的兼容性</h2><p>国标GB编码和UTF8互相不兼容。ASCII编码几乎被世界上所有编码所兼容，除了UTF16和UTF32编码。更具体的见下图：</p>
+<p><img src="/2024/10/09/%E7%BC%96%E7%A0%81%E6%96%B9%E5%BC%8F/image-20241009151944409.png" alt="image-20241009151944409"></p>
+<h1 id="字符编码识别工具"><a href="#字符编码识别工具" class="headerlink" title="字符编码识别工具"></a>字符编码识别工具</h1><ul>
+<li>快速且准确的中文编码检测工具：<a target="_blank" rel="noopener" href="https://github.com/alanshi/charset_mnbvc">https://github.com/alanshi/charset_mnbvc</a></li>
+</ul>
+<h1 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://www.python1989.com/问答/asciigbkgb2312utf-8unicode/">常见的字符集编码方法都有哪些？一文说懂ASCII,GBK,GB2312,UTF-8,Unicode等- Python学习导航 (python1989.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/byf0521hlyp/article/details/80365045">常见的几种编码方式-CSDN博客</a></li>
+</ul>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+
+    
+    
+    <a href="/2024/10/31/搜索引擎技术/" type="button" class="btn btn-default"><i
+                class="fa fa-arrow-circle-o-left"></i> Prev</a>
+    
+
+    <a href="/" type="button" class="btn btn-default"><i class="fa fa-home"></i>Home</a>
+    
+    <a href="/2024/09/12/糕点小记/" type="button" class="btn btn-default ">Next<i
+                class="fa fa-arrow-circle-o-right"></i></a>
+    
+
+    
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+    <h2 class="title">Comments</h2>
+
+    
+</section>
+
+
+	</div> <!-- col-md-9/col-md-12 -->
+		
+	
+	<div id="side_meta">
+		<div class="col-md-3" id="post_meta"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2024-10-09 
+	</div>
+	
+
+	<!-- categories -->
+    
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/常识与技巧/">常识与技巧<span>17</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	</div>
+		
+
+</div><!-- row -->
+
+
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2024 Jici
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a>    
+</p>
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+
+<span class="post-meta-divider">|</span>
+本站总访问量&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;次</span>
+
+<script>
+var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a||"interactive"===document.readyState||"complete"===document.readyState?c.call(document):b.push(function(){return c.call(this)}),this},d=function(){for(var a=0,c=b.length;c>a;a++)b[a].apply(document);b=[]},e=function(){a||(a=!0,d.call(window),document.removeEventListener?document.removeEventListener("DOMContentLoaded",e,!1):document.attachEvent&&(document.detachEvent("onreadystatechange",e),window==window.top&&(clearInterval(c),c=null)))},document.addEventListener?document.addEventListener("DOMContentLoaded",e,!1):document.attachEvent&&(document.attachEvent("onreadystatechange",function(){/loaded|complete/.test(document.readyState)&&e()}),window==window.top&&(c=setInterval(function(){try{a||document.documentElement.doScroll("left")}catch(b){return}e()},5)))}(),bszCaller={fetch:function(a,b){var c="BusuanziCallback_"+Math.floor(1099511627776*Math.random());window[c]=this.evalCall(b),a=a.replace("=BusuanziCallback","="+c),scriptTag=document.createElement("SCRIPT"),scriptTag.type="text/javascript",scriptTag.defer=!0,scriptTag.src=a,scriptTag.referrerPolicy="no-referrer-when-downgrade",document.getElementsByTagName("HEAD")[0].appendChild(scriptTag)},evalCall:function(a){return function(b){ready(function(){try{a(b),scriptTag.parentElement.removeChild(scriptTag)}catch(c){bszTag.hides()}})}}},bszCaller.fetch("//busuanzi.ibruce.info/busuanzi?jsonpCallback=BusuanziCallback",function(a){bszTag.texts(a),bszTag.shows()}),bszTag={bszs:["site_pv","page_pv","site_uv"],texts:function(a){this.bszs.map(function(b){var c=document.getElementById("busuanzi_value_"+b);c&&(c.innerHTML=a[b])})},hides:function(){this.bszs.map(function(a){var b=document.getElementById("busuanzi_container_"+a);b&&(b.style.display="none")})},shows:function(){this.bszs.map(function(a){var b=document.getElementById("busuanzi_container_"+a);b&&(b.style.display="inline")})}};
+</script>
+
+
+<!-- <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span class="post-meta-divider">|</span>
+<span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+<span class="post-meta-divider">|</span>
+<span id="busuanzi_container_site_uv">本站访客数<span id="busuanzi_value_site_uv"></span>人</span> -->
+
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("08/12/2023 00:00:00");//在此处修改你的建站时间
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已勉强运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+    setInterval("createtime()",250);
+</script>
+<br><br>
+<span class="num">及辞已经在本站记录了 177.7k 字</span>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    fetch('/imageCount.json')
+      .then(response => response.json())
+      .then(data => {
+        const imageCount = data.count;
+        const imageCountElement = document.getElementById('imageCount');
+        imageCountElement.textContent = `共计收录了 ${imageCount} 张图片`;
+      })
+      .catch(error => {
+        console.error('Failed to load image count:', error);
+      });
+  });
+</script>
+<br><br>
+<span id="imageCount">正在加载图片数目...</span>
+</div> </footer>
+</div> <!-- container-narrow -->
+  
+
+
+  
+<a id="gotop" href="#">   
+  <span>⬆︎TOP</span>
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+   <script type="text/javascript">      
+     var search_path = "search.xml";
+	 if (search_path.length == 0) {
+	 	search_path = "search.xml";
+	 }
+	 var path = "/" + search_path;
+     searchFunc(path, 'local-search-input', 'local-search-result');
+   </script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<!-- hexo injector body_end start --><script src="/assets/mmedia/mmedia-loader.js"></script><!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/ni-j.model.json"},"display":{"position":"left","width":260,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+   </html>
+
+<!-- 雪花特效 -->
+<!-- 直接引用公网CDN在线文件 -->
+<!-- <script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/xuehuapiaoluo.js">-->
+<!-- 引用本地文件 -->
+<!--<script type="text/javascript" src="\js\snow.js"></script>-->
+
+<!-- 樱花花特效 -->
+<!-- 直接引用公网CDN在线文件 -->
+<!--<script src="https://cdn.jsdelivr.net/gh/wallleap/cdn/js/sakura.js"></script>-->
+<!-- 引用本地文件 -->
+<script type="text/javascript" src="\js\sakura.js"></script>
+
+
+<!-- 数字雨 
+<canvas id="canvas" width="1440" height="900" ></canvas>
+<script type="text/javascript" src="/js/DigitalRain.js"></script>-->
+
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+
+<!--图片预加载-->
+<script src="//instant.page/3.0.0" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+<!--字体真棒图标-->
+<script type="text/javascript" src="/js/fontawesome_715cc194ca.js"></script>
