@@ -163,10 +163,11 @@ var _hmt = _hmt || [];
 	  <p>这里先简单介绍一下DDoS</p>
 <p><img src="/2023/11/29/DDoS%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/image-20231129204650908.png" alt="image-20231129204650908"></p>
 <p><img src="/2023/11/29/DDoS%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/image-20231129204700389.png" alt="image-20231129204700389"></p>
-<p>在漏洞挖掘的时候还会碰到其他造成DDoS的漏洞，==这里注意一点，DDoS不一定要通过不断发包导致==</p>
-<h1 id="图像大小与请求参数可修改"><a href="#图像大小与请求参数可修改" class="headerlink" title="图像大小与请求参数可修改"></a>图像大小与请求参数可修改</h1><p>图片大小相关参数可控导致DDoS &gt; 影响服务端对图片处理的参数可控，进而可通过修改参数导致服务端分配大量资源处理图片，造成DDoS效果。攻击者不需要在此类攻击中投入资源，但服务器可能会分配所需的像素缓冲区（导致内存不足）或者执行随图像大小变化的计算（导致占用服务器CPU）。通过这种能一次请求大型资源的漏洞，也会造成DDos。</p>
+<p>在漏洞挖掘的时候还会碰到其他造成DDoS的漏洞，<mark>这里注意一点，DDoS不一定要通过不断发包导致</mark></p>
+<h1>图像大小与请求参数可修改</h1>
+<p>图片大小相关参数可控导致DDoS &gt; 影响服务端对图片处理的参数可控，进而可通过修改参数导致服务端分配大量资源处理图片，造成DDoS效果。攻击者不需要在此类攻击中投入资源，但服务器可能会分配所需的像素缓冲区（导致内存不足）或者执行随图像大小变化的计算（导致占用服务器CPU）。通过这种能一次请求大型资源的漏洞，也会造成DDos。</p>
 <p>这一类的漏洞挖掘，可以使用BurpSuite的Image Size Issues插件</p>
-<p>下载地址：<a target="_blank" rel="noopener" href="https://github.com/portswigger/image-size-issues">https://github.com/portswigger/image-size-issues</a>  </p>
+<p>下载地址：<a target="_blank" rel="noopener" href="https://github.com/portswigger/image-size-issues">https://github.com/portswigger/image-size-issues</a></p>
 <p>也可以在BurpSuite的插件商城中直接搜索安装</p>
 <p><img src="/2023/11/29/DDoS%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/image-20231129210214416.png" alt="image-20231129210214416"></p>
 <p>安装并启用后，在挂着Burp代理浏览网页时，若存在此漏洞，Burp在Target中显示 Image size matches request parameters，如下</p>
@@ -175,7 +176,8 @@ var _hmt = _hmt || [];
 <p>这里注意，如果是提交SRC的话，有的SRC会在文档中注明“禁止使用 DDOS 攻击”，即这种漏洞是不收的，如果提交了漏洞，很有可能面临法律责任，比如下面对SRC</p>
 </blockquote>
 <p><img src="/2023/11/29/DDoS%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/image-20231212142810224.png" alt="image-20231212142810224"></p>
-<h1 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h1><ul>
+<h1>鸣谢</h1>
+<ul>
 <li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/RG6J2OIvvrU6wLXZ5s1QBw">https://mp.weixin.qq.com/s/RG6J2OIvvrU6wLXZ5s1QBw</a></li>
 <li><a target="_blank" rel="noopener" href="https://forum.butian.net/share/2602">https://forum.butian.net/share/2602</a></li>
 </ul>
@@ -311,7 +313,7 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
     setInterval("createtime()",250);
 </script>
 <br><br>
-<span class="num">及辞已经在本站记录了 177.7k 字</span>
+<span class="num">及辞已经在本站记录了 177.6k 字</span>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     fetch('/imageCount.json')

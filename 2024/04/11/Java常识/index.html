@@ -163,11 +163,13 @@ var _hmt = _hmt || [];
 	  		
 
 	  <blockquote>
-<p>这里不会讨论Java基础的学习（Java基础学习移步至<a href="https://jici-zeroten.github.io/2024/04/10/Java学习笔记/">Java学习笔记 </a>），主要是Java底层逻辑的一些常识。</p>
+<p>这里不会讨论Java基础的学习（Java基础学习移步至<a href="https://jici-zeroten.github.io/2024/04/10/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Java学习笔记 </a>），主要是Java底层逻辑的一些常识。</p>
 </blockquote>
-<h1 id="Bean"><a href="#Bean" class="headerlink" title="Bean"></a>Bean</h1><p><img src="/2024/04/11/Java%E5%B8%B8%E8%AF%86/image-20240410102434377.png" alt="image-20240410102434377"></p>
-<h1 id="Java-Bean"><a href="#Java-Bean" class="headerlink" title="Java Bean"></a>Java Bean</h1><p>上面说了Bean的中文含义是“豆子”，顾名思义JavaBean是一段Java小程序。==Java Bean实际上是指一种特殊的Java类，它通常用来实现一些比较常用的简单功能，并可以很容易的被重用或者是插入其他应用程序中去。所有遵循一定编程原则的Java类都可以被称作JavaBean==。</p>
-<p>Java Bean是基于Java的组件模型，由属性、方法、事件3部分组成。在该模型中，==JavaBean可以被修改或与其他组件结合以生成新组件或完整的程序。它是一种Java类，通过封装成为具有某种功能或者处理某个业务的对象。因此，也可以通过嵌在JSP页面内的Java代码访问Bean及其属性==。</p>
+<h1>Bean</h1>
+<p><img src="/2024/04/11/Java%E5%B8%B8%E8%AF%86/image-20240410102434377.png" alt="image-20240410102434377"></p>
+<h1>Java Bean</h1>
+<p>上面说了Bean的中文含义是“豆子”，顾名思义JavaBean是一段Java小程序。<mark>Java Bean实际上是指一种特殊的Java类，它通常用来实现一些比较常用的简单功能，并可以很容易的被重用或者是插入其他应用程序中去。所有遵循一定编程原则的Java类都可以被称作JavaBean</mark>。</p>
+<p>Java Bean是基于Java的组件模型，由属性、方法、事件3部分组成。在该模型中，<mark>JavaBean可以被修改或与其他组件结合以生成新组件或完整的程序。它是一种Java类，通过封装成为具有某种功能或者处理某个业务的对象。因此，也可以通过嵌在JSP页面内的Java代码访问Bean及其属性</mark>。</p>
 <p>Bean的含义是可重复使用的Java组件。所谓组件就是一个由可以自行进行内部管理的一个或几个类所组成、外界不了解其内部信息和运行方式的群体。使用它的对象只能通过接口来操作。</p>
 <p>这里借助维基百科的词条做一个总结：</p>
 <p><img src="/2024/04/11/Java%E5%B8%B8%E8%AF%86/image-20240410105013977.png" alt="image-20240410105013977"></p>
@@ -181,7 +183,8 @@ var _hmt = _hmt || [];
 <p>下面通过Java代码来体会一下：</p>
 <p><img src="/2024/04/11/Java%E5%B8%B8%E8%AF%86/image-20240410105708254.png" alt="image-20240410105708254"></p>
 <p><img src="/2024/04/11/Java%E5%B8%B8%E8%AF%86/image-20240410105856903.png" alt="image-20240410105856903"></p>
-<h1 id="Spring-Bean"><a href="#Spring-Bean" class="headerlink" title="Spring Bean"></a>Spring Bean</h1><p>首先，Spring 是一个强大的开源框架，用于构建 Java 应用程序。而==Spring Bean 是一种由 Spring 容器管理的对象==。这些对象可以是普通的 Java 对象，但它们由 Spring 负责创建、配置和管理。Spring 的 IOC（控制反转）机制使得 Bean 的创建和管理变得更加灵活和集中化。</p>
+<h1>Spring Bean</h1>
+<p>首先，Spring 是一个强大的开源框架，用于构建 Java 应用程序。而<mark>Spring Bean 是一种由 Spring 容器管理的对象</mark>。这些对象可以是普通的 Java 对象，但它们由 Spring 负责创建、配置和管理。Spring 的 IOC（控制反转）机制使得 Bean 的创建和管理变得更加灵活和集中化。</p>
 <blockquote>
 <p>这里补充一下对于IOC机制、 IOC容器、Spring 容器的理解</p>
 </blockquote>
@@ -193,19 +196,22 @@ var _hmt = _hmt || [];
 <blockquote>
 <p>IOC机制不只是Spring才有，很多框架也都有该技术。</p>
 </blockquote>
-<h1 id="Java-Bean和Spring-Bean的区别和联系"><a href="#Java-Bean和Spring-Bean的区别和联系" class="headerlink" title="Java Bean和Spring Bean的区别和联系"></a>Java Bean和Spring Bean的区别和联系</h1><p><img src="/2024/04/11/Java%E5%B8%B8%E8%AF%86/image-20240410130903687.png" alt="image-20240410130903687"><img src="/2024/04/11/Java%E5%B8%B8%E8%AF%86/image-20240410130912709.png" alt="image-20240410130912709"></p>
-<p>==Spring 的 Bean 对象在一定程度上扩展了普通的 Java Bean对象的概念==，以提供更多的功能和便利性。</p>
+<h1>Java Bean和Spring Bean的区别和联系</h1>
+<p><img src="/2024/04/11/Java%E5%B8%B8%E8%AF%86/image-20240410130903687.png" alt="image-20240410130903687"><img src="/2024/04/11/Java%E5%B8%B8%E8%AF%86/image-20240410130912709.png" alt="image-20240410130912709"></p>
+<p><mark>Spring 的 Bean 对象在一定程度上扩展了普通的 Java Bean对象的概念</mark>，以提供更多的功能和便利性。</p>
 <p>为了方便理解，我分别从<code>装配和管理</code>、<code>依赖注入</code>、<code>切面和增强</code>、<code>生命周期管理</code>、<code>配置</code>、<code>写法</code>等方面做一个对比总结：</p>
 <ul>
 <li>装配和管理： 普通的Java Bean对象需要自行创建和管理，而 Spring 的 Bean 则由 Spring 容器负责创建、配置和管理。这为我们的程序提供了更大的灵活性和可维护性，无须再像以前一样经常需要new 对象来使用，现在我们将创建对象的任务交给 Spring 来做，我们只需要在需要用的地方注入对象就可以。</li>
 <li>依赖注入： Spring 的 Bean 可以通过依赖注入（DI）来自动解决它们之间的依赖关系。这意味着我们可以将一个 Bean 注入到另一个 Bean 中，而无需手动实例化（new）它们或处理依赖关系。</li>
 <li>切面和增强： Spring 的 Bean 支持面向切面编程（AOP），这使我们可以将横切关注点（如日志记录、事务管理等）从业务逻辑中分离出来，使代码更加干净和模块化。说白了就是我们可以封装日志记录、事务管理的代码，等程序运行到我们想要切入的地方（即类中的方法）时，Spring AOP 会将我们封装的日志记录、事务管理等代码追加到切入点的前后啥的。</li>
 <li>生命周期管理： Spring 的 Bean 可以通过初始化和销毁回调方法来管理其生命周期。我们可以在 Bean 初始化之前或销毁之后执行特定的操作，如通过 @PostConstruct 来初始化前对属性进行赋值或者通过实现 InitializingBean 接口进行初始化</li>
-<li>配置： 普通的Java Bean对象通常在代码中硬编码配置，而==Spring 的 Bean 可以通过 XML 配置、Java 注解或 Java 配置类进行配置==，使得配置更加灵活和可管理。</li>
+<li>配置： 普通的Java Bean对象通常在代码中硬编码配置，而<mark>Spring 的 Bean 可以通过 XML 配置、Java 注解或 Java 配置类进行配置</mark>，使得配置更加灵活和可管理。</li>
 <li>写法：传统Java Bean作为值对象，要求每个属性都提供getter和setter方法；但Spring中的Bean仅需为接受<code>设值注入</code>的属性提供setter方法</li>
 </ul>
-<h1 id="JMX"><a href="#JMX" class="headerlink" title="JMX"></a>JMX</h1><p>Java Management Extensions（JMX）是Java平台中一个重要的管理和监控技术，通过使用JMX，开发人员可以轻松地实现对Java应用程序进行监控和管理。</p>
-<h2 id="JMX介绍"><a href="#JMX介绍" class="headerlink" title="JMX介绍"></a>JMX介绍</h2><p>==JMX是Java平台的一个标准规范，它定义了一组API和协议，用于管理和监控Java应用程序的运行状态==。JMX提供了一种统一的方式来访问Java应用程序的各种资源，包括操作系统、虚拟机、应用程序服务器和自定义应用程序组件等。</p>
+<h1>JMX</h1>
+<p>Java Management Extensions（JMX）是Java平台中一个重要的管理和监控技术，通过使用JMX，开发人员可以轻松地实现对Java应用程序进行监控和管理。</p>
+<h2 id="JMX介绍">JMX介绍</h2>
+<p><mark>JMX是Java平台的一个标准规范，它定义了一组API和协议，用于管理和监控Java应用程序的运行状态</mark>。JMX提供了一种统一的方式来访问Java应用程序的各种资源，包括操作系统、虚拟机、应用程序服务器和自定义应用程序组件等。</p>
 <p>JMX的主要功能包括：</p>
 <ol>
 <li>监控和管理Java应用程序的运行状态：JMX为Java应用程序提供了一种标准化的方式来访问应用程序内部的各种状态信息，比如内存使用情况、线程状态、GC情况等等。这些信息可以用于监控和管理应用程序的性能和可用性。</li>
@@ -216,55 +222,63 @@ var _hmt = _hmt || [];
 <p>是不是和Spring Boot Actuator的功能很像，Spring Boot Actuator就用到了 JMX。此外，JConsole和VisualVM 也用到了 JMX。</p>
 </blockquote>
 <p><img src="/2024/04/11/Java%E5%B8%B8%E8%AF%86/image-20240410140129109.png" alt="image-20240410140129109"></p>
-<h2 id="JMX架构与MBean"><a href="#JMX架构与MBean" class="headerlink" title="JMX架构与MBean"></a>JMX架构与MBean</h2><p>JMX的架构由三个主要组件组成：</p>
+<h2 id="JMX架构与MBean">JMX架构与MBean</h2>
+<p>JMX的架构由三个主要组件组成：</p>
 <ol>
-<li>MBean： ==MBean是Managed Bean的缩写（中文可译为”托管Bean”），它是JMX中的核心概念。MBean用于暴露应用程序内部的状态信息和操作，比如内存使用情况、线程状态、GC情况等等。MBean可以被动态地创建、注册和注销==，使得开发人员可以非常方便地将应用程序的状态信息暴露给JMX。</li>
+<li>MBean： <mark>MBean是Managed Bean的缩写（中文可译为&quot;托管Bean&quot;），它是JMX中的核心概念。MBean用于暴露应用程序内部的状态信息和操作，比如内存使用情况、线程状态、GC情况等等。MBean可以被动态地创建、注册和注销</mark>，使得开发人员可以非常方便地将应用程序的状态信息暴露给JMX。</li>
 <li>MBean Server： MBean Server是JMX的核心组件，它提供了MBean的注册、查询和调用等功能。MBean Server负责管理所有注册到它上面的MBean，并通过JMX协议向外部提供服务。在Java应用程序中，每个JVM只有一个MBean Server实例。</li>
 <li>JMX Agent： JMX Agent是JMX的客户端组件，它允许开发人员通过网络远程访问和管理MBean Server。JMX Agent可以以独立进程的形式运行，也可以作为Java应用程序的一部分嵌入到应用程序中。</li>
 </ol>
-<p>==MBean就是一种规范的 Java Bean（即属于Java Bean的一种）==，集成和实现了一套标准的Java Bean 接口。在JMX中MBean代表一个被管理的资源【运行在Java虚拟机（JVM）上的资源】实例，例如应用程序或Java EE服务（事务监控、JDBC驱动程序等）。MBean会通过接口定义（这样外界就可以获取被管理的资源的状态和操纵MBean的行为），给出这些资源的一些特定操作，比如：</p>
+<p><mark>MBean就是一种规范的 Java Bean（即属于Java Bean的一种）</mark>，集成和实现了一套标准的Java Bean 接口。在JMX中MBean代表一个被管理的资源【运行在Java虚拟机（JVM）上的资源】实例，例如应用程序或Java EE服务（事务监控、JDBC驱动程序等）。MBean会通过接口定义（这样外界就可以获取被管理的资源的状态和操纵MBean的行为），给出这些资源的一些特定操作，比如：</p>
 <ol>
 <li>属性的读和写操作</li>
 <li>可以被执行的操作</li>
 <li>显示描述信息</li>
 </ol>
-<p>JMX 中共有四种类型的 MBean，分别是 <code>Standard MBean(标准MBean)</code>、<code>Dynamic MBean(动态MBean)</code>、<code>Open MBean(开放式MBean)</code>、<code>MXBean(管理扩展Bean)</code>、<code>Model MBean(模型MBean)</code>。具体如下：</p>
+<p>JMX 中共有四种类型的 MBean，分别是 <code>Standard MBean(标准MBean)</code>、<code> Dynamic MBean(动态MBean)</code>、<code>Open MBean(开放式MBean)</code>、<code>MXBean(管理扩展Bean)</code>、<code>Model MBean(模型MBean)</code>。具体如下：</p>
 <ol>
-<li>Standard MBean（标准MBean）：<ul>
+<li>Standard MBean（标准MBean）：
+<ul>
 <li>Standard MBean是最简单的一种MBean类型，它是通过Java接口和具体实现类的方式定义的。</li>
 <li>Standard MBean的接口定义了MBean的管理接口，实现类提供了具体的实现逻辑。</li>
 <li>Standard MBean可以使用Java的反射机制自动生成MBean的管理接口和实现类的代码。</li>
 </ul>
 </li>
-<li>Dynamic MBean（动态MBean）：<ul>
+<li>Dynamic MBean（动态MBean）：
+<ul>
 <li>Dynamic MBean是一种更灵活和动态的MBean类型，它不需要在编译时定义接口和实现类。</li>
 <li>Dynamic MBean通过实现DynamicMBean接口来定义管理接口，并在运行时动态地提供管理属性和操作。</li>
 <li>Dynamic MBean可以在运行时动态地添加、删除或修改其管理属性和操作。</li>
 </ul>
 </li>
-<li>Open MBean（开放式MBean）：<ul>
+<li>Open MBean（开放式MBean）：
+<ul>
 <li>Open MBean是一种与特定Java类型无关的MBean类型，它可以管理任意类型的Java对象。</li>
 <li>Open MBean使用MBean描述符来定义管理接口和属性，可以管理任意类型的对象和属性。</li>
 <li>Open MBean可以通过MBean描述符提供属性类型、访问权限、合法值等信息。</li>
 </ul>
 </li>
-<li>MXBean（管理扩展Bean）：<ul>
+<li>MXBean（管理扩展Bean）：
+<ul>
 <li>MXBean是一种特殊类型的MBean，它通过Java接口和具体实现类的方式定义。</li>
 <li>MXBean的接口定义了MBean的管理接口，实现类提供了具体的实现逻辑。</li>
 <li>MXBean使用一组特定的注解来定义属性、操作和通知，并提供了更严格的类型限制和安全性。</li>
 </ul>
 </li>
-<li>Model MBean（模型MBean）：<ul>
+<li>Model MBean（模型MBean）：
+<ul>
 <li>Model MBean是JMX中的一种特殊类型的MBean，它提供了更灵活和可编程的管理机制。</li>
 <li>Model MBean允许开发者在运行时动态地定义和管理MBean的属性、操作和通知。</li>
-<li>Model MBean通过中间层的”模型”来将MBean的管理接口与实际的实现逻辑分离开来，实现了解耦和灵活的管理能力。</li>
+<li>Model MBean通过中间层的&quot;模型&quot;来将MBean的管理接口与实际的实现逻辑分离开来，实现了解耦和灵活的管理能力。</li>
 <li>Model MBean可以通过配置和编程的方式进行定制，开发者可以在运行时为Model MBean设置属性、操作和通知，并为其提供自定义的实现逻辑。</li>
 <li>Model MBean的管理接口可以通过MBeanInfo对象进行描述，包括属性、操作和通知等信息。</li>
 </ul>
 </li>
 </ol>
-<h2 id="MXBean"><a href="#MXBean" class="headerlink" title="MXBean"></a>MXBean</h2><p>==MXBean 是一种MBean==。更准确的来说，MXBean是一种引用预定义数据类型（例如java.util.Date）的MBean。通过这种方式，可以确保任何客户机（包括远程客户机）都可以使用MBean，而不需要客户机访问代表MBean类型的特定的类。MXBean提供一种方便的方法来绑定数据，而不需要客户端进行特殊的绑定操作。</p>
-<h1 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h1><ul>
+<h2 id="MXBean">MXBean</h2>
+<p><mark>MXBean 是一种MBean</mark>。更准确的来说，MXBean是一种引用预定义数据类型（例如java.util.Date）的MBean。通过这种方式，可以确保任何客户机（包括远程客户机）都可以使用MBean，而不需要客户机访问代表MBean类型的特定的类。MXBean提供一种方便的方法来绑定数据，而不需要客户端进行特殊的绑定操作。</p>
+<h1>鸣谢</h1>
+<ul>
 <li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/JavaBeans">JavaBeans - 维基百科，自由的百科全书 (wikipedia.org)</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/1252599548343744/1260474416351680">JavaBean - 廖雪峰的官方网站 (liaoxuefeng.com)</a></li>
 <li><a target="_blank" rel="noopener" href="https://i.bjpowernode.com/article/676.html">简述Java中的Bean是什么意思 - 动力节点在线 (bjpowernode.com)</a></li>
@@ -410,7 +424,7 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
     setInterval("createtime()",250);
 </script>
 <br><br>
-<span class="num">及辞已经在本站记录了 177.7k 字</span>
+<span class="num">及辞已经在本站记录了 177.6k 字</span>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     fetch('/imageCount.json')
