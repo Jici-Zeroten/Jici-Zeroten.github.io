@@ -258,6 +258,18 @@ greet(&quot;Bob&quot;);<span aria-hidden="true" class="line-numbers-rows"><span>
 <p><img src="/2024/09/03/%E6%B5%8F%E8%A7%88%E5%99%A8%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/image-20241113162553165.png" alt="image-20241113162553165"></p>
 <p>找到需要复制的前端请求，右键即可选择将复制为其他请求</p>
 <p><img src="/2024/09/03/%E6%B5%8F%E8%A7%88%E5%99%A8%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/image-20241113162823174.png" alt="image-20241113162823174"></p>
+<h2 id="定位元素绑定的事件函数">定位元素绑定的事件函数</h2>
+<blockquote>
+<p>有些前端元素（如输入框、按钮等）会绑定事件（如：输入、点击等）以触发函数，使用浏览器的开发者工具可以快速定位元素绑定的事件函数</p>
+</blockquote>
+<p>F12打开开发者工具，点击<code>元素检查器</code>选中要定位的前端元素，右边选择 Event Listeners 标签</p>
+<blockquote>
+<p>默认会勾选 Ancestors All，是显示包含该元素所有父类绑定的监听事件的，只需要定位当前元素的话可以取消勾选，比如下图中的提示框的确定按钮就绑定了一个 click 点击事件</p>
+</blockquote>
+<p><img src="/2024/09/03/%E6%B5%8F%E8%A7%88%E5%99%A8%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/image-20250422181155489.png" alt="image-20250422181155489"></p>
+<h2 id="全局搜索关键字">全局搜索关键字</h2>
+<p>F12打开开发者工具，使用快捷键<code>Ctrl + Shift + F</code>即可打开全局搜索框，搜索的关键字会在所有前端静态资源（如css、js等，不包括html和动态加载的内容）中查找</p>
+<p><img src="/2024/09/03/%E6%B5%8F%E8%A7%88%E5%99%A8%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/image-20250422182438449.png" alt="image-20250422182438449"><img src="/2024/09/03/%E6%B5%8F%E8%A7%88%E5%99%A8%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7/image-20250422182610608.png" alt="image-20250422182610608"></p>
 <h1>鸣谢</h1>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://devtoolstips.org/guides/en/understand-devtools/">Understanding DevTools: what is it, who is it for, how to open it, how to use it? (devtoolstips.org)</a></li>
@@ -394,7 +406,7 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
     setInterval("createtime()",250);
 </script>
 <br><br>
-<span class="num">及辞已经在本站记录了 177.9k 字</span>
+<span class="num">及辞已经在本站记录了 178.3k 字</span>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     fetch('/imageCount.json')
