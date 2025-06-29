@@ -166,33 +166,22 @@ var _hmt = _hmt || [];
 <p>下面测试代码块、公式块、表格、表情</p>
 <pre class="line-numbers language-Python" data-language="Python"><code class="language-Python">这是代码块<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token variable">$x</span> <span class="token operator">=</span> <span class="token string double-quoted-string">"just go go!"</span> <span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>这是简单公式块<br>
-$$<br>
-7x \times 2y \neq 3z<br>
-$$</p>
-<p>$$<br>
-7x + 2y = 3z<br>
-$$</p>
-<p>$$<br>
-x^3+x^9+x^y<br>
-$$</p>
-<p>这是复杂公式块<br>
-$$<br>
-\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt,.<br>
-\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt,.<br>
-$$</p>
-<p>$$<br>
-\lim\limits_{x \to \infty} \exp(-x) = 0<br>
-$$</p>
-<p>$$<br>
-X(m,n)=<br>
-\begin{cases}<br>
-x(n),\<br>
-x(n-1),\<br>
-x(n+1)<br>
-\end{cases}<br>
-$$</p>
-<p>这是表格</p>
+<p>这是简单公式块</p>
+<script type="math/tex; mode=display">
+7x \times 2y \neq 3z</script><script type="math/tex; mode=display">
+7x + 2y = 3z</script><script type="math/tex; mode=display">
+x^3+x^9+x^y</script><p>这是复杂公式块</p>
+<script type="math/tex; mode=display">
+\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,. 
+\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.</script><script type="math/tex; mode=display">
+\lim\limits_{x \to \infty} \exp(-x) = 0</script><script type="math/tex; mode=display">
+X(m,n)=
+\begin{cases}
+x(n),\\
+x(n-1),\\
+x(n+1)
+\end{cases}</script><p>这是表格</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -215,12 +204,12 @@ $$</p>
 <tr>
 <td></td>
 <td></td>
-<td></td>
 </tr>
 </tbody>
 </table>
+</div>
 <p>这是雪人表情</p>
-<p><span class="emoji" alias="snowman" style fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/26c4.png?v8">⛄</span></p>
+<p><span class="emoji" alias="snowman" style fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/26c4.png?v8">&#x26c4;</span></p>
 	  
 	</div>
 
@@ -353,7 +342,7 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
     setInterval("createtime()",250);
 </script>
 <br><br>
-<span class="num">及辞已经在本站记录了 179.1k 字</span>
+<span class="num">及辞已经在本站记录了 181k 字</span>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     fetch('/imageCount.json')

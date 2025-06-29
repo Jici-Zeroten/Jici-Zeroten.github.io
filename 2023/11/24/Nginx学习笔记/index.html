@@ -164,86 +164,60 @@ var _hmt = _hmt || [];
 		 </div> <!-- alert -->
 	  		
 
-	  <h1>Nginx处理的问题</h1>
-<p><img src="/2023/11/24/Nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image1.png" alt></p>
+	  <h1 id="Nginx处理的问题"><a href="#Nginx处理的问题" class="headerlink" title="Nginx处理的问题"></a>Nginx处理的问题</h1><p><img src="/2023/11/24/Nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image1.png" alt></p>
 <p><img src="/2023/11/24/Nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image2.png" alt></p>
-<br>
-<h1>http代理</h1>
-<h2 id="正向代理：代理客户端-去发送请求">正向代理：代理客户端(去发送请求)</h2>
-<p><img src="/2023/11/24/Nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image3.png" alt></p>
-<h2 id="反向代理：代理服务器端-去应答请求">反向代理：代理服务器端(去应答请求)</h2>
-<p><img src="/2023/11/24/Nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image4.png" alt></p>
-<br>
-<h1>负载均衡</h1>
-<h2 id="基本介绍">基本介绍</h2>
-<p>负载均衡即根据服务器性能处理客户端请求，保证服务器性能最大化</p>
+<p><br></p>
+<h1 id="http代理"><a href="#http代理" class="headerlink" title="http代理"></a>http代理</h1><h2 id="正向代理：代理客户端-去发送请求"><a href="#正向代理：代理客户端-去发送请求" class="headerlink" title="正向代理：代理客户端(去发送请求)"></a>正向代理：代理客户端(去发送请求)</h2><p><img src="/2023/11/24/Nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image3.png" alt></p>
+<h2 id="反向代理：代理服务器端-去应答请求"><a href="#反向代理：代理服务器端-去应答请求" class="headerlink" title="反向代理：代理服务器端(去应答请求)"></a>反向代理：代理服务器端(去应答请求)</h2><p><img src="/2023/11/24/Nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image4.png" alt></p>
+<p><br></p>
+<h1 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h1><h2 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h2><p>负载均衡即根据服务器性能处理客户端请求，保证服务器性能最大化</p>
 <p><img src="/2023/11/24/Nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image5.png" alt></p>
-<h2 id="Nginx的处理方式">Nginx的处理方式</h2>
-<p>Nginx提供的负载均衡策略有2种：内置策略和扩展策略。内置策略为轮询、加权轮询、Ip hash。扩展策略由用户自定义，十分强大</p>
+<h2 id="Nginx的处理方式"><a href="#Nginx的处理方式" class="headerlink" title="Nginx的处理方式"></a>Nginx的处理方式</h2><p>Nginx提供的负载均衡策略有2种：内置策略和扩展策略。内置策略为轮询、加权轮询、Ip hash。扩展策略由用户自定义，十分强大</p>
 <ul>
-<li>
-<p>轮询：平均分配客户端请求给服务器<img src="/2023/11/24/Nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image6.png" alt></p>
-</li>
-<li>
-<p>加权轮询：按照权重分配客户端请求给服务器【使得一些性能较差的服务器也能上线运行】<img src="/2023/11/24/Nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image7.png" alt></p>
-</li>
-<li>
-<p>Ip hash：<img src="/2023/11/24/Nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image8.png" alt></p>
-</li>
+<li>轮询：平均分配客户端请求给服务器<img src="/2023/11/24/Nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image6.png" alt></li>
 </ul>
-<h2 id="实现动静分离">实现动静分离</h2>
-<p><img src="/2023/11/24/Nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image9.png" alt></p>
-<br>
-<h1>Nginx下载与配置</h1>
-<p><img src="/2023/11/24/Nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image10.png" alt></p>
+<ul>
+<li>加权轮询：按照权重分配客户端请求给服务器【使得一些性能较差的服务器也能上线运行】<img src="/2023/11/24/Nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image7.png" alt></li>
+</ul>
+<ul>
+<li>Ip hash：<img src="/2023/11/24/Nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image8.png" alt></li>
+</ul>
+<h2 id="实现动静分离"><a href="#实现动静分离" class="headerlink" title="实现动静分离"></a>实现动静分离</h2><p><img src="/2023/11/24/Nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image9.png" alt></p>
+<p><br></p>
+<h1 id="Nginx下载与配置"><a href="#Nginx下载与配置" class="headerlink" title="Nginx下载与配置"></a>Nginx下载与配置</h1><p><img src="/2023/11/24/Nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image10.png" alt></p>
 <p><img src="/2023/11/24/Nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image11.png" alt></p>
 <p><img src="/2023/11/24/Nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image12.png" alt></p>
 <p><img src="/2023/11/24/Nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image13.png" alt></p>
 <p><img src="/2023/11/24/Nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image14.png" alt></p>
-<br>
-<h1>Nginx命令</h1>
-<h2 id="Windows">Windows</h2>
-<ul>
-<li>
-<p>start nginx.exe 启动</p>
+<p><br></p>
+<h1 id="Nginx命令"><a href="#Nginx命令" class="headerlink" title="Nginx命令"></a>Nginx命令</h1><h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><ul>
+<li><p>start nginx.exe 启动</p>
 </li>
-<li>
-<p>nginx.exe -s stop 停止</p>
+<li><p>nginx.exe -s stop 停止</p>
 </li>
-<li>
-<p>nginx.exe -s quit 安全退出</p>
+<li><p>nginx.exe -s quit 安全退出</p>
 </li>
-<li>
-<p>nginx.exe -s reload 重新加载配置文件</p>
+<li><p>nginx.exe -s reload 重新加载配置文件</p>
 </li>
 </ul>
-<h2 id="Linux">Linux</h2>
-<ul>
-<li>
-<p>cd /usr/local/nginx/sbin/</p>
+<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><ul>
+<li><p>cd /usr/local/nginx/sbin/</p>
 </li>
-<li>
-<p>./nginx 启动</p>
+<li><p>./nginx 启动</p>
 </li>
-<li>
-<p>./nginx -s stop 停止</p>
+<li><p>./nginx -s stop 停止</p>
 </li>
-<li>
-<p>./nginx -s quit 安全退出</p>
+<li><p>./nginx -s quit 安全退出</p>
 </li>
-<li>
-<p>./nginx -s reload 重新加载配置文件</p>
+<li><p>./nginx -s reload 重新加载配置文件</p>
 </li>
-<li>
-<p>ps aux|grep nginx 查看nginx进程</p>
+<li><p>ps aux|grep nginx 查看nginx进程</p>
 </li>
 </ul>
-<br>
-<h1>linux服务器中Nginx敏感文件</h1>
-<p><img src="/2023/11/24/Nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image15.png" alt></p>
-<br>
-<h1>鸣谢</h1>
-<ul>
+<p><br></p>
+<h1 id="linux服务器中Nginx敏感文件"><a href="#linux服务器中Nginx敏感文件" class="headerlink" title="linux服务器中Nginx敏感文件"></a>linux服务器中Nginx敏感文件</h1><p><img src="/2023/11/24/Nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/image15.png" alt></p>
+<p><br></p>
+<h1 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h1><ul>
 <li>狂神说</li>
 </ul>
 	  
@@ -378,7 +352,7 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
     setInterval("createtime()",250);
 </script>
 <br><br>
-<span class="num">及辞已经在本站记录了 179.1k 字</span>
+<span class="num">及辞已经在本站记录了 181k 字</span>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     fetch('/imageCount.json')

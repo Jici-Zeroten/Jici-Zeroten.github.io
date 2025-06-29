@@ -9,9 +9,8 @@
   <title>Webpack源代码泄露漏洞 | Jici&#39;s Blog</title>
   <meta name="author" content="Jici">
   
-  <meta name="description" content="Webpack介绍与漏洞成因
-Webpack是一个JavaScript应用程序的静态资源打包器（module bundler）。它会递归构建一个依赖关系图（dependency graph），其中包含应用程序需要的每个模块，然后将所有这些模块打包成一个或多个bundle。
-简单来说就是，Webpack是一个前端代码打包工具，它可以将多个JavaScript、CSS、图片等静态资源文件打包成一个或多个静态资源文件并通过模块化管理打包后的代码以提高前端应用程序的性能和加载速度。">
+  <meta name="description" content="Webpack介绍与漏洞成因Webpack是一个JavaScript应用程序的静态资源打包器（module bundler）。它会递归构建一个依赖关系图（dependency graph），其中包含应用程序需要的每个模块，然后将所有这些模块打包成一个或多个bundle。
+简单来说就是，==Webpack是一个前端代码打包工具，它可以将多个JavaScript、CSS、图片等静态资源文件打包成一个或多个静态资源文件并通过模块化管理打包后的代码以提高前端应用程序的性能和加载速度==。">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -162,12 +161,11 @@ var _hmt = _hmt || [];
 	<div class="mypage">		
 	  		
 
-	  <h1>Webpack介绍与漏洞成因</h1>
-<p>Webpack是一个JavaScript应用程序的静态资源打包器（module bundler）。它会递归构建一个依赖关系图（dependency graph），其中包含应用程序需要的每个模块，然后将所有这些模块打包成一个或多个bundle。</p>
-<p>简单来说就是，<mark>Webpack是一个前端代码打包工具，它可以将多个JavaScript、CSS、图片等静态资源文件打包成一个或多个静态资源文件并通过模块化管理打包后的代码以提高前端应用程序的性能和加载速度</mark>。</p>
-<p>Webpack目前支持很多种调试模式，<mark>每种模式的区别是编译后的代码和源码的映射方式不同</mark>。比如，有的模式会生成一个.map文件映射，有的模式会通过注释映射，有的模式会使用DataUrl的方式映射。更具体的，见下图</p>
+	  <h1 id="Webpack介绍与漏洞成因"><a href="#Webpack介绍与漏洞成因" class="headerlink" title="Webpack介绍与漏洞成因"></a>Webpack介绍与漏洞成因</h1><p>Webpack是一个JavaScript应用程序的静态资源打包器（module bundler）。它会递归构建一个依赖关系图（dependency graph），其中包含应用程序需要的每个模块，然后将所有这些模块打包成一个或多个bundle。</p>
+<p>简单来说就是，==Webpack是一个前端代码打包工具，它可以将多个JavaScript、CSS、图片等静态资源文件打包成一个或多个静态资源文件并通过模块化管理打包后的代码以提高前端应用程序的性能和加载速度==。</p>
+<p>Webpack目前支持很多种调试模式，==每种模式的区别是编译后的代码和源码的映射方式不同==。比如，有的模式会生成一个.map文件映射，有的模式会通过注释映射，有的模式会使用DataUrl的方式映射。更具体的，见下图</p>
 <p><img src="/2024/07/06/Webpack%E6%BA%90%E4%BB%A3%E7%A0%81%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/image-20240706151602794.png" alt="image-20240706151602794"></p>
-<p>Webpack源代码泄露漏洞针对的就是【通过生成一个.map文件映射】的这种模式，使用Webpack打包应用程序会在网站js同目录下生成js.map文件。.map文件的作用是：项目打包后，代码都是经过压缩加密的，如果运行时报错，输出的错误信息无法准确得知是哪里的代码报错，而<mark>有了.map之后，就可以像未加密的代码一样，准确的输出是哪一行哪一列有错，方便开发者调试</mark>。开发者会在开发时，在webpack.config.js中可以通过设置devtool选项来开启Source Map功能：</p>
+<p>Webpack源代码泄露漏洞针对的就是【通过生成一个.map文件映射】的这种模式，使用Webpack打包应用程序会在网站js同目录下生成js.map文件。.map文件的作用是：项目打包后，代码都是经过压缩加密的，如果运行时报错，输出的错误信息无法准确得知是哪里的代码报错，而==有了.map之后，就可以像未加密的代码一样，准确的输出是哪一行哪一列有错，方便开发者调试==。开发者会在开发时，在webpack.config.js中可以通过设置devtool选项来开启Source Map功能：</p>
 <pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token comment">// webpack.config.js</span>
 module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
   <span class="token comment">// ...</span>
@@ -177,78 +175,63 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <p>更具体的，关于.map文件（或者说Source Map）的作用，这里借用阮一峰师傅的文章做一个说明，如下</p>
 <p><img src="/2024/07/06/Webpack%E6%BA%90%E4%BB%A3%E7%A0%81%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/image-20240706170346466.png" alt="image-20240706170346466"></p>
 <p><img src="/2024/07/06/Webpack%E6%BA%90%E4%BB%A3%E7%A0%81%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/image-20240706170432896.png" alt="image-20240706170432896"></p>
-<h1>漏洞识别</h1>
-<p>首先要做Webpack站点识别，可以通过Wappalyzer插件检测一下前端技术，如下</p>
+<h1 id="漏洞识别"><a href="#漏洞识别" class="headerlink" title="漏洞识别"></a>漏洞识别</h1><p>首先要做Webpack站点识别，可以通过Wappalyzer插件检测一下前端技术，如下</p>
 <p><img src="/2024/07/06/Webpack%E6%BA%90%E4%BB%A3%E7%A0%81%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/image-20240706151111040.png" alt="image-20240706151111040"></p>
 <p>确定是Webpack站点后，可以根据以下特征识别</p>
 <ul>
-<li>
-<p>浏览器开发者工具中的<code>Sources</code>–&gt;<code> Page</code>中存在<code> Webpack://</code></p>
+<li><p>浏览器开发者工具中的<code>Sources</code>—&gt;<code>Page</code>中存在<code>Webpack://</code></p>
 <p><img src="/2024/07/06/Webpack%E6%BA%90%E4%BB%A3%E7%A0%81%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/image-20240706162507527.png" alt="image-20240706162507527"></p>
 </li>
-<li>
-<p>查看源代码：由于Webpack打包工具所生成的网站大部分会简化掉大量的HTML代码，采用js文件进行页面渲染，前端的所有内容都依赖于浏览器对js文件的解析，所以查看<mark>首页源代码如果看到全是js文件</mark>，那么大概率该站使用Webpack打包生成，如下图所示</p>
+<li><p>查看源代码：由于Webpack打包工具所生成的网站大部分会简化掉大量的HTML代码，采用js文件进行页面渲染，前端的所有内容都依赖于浏览器对js文件的解析，所以查看==首页源代码如果看到全是js文件==，那么大概率该站使用Webpack打包生成，如下图所示</p>
 <p><img src="/2024/07/06/Webpack%E6%BA%90%E4%BB%A3%E7%A0%81%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/image-20240706162917164.png" alt="image-20240706162917164"></p>
 </li>
-<li>
-<p>使用开发者工具检索全部js文件，查找是否存在如下关键字：</p>
+<li><p>使用开发者工具检索全部js文件，查找是否存在如下关键字：</p>
 <ul>
-<li>
-<p>Webpack所生成的每个js文件具体内容均以<mark>webpackJsonp</mark>开头</p>
+<li><p>Webpack所生成的每个js文件具体内容均以==webpackJsonp==开头</p>
 <p><img src="/2024/07/06/Webpack%E6%BA%90%E4%BB%A3%E7%A0%81%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/image-20240706163238838.png" alt="image-20240706163238838"></p>
 </li>
-<li>
-<p>存在*<mark>.js.map</mark>文件</p>
+<li><p>存在*==.js.map==文件</p>
 </li>
-<li>
-<p><mark>SourceMap</mark></p>
+<li><p>==SourceMap==</p>
 <p><img src="/2024/07/06/Webpack%E6%BA%90%E4%BB%A3%E7%A0%81%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/image-20240706163115933.png" alt="image-20240706163115933"></p>
 </li>
 </ul>
 </li>
-<li>
-<p>大部分Vue等应用项目会使用Webpack进行打包</p>
+<li><p>大部分Vue等应用项目会使用Webpack进行打包</p>
 <blockquote>
 <p>Vue框架的一个典型特征就是，URL中带有#符号，比如/index.html#/</p>
 </blockquote>
 </li>
 </ul>
-<h1>漏洞利用</h1>
-<p>Webpack项目源码在泄漏的情况下，可以在浏览器开发者工具中的<code>Sources</code>–&gt;<code> Page</code>–&gt;<code> Webpack://</code>中查看源代码，如下</p>
+<h1 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h1><p>Webpack项目源码在泄漏的情况下，可以在浏览器开发者工具中的<code>Sources</code>—&gt;<code>Page</code>—&gt;<code>Webpack://</code>中查看源代码，如下</p>
 <p><img src="/2024/07/06/Webpack%E6%BA%90%E4%BB%A3%E7%A0%81%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/image-20240706154023022.png" alt="image-20240706154023022"></p>
-<p>在某些情况下，不能直接在浏览器开发者工具中的<code>Sources</code>–&gt;<code> Page</code>–&gt;<code> Webpack://</code>中查看到Webpack项目源码（比如有些前端应用虽然是通过Webpack打包的，但由于关闭了Source Map，所以无法正常显示），但是网站上存在.js.map文件，我们可以通过一些工具将js.map中的内容进行还原Webpack项目源码，效果如下：</p>
+<p>在某些情况下，不能直接在浏览器开发者工具中的<code>Sources</code>—&gt;<code>Page</code>—&gt;<code>Webpack://</code>中查看到Webpack项目源码（比如有些前端应用虽然是通过Webpack打包的，但由于关闭了Source Map，所以无法正常显示），但是网站上存在.js.map文件，我们可以通过一些工具将js.map中的内容进行还原Webpack项目源码，效果如下：</p>
 <p><img src="/2024/07/06/Webpack%E6%BA%90%E4%BB%A3%E7%A0%81%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/image-20240706155218403.png" alt="image-20240706155218403"></p>
 <p><img src="/2024/07/06/Webpack%E6%BA%90%E4%BB%A3%E7%A0%81%E6%B3%84%E9%9C%B2%E6%BC%8F%E6%B4%9E/image-20240706155253446.png" alt="image-20240706155253446"></p>
 <p>工具如下：</p>
 <ul>
-<li>
-<p>SourceDetector插件：<a target="_blank" rel="noopener" href="https://github.com/Lz1y/SourceDetector-dist">https://github.com/Lz1y/SourceDetector-dist</a></p>
+<li><p>SourceDetector插件：<a target="_blank" rel="noopener" href="https://github.com/Lz1y/SourceDetector-dist">https://github.com/Lz1y/SourceDetector-dist</a></p>
 </li>
-<li>
-<p>reverse-sourcemap：<a target="_blank" rel="noopener" href="https://github.com/davidkevork/reverse-sourcemap">https://github.com/davidkevork/reverse-sourcemap</a></p>
+<li><p>reverse-sourcemap：<a target="_blank" rel="noopener" href="https://github.com/davidkevork/reverse-sourcemap">https://github.com/davidkevork/reverse-sourcemap</a></p>
 <pre class="line-numbers language-none"><code class="language-none">npm install --global reverse-sourcemap
 reverse-sourcemap -h
 # 下载xxx.js.map文件后执行
 reverse-sourcemap --output-dir .&#x2F; xxx.js.map
 # 执行成功后生成的源代码会放在当前目录下的Webpack中<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li>
-<p>restore-source-tree：<a target="_blank" rel="noopener" href="https://github.com/alexkuz/restore-source-tree">https://github.com/alexkuz/restore-source-tree</a></p>
+<li><p>restore-source-tree：<a target="_blank" rel="noopener" href="https://github.com/alexkuz/restore-source-tree">https://github.com/alexkuz/restore-source-tree</a></p>
 <pre class="line-numbers language-none"><code class="language-none">npm i -g restore-source-tree
 restore-source-tree --out-dir &lt;OUT_DIR&gt; xxx.js.map<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
-<li>
-<p>shuji：<a target="_blank" rel="noopener" href="https://github.com/paazmaya/shuji">https://github.com/paazmaya/shuji</a></p>
+<li><p>shuji：<a target="_blank" rel="noopener" href="https://github.com/paazmaya/shuji">https://github.com/paazmaya/shuji</a></p>
 <pre class="line-numbers language-none"><code class="language-none">npm install --global shuji
 # 下载xxx.js.map文件后执行
 shuji xxx.js.map -o Webpack<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
 <p>获取到源代码后，可以对代码进行审计，容易泄露各种信息，如API、加密算法、管理员邮箱、内部功能等等</p>
-<h1>漏洞修复</h1>
-<ul>
-<li>
-<p>在生产环境中禁用 SourceMap 功能或限制 SourceMap 文件的访问权限</p>
+<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><ul>
+<li><p>在生产环境中禁用 SourceMap 功能或限制 SourceMap 文件的访问权限</p>
 <pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; 比如在Webpack配置中禁用Source Map功能
 &#x2F;&#x2F; webpack.config.js
 module.exports &#x3D; &#123;
@@ -264,8 +247,7 @@ location &#x2F;static&#x2F; &#123;
   alias &#39;&#x2F;path&#x2F;to&#x2F;source-maps&#x2F;&#39;;
 &#125; <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li>
-<p>如果用的Vue框架，可以修改vue.config.js配置，如下</p>
+<li><p>如果用的Vue框架，可以修改vue.config.js配置，如下</p>
 <pre class="line-numbers language-none"><code class="language-none"># 修改
 modeule.exports &#x3D; &#123;
   productionSourceMap:false
@@ -288,12 +270,10 @@ modeule.exports &#x3D; &#123;
   &#125;,
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li>
-<p>删除或禁止访问正式环境中的js.map文件</p>
+<li><p>删除或禁止访问正式环境中的js.map文件</p>
 </li>
 </ul>
-<h1>鸣谢</h1>
-<ul>
+<h1 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h1><ul>
 <li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2350133">Webpack源代码泄露-腾讯云开发者社区-腾讯云 (tencent.com)</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhibing/p/16893835.html">https://www.cnblogs.com/zhibing/p/16893835.html</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.51cto.com/article/759903.html">Webpack源代码泄露漏洞研究-51CTO.COM</a></li>
@@ -433,7 +413,7 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
     setInterval("createtime()",250);
 </script>
 <br><br>
-<span class="num">及辞已经在本站记录了 179.1k 字</span>
+<span class="num">及辞已经在本站记录了 181k 字</span>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     fetch('/imageCount.json')

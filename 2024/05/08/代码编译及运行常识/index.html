@@ -9,9 +9,7 @@
   <title>代码编译及运行常识 | Jici&#39;s Blog</title>
   <meta name="author" content="Jici">
   
-  <meta name="description" content="Visual Basic
-运行
-cscript test.vbs">
+  <meta name="description" content="Visual Basic运行cscript test.vbs">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -162,69 +160,55 @@ var _hmt = _hmt || [];
 	<div class="mypage">		
 	  		
 
-	  <h1>Visual Basic</h1>
-<h2 id="运行">运行</h2>
-<pre class="line-numbers language-none"><code class="language-none">cscript test.vbs<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h1>Rust</h1>
-<h2 id="编译">编译</h2>
-<pre class="line-numbers language-none"><code class="language-none"># 任选其一
+	  <h1 id="Visual-Basic"><a href="#Visual-Basic" class="headerlink" title="Visual Basic"></a>Visual Basic</h1><h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><pre class="line-numbers language-none"><code class="language-none">cscript test.vbs<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h1 id="Rust"><a href="#Rust" class="headerlink" title="Rust"></a>Rust</h1><h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><pre class="line-numbers language-none"><code class="language-none"># 任选其一
 rustc test.rs
 cargo build 
 cargo build --release<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="运行-2">运行</h2>
-<pre class="line-numbers language-none"><code class="language-none"># 任选其一
+<h2 id="运行-1"><a href="#运行-1" class="headerlink" title="运行"></a>运行</h2><pre class="line-numbers language-none"><code class="language-none"># 任选其一
 cargo run
 cargo run --release<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<h1>C#</h1>
-<h2 id="编译-2">编译</h2>
-<h3 id="命令编译">命令编译</h3>
-<pre class="line-numbers language-none"><code class="language-none">csc.exe test.cs &#x2F;unsafe<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h1 id="C"><a href="#C" class="headerlink" title="C"></a>C</h1><h2 id="编译-1"><a href="#编译-1" class="headerlink" title="编译"></a>编译</h2><h3 id="命令编译"><a href="#命令编译" class="headerlink" title="命令编译"></a>命令编译</h3><pre class="line-numbers language-none"><code class="language-none">csc.exe test.cs &#x2F;unsafe<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <blockquote>
 <p>这里说一下/unsafe参数</p>
 </blockquote>
 <p><img src="/2024/05/08/%E4%BB%A3%E7%A0%81%E7%BC%96%E8%AF%91%E5%8F%8A%E8%BF%90%E8%A1%8C%E5%B8%B8%E8%AF%86/image-20240511105208357.png" alt="image-20240511105208357"></p>
-<h3 id="使用Visual-Studio编译">使用Visual Studio编译</h3>
-<p><video src="使用VisualStudio编译Cshrap.mp4"controls></video></video></p>
-<h1>C / C++</h1>
-<h2 id="编译-3">编译</h2>
-<h3 id="命令编译-2">命令编译</h3>
-<pre class="line-numbers language-none"><code class="language-none"># 任选其一
+<h3 id="使用Visual-Studio编译"><a href="#使用Visual-Studio编译" class="headerlink" title="使用Visual Studio编译"></a>使用Visual Studio编译</h3><video src="使用VisualStudio编译Cshrap.mp4"controls></video></video>
+
+<h1 id="C-C"><a href="#C-C" class="headerlink" title="C / C++"></a>C / C++</h1><h2 id="编译-2"><a href="#编译-2" class="headerlink" title="编译"></a>编译</h2><h3 id="命令编译-1"><a href="#命令编译-1" class="headerlink" title="命令编译"></a>命令编译</h3><pre class="line-numbers language-none"><code class="language-none"># 任选其一
 gcc -o output_file test.c&#x2F;test.cpp
 gcc -static -o output_file test.c&#x2F;test.cpp<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <blockquote>
 <p>这里说一下-static参数</p>
 </blockquote>
 <p><img src="/2024/05/08/%E4%BB%A3%E7%A0%81%E7%BC%96%E8%AF%91%E5%8F%8A%E8%BF%90%E8%A1%8C%E5%B8%B8%E8%AF%86/image-20240510100912690.png" alt="image-20240510100912690"></p>
-<h3 id="使用Visual-Studio编译-2">使用Visual Studio编译</h3>
-<p>这里以编译C为例做一个视频演示，C++同理</p>
-<p><video src="使用VS编译C.mp4"controls></video></video></p>
-<h4 id="将exe编译为dll">将exe编译为dll</h4>
-<p><video src="将exe编译为dll.mp4"controls></video></video></p>
-<h4 id="如何修改项目属性-如何打开解决方案">如何修改项目属性/如何打开解决方案</h4>
-<p>先介绍一下&quot;解决方案&quot;文件，如下</p>
+<h3 id="使用Visual-Studio编译-1"><a href="#使用Visual-Studio编译-1" class="headerlink" title="使用Visual Studio编译"></a>使用Visual Studio编译</h3><p>这里以编译C为例做一个视频演示，C++同理</p>
+<video src="使用VS编译C.mp4"controls></video></video>
+
+<h4 id="将exe编译为dll"><a href="#将exe编译为dll" class="headerlink" title="将exe编译为dll"></a>将exe编译为dll</h4><video src="将exe编译为dll.mp4"controls></video></video>
+
+<h4 id="如何修改项目属性-如何打开解决方案"><a href="#如何修改项目属性-如何打开解决方案" class="headerlink" title="如何修改项目属性/如何打开解决方案"></a>如何修改项目属性/如何打开解决方案</h4><p>先介绍一下”解决方案”文件，如下</p>
 <p><img src="/2024/05/08/%E4%BB%A3%E7%A0%81%E7%BC%96%E8%AF%91%E5%8F%8A%E8%BF%90%E8%A1%8C%E5%B8%B8%E8%AF%86/image-20240510105323295.png" alt="image-20240510105323295"></p>
 <p>下面做一个视频演示</p>
-<p><video src="如何打开解决方案.mp4"controls></video></video></p>
-<h4 id="高版本VS如何打开低版本项目">高版本VS如何打开低版本项目</h4>
-<p>高版本VS打开低版本项目时可能出现不兼容问题，解决方法主要就是<code>修改解决方法文件</code>或者<code>补组件</code>，这里做一个视频演示如何解决</p>
-<p><video src="高版本VS如何打开低版本项目.mp4"controls></video></video></p>
-<h4 id="修改目标Windows-SDK版本">修改目标Windows SDK版本</h4>
-<p>一些项目在生成&quot;解决方案&quot;文件的时候，指定了目标Windows SDK版本（比如Windows SDK 版本 8.1），但是你的本机环境上可能没有，会出现以下报错</p>
+<video src="如何打开解决方案.mp4"controls></video></video>
+
+<h4 id="高版本VS如何打开低版本项目"><a href="#高版本VS如何打开低版本项目" class="headerlink" title="高版本VS如何打开低版本项目"></a>高版本VS如何打开低版本项目</h4><p>高版本VS打开低版本项目时可能出现不兼容问题，解决方法主要就是<code>修改解决方法文件</code>或者<code>补组件</code>，这里做一个视频演示如何解决</p>
+<video src="高版本VS如何打开低版本项目.mp4"controls></video></video>
+
+<h4 id="修改目标Windows-SDK版本"><a href="#修改目标Windows-SDK版本" class="headerlink" title="修改目标Windows SDK版本"></a>修改目标Windows SDK版本</h4><p>一些项目在生成”解决方案”文件的时候，指定了目标Windows SDK版本（比如Windows SDK 版本 8.1），但是你的本机环境上可能没有，会出现以下报错</p>
 <p><img src="/2024/05/08/%E4%BB%A3%E7%A0%81%E7%BC%96%E8%AF%91%E5%8F%8A%E8%BF%90%E8%A1%8C%E5%B8%B8%E8%AF%86/image-20240510104321426.png" alt="image-20240510104321426"></p>
 <p>VS提示有两种解决方法：</p>
 <ul>
 <li>安装指定Windows SDK</li>
-<li>修改&quot;解决方案&quot;文件中的目标Windows SDK版本</li>
+<li>修改”解决方案”文件中的目标Windows SDK版本</li>
 </ul>
 <p>这里做一个视频演示修改目标Windows SDK版本</p>
-<p><video src="修改目标WindowsSDK版本.mp4"controls></video></video></p>
-<h4 id="安装其他开发包或单个组件">安装其他开发包或单个组件</h4>
-<p><video src="安装其他开发包或单个组件.mp4"controls></video></video></p>
-<h1>Golang</h1>
-<h2 id="编译-4">编译</h2>
-<pre class="line-numbers language-none"><code class="language-none">go build test.go<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="运行-3">运行</h2>
-<pre class="line-numbers language-none"><code class="language-none">go run test.go<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<video src="修改目标WindowsSDK版本.mp4"controls></video></video>
+
+<h4 id="安装其他开发包或单个组件"><a href="#安装其他开发包或单个组件" class="headerlink" title="安装其他开发包或单个组件"></a>安装其他开发包或单个组件</h4><video src="安装其他开发包或单个组件.mp4"controls></video></video>
+
+<h1 id="Golang"><a href="#Golang" class="headerlink" title="Golang"></a>Golang</h1><h2 id="编译-3"><a href="#编译-3" class="headerlink" title="编译"></a>编译</h2><pre class="line-numbers language-none"><code class="language-none">go build test.go<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="运行-2"><a href="#运行-2" class="headerlink" title="运行"></a>运行</h2><pre class="line-numbers language-none"><code class="language-none">go run test.go<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 	  
 	</div>
 
@@ -282,7 +266,7 @@ gcc -static -o output_file test.c&#x2F;test.cpp<span aria-hidden="true" class="l
 	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
     <ul id="tags" class="tag_box list-unstyled collapse in">	  
 	    
-  <li><a href="/tags/常识与技巧/">常识与技巧<span>17</span></a></li>
+  <li><a href="/tags/常识与技巧/">常识与技巧<span>18</span></a></li>
     </ul>
 	</div>
 		
@@ -293,7 +277,7 @@ gcc -static -o output_file test.c&#x2F;test.cpp<span aria-hidden="true" class="l
 	   <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a>
 	   <div id="toc" class="toc collapse in">
 		   <span class="toc-title">Contents</span>
-			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link"><span class="toc-article-text">Visual Basic</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E8%BF%90%E8%A1%8C"><span class="toc-article-text">运行</span></a></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link"><span class="toc-article-text">Rust</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E7%BC%96%E8%AF%91"><span class="toc-article-text">编译</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E8%BF%90%E8%A1%8C-2"><span class="toc-article-text">运行</span></a></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link"><span class="toc-article-text">C#</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E7%BC%96%E8%AF%91-2"><span class="toc-article-text">编译</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E5%91%BD%E4%BB%A4%E7%BC%96%E8%AF%91"><span class="toc-article-text">命令编译</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E4%BD%BF%E7%94%A8Visual-Studio%E7%BC%96%E8%AF%91"><span class="toc-article-text">使用Visual Studio编译</span></a></li></ol></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link"><span class="toc-article-text">C &#x2F; C++</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E7%BC%96%E8%AF%91-3"><span class="toc-article-text">编译</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E5%91%BD%E4%BB%A4%E7%BC%96%E8%AF%91-2"><span class="toc-article-text">命令编译</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E4%BD%BF%E7%94%A8Visual-Studio%E7%BC%96%E8%AF%91-2"><span class="toc-article-text">使用Visual Studio编译</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#%E5%B0%86exe%E7%BC%96%E8%AF%91%E4%B8%BAdll"><span class="toc-article-text">将exe编译为dll</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#%E5%A6%82%E4%BD%95%E4%BF%AE%E6%94%B9%E9%A1%B9%E7%9B%AE%E5%B1%9E%E6%80%A7-%E5%A6%82%E4%BD%95%E6%89%93%E5%BC%80%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-article-text">如何修改项目属性&#x2F;如何打开解决方案</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#%E9%AB%98%E7%89%88%E6%9C%ACVS%E5%A6%82%E4%BD%95%E6%89%93%E5%BC%80%E4%BD%8E%E7%89%88%E6%9C%AC%E9%A1%B9%E7%9B%AE"><span class="toc-article-text">高版本VS如何打开低版本项目</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#%E4%BF%AE%E6%94%B9%E7%9B%AE%E6%A0%87Windows-SDK%E7%89%88%E6%9C%AC"><span class="toc-article-text">修改目标Windows SDK版本</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#%E5%AE%89%E8%A3%85%E5%85%B6%E4%BB%96%E5%BC%80%E5%8F%91%E5%8C%85%E6%88%96%E5%8D%95%E4%B8%AA%E7%BB%84%E4%BB%B6"><span class="toc-article-text">安装其他开发包或单个组件</span></a></li></ol></li></ol></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link"><span class="toc-article-text">Golang</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E7%BC%96%E8%AF%91-4"><span class="toc-article-text">编译</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E8%BF%90%E8%A1%8C-3"><span class="toc-article-text">运行</span></a></li></ol></li></ol>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#Visual-Basic"><span class="toc-article-text">Visual Basic</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E8%BF%90%E8%A1%8C"><span class="toc-article-text">运行</span></a></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#Rust"><span class="toc-article-text">Rust</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E7%BC%96%E8%AF%91"><span class="toc-article-text">编译</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E8%BF%90%E8%A1%8C-1"><span class="toc-article-text">运行</span></a></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#C"><span class="toc-article-text">C</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E7%BC%96%E8%AF%91-1"><span class="toc-article-text">编译</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E5%91%BD%E4%BB%A4%E7%BC%96%E8%AF%91"><span class="toc-article-text">命令编译</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E4%BD%BF%E7%94%A8Visual-Studio%E7%BC%96%E8%AF%91"><span class="toc-article-text">使用Visual Studio编译</span></a></li></ol></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#C-C"><span class="toc-article-text">C &#x2F; C++</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E7%BC%96%E8%AF%91-2"><span class="toc-article-text">编译</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E5%91%BD%E4%BB%A4%E7%BC%96%E8%AF%91-1"><span class="toc-article-text">命令编译</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#%E4%BD%BF%E7%94%A8Visual-Studio%E7%BC%96%E8%AF%91-1"><span class="toc-article-text">使用Visual Studio编译</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#%E5%B0%86exe%E7%BC%96%E8%AF%91%E4%B8%BAdll"><span class="toc-article-text">将exe编译为dll</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#%E5%A6%82%E4%BD%95%E4%BF%AE%E6%94%B9%E9%A1%B9%E7%9B%AE%E5%B1%9E%E6%80%A7-%E5%A6%82%E4%BD%95%E6%89%93%E5%BC%80%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-article-text">如何修改项目属性&#x2F;如何打开解决方案</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#%E9%AB%98%E7%89%88%E6%9C%ACVS%E5%A6%82%E4%BD%95%E6%89%93%E5%BC%80%E4%BD%8E%E7%89%88%E6%9C%AC%E9%A1%B9%E7%9B%AE"><span class="toc-article-text">高版本VS如何打开低版本项目</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#%E4%BF%AE%E6%94%B9%E7%9B%AE%E6%A0%87Windows-SDK%E7%89%88%E6%9C%AC"><span class="toc-article-text">修改目标Windows SDK版本</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#%E5%AE%89%E8%A3%85%E5%85%B6%E4%BB%96%E5%BC%80%E5%8F%91%E5%8C%85%E6%88%96%E5%8D%95%E4%B8%AA%E7%BB%84%E4%BB%B6"><span class="toc-article-text">安装其他开发包或单个组件</span></a></li></ol></li></ol></li></ol></li><li class="toc-article-item toc-article-level-1"><a class="toc-article-link" href="#Golang"><span class="toc-article-text">Golang</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E7%BC%96%E8%AF%91-3"><span class="toc-article-text">编译</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#%E8%BF%90%E8%A1%8C-2"><span class="toc-article-text">运行</span></a></li></ol></li></ol>
 		</div>
 	
 	</div>
@@ -363,7 +347,7 @@ var bszCaller,bszTag;!function(){var c,d,e,a=!1,b=[];ready=function(c){return a|
     setInterval("createtime()",250);
 </script>
 <br><br>
-<span class="num">及辞已经在本站记录了 179.1k 字</span>
+<span class="num">及辞已经在本站记录了 181k 字</span>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     fetch('/imageCount.json')
