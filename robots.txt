@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://jici-zeroten.github.io/sitemap.xml
+Sitemap: https://jici-zeroten.github.io/baidusitemap.xml
