@@ -164,135 +164,158 @@ var _hmt = _hmt || [];
 		 </div> <!-- alert -->
 	  		
 
-	  <h1 id="编码方式的类别"><a href="#编码方式的类别" class="headerlink" title="编码方式的类别"></a>编码方式的类别</h1><p>常用编码方式通常分为以下几类：</p>
+	  <h1>编码方式的类别</h1>
+<p>常用编码方式通常分为以下几类：</p>
 <ul>
 <li>字符编码（如UTF-8、ASCII）</li>
 <li>数据编码（如Base64、URL编码）</li>
 <li>音频视频编码（如MP3、H.264）</li>
 <li>压缩编码（如ZIP、GZIP）</li>
 </ul>
-<h1 id="字符编码"><a href="#字符编码" class="headerlink" title="字符编码"></a>字符编码</h1><p>==常见的字符编码方式有：ASCII、GB2312、GBK、GB18030、UTF8==。 目前用的比较多的是GBK和UTF8（大多数网页采用的是UTF8编码，所以网页源码一般都有<code>&lt;meta charset=&quot;UTF-8&quot;&gt;</code>的标签）。</p>
-<h2 id="常见字符编码方式"><a href="#常见字符编码方式" class="headerlink" title="常见字符编码方式"></a>常见字符编码方式</h2><p>下面按照时间线对几种常见的字符编码方式进行介绍：</p>
+<h1>字符编码</h1>
+<p><mark>常见的字符编码方式有：ASCII、GB2312、GBK、GB18030、UTF8</mark>。 目前用的比较多的是GBK和UTF8（大多数网页采用的是UTF8编码，所以网页源码一般都有<code>&lt;meta charset=&quot;UTF-8&quot;&gt;</code>的标签）。</p>
+<h2 id="常见字符编码方式">常见字符编码方式</h2>
+<p>下面按照时间线对几种常见的字符编码方式进行介绍：</p>
 <ul>
-<li><p><strong>1963年：ASCII</strong></p>
+<li>
+<p><strong>1963年：ASCII</strong></p>
 <ul>
 <li>发明国家：美国</li>
 <li>发明人：Robert W. Bemer、John McCarthy等</li>
 <li>编码长度：8位</li>
 <li>原因：为了解决计算机之间数据互换的问题，需要制定一个统一的字符编码方案。</li>
-<li>主要用途：==表示英文字母、数字、标点符号等基本字符==。</li>
+<li>主要用途：<mark>表示英文字母、数字、标点符号等基本字符</mark>。</li>
 </ul>
 </li>
-<li><p><strong>1977年：Base64</strong></p>
+<li>
+<p><strong>1977年：Base64</strong></p>
 <ul>
 <li>发明国家：美国</li>
 <li>发明人：Joseph L. Yarbrough</li>
 <li>编码长度：6位</li>
 <li>原因：二进制数据在不同系统之间传输时可能会出现乱码，需要一种编码方式将二进制数据转换为文本形式。</li>
-<li>主要用途：==将二进制数据编码成文本，主要用于电子邮件、HTTP、MIME等协议中传输二进制数据==。</li>
+<li>主要用途：<mark>将二进制数据编码成文本，主要用于电子邮件、HTTP、MIME等协议中传输二进制数据</mark>。</li>
 </ul>
 <blockquote>
 <p>严格来讲，Base64并不是一个字符集或字符编码，而是一种加密方式，用于将二进制数据转换为可打印字符的文本表示，便于在网络上进行传输。它并没有包含字符集的概念，而是将二进制数据表示为一组64个可打印的ASCII字符。</p>
 </blockquote>
 </li>
-<li><p><strong>1980年代初：GB2312</strong></p>
+<li>
+<p><strong>1980年代初：GB2312</strong></p>
 <ul>
 <li>发明国家：中国</li>
 <li>发明人：国家标准总局</li>
 <li>编码长度：16位</li>
 <li>原因：为了解决中国计算机之间中文数据互换的问题，需要制定</li>
-<li>主要用途：==表示中文字符，是中文字符编码的一种==。</li>
+<li>主要用途：<mark>表示中文字符，是中文字符编码的一种</mark>。</li>
 </ul>
 </li>
-<li><p><strong>1984年：Big5</strong></p>
+<li>
+<p><strong>1984年：Big5</strong></p>
 <ul>
 <li>发明国家：中国台湾</li>
 <li>发明人：台湾计算机公司（TCA）</li>
 <li>编码长度：16位</li>
 <li>原因：为了解决台湾计算机之间繁体中文数据互换的问题，需要制定一个统一的字符编码方案。</li>
-<li>主要用途：==表示繁体中文字符，广泛用于中国台湾等地==。</li>
+<li>主要用途：<mark>表示繁体中文字符，广泛用于中国台湾等地</mark>。</li>
 </ul>
 </li>
-<li><p><strong>1987年：ISO-8859-1（Latin-1）</strong></p>
+<li>
+<p><strong>1987年：ISO-8859-1（Latin-1）</strong></p>
 <ul>
 <li>发明国家：国际标准化组织（ISO）</li>
 <li>发明人：ISO完成的。因此，并没有特定的个人被明确指定为ISO-8859-1的发明人</li>
 <li>编码长度：8位</li>
 <li>原因：为了满足西欧、拉丁美洲和东欧等多种语言的需求，需要一种新的字符编码方案。</li>
-<li>主要用途：==表示西欧语言字符，是ISO-8859系列的一部分==。</li>
+<li>主要用途：<mark>表示西欧语言字符，是ISO-8859系列的一部分</mark>。</li>
 </ul>
 </li>
-<li><p><strong>1991年：Unicode</strong></p>
+<li>
+<p><strong>1991年：Unicode</strong></p>
 <ul>
-<li><p>发明国家：美国</p>
+<li>
+<p>发明国家：美国</p>
 </li>
-<li><p>发明人：Unicode联盟（Unicode Consortium）</p>
+<li>
+<p>发明人：Unicode联盟（Unicode Consortium）</p>
 </li>
-<li><p>编码长度：==取决于具体的编码方式，如UTF-8、UTF-16、UTF-32等==</p>
+<li>
+<p>编码长度：<mark>取决于具体的编码方式，如UTF-8、UTF-16、UTF-32等</mark></p>
 <blockquote>
 <p>所以注意理清关系，这里的关系是，UTF-8、UTF-16、UTF-32是Unicode的几种实现方式</p>
 </blockquote>
 </li>
-<li><p>原因：为了能够容纳世界上所有文字和符号，需要制定一个新的字符编码方案。</p>
+<li>
+<p>原因：为了能够容纳世界上所有文字和符号，需要制定一个新的字符编码方案。</p>
 </li>
-<li><p>主要用途：==为解决字符集的全球化而设计，包含几乎所有世界上的字符，用于在计算机系统中表示文本。==</p>
+<li>
+<p>主要用途：<mark>为解决字符集的全球化而设计，包含几乎所有世界上的字符，用于在计算机系统中表示文本。</mark></p>
 </li>
 </ul>
 </li>
-<li><p><strong>1991年：UTF-16</strong></p>
+<li>
+<p><strong>1991年：UTF-16</strong></p>
 <ul>
 <li>发明国家：美国</li>
 <li>发明人：Unicode联盟（Unicode Consortium）</li>
 <li>编码长度：16位</li>
-<li>主要用途：==Unicode字符编码，包括辅助平面字符==。</li>
+<li>主要用途：<mark>Unicode字符编码，包括辅助平面字符</mark>。</li>
 </ul>
 </li>
-<li><p><strong>1992年：UTF-8</strong></p>
+<li>
+<p><strong>1992年：UTF-8</strong></p>
 <ul>
 <li>发明国家：美国</li>
 <li>发明人：Kenneth Thompson、Rob Pike、Joe Darcy等</li>
 <li>编码长度：8位</li>
 <li>原因：为了提高Unicode的存储效率，需要一种更紧凑的编码方式。</li>
-<li>主要用途：==Unicode字符编码，兼容ASCII，可变长表示字符==。</li>
+<li>主要用途：<mark>Unicode字符编码，兼容ASCII，可变长表示字符</mark>。</li>
 </ul>
 </li>
-<li><p><strong>1995年：GBK（Guo Biao Kangxi）</strong></p>
+<li>
+<p><strong>1995年：GBK（Guo Biao Kangxi）</strong></p>
 <ul>
 <li>发明国家：中国</li>
 <li>发明人：国家标准总局</li>
 <li>编码长度：16位</li>
 <li>原因：为了支持所有汉字，需要一种新的字符编码方案。GB2312无法表示所有汉字，需要一种新的字符编码方案来支持所有汉字。</li>
-<li>主要用途：==中文字符编码，是GB2312的扩展，包含更多的汉字和符号，广泛用于中文环境中==。</li>
+<li>主要用途：<mark>中文字符编码，是GB2312的扩展，包含更多的汉字和符号，广泛用于中文环境中</mark>。</li>
 </ul>
 </li>
-<li><p><strong>1996年：UTF-32</strong></p>
+<li>
+<p><strong>1996年：UTF-32</strong></p>
 <ul>
 <li>发明国家：美国</li>
 <li>发明人：Unicode联盟（Unicode Consortium）</li>
 <li>编码长度：32位</li>
 <li>原因：Unicode可以使用多个字节来表示字符，在某些情况下会导致存储空间浪费。为了提高Unicode的存储效率，需要一种更紧凑的编码方式。</li>
-<li>主要用途：==Unicode字符编码，UTF-32主要用于需要精确表示字符的场合==。</li>
+<li>主要用途：<mark>Unicode字符编码，UTF-32主要用于需要精确表示字符的场合</mark>。</li>
 </ul>
 </li>
-<li><p><strong>2000年：GB18030</strong></p>
+<li>
+<p><strong>2000年：GB18030</strong></p>
 <ul>
 <li>发明国家： 中国</li>
 <li>发明人： 国家标准总局</li>
 <li>编码长度： 变长，可以是1、2、3、或4个字节</li>
 <li>原因：为了支持所有汉字，需要一种新的字符编码方案。GB2312和GBK无法表示所有汉字，需要一种新的字符编码方案来支持所有汉字。</li>
-<li>主要用途：==用于中文字符编码，是GB2312、GBK的扩展，支持更多的汉字和特殊字符。它也兼容Unicode==。</li>
+<li>主要用途：<mark>用于中文字符编码，是GB2312、GBK的扩展，支持更多的汉字和特殊字符。它也兼容Unicode</mark>。</li>
 </ul>
 </li>
 </ul>
-<h2 id="常见字符编码的比较"><a href="#常见字符编码的比较" class="headerlink" title="常见字符编码的比较"></a>常见字符编码的比较</h2><p>这里比较一下几种字符编码方式，如下</p>
+<h2 id="常见字符编码的比较">常见字符编码的比较</h2>
+<p>这里比较一下几种字符编码方式，如下</p>
 <p><img src="/2024/10/09/%E7%BC%96%E7%A0%81%E6%96%B9%E5%BC%8F/image-20241009145659223.png" alt="image-20241009145659223"></p>
-<h2 id="字符编码的兼容性"><a href="#字符编码的兼容性" class="headerlink" title="字符编码的兼容性"></a>字符编码的兼容性</h2><p>国标GB编码和UTF8互相不兼容。ASCII编码几乎被世界上所有编码所兼容，除了UTF16和UTF32编码。更具体的见下图：</p>
+<h2 id="字符编码的兼容性">字符编码的兼容性</h2>
+<p>国标GB编码和UTF8互相不兼容。ASCII编码几乎被世界上所有编码所兼容，除了UTF16和UTF32编码。更具体的见下图：</p>
 <p><img src="/2024/10/09/%E7%BC%96%E7%A0%81%E6%96%B9%E5%BC%8F/image-20241009151944409.png" alt="image-20241009151944409"></p>
-<h1 id="字符编码识别工具"><a href="#字符编码识别工具" class="headerlink" title="字符编码识别工具"></a>字符编码识别工具</h1><ul>
+<h1>字符编码识别工具</h1>
+<ul>
 <li>快速且准确的中文编码检测工具：<a target="_blank" rel="noopener" href="https://github.com/alanshi/charset_mnbvc">https://github.com/alanshi/charset_mnbvc</a></li>
 </ul>
-<h1 id="鸣谢"><a href="#鸣谢" class="headerlink" title="鸣谢"></a>鸣谢</h1><ul>
-<li><a target="_blank" rel="noopener" href="https://www.python1989.com/问答/asciigbkgb2312utf-8unicode/">常见的字符集编码方法都有哪些？一文说懂ASCII,GBK,GB2312,UTF-8,Unicode等- Python学习导航 (python1989.com)</a></li>
+<h1>鸣谢</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.python1989.com/%E9%97%AE%E7%AD%94/asciigbkgb2312utf-8unicode/">常见的字符集编码方法都有哪些？一文说懂ASCII,GBK,GB2312,UTF-8,Unicode等- Python学习导航 (python1989.com)</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/byf0521hlyp/article/details/80365045">常见的几种编码方式-CSDN博客</a></li>
 </ul>
 	  
